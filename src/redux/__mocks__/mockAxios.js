@@ -10,6 +10,7 @@ import mockProfessions from "../../app/modules/System/__mocks__/professions/mock
 import mockTaxOffice from "../../app/modules/System/__mocks__/taxOffices/mockTaxOffice";
 import mockDealer from "../../app/modules/System/__mocks__/dealers/mockDealer";
 import mockUser from "../../app/modules/System/__mocks__/users/mockUser";
+import mockAddress from "../../app/modules/System/__mocks__/addresses/mockAddress";
 import mockCities from "../../app/modules/System/__mocks__/_cities/mockCity";
 import mockTowns from "../../app/modules/System/__mocks__/_towns/mockTown";
 import mockNeighborhoods from "../../app/modules/System/__mocks__/_neighborhoods/mockNeighborhood";
@@ -24,6 +25,7 @@ export default function mockAxios(axios) {
   mockSpecifications(mock);
 
 //////////////////////////////
+  mockAddress(mock);
   mockCities(mock);
   mockTowns(mock);
   mockNeighborhoods(mock);

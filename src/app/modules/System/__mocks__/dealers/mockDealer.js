@@ -6,39 +6,46 @@ export default function mockDealers(mock) {
   mock.onPost("api/dealers").reply(({ data }) => {
     const { dealer } = JSON.parse(data);
     const {
-      name= "BZK OTOMOTİV",
-      taxIdentityNo= "10447572022",
-      taxOfficeId= 1,
-      adminId= 1,
-      dealerTypeId=1,
-      
-      isActive= false, 
-      createdDate= "2019-11-01T00:00:00+00:00",
-      createdBy=1,
-      updatedDate= null,
-      updatedBy= null,
-      deletedDate= null,
-      deletedBy=null,
-      guid="",
-  } = dealer;
+      name = "BZK OTOMOTİV",
+      taxIdentityNo = "10447572022",
+      taxOfficeId = 1,
+      adminId = 1,
+      dealerTypeId = 1,
+      email = "info@bzkotomotiv.com",
+      fax = "02139876554",
+      tel1 = "02139876554",
+      tel2 = "02139876555",
+      isActive = false,
+      createdDate = "2019-11-01T00:00:00+00:00",
+      createdBy = 1,
+      updatedDate = null,
+      updatedBy = null,
+      deletedDate = null,
+      deletedBy = null,
+      guid = "",
+    } = dealer;
 
-  const id = generateDealerId();
-  const newDealer = {
-    id,
-    name,
-    taxIdentityNo,
-    taxOfficeId,
-    adminId,
-    dealerTypeId,
-    isActive,
-    createdDate,
-    createdBy,
-    updatedDate,
-    updatedBy,
-    deletedDate,
-    deletedBy,
-    guid
-  };
+    const id = generateDealerId();
+    const newDealer = {
+      id,
+      name,
+      taxIdentityNo,
+      taxOfficeId,
+      adminId,
+      dealerTypeId,
+      email,
+      fax,
+      tel1,
+      tel2,
+      isActive,
+      createdDate,
+      createdBy,
+      updatedDate,
+      updatedBy,
+      deletedDate,
+      deletedBy,
+      guid
+    };
     dealerTableMock.push(newDealer);
     return [200, { dealer: newDealer }];
   });
@@ -53,11 +60,11 @@ export default function mockDealers(mock) {
 
   mock.onPost("api/dealers/getusers").reply(config => {
     const { id } = JSON.parse(config.data);
-    const filteredUsers = userTableMock.filter(q=>q.dealerId==id);
+    const filteredUsers = userTableMock.filter(q => q.dealerId == id);
 
-    var resp={
-      entities:filteredUsers,
-      totalCount:filteredUsers.length
+    var resp = {
+      entities: filteredUsers,
+      totalCount: filteredUsers.length
     }
     return [200, resp];
   });

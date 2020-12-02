@@ -58,6 +58,7 @@ export const createUser = userForCreation => dispatch => {
     .then(response => {
       const { user } = response.data;
       dispatch(actions.userCreated({ user }));
+      return user;
     })
     .catch(error => {
       error.clientMessage = "Can't create user";

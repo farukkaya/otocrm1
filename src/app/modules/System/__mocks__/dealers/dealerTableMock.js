@@ -8,7 +8,11 @@ export default [
 
         name: "BZK OTOMOTİV",
         taxIdentityNo: "123456790",
-        
+        email:"info@bzkotomotiv.com",
+        fax:"02139876554",
+        tel1:"02139876554",
+        tel2:"02139876555",
+
         isActive: "1", 
         createdDate: "2019-11-01T00:00:00+00:00",
         createdBy:1,
@@ -31,6 +35,10 @@ export default [
 
         name: "TaksitleOtoAl",
         taxIdentityNo: "123456742",
+        email:"info@taksitleotoal.com",
+        fax:"02139876554",
+        tel1:"02139876554",
+        tel2:"02139876555",
 
         isActive: "1", 
         createdDate: "2019-11-01T00:00:00+00:00",
@@ -53,6 +61,10 @@ export default [
 
         name: "OtoCrm İstanbul",
         taxIdentityNo: "3425968301",
+        email:"info@otocrm.com",
+        fax:"02139876554",
+        tel1:"02139876554",
+        tel2:"02139876555",
 
         isActive: "0", 
         createdDate: "2019-11-01T00:00:00+00:00",

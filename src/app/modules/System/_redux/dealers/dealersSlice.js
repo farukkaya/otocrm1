@@ -4,7 +4,7 @@ const initialDealersState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
-  entities: null,
+  entities: [],
   usersOfDealer:[],
   dealerForEdit: undefined,
   lastError: null

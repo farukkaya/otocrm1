@@ -9,6 +9,8 @@ import * as professionsActions from "../../../_redux/professions/professionsActi
 import * as citiesActions from "../../../_redux/_cities/citiesActions"
 import * as townsActions from "../../../_redux/_towns/townsActions"
 import * as neighborhoodsActions from "../../../_redux/_neighborhoods/neighborhoodsActions"
+import * as usersActions from "../../../_redux/users/usersActions"
+import * as addressesActions from "../../../_redux/addresses/addressesActions";
 import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 import {
   DealerTypeTitles
@@ -31,12 +33,17 @@ import { v4 as generateGuid } from 'uuid';
 const initDealer = {
 
   //STEP1-> BAYİ
-  guid:generateGuid(),
+  guid: generateGuid(),
   dealerName: "",
   taxIdentityNo: "",
   taxOfficeId: undefined,
   dealerTypeId: undefined,
-  //STEP2-> YÖNETİCİ(KULLANICI)
+  //STEP2-> İLETİŞİM
+  email: "",
+  fax: "",
+  tel1: "",
+  tel2: "",
+  //STEP3-> YÖNETİCİ(KULLANICI)
   firstName: "",
   professionId: "1",
   lastName: "",
@@ -44,11 +51,7 @@ const initDealer = {
   username: "",
   ownerEmail: "",
   phone: "",
-  //STEP3-> İLETİŞİM
-  email: "",
-  fax: "",
-  workPhone: "",
-  personalPhone: "",
+  
   //STEP4-> ADRES
   addressName: "",
   cityId: undefined,
@@ -67,16 +70,17 @@ const arrayProgress = [
   },
   {
     id: 2,
-    title: "Bayi Yöneticisi",
-    description: "Bayi için bir yönetici atayın",
-    icon: "/media/svg/icons/Communication/Add-user.svg"
-  },
-  {
-    id: 3,
     title: "Bayi İletişim",
     description: "Bayinin İletişim Bilgilerini Giriniz",
     icon: "/media/svg/icons/Communication/Adress-book1.svg"
   },
+  {
+    id: 3,
+    title: "Bayi Yöneticisi",
+    description: "Bayi için bir yönetici atayın",
+    icon: "/media/svg/icons/Communication/Add-user.svg"
+  },
+ 
   {
     id: 4,
     title: "Bayi Adres",
@@ -114,6 +118,19 @@ const Step1Schema = Yup.object().shape({
     .required(format(REQUIRED, "Vergi Dairesi")),
 });
 const Step2Schema = Yup.object().shape({
+  email: Yup.string()
+    .min(2, format(MIN_LENGTH, "2"))
+    .max(150, format(MAX_LENGTH, "50"))
+    .email('Geçersiz E-Posta')
+    .required(format(REQUIRED, "E-Posta")),
+
+  tel1: Yup.string()
+    .min(2, format(MIN_LENGTH, "2"))
+    .max(150, format(MAX_LENGTH, "50"))
+    .required(format(REQUIRED, "Telefon No.1")),
+
+});
+const Step3Schema = Yup.object().shape({
   ownerEmail: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
     .max(150, format(MAX_LENGTH, "50"))
@@ -123,11 +140,11 @@ const Step2Schema = Yup.object().shape({
     .matches(/^[0-9]+$/, DIGIT_CONTROL)
     .length(11, format(LENGTH, "Kimlik No", "11"))
     .required(format(REQUIRED, "Kimlik No")),
-    username: Yup.string()
+  username: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
     .max(150, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Kullanıcı Adı")),
-    firstName: Yup.string()
+  firstName: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
     .max(150, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Ad")),
@@ -140,25 +157,7 @@ const Step2Schema = Yup.object().shape({
     .required(format(REQUIRED, "Vergi Dairesi")),
 
 });
-const Step3Schema = Yup.object().shape({
-  email: Yup.string()
-    .min(2, format(MIN_LENGTH, "2"))
-    .max(150, format(MAX_LENGTH, "50"))
-    .email('Geçersiz E-Posta')
-    .required(format(REQUIRED, "E-Posta")),
 
-  workPhone: Yup.string()
-    .min(2, format(MIN_LENGTH, "2"))
-    .max(150, format(MAX_LENGTH, "50"))
-    .required(format(REQUIRED, "İş Telefonu")),
-
-  personalPhone: Yup.string()
-    .min(2, format(MIN_LENGTH, "2"))
-    .max(150, format(MAX_LENGTH, "50"))
-    .required(format(REQUIRED, "Kişisel Telefon")),
-
-
-});
 const Step4Schema = Yup.object().shape({
   addressName: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
@@ -195,7 +194,7 @@ export function DealerEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, dealerForEdit, taxOffices, users, professions, cities, towns, neighborhoods} = useSelector(
+  const { actionsLoading, dealerForEdit, taxOffices, users, professions, cities, towns, neighborhoods } = useSelector(
     (state) => ({
       actionsLoading: state.dealers.actionsLoading,
       dealerForEdit: state.dealers.dealerForEdit,
@@ -274,7 +273,7 @@ export function DealerEdit({
     history.push(`/system/dealers`);
   };
 
- 
+
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
   const required = value => (value ? undefined : "Required");
@@ -295,46 +294,90 @@ export function DealerEdit({
           Geri
           </button>
           {`  `}
-         
+
           {id && (
-           <>
-             <button
-             className="btn btn-light ml-2"
-             onClick={handleResetClick}
-           >
-             <i className="fa fa-redo"></i>
+            <>
+              <button
+                className="btn btn-light ml-2"
+                onClick={handleResetClick}
+              >
+                <i className="fa fa-redo"></i>
              Reset
            </button>
-           {`  `}
-            <button
-              type="submit"
-              data-wizard-type="action-submit"
-              className="btn btn-primary ml-2"
-              onClick={saveDealerClick}
-            >
-              Kaydet
+              {`  `}
+              <button
+                type="submit"
+                data-wizard-type="action-submit"
+                className="btn btn-primary ml-2"
+                onClick={saveDealerClick}
+              >
+                Kaydet
             </button>
-           </>
+            </>
           )}
 
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        {id === undefined 
+        {id === undefined
           ? <Wizard
             initialValues={initDealer}
             arrayProgress={arrayProgress}
             schemaArray={schemaArray}
-            onSubmit={(values, actions) => {
+            onSubmit={(values, formActions) => {
               sleep(300).then(() => {
-                window.alert(JSON.stringify(values, null, 2));
-                // const {dealer,user,contactInfo,address}=values;
-                // dispatch(actions.createDealer(dealer))
-                // backToDealersList()
-                actions.setSubmitting(false);
+                // window.alert(JSON.stringify(values, null, 2));
+                const dealer = {
+                  name: values.dealerName,
+                  taxIdentityNo: values.taxIdentityNo,
+                  taxOfficeId: values.taxOfficeId,
+                  dealerTypeId: values.dealerTypeId,
+                  email: values.email,
+                  fax: values.fax,
+                  tel1: values.tel1,
+                  tel2: values.tel2,
+                  guid: values.guid,
+                }
+                const adminUser = {
+                  email: values.ownerEmail,
+                  identityNo: values.identityNo,
+                  firstName: values.firstName,
+                  lastName: values.lastName,
+                  username: values.username,
+                  professionId: values.professionId,
+                  tel1: values.ownerTel,
+                  tel2: "",
+                  relationGuid: values.guid,
+                  relationTable: "Dealers"
+                }
+                const address = {
+                  name: values.addressName,
+                  cityId: values.cityId,
+                  townId: values.townId,
+                  neighborhoodId: values.neighborhoodId,
+                  openAddress: values.openAddress,
+                  relationGuid: values.guid,
+                  relationTable: "Dealers"
+                }
+                dispatch(usersActions.createUser(adminUser)).then((response) => {
+                  debugger
+                  dealer.adminId = response?.id;
+                  dispatch(actions.createDealer(dealer)).then(() => {
+                    dispatch(addressesActions.createAddress(address)).then(() => {
+                      backToDealersList()
+                      // dispatch(actions.fetchCustomers(customersUIProps.queryParams));
+                      // // clear selections list
+                      // customersUIProps.setIds([]);
+                    })
+                  })
+
+                })
+
+
+                formActions.setSubmitting(false);
               });
             }}
-            
+
           >
             <Wizard.Page>
               {props => {
@@ -349,17 +392,18 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Bayi Adı"
                           label="Bayi Adı"
+                          value="Anka"
                         />
                       </div>
                       <div className="col-lg-6">
-                        <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} disabledOption={1} />
+                        <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} disabledOption={1} value={2} />
 
                       </div>
 
                     </div>
                     <div className="form-group row">
                       <div className="col-lg-6">
-                        <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} autoSelect={false} />
+                        <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} autoSelect={false} value="3" />
 
                       </div>
                       <div className="col-lg-6">
@@ -368,6 +412,7 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Vergi No"
                           label="Vergi No"
+                          value="321365498754"
                         />
                       </div>
                     </div>
@@ -382,6 +427,65 @@ export function DealerEdit({
                 return (
                   <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                     <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 2).description}</h4>
+
+                    <div className="form-group row">
+                      <div className="col-lg-6">
+                        <Field
+                          name="email"
+                          component={Input}
+                          placeholder="E-Posta"
+                          label="E-Posta"
+                          value="info@anka.com"
+                        />
+                      </div>
+                      <div className="col-lg-6">
+                        <Field
+                          name="fax"
+                          component={Input}
+                          placeholder="Fax"
+                          label="Fax"
+                          value="02163259874"
+
+
+                        />
+                      </div>
+
+                    </div>
+                    <div className="form-group row">
+                      <div className="col-lg-6">
+                        <Field
+                          name="tel1"
+                          component={Input}
+                          placeholder="Telefon No.1"
+                          label="Telefon No.1"
+                          value="05318540265"
+
+                        />
+                      </div>
+                      <div className="col-lg-6">
+                        <Field
+                          name="tel2"
+                          component={Input}
+                          placeholder="Telefon No.2"
+                          label="Telefon No.2"
+                          value="05318540266"
+
+                        />
+                      </div>
+
+                    </div>
+
+                  </div>
+                );
+              }}
+            </Wizard.Page>
+         
+            <Wizard.Page>
+              {props => {
+                console.log(props, "this props 3");
+                return (
+                  <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                    <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 3).description}</h4>
                     <div className="form-group row">
                       <div className="col-lg-4">
                         <Field
@@ -389,6 +493,7 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Ad"
                           label="Ad"
+                          value="Bilal"
                         />
                       </div>
                       <div className="col-lg-4">
@@ -397,10 +502,11 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Soyad"
                           label="Soyad"
+                          value="Öner"
                         />
                       </div>
                       <div className="col-lg-4">
-                        <Select name="professionId" label="Meslek" options={professions} />
+                        <Select name="professionId" label="Meslek" options={professions} value="1" />
                       </div>
                     </div>
                     <div className="form-group row">
@@ -410,6 +516,7 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Kimlik No"
                           label="Kimlik No"
+                          value="1054569874"
                         />
                       </div>
                       <div className="col-lg-6">
@@ -418,6 +525,7 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Kullanıcı Adı"
                           label="Kullanıcı Adı"
+                          value="bilal.oner"
                         />
                       </div>
                     </div>
@@ -429,14 +537,17 @@ export function DealerEdit({
                           component={Input}
                           placeholder="E-Posta"
                           label="E-Posta"
+                          value="bilal.oner@otocrm.com"
                         />
                       </div>
                       <div className="col-lg-6">
                         <Field
-                          name="phone"
+                          name="ownerTel"
                           component={Input}
                           placeholder="Telefon"
                           label="Telefon"
+                          value="05348540225"
+
                         />
                       </div>
 
@@ -446,57 +557,7 @@ export function DealerEdit({
                 );
               }}
             </Wizard.Page>
-            <Wizard.Page>
-              {props => {
-                console.log(props, "this props 3");
-                return (
-                  <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
-                    <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 3).description}</h4>
-
-                    <div className="form-group row">
-                      <div className="col-lg-6">
-                        <Field
-                          name="email"
-                          component={Input}
-                          placeholder="E-Posta"
-                          label="E-Posta"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <Field
-                          name="fax"
-                          component={Input}
-                          placeholder="Fax"
-                          label="Fax"
-                        />
-                      </div>
-
-                    </div>
-                    <div className="form-group row">
-                      <div className="col-lg-6">
-                        <Field
-                          name="workPhone"
-                          component={Input}
-                          placeholder="İş Telefonu"
-                          label="İş Telefonu"
-                        />
-                      </div>
-                      <div className="col-lg-6">
-                        <Field
-                          name="personalPhone"
-                          component={Input}
-                          placeholder="Kişisel Telefon"
-                          label="Kişisel Telefon"
-                        />
-                      </div>
-
-                    </div>
-
-                  </div>
-                );
-              }}
-            </Wizard.Page>
-            <Wizard.Page>
+             <Wizard.Page>
               {props => {
                 console.log(props, "this props 4");
                 return (
@@ -510,10 +571,12 @@ export function DealerEdit({
                           component={Input}
                           placeholder="Merkez, Şube vb."
                           label="Adres Adı"
+                          value="Merkez"
+
                         />
                       </div>
                       <div className="col-lg-6">
-                      {/* <Field
+                        {/* <Field
                 id="cityId"
                 name="cityId"
                 as="select"
@@ -527,28 +590,39 @@ export function DealerEdit({
                   setFieldValue("towns", _towns);
                 }}
              /> */}
-                        <Select name="cityId" label="İl" options={cities} onChange={(e)=>{
+                        <Select
+                          name="cityId"
+                          label="İl"
+                          options={cities}
+                          onChange={(e) => {
                             const { value } = e.target;
                             dispatch(townsActions.fetchTownsByCity(value))
                             props.setFieldValue("cityId", value);
                             props.setFieldValue("townId", "");
                             props.setFieldValue("neighborhoodId", "");
-                        }}/>
+                          }} />
                       </div>
 
                     </div>
                     <div className="form-group row">
                       <div className="col-lg-6">
-                        <Select name="townId" label="İlçe" options={towns}  onChange={(e)=>{
+                        <Select
+                          name="townId"
+                          label="İlçe"
+                          options={towns}
+                          onChange={(e) => {
                             const { value } = e.target;
                             dispatch(neighborhoodsActions.fetchNeighborhoodsByTown(value))
                             props.setFieldValue("townId", value);
                             props.setFieldValue("neighborhoodId", "");
-                        }}/>
+                          }} />
                         {/* onchange i kontrol et */}
                       </div>
                       <div className="col-lg-6">
-                        <Select name="neighborhoodId" label="Mahalle" options={neighborhoods}/>
+                        <Select
+                          name="neighborhoodId"
+                          label="Mahalle"
+                          options={neighborhoods} />
                       </div>
                     </div>
                     <div className="form-group row">
@@ -569,7 +643,7 @@ export function DealerEdit({
             </Wizard.Page>
             <Wizard.Page>
               {props => {
-                const data = props.values; 
+                const data = props.values;
                 return (
                   <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                     {/*begin::Section*/}
@@ -600,8 +674,8 @@ export function DealerEdit({
                     <div className="text-dark-50 line-height-lg">
                       <div><span>E-Posta:</span> {data.email}</div>
                       <div><span>Fax:</span> {data.fax}</div>
-                      <div><span>İş Telefonu:</span> {data.workPhone}</div>
-                      <div><span>Kişisel Telefon:</span> {data.personalPhone}</div>
+                      <div><span>Telefon No.1:</span> {data.tel1}</div>
+                      <div><span>Telefon No.2:</span> {data.tel2}</div>
                     </div>
                     <div className="separator separator-dashed my-5"></div>
                     {/*end::Section*/}
@@ -621,45 +695,45 @@ export function DealerEdit({
             </Wizard.Page>
           </Wizard>
           : (<>
-                <ul className="nav nav-tabs nav-tabs-line " role="tablist">
-                  <li className="nav-item" onClick={() => setTab("basic")}>
-                    <a className={`nav-link ${tab === "basic" && "active"}`}
-                      data-toggle="tab"
-                      role="tab"
-                      aria-selected={(tab === "basic")}
-                    >
-                      Bayi
+            <ul className="nav nav-tabs nav-tabs-line " role="tablist">
+              <li className="nav-item" onClick={() => setTab("basic")}>
+                <a className={`nav-link ${tab === "basic" && "active"}`}
+                  data-toggle="tab"
+                  role="tab"
+                  aria-selected={(tab === "basic")}
+                >
+                  Bayi
                   </a>
-                  </li>
-                  <li className="nav-item" onClick={() => setTab("galleries")}>
-                    <a
-                      className={`nav-link ${tab === "galleries" && "active"}`}
-                      data-toggle="tab"
-                      role="button"
-                      aria-selected={(tab === "galleries")}
-                    >
-                      Galerileri
+              </li>
+              <li className="nav-item" onClick={() => setTab("galleries")}>
+                <a
+                  className={`nav-link ${tab === "galleries" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "galleries")}
+                >
+                  Galerileri
                     </a>
-                  </li>
-                </ul>
-                <div className="mt-5">
-                  {tab === "basic" && (
-                    <DealerEditForm
-                      actionsLoading={actionsLoading}
-                      dealer={dealerForEdit || initDealer}
-                      btnRef={btnRef}
-                      btnReset={btnReset}
-                      saveDealer={saveDealer}
-                      handleReset={handleReset}
-                      taxOffices={taxOffices}
-                      users={users}
-                    />
-                  )}
-                  {tab === "galleries" && id && (
-                    <h4>Galeriler</h4>
-                  )}
-                </div>
-              </>)
+              </li>
+            </ul>
+            <div className="mt-5">
+              {tab === "basic" && (
+                <DealerEditForm
+                  actionsLoading={actionsLoading}
+                  dealer={dealerForEdit || initDealer}
+                  btnRef={btnRef}
+                  btnReset={btnReset}
+                  saveDealer={saveDealer}
+                  handleReset={handleReset}
+                  taxOffices={taxOffices}
+                  users={users}
+                />
+              )}
+              {tab === "galleries" && id && (
+                <h4>Galeriler</h4>
+              )}
+            </div>
+          </>)
         }
       </CardBody>
     </Card>
