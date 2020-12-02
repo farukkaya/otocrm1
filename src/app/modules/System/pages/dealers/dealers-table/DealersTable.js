@@ -62,7 +62,7 @@ export function DealersTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "dealerType",
+      dataField: "dealerTypeId",
       text:"Bayi Tipi",
       sort: true,
       sortCaret: sortCaret,

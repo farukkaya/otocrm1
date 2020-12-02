@@ -56,7 +56,6 @@ export default function mockTowns(mock) {
     return [200, resp];
   });
   mock.onPost("api/towns/getAllByCity").reply(config => {
-    debugger
     const { cityId } = JSON.parse(config.data);
     var towns=townTableMock.filter(q=>q.cityId==cityId);
     var resp={

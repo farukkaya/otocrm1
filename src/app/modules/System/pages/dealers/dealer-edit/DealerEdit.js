@@ -35,7 +35,7 @@ const initDealer = {
   dealerName: "",
   taxIdentityNo: "",
   taxOfficeId: undefined,
-  dealerType: undefined,
+  dealerTypeId: undefined,
   //STEP2-> YÖNETİCİ(KULLANICI)
   firstName: "",
   professionId: "1",
@@ -102,7 +102,7 @@ const Step1Schema = Yup.object().shape({
     .min(2, format(MIN_LENGTH, "2"))
     .max(150, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Bayi Adı")),
-  dealerType: Yup.number()
+  dealerTypeId: Yup.number()
     .required(format(REQUIRED, "Bayi Tipi")),
   taxIdentityNo: Yup.string()
     .matches(/^[0-9]+$/, DIGIT_CONTROL)
@@ -252,14 +252,13 @@ export function DealerEdit({
     if (values.id) {
       values = dealerForEdit
     } else {
-      values = initDealer
+
     }
   };
   const btnRef = useRef();
   const btnReset = useRef();
 
   const handleResetClick = () => {
-
     if (btnReset && btnReset.current) {
       btnReset.current.click();
     }
@@ -296,15 +295,17 @@ export function DealerEdit({
           Geri
           </button>
           {`  `}
-          <button
-            className="btn btn-light ml-2"
-            onClick={handleResetClick}
-          >
-            <i className="fa fa-redo"></i>
-            Reset
-          </button>
-          {`  `}
+         
           {id && (
+           <>
+             <button
+             className="btn btn-light ml-2"
+             onClick={handleResetClick}
+           >
+             <i className="fa fa-redo"></i>
+             Reset
+           </button>
+           {`  `}
             <button
               type="submit"
               data-wizard-type="action-submit"
@@ -313,6 +314,7 @@ export function DealerEdit({
             >
               Kaydet
             </button>
+           </>
           )}
 
         </CardHeaderToolbar>
@@ -332,6 +334,7 @@ export function DealerEdit({
                 actions.setSubmitting(false);
               });
             }}
+            
           >
             <Wizard.Page>
               {props => {
@@ -349,7 +352,7 @@ export function DealerEdit({
                         />
                       </div>
                       <div className="col-lg-6">
-                        <Select name="dealerType" label="Bayi Tipi" options={DealerTypeTitles} disabledOption={1} />
+                        <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} disabledOption={1} />
 
                       </div>
 
@@ -567,7 +570,6 @@ export function DealerEdit({
             <Wizard.Page>
               {props => {
                 const data = props.values; 
-                debugger
                 return (
                   <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                     {/*begin::Section*/}
@@ -575,7 +577,7 @@ export function DealerEdit({
                     <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 1).title}:</h6>
                     <div className="text-dark-50 line-height-lg">
                       <div><span>Bayi Adı:</span> {data.dealerName}</div>
-                      <div><span>Bayi Tipi:</span> {DealerTypeTitles.find(q => q.id == data.dealerType).name}</div>
+                      <div><span>Bayi Tipi:</span> {DealerTypeTitles.find(q => q.id == data.dealerTypeId).name}</div>
                       <div><span>Bayi Dairesi:</span> {taxOffices.find(q => q.id == data.taxOfficeId).name}</div>
                       <div><span>Vergi No:</span> {data.taxIdentityNo}</div>
                     </div>

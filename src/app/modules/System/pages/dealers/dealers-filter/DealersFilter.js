@@ -10,20 +10,23 @@ export const prepareFilter = (queryParams, values) => {
   const filter = {
     name: "",
     taxOffice:"",
+    dealerType:"",
     taxIdentityNo: "",
     admin:"",
-    isActive:false
+    isActive:""
   };
   // Filter by all fields
   if (searchText) {
     filter.name= searchText;
     filter.taxOffice= searchText;
+    filter.dealerType= searchText;
     filter.taxIdentityNo= searchText;
     filter.admin= searchText;
   }
-  filter.isActive=isActive==="1" ? true
-  : isActive==="0" ? false
-  : undefined;
+  filter.isActive=isActive;
+  // ==="1" ? true
+  // : isActive==="0" ? false
+  // : undefined;
   newQueryParams.filter = filter;
   return newQueryParams;
 };

@@ -41,8 +41,8 @@ export function DealersUIProvider({ dealersUIEvents, children }) {
     openDeleteDealerDialog: dealersUIEvents.openDeleteDealerDialog,
     openDeleteDealersDialog: dealersUIEvents.openDeleteDealersDialog,
     openFetchDealersDialog: dealersUIEvents.openFetchDealersDialog,
-    openUpdateDealersStatusDialog:
-      dealersUIEvents.openUpdateDealersStatusDialog,
+    openUpdateDealerStatusDialog:dealersUIEvents.openUpdateDealerStatusDialog,
+    openUpdateDealersStatusDialog:dealersUIEvents.openUpdateDealersStatusDialog,
   };
 
   return (

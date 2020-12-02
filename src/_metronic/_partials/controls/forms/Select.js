@@ -25,18 +25,47 @@ export function Select({
   customFeedbackLabel,
   disabledOption,
   options = [],
+  optionLabel="name",
   ...props
 }) {
 
   const [field, meta] = useField(props);
-  const { touched, error, value } = meta;
-  const [val, setValue] = React.useState(options[0]);
-  const [inputValue, setInputValue] = React.useState('');
+  const { touched, error /*, value*/ } = meta;
+  // const [val, setValue] = React.useState(options[0]);
+  // const [inputValue, setInputValue] = React.useState('');
 
   return (
     <>
       {label && <label>{label} Seçiniz</label>}
-      {
+      <>
+            <select
+              className={getFieldCSSClasses(touched, error)}
+              {...field}
+              {...props}
+            >
+              {addEmptyOption && <option value={undefined} />}
+              {options.map((item) => (
+
+                item.id !== disabledOption && (
+                  <option key={item.id} value={item.id}>
+                    {item[optionLabel]}
+                  </option>
+                )
+
+              ))}
+            </select>
+            {withFeedbackLabel && (
+              <FieldFeedbackLabel
+                error={error}
+                touched={touched}
+                label={label}
+                type={type}
+
+                customFeedbackLabel={customFeedbackLabel}
+              />
+            )}
+          </>
+      {/* {
         autoSelect ? (
           <Autocomplete
             {...props}
@@ -49,7 +78,7 @@ export function Select({
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue);
             }}
-            getOptionLabel={(option) => option.name}
+            getOptionLabel={(option) => option[optionLabel]}
             options={options}
             noOptionsText="Seçenek Yok"
             renderInput={(params) => {
@@ -77,35 +106,8 @@ export function Select({
             }
             }
           />
-        ): <>
-            <select
-              className={getFieldCSSClasses(touched, error)}
-              {...field}
-              {...props}
-            >
-              {addEmptyOption && <option value={undefined} />}
-              {options.map((item) => (
-
-                item.id !== disabledOption && (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                )
-
-              ))}
-            </select>
-            {withFeedbackLabel && (
-              <FieldFeedbackLabel
-                error={error}
-                touched={touched}
-                label={label}
-                type={type}
-
-                customFeedbackLabel={customFeedbackLabel}
-              />
-            )}
-          </>
-      }
+        ): 
+      } */}
 
 
 

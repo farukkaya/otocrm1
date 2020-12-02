@@ -10,6 +10,7 @@ export const DealerTypeTitles = [{id:1,name:"Yönetim"},{id:2,name:"Bayi&Galeri"
 
 export const initialFilter = {
   filter:{
+    dealerType:"",
     name: "",
     admin:"",
     taxOffice:"",

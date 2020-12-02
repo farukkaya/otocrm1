@@ -33,7 +33,7 @@ export function DealerUpdateStatusDialog({ id, show, onHide }) {
 
 
   const updateDealer = () => dispatch(actions.fetchDealer(id)) // server request for updateing user by ids
-    .then((dealer) => dispatch(actions.updateDealersStatus([parseInt(id)], !dealer.isActive)) // update status this user
+    .then((dealer) => dispatch(actions.updateDealersStatus([parseInt(id)], dealer.isActive=="0"?"1":"0")) // update status this user
       .then(() => dispatch(actions.fetchDealers(dealersUIProps.queryParams))) // refresh dealers
       .then(() => onHide()) //close modal
     );

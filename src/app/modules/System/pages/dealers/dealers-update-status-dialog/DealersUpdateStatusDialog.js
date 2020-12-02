@@ -43,7 +43,7 @@ export function DealersUpdateStatusDialog({ show, onHide }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dealersUIProps.ids]);
 
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState("0");
 
   const dispatch = useDispatch();
   const updateStatus = () => dispatch(actions.updateDealersStatus(dealersUIProps.ids, status))// server request for updateing dealer by ids
@@ -95,9 +95,9 @@ export function DealersUpdateStatusDialog({ show, onHide }) {
       <Modal.Footer className="form">
         <div className="form-group">
           <select
-            className={`form-control ${status ? "success" : "info"}`}
-            value={status ? "1" : "0"}
-            onChange={(e) => setStatus(e.target.value === "0" ? false : true)}
+            className={`form-control ${status=="1" ? "success" : "info"}`}
+            value={status}
+            onChange={(e) => setStatus(e.target.value /*=== "0" ? false : true*/)}
           >
             <option value="1">Aktif</option>
             <option value="0">Pasif</option>

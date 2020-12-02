@@ -10,6 +10,7 @@ export default function mockDealers(mock) {
       taxIdentityNo= "10447572022",
       taxOfficeId= 1,
       adminId= 1,
+      dealerTypeId=1,
       
       isActive= false, 
       createdDate= "2019-11-01T00:00:00+00:00",
@@ -28,6 +29,7 @@ export default function mockDealers(mock) {
     taxIdentityNo,
     taxOfficeId,
     adminId,
+    dealerTypeId,
     isActive,
     createdDate,
     createdBy,
@@ -74,7 +76,7 @@ export default function mockDealers(mock) {
     const { ids, status } = JSON.parse(config.data);
     dealerTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {
-        el.status = status;
+        el.isActive = status;
       }
     });
     return [200];
@@ -94,7 +96,7 @@ export default function mockDealers(mock) {
     const id = config.url.match(/api\/dealers\/(\d+)/)[1];
     const { dealer } = JSON.parse(config.data);
     const index = dealerTableMock.findIndex(el => el.id === +id);
-    if (!index) {
+    if (!index === -1) {
       return [400];
     }
 

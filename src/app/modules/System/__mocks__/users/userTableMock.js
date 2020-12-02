@@ -26,6 +26,7 @@ export default [
         dealer:"",
         gallery:"BZK OTOMOTİV",
         profession:"Yönetici",
+        fullName:"Faruk Kaya"
     },
     {
         id: 2,
@@ -53,6 +54,7 @@ export default [
         dealer:"BZK OTOMOTİV",
         gallery:"",
         profession:"Yönetici",
+        fullName:"Enes Bozok"
     },
     {
         id: 3,
@@ -61,11 +63,11 @@ export default [
         galleryId:null,
         professionId:1,
 
-        email: "enesbozok@otocrm.com",
+        email: "umutkocak@otocrm.com",
         identityNo: "10101010101",
-        firstName: "Enes",
-        lastName: "Bozok",
-        username: "enesbozok",
+        firstName: "Umut",
+        lastName: "Koçak",
+        username: "umutkocak",
         workPhone: "",
         personalPhone: "",
 
@@ -80,7 +82,8 @@ export default [
 
         dealer:"BZK OTOMOTİV",
         gallery:"",
-        profession:"Yönetici",
+        profession:"Satışçı",
+        fullName:"Umut Koçak"
     }
     ];
   

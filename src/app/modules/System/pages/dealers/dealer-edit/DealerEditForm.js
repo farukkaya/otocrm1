@@ -33,7 +33,7 @@ export function DealerEditForm({
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Bayi Adı")),
-    dealerType: Yup.string()
+    dealerTypeId: Yup.string()
       .required(format(REQUIRED, "Bayi Adı")),
     taxIdentityNo: Yup.string()
       .matches(/^[0-9]+$/, DIGIT_CONTROL)
@@ -60,38 +60,7 @@ export function DealerEditForm({
           <>
             <Form className="form form-label-right">
               <div className="form-group row">
-                {users && (
-                  <>
-                    <div className="col-lg-4">
-                      <Field
-                        name="name"
-                        component={Input}
-                        placeholder="Bayi Adı"
-                        label="Bayi Adı"
-                      />
-                    </div>
-                    <div className="col-lg-4">
-                      <Select name="adminId" label="Yönetici">
-                        <option key="" value=""></option>
-                        {users.map((item) => (
-                          <option key={item.id} value={item.id}>
-                            {item.firstName}  {item.lastName}
-                          </option>
-                        ))}
-                      </Select>
-                    </div>
-                    <div className="col-lg-4">
-                      <Select name="dealerType" label="Bayi Tipi">
-                        {DealerTypeTitles.map((item, i) => (
-                          <option key={i} value={i}>
-                            {item}
-                          </option>
-                        ))}
-                      </Select>
-                    </div>
-                  </>
-                )}
-                {!users && (
+                {users==undefined ?(
                   <>
                     <div className="col-lg-6">
                       <Field
@@ -102,31 +71,33 @@ export function DealerEditForm({
                       />
                     </div>
                     <div className="col-lg-6">
-                      <Select name="dealerType" label="Bayi Tipi">
-                        {DealerTypeTitles.map((item, i) => (
-                          i !== 1 && (
-                            <option key={i} value={i}>
-                              {item}
-                            </option>
-                          )
-                        ))}
-                      </Select>
-                    </div>
-                  </>
+                      <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles}  />
 
+                    </div>
+                  </>
+                ): (
+                  <>
+                    <div className="col-lg-4">
+                      <Field
+                        name="name"
+                        component={Input}
+                        placeholder="Bayi Adı"
+                        label="Bayi Adı"
+                      />
+                    </div>
+                    <div className="col-lg-4">
+                      <Select name="adminId" label="Yönetici" options={users} optionLabel="fullName"/>
+                    </div>
+                    <div className="col-lg-4">
+                      <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} />
+                    </div>
+                  </>
                 )}
+               
               </div>
               <div className="form-group row">
                 <div className="col-lg-6">
-
-                  <Field
-                    id="taxOfficeId"
-                    name="taxOfficeId"
-                    component={AutoSelect}
-                    options={taxOffices}
-                    label="Vergi Dairesi"
-                  />
-
+                <Select name="taxOfficeId"  label="Vergi Dairesi" options={taxOffices}/>
                 </div>
                 <div className="col-lg-6">
                   <Field

@@ -14,7 +14,7 @@ export class Wizard extends React.Component {
     };
 
     constructor(props) {
-        
+
         super(props);
         this.state = {
             page: 0,
@@ -22,7 +22,7 @@ export class Wizard extends React.Component {
         };
     }
 
-    next = values =>   this.setState(state => ({
+    next = values => this.setState(state => ({
         page: Math.min(state.page + 1, this.props.children.length - 1),
         values
     }));
@@ -40,7 +40,7 @@ export class Wizard extends React.Component {
     };
 
     handleSubmit = (values, bag) => {
-        
+
         const { children, onSubmit } = this.props;
         const { page } = this.state;
         const isLastPage = page === React.Children.count(children) - 1;
@@ -53,48 +53,54 @@ export class Wizard extends React.Component {
             this.next(values);
         }
     };
+    // handleReset = () => {
+    //     debugger
+    //     this.setState({
+    //         page: 0,
+    //         values: this.props.initialValues,
+    //     })
+    // };
 
     render() {
-        const { children, arrayProgress,schemaArray } = this.props;
+        const { children, arrayProgress, schemaArray } = this.props;
         const { page, values } = this.state;
         const activePage = React.Children.toArray(children)[page];
-        console.log(activePage, "activePage");
+        //console.log(activePage, "activePage");
         const isLastPage = page === React.Children.count(children) - 1;
         return (
             <Formik
                 initialValues={values}
                 enableReinitialize={false}
-                // validate={this.validate}
-                // validationSchema={this.schemaArray[page]}
                 validationSchema={schemaArray[page]}
                 onSubmit={this.handleSubmit}
+               // onReset={this.handleReset}
             >
                 {props => {
-                    const { handleSubmit, isSubmitting } = props;
-                    
+                    const { handleSubmit, /*handleReset,*/ isSubmitting } = props;
+
                     return (
-                        <form onSubmit={handleSubmit} id="wizardForm">
+                        <form onSubmit={handleSubmit} /*onReset={handleReset}*/ id="wizardForm">
                             <div className="wizard wizard-2">
                                 <div className="wizard-nav border-right py-8 px-8 py-lg-20 px-lg-10">
                                     <div className="wizard-steps" >
                                         {arrayProgress.map(function (item, index) {
-                                                return (
-                                                    <div key={item.id} className="wizard-step" data-wizard-state={page === index ? "current" : "pending"}>
-                                                        <div className="wizard-wrapper">
-                                                            <div className="wizard-icon">
-                                                                <span className="svg-icon svg-icon-2x">
-                                                                    <SVG src={toAbsoluteUrl(item.icon)} />
+                                            return (
+                                                <div key={item.id} className="wizard-step" data-wizard-state={page === index ? "current" : "pending"}>
+                                                    <div className="wizard-wrapper">
+                                                        <div className="wizard-icon">
+                                                            <span className="svg-icon svg-icon-2x">
+                                                                <SVG src={toAbsoluteUrl(item.icon)} />
 
-                                                                </span>
-                                                            </div>
-                                                            <div className="wizard-label">
-                                                                <h3 className="wizard-title">{item.title}</h3>
-                                                                <div className="wizard-desc">{item.description}</div>
-                                                            </div>
+                                                            </span>
+                                                        </div>
+                                                        <div className="wizard-label">
+                                                            <h3 className="wizard-title">{item.title}</h3>
+                                                            <div className="wizard-desc">{item.description}</div>
                                                         </div>
                                                     </div>
-                                                );
-                                            })}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
 
@@ -111,8 +117,10 @@ export class Wizard extends React.Component {
                                                     )}
                                                 </div>
                                                 <div>
+                                                    {/* <button type="submit" onClick={this.handleReset} className="btn btn-light font-weight-bolder text-uppercase px-9 py-4" disabled={isSubmitting}>Reset</button> */}
                                                     {isLastPage && <button type="submit" className="btn btn-success font-weight-bolder text-uppercase px-9 py-4" disabled={isSubmitting}>Tamamla</button>}
                                                     {!isLastPage && <button type="submit" /*(validation kullanmak istemezsen bunu yorum satırından çıkar) onClick={this.next} */ className="btn btn-primary font-weight-bolder text-uppercase px-9 py-4">İleri</button>}
+                                                   
                                                 </div>
                                             </div>
                                             {/*end: Wizard Actions*/}
@@ -121,6 +129,7 @@ export class Wizard extends React.Component {
 
                                 </div>
                             </div>
+
                         </form>
                     );
                 }}

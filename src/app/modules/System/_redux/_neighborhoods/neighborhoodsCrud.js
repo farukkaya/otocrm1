@@ -24,7 +24,6 @@ export function findNeighborhoods(queryParams) {
 
 
 export function getAllByTown(townId) {
-  debugger
   return axios.post(`${NEIGHBORHOODS_URL}/getAllByTown`, { townId });
 }
 

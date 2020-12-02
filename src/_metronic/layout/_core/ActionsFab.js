@@ -33,7 +33,7 @@ export const ActionsFab = (props) => {
       >
         <Icon className={clsx(classes.icon, 'fa fa-ellipsis-h')} />
       </IconButton>
-    
+
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -41,24 +41,24 @@ export const ActionsFab = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        
-       
+
+
         <MenuItem onClick={() => {
           openEditPage(row.id)
           handleClose()
         }}>Güncelle</MenuItem>
+
         <MenuItem onClick={() => {
           openDeleteDialog(row.id)
           handleClose()
         }}
         > Sil</MenuItem>
-          {openUpdateStatusDialog&&(
-         <MenuItem onClick={() => {
-          openUpdateStatusDialog(row.id)
-          handleClose()
-        }}>{
-        row.isActive ?  "Pasif":"Aktif"
-        }</MenuItem>
+
+        {openUpdateStatusDialog && (
+          <MenuItem onClick={() => {
+            openUpdateStatusDialog(row.id)
+            handleClose()
+          }}>{ row.isActive==="0" ? "Aktifleştir" : "Pasifleştir" }</MenuItem>
         )}
       </Menu>
     </>

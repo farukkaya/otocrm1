@@ -56,7 +56,6 @@ export default function mockNeighborhoods(mock) {
     return [200, resp];
   });
   mock.onPost("api/neighborhoods/getAllByTown").reply(config => {
-    debugger
     const { townId } = JSON.parse(config.data);
     var neighborhoods=neighborhoodTableMock.filter(q=>q.townId==townId);
     var resp={

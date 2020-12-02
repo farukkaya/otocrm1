@@ -51,7 +51,7 @@ const DealerEditSchema = Yup.object().shape({
         .min(2, format(MIN_LENGTH, "2"))
         .max(150, format(MAX_LENGTH, "50"))
         .required(format(REQUIRED, "Bayi Adı")),
-    dealerType: Yup.string()
+    dealerTypeId: Yup.string()
         .required(format(REQUIRED, "Bayi Adı")),
     taxIdentityNo: Yup.string()
         .matches(/^[0-9]+$/, DIGIT_CONTROL)
@@ -127,7 +127,7 @@ export const DealerWizard = ({
                                                 />
                                             </div>
                                             <div className="col-lg-6">
-                                                <Select name="dealerType" label="Bayi Tipi">
+                                                <Select name="dealerTypeId" label="Bayi Tipi">
                                                     {DealerTypeTitles.map((item, i) => (
                                                         i !== 1 && (
                                                             <option key={i} value={i}>
