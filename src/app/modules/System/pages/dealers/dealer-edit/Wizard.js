@@ -54,7 +54,7 @@ export class Wizard extends React.Component {
         }
     };
     // handleReset = () => {
-    //     debugger
+    //     
     //     this.setState({
     //         page: 0,
     //         values: this.props.initialValues,

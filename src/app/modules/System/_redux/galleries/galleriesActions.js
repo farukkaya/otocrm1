@@ -20,6 +20,26 @@ export function fetchAllGallery() {
       });
   };
 }
+
+export const fetchGalleriesByDealer = (queryParams, dealerId) => dispatch => {
+  
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  if (!dealerId) {
+    return dispatch(actions.galleriesFetched({ totalCount: 0, entities: null }));
+  }
+
+  return requestFromServer
+    .findGalleriesByDealer(queryParams, dealerId)
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.galleriesFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find remarks";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
 export const fetchGalleries = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -46,6 +66,7 @@ export const fetchGallery = id => dispatch => {
       
       const gallery = response.data;
       dispatch(actions.galleryFetched({ galleryForEdit: gallery }));
+      return gallery;
     })
     .catch(error => {
       error.clientMessage = "Can't find gallery";

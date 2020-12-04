@@ -5,8 +5,9 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input,AutoSelect,Select } from "../../../../../../_metronic/_partials/controls";
+import { Input, AutoSelect, Select } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
+import { GalleryLevelList } from "../../galleries/GalleriesUIHelpers";
 
 export function GalleryEditForm({
   gallery,
@@ -41,8 +42,6 @@ export function GalleryEditForm({
       .moreThan(0, format(MORE_THEN, "Seviye", "0"))
       .lessThan(6, format(LESS_THEN, "Seviye", "6"))
       .required(format(REQUIRED, "Seviye")),
-    dealerId: Yup.number()
-      .required(format(REQUIRED, "Bayi")),
     taxOfficeId: Yup.string()
       .required(format(REQUIRED, "Vergi Dairesi")),
   });
@@ -60,16 +59,8 @@ export function GalleryEditForm({
         {({ handleSubmit, handleReset }) => (
           <>
             <Form className="form form-label-right">
-            <div className="form-group row">
-                <div className="col-lg-6">
-                  <Field
-                    name="dealerId"
-                    component={Input}
-                    placeholder="Bayi"
-                    label="Bayi"
-                  />
-                </div>
-                <div className="col-lg-6">
+              <div className="form-group row">
+                <div className="col-lg-12">
                   <Field
                     name="name"
                     component={Input}
@@ -77,28 +68,10 @@ export function GalleryEditForm({
                     label="Galeri Adı"
                   />
                 </div>
-
               </div>
               <div className="form-group row">
                 <div className="col-lg-6">
-             
-                <Field
-                    id="taxOfficeId"
-                    name="taxOfficeId"
-                    component={AutoSelect}
-                    options={taxOffices}
-                    label="Vergi Dairesi"
-                  />  
-                 
-                    {/* <Select name="taxOfficeId" label="Vergi Dairesi">
-                    <option key="" value=""></option>
-                    {taxOffices.map((item) => (
-                      <option key={item.id} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </Select> */}
-                  {/* <Select autocomplete={true}  options={taxOffices} name="taxOfficeId" label={t["SYSTEM.GALLERIES.FIELD.TAXOFFICE"]}/> */}
+                <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} />
                 </div>
                 <div className="col-lg-6">
                   <Field
@@ -111,11 +84,32 @@ export function GalleryEditForm({
               </div>
               <div className="form-group row">
                 <div className="col-lg-6">
-                  <Field
-                    name="level"
+                  <Select name="levelId" label="Seviye" options={GalleryLevelList} />
+                </div>
+                <div className="col-lg-6">
+                <Field
+                    name="email"
                     component={Input}
-                    placeholder="Seviye"
-                    label="Seviye"
+                    placeholder="E-Posta"
+                    label="E-Posta"
+                  />
+                </div>
+              </div>
+              <div className="form-group row">
+                <div className="col-lg-6">
+                <Field
+                    name="tel1"
+                    component={Input}
+                    placeholder="Telefon No"
+                    label="Telefon No"
+                  />
+                </div>
+                <div className="col-lg-6">
+                  <Field
+                    name="fax"
+                    component={Input}
+                    placeholder="Fax No"
+                    label="Fax No"
                   />
                 </div>
               </div>

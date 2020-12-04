@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
+import { shallowEqual, useSelector } from "react-redux";
 
 export function AsideMenuList({ layoutProps }) {
   const location = useLocation();
@@ -13,6 +14,15 @@ export function AsideMenuList({ layoutProps }) {
       : "";
   };
 
+
+  const { currentUser } = useSelector(
+    ({ auth }) => ({
+      currentUser: auth.user,
+    }),
+    shallowEqual
+  );
+
+  const {dealer,gallery}=currentUser;
   return (
     <>
       {/* begin::Menu Nav */}
@@ -45,108 +55,111 @@ export function AsideMenuList({ layoutProps }) {
         </li>
         {/*end::1 Level*/}
 
+        {
+          gallery && (
+            <>
+              {/* SALES */}
+              {/* begin::section */}
+              <li className="menu-section ">
+                <h4 className="menu-text">Satış</h4>
+                <i className="menu-icon flaticon-more-v2"></i>
+              </li>
+              {/* end:: section */}
 
-        {/* SALES */}
-        {/* begin::section */}
-        <li className="menu-section ">
-          <h4 className="menu-text">Satış</h4>
-          <i className="menu-icon flaticon-more-v2"></i>
-        </li>
-        {/* end:: section */}
-
-        {/* Müşteri Yönetimi */}
-        {/*begin::1 Level*/}
-        <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-          <a href="#" className="menu-link menu-toggle">
-            <span className="svg-icon menu-icon">
-              {/*begin::Svg Icon | path:../media/svg/icons/Layout/Layout-4-blocks.svg*/}
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Layout/Layout-4-blocks.svg")} />
-              {/*end::Svg Icon*/}
-            </span>
-            <span className="menu-text">Müşteri Yönetimi</span>
-            <i className="menu-arrow"></i>
-          </a>
-          <div className="menu-submenu">
-            <i className="menu-arrow"></i>
-            <ul className="menu-subnav">
-
-              {/*begin::2 Level*/}
-              <li
-                className={`menu-item ${getMenuItemActive(
-                  "/sales/customerQuery"
-                )}`}
-                aria-haspopup="true"
-              >
-                <NavLink className="menu-link" to="/sales/customerQuery">
-                  <i className="menu-bullet menu-bullet-dot">
-                    <span />
-                  </i>
-                  <span className="menu-text">Müşteri Sorgulama</span>
-                  <span className="menu-label">
-                    <span className="label label-danger label-inline">yeni</span>
+              {/* Müşteri Yönetimi */}
+              {/*begin::1 Level*/}
+              <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="#" className="menu-link menu-toggle">
+                  <span className="svg-icon menu-icon">
+                    {/*begin::Svg Icon | path:../media/svg/icons/Layout/Layout-4-blocks.svg*/}
+                    <SVG src={toAbsoluteUrl("/media/svg/icons/Layout/Layout-4-blocks.svg")} />
+                    {/*end::Svg Icon*/}
                   </span>
-                </NavLink>
-              </li>
-              {/*end::2 Level*/}
-              {/*begin::2 Level*/}
-              <li
-                className={`menu-item ${getMenuItemActive(
-                  "/sales/customers"
-                )}`}
-                aria-haspopup="true"
-              >
-                <NavLink className="menu-link" to="/sales/customers">
-                  <i className="menu-bullet menu-bullet-dot">
-                    <span />
-                  </i>
-                  <span className="menu-text">Müşteriler</span>
-                </NavLink>
-              </li>
-              {/*end::2 Level*/}
-
-            </ul>
-          </div>
-        </li>
-        {/*end::1 Level*/}
-
-        {/* Raporlar */}
-        {/*begin::1 Level*/}
-        <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-          <a href="#" className="menu-link menu-toggle">
-            <span className="svg-icon menu-icon">
-              {/*begin::Svg Icon | path:../media/svg/icons/Shopping/Barcode-read.svg*/}
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Barcode-read.svg")} />
-              {/*end::Svg Icon*/}
-            </span>
-            <span className="menu-text">Raporlar</span>
-            <i className="menu-arrow"></i>
-          </a>
-          <div className="menu-submenu">
-            <i className="menu-arrow"></i>
-            <ul className="menu-subnav">
-
-              <li className="menu-item" aria-haspopup="true">
-                <a href="custom/apps/inbox.html" className="menu-link">
-                  <i className="menu-bullet menu-bullet-line">
-                    <span></span>
-                  </i>
-                  <span className="menu-text">Araç Bazında Satışlar</span>
+                  <span className="menu-text">Müşteri Yönetimi</span>
+                  <i className="menu-arrow"></i>
                 </a>
+                <div className="menu-submenu">
+                  <i className="menu-arrow"></i>
+                  <ul className="menu-subnav">
+
+                    {/*begin::2 Level*/}
+                    <li
+                      className={`menu-item ${getMenuItemActive(
+                        "/sales/customerQuery"
+                      )}`}
+                      aria-haspopup="true"
+                    >
+                      <NavLink className="menu-link" to="/sales/customerQuery">
+                        <i className="menu-bullet menu-bullet-dot">
+                          <span />
+                        </i>
+                        <span className="menu-text">Müşteri Sorgulama</span>
+                        <span className="menu-label">
+                          <span className="label label-danger label-inline">yeni</span>
+                        </span>
+                      </NavLink>
+                    </li>
+                    {/*end::2 Level*/}
+                    {/*begin::2 Level*/}
+                    <li
+                      className={`menu-item ${getMenuItemActive(
+                        "/sales/customers"
+                      )}`}
+                      aria-haspopup="true"
+                    >
+                      <NavLink className="menu-link" to="/sales/customers">
+                        <i className="menu-bullet menu-bullet-dot">
+                          <span />
+                        </i>
+                        <span className="menu-text">Müşteriler</span>
+                      </NavLink>
+                    </li>
+                    {/*end::2 Level*/}
+
+                  </ul>
+                </div>
               </li>
-              <li className="menu-item" aria-haspopup="true">
-                <a href="custom/apps/inbox.html" className="menu-link">
-                  <i className="menu-bullet menu-bullet-line">
-                    <span></span>
-                  </i>
-                  <span className="menu-text">Temsilci Bazında Satışlar</span>
+              {/*end::1 Level*/}
+
+              {/* Raporlar */}
+              {/*begin::1 Level*/}
+              <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                <a href="#" className="menu-link menu-toggle">
+                  <span className="svg-icon menu-icon">
+                    {/*begin::Svg Icon | path:../media/svg/icons/Shopping/Barcode-read.svg*/}
+                    <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Barcode-read.svg")} />
+                    {/*end::Svg Icon*/}
+                  </span>
+                  <span className="menu-text">Raporlar</span>
+                  <i className="menu-arrow"></i>
                 </a>
+                <div className="menu-submenu">
+                  <i className="menu-arrow"></i>
+                  <ul className="menu-subnav">
+
+                    <li className="menu-item" aria-haspopup="true">
+                      <a href="custom/apps/inbox.html" className="menu-link">
+                        <i className="menu-bullet menu-bullet-line">
+                          <span></span>
+                        </i>
+                        <span className="menu-text">Araç Bazında Satışlar</span>
+                      </a>
+                    </li>
+                    <li className="menu-item" aria-haspopup="true">
+                      <a href="custom/apps/inbox.html" className="menu-link">
+                        <i className="menu-bullet menu-bullet-line">
+                          <span></span>
+                        </i>
+                        <span className="menu-text">Temsilci Bazında Satışlar</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-            </ul>
-          </div>
-        </li>
-
-        {/*end::1 Level*/}
-
+              {/*end::1 Level*/}
+            </>
+          )
+        }
 
         {/* Sistem */}
         {/* begin::section */}
@@ -160,66 +173,83 @@ export function AsideMenuList({ layoutProps }) {
         {/*begin::1 Level*/}
         {/*end::1 Level*/}
 
- {/* Bayiler */}
+        {/* Bayiler */}
         {/*begin::1 Level*/}
-        <li className={`menu-item ${getMenuItemActive("/system/dealers")}`} aria-haspopup="true" >
-          <NavLink className="menu-link" to="/system/dealers">
-            <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Home/Building.svg")} />
-            </span>
-            <span className="menu-text">Bayiler</span>
-          </NavLink>
-        </li>
+        {
+          (dealer?.isManager&&dealer.adminId==currentUser.id) &&
+          (
+            <li className={`menu-item ${getMenuItemActive("/system/dealers")}`} aria-haspopup="true" >
+              <NavLink className="menu-link" to="/system/dealers">
+                <span className="svg-icon menu-icon">
+                  <SVG src={toAbsoluteUrl("/media/svg/icons/Home/Building.svg")} />
+                </span>
+                <span className="menu-text">Bayiler</span>
+              </NavLink>
+            </li>
+          )
+        }
         {/*end::1 Level*/}
 
         {/* Galeriler */}
         {/*begin::1 Level*/}
-        <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
-          <NavLink className="menu-link" to="/system/galleries">
-            <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
-            </span>
-            <span className="menu-text">Galeriler</span>
-          </NavLink>
-        </li>
+        {
+          (dealer&&dealer.adminId==currentUser.id) &&
+          (
+            <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
+              <NavLink className="menu-link" to="/system/galleries">
+                <span className="svg-icon menu-icon">
+                  <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
+                </span>
+                <span className="menu-text">Galeriler</span>
+              </NavLink>
+            </li>
+          )
+        }
         {/*end::1 Level*/}
+
+
         {/* Stok Yönetimi */}
         {/*begin::1 Level*/}
-        <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-          <a href="#" className="menu-link menu-toggle">
-            <span className="svg-icon menu-icon">
-              {/*begin::Svg Icon | path:../media/svg/icons/Layout/Layout-4-blocks.svg*/}
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Layout/Layout-4-blocks.svg")} />
-              {/*end::Svg Icon*/}
-            </span>
-            <span className="menu-text">Stok Yönetimi</span>
-            <i className="menu-arrow"></i>
-          </a>
-          <div className="menu-submenu">
-            <i className="menu-arrow"></i>
-            <ul className="menu-subnav">
-              <li className="menu-item" aria-haspopup="true">
-                <a href="custom/apps/inbox.html" className="menu-link">
-                  <i className="menu-bullet menu-bullet-line">
-                    <span></span>
-                  </i>
-                  <span className="menu-text">Stoklar</span>
-                  <span className="menu-label">
-                    <span className="label label-danger label-inline">yeni</span>
-                  </span>
-                </a>
-              </li>
-              <li className="menu-item" aria-haspopup="true">
-                <a href="custom/apps/inbox.html" className="menu-link">
-                  <i className="menu-bullet menu-bullet-line">
-                    <span></span>
-                  </i>
-                  <span className="menu-text">Fiyatlandırma</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
+        {
+          dealer.dealerTypeId === 1 && (
+            <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+              <a href="#" className="menu-link menu-toggle">
+                <span className="svg-icon menu-icon">
+                  {/*begin::Svg Icon | path:../media/svg/icons/Layout/Layout-4-blocks.svg*/}
+                  <SVG src={toAbsoluteUrl("/media/svg/icons/Layout/Layout-4-blocks.svg")} />
+                  {/*end::Svg Icon*/}
+                </span>
+                <span className="menu-text">Stok Yönetimi</span>
+                <i className="menu-arrow"></i>
+              </a>
+              <div className="menu-submenu">
+                <i className="menu-arrow"></i>
+                <ul className="menu-subnav">
+                  <li className="menu-item" aria-haspopup="true">
+                    <a href="custom/apps/inbox.html" className="menu-link">
+                      <i className="menu-bullet menu-bullet-line">
+                        <span></span>
+                      </i>
+                      <span className="menu-text">Stoklar</span>
+                      <span className="menu-label">
+                        <span className="label label-danger label-inline">yeni</span>
+                      </span>
+                    </a>
+                  </li>
+                  <li className="menu-item" aria-haspopup="true">
+                    <a href="custom/apps/inbox.html" className="menu-link">
+                      <i className="menu-bullet menu-bullet-line">
+                        <span></span>
+                      </i>
+                      <span className="menu-text">Fiyatlandırma</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+          )
+        }
         {/*end::1 Level*/}
         {/* Kullanıcı Yönetimi */}
         {/*begin::1 Level*/}
@@ -273,7 +303,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Components */}
         {/* begin::section */}
         <li className="menu-section ">
-          <h4 className="menu-text">Metronic</h4>
+          <h4 className="menu-text">Metronic -GEÇİCİ-</h4>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
         {/* end:: section */}

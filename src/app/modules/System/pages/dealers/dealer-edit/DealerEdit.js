@@ -29,6 +29,14 @@ import { DealerEditForm } from "./DealerEditForm";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { Wizard } from "./Wizard";
 import { v4 as generateGuid } from 'uuid';
+import { Galleries } from "../dealer-galleries/Galleries";
+import { GalleriesUIProvider } from "../dealer-galleries/GalleriesUIContext";
+
+
+import { Users } from "../dealer-users/Users";
+import { UsersUIProvider } from "../dealer-users/UsersUIContext";
+
+
 
 const initDealer = {
 
@@ -51,7 +59,7 @@ const initDealer = {
   username: "",
   ownerEmail: "",
   phone: "",
-  
+
   //STEP4-> ADRES
   addressName: "",
   cityId: undefined,
@@ -80,7 +88,7 @@ const arrayProgress = [
     description: "Bayi için bir yönetici atayın",
     icon: "/media/svg/icons/Communication/Add-user.svg"
   },
- 
+
   {
     id: 4,
     title: "Bayi Adres",
@@ -194,8 +202,9 @@ export function DealerEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, dealerForEdit, taxOffices, users, professions, cities, towns, neighborhoods } = useSelector(
+  const { actionsLoading, dealerForEdit, taxOffices, users, professions, cities, towns, neighborhoods,currentUser } = useSelector(
     (state) => ({
+      currentUser:state.auth.user,
       actionsLoading: state.dealers.actionsLoading,
       dealerForEdit: state.dealers.dealerForEdit,
       taxOffices: state.taxOffices.entities,
@@ -279,7 +288,10 @@ export function DealerEdit({
   const required = value => (value ? undefined : "Required");
 
 
-
+  if(currentUser.dealer==undefined&&currentUser.dealer.isManager){
+    alert("Bayi Ekleme Yetkiniz Yok!!!");
+    backToDealersList();
+  }
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}
@@ -360,7 +372,7 @@ export function DealerEdit({
                   relationTable: "Dealers"
                 }
                 dispatch(usersActions.createUser(adminUser)).then((response) => {
-                  debugger
+                  
                   dealer.adminId = response?.id;
                   dispatch(actions.createDealer(dealer)).then(() => {
                     dispatch(addressesActions.createAddress(address)).then(() => {
@@ -396,7 +408,7 @@ export function DealerEdit({
                         />
                       </div>
                       <div className="col-lg-6">
-                        <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} disabledOption={1} value={2} />
+                        <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} value={1} />
 
                       </div>
 
@@ -479,7 +491,7 @@ export function DealerEdit({
                 );
               }}
             </Wizard.Page>
-         
+
             <Wizard.Page>
               {props => {
                 console.log(props, "this props 3");
@@ -557,7 +569,7 @@ export function DealerEdit({
                 );
               }}
             </Wizard.Page>
-             <Wizard.Page>
+            <Wizard.Page>
               {props => {
                 console.log(props, "this props 4");
                 return (
@@ -715,6 +727,16 @@ export function DealerEdit({
                   Galerileri
                     </a>
               </li>
+              <li className="nav-item" onClick={() => setTab("users")}>
+                <a
+                  className={`nav-link ${tab === "users" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "users")}
+                >
+                  Kullanıcıları
+                    </a>
+              </li>
             </ul>
             <div className="mt-5">
               {tab === "basic" && (
@@ -730,7 +752,14 @@ export function DealerEdit({
                 />
               )}
               {tab === "galleries" && id && (
-                <h4>Galeriler</h4>
+                <GalleriesUIProvider currentDealerId={id}>
+                  <Galleries />
+                </GalleriesUIProvider>
+              )}
+               {tab === "users" && id && (
+                <UsersUIProvider currentDealerId={id}>
+                  <Users />
+                </UsersUIProvider>
               )}
             </div>
           </>)

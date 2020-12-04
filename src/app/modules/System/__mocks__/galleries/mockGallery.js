@@ -7,18 +7,21 @@ export default function mockGalleries(mock) {
     const {
       dealer = "",
       name = "",
-      level= 0,
+      levelId = 0,
       taxOffice = 0,
-      taxOfficeId=0,
+      taxOfficeId = 0,
       taxIdentityNo = "",
+      tel1 = "",
+      fax = "",
+      email = "",
       isActive = false,
-      createdDate= "2019-11-01T00:00:00+00:00",
-      createdBy=1,
-      updatedDate= null,
-      updatedBy= null,
-      deletedDate= null,
-      deletedBy=null,
-      guid="",
+      createdDate = "2019-11-01T00:00:00+00:00",
+      createdBy = 1,
+      updatedDate = null,
+      updatedBy = null,
+      deletedDate = null,
+      deletedBy = null,
+      guid = "",
     } = gallery;
 
     const id = generateGalleryId();
@@ -26,10 +29,13 @@ export default function mockGalleries(mock) {
       id,
       dealer,
       name,
-      level,
+      levelId,
       taxOffice,
       taxOfficeId,
       taxIdentityNo,
+      tel1,
+      fax,
+      email,
       isActive,
       createdDate,
       createdBy,
@@ -52,6 +58,15 @@ export default function mockGalleries(mock) {
     return [200, filteredGalleries];
   });
 
+  mock.onPost(/api\/galleriesfind\/\d+/).reply(config => {
+    const urls = config.url.split("/");
+    const id = urls[2];
+    const mockUtils = new MockUtils();
+    const { queryParams } = JSON.parse(config.data);
+    const dealerGalleries = galleryTableMock.filter(el => el.dealerId === +id);
+    const filteredGalleries = mockUtils.baseFilter(dealerGalleries, queryParams);
+    return [200, filteredGalleries];
+  });
   mock.onPost("api/galleries/deleteGalleries").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
@@ -64,10 +79,11 @@ export default function mockGalleries(mock) {
   });
 
   mock.onPost("api/galleries/updateStatusForGalleries").reply(config => {
+    
     const { ids, status } = JSON.parse(config.data);
     galleryTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {
-        el.status = status;
+        el.isActive = status;
       }
     });
     return [200];

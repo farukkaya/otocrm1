@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { shallowEqual, useSelector } from "react-redux";
-import * as actions from "../../../_redux/galleries/galeriesActions";
+import * as actions from "../../../_redux/galleries/galleriesActions"
 import * as taxOfficesActions from "../../../_redux/taxOffices/taxOfficesActions"
 import {
   Card,
@@ -14,15 +14,8 @@ import {
 import { GalleryEditForm } from "./GalleryEditForm";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
-const initGallery = {
-    id:undefined,
-    name: "",
-    level:undefined,
-    dealer:"",
-    taxOffice:"",
-    taxOfficeId:undefined,
-    taxIdentityNo: "",
-};
+import { Alert } from "@material-ui/lab";
+
 
 export function GalleryEdit({
   history,
@@ -42,8 +35,9 @@ export function GalleryEdit({
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
   
-  const { actionsLoading, galleryForEdit,taxOffices } = useSelector(
+  const { actionsLoading, galleryForEdit,taxOffices ,currentUser} = useSelector(
     (state) => ({
+      currentUser:state.auth.user,
       actionsLoading: state.galleries.actionsLoading,
       galleryForEdit: state.galleries.galleryForEdit,
       taxOffices:state.taxOffices.entities
@@ -51,6 +45,14 @@ export function GalleryEdit({
     shallowEqual
   );
   
+  const initGallery = {
+    id:undefined,
+    name: "",
+    level:undefined,
+    dealerId:currentUser.dealer?.id,
+    taxOfficeId:undefined,
+    taxIdentityNo: "",
+};
 
   useEffect(() => {
     dispatch(taxOfficesActions.fetchAllTaxOffice());
@@ -106,7 +108,10 @@ export function GalleryEdit({
   const backToGalleriesList = () => {
     history.push(`/system/galleries`);
   };
-
+  if(currentUser.dealer==undefined){
+    alert("Galeri Ekleme Yetkiniz Yok!!!");
+    backToGalleriesList();
+  }
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}

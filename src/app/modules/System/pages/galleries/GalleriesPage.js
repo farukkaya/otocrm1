@@ -1,4 +1,5 @@
 import React from "react";
+import { shallowEqual, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { GalleriesLoadingDialog } from "./galleries-loading-dialog/GalleriesLoadingDialog";
 import { GalleryDeleteDialog } from "./gallery-delete-dialog/GalleryDeleteDialog";
@@ -10,6 +11,23 @@ import { GalleriesDeleteDialog } from "./galleries-delete-dialog/GalleriesDelete
 import { GalleryUpdateStatusDialog } from "./gallery-update-status-dialog/GalleryUpdateStatusDialog";
 
 export const GalleriesPage=({ history }) =>{
+
+  const { dealer } = useSelector(
+    ({ auth }) => ({
+      dealer: auth.user.dealer,
+    }),
+    shallowEqual
+  );
+  const backToDashboard = () => {
+    history.push(`/dashboard`);
+  };
+
+  
+  if(dealer==undefined){
+    alert("Bu Ekranı Görme Yetkiniz Yok!!!");
+    backToDashboard();
+  }
+
   const galleriesUIEvents = {
     newGalleryButtonClick: () => {
       history.push("/system/galleries/new");

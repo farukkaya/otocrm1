@@ -33,14 +33,12 @@ export function GalleriesUIProvider({ currentDealerId, children }) {
   const initGallery = {
     id:undefined,
     name: "",
-    level:undefined,
-    dealer:"",
-    taxOffice:"",
+    levelId:0,
+    dealerId:dealerId,
     taxOfficeId:undefined,
     taxIdentityNo: ""
   };
   useEffect(()=> {
-    initGallery.dealerId = currentDealerId;
     setDealerId(currentDealerId);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDealerId]);
@@ -52,6 +50,8 @@ export function GalleriesUIProvider({ currentDealerId, children }) {
     setSelectedId(id);
     setShowEditGalleryDialog(true);
   };
+ 
+
   const closeEditGalleryDialog = () => {
     setSelectedId(undefined);
     setShowEditGalleryDialog(false);
@@ -64,6 +64,17 @@ export function GalleriesUIProvider({ currentDealerId, children }) {
   const closeDeleteGalleryDialog = () => {
     setSelectedId(undefined);
     setShowDeleteGalleryDialog(false);
+  };
+
+  const [showUpdateStatusGalleryDialog, setShowUpdateStatusGalleryDialog] = useState(false);
+
+  const openUpdateStatusGalleryDialog = id => {
+    setSelectedId(id);
+    setShowUpdateStatusGalleryDialog(true);
+  };
+  const closeUpdateStatusGalleryDialog = () => {
+    setSelectedId(undefined);
+    setShowUpdateStatusGalleryDialog(false);
   };
 
   const [showDeleteGalleriesDialog, setShowDeleteGalleriesDialog] = useState(false);
@@ -94,6 +105,9 @@ export function GalleriesUIProvider({ currentDealerId, children }) {
     showEditGalleryDialog,
     openNewGalleryDialog,    
     openEditGalleryDialog,
+    openUpdateStatusGalleryDialog,
+    closeUpdateStatusGalleryDialog,
+    showUpdateStatusGalleryDialog,
     closeEditGalleryDialog,
     showDeleteGalleryDialog,
     openDeleteGalleryDialog,

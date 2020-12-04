@@ -5,6 +5,26 @@ const {actions} = usersSlice;
 
 
 
+export const fetchUsersByDealer = (queryParams, dealerId) => dispatch => {
+  
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  if (!dealerId) {
+    return dispatch(actions.usersFetched({ totalCount: 0, entities: null }));
+  }
+
+  return requestFromServer
+    .findUsersByDealer(queryParams, dealerId)
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.usersFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find remarks";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
+
 export const fetchUsers = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -31,6 +51,7 @@ export const fetchUser = id => dispatch => {
       
       const user = response.data;
       dispatch(actions.userFetched({ userForEdit: user }));
+      return user;
     })
     .catch(error => {
       error.clientMessage = "Can't find user";

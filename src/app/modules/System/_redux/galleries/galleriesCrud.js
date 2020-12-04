@@ -22,6 +22,9 @@ export function findGalleries(queryParams) {
   return axios.post(`${GALLERIES_URL}/find`, { queryParams });
 }
 
+export function findGalleriesByDealer(queryParams, dealerId) {
+  return axios.post(`${GALLERIES_URL}find/${dealerId}`, { queryParams });
+}
 // UPDATE => PUT: update the procuct on the server
 export function updateGallery(gallery) {
   return axios.put(`${GALLERIES_URL}/${gallery.id}`, { gallery });
@@ -29,6 +32,7 @@ export function updateGallery(gallery) {
 
 // UPDATE Status
 export function updateStatusForGalleries(ids, status) {
+  
   return axios.post(`${GALLERIES_URL}/updateStatusForGalleries`, {
     ids,
     status

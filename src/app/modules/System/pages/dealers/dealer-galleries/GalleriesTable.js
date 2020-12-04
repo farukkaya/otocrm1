@@ -31,6 +31,7 @@ export function GalleriesTable() {
       setQueryParams: galleriesUIContext.setQueryParams,
       dealerId: galleriesUIContext.dealerId,
       openEditGalleryDialog: galleriesUIContext.openEditGalleryDialog,
+      openUpdateStatusGalleryDialog:galleriesUIContext.openUpdateStatusGalleryDialog,
       openDeleteGalleryDialog: galleriesUIContext.openDeleteGalleryDialog,
     };
   }, [galleriesUIContext]);
@@ -44,67 +45,65 @@ export function GalleriesTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     galleriesUIProps.setIds([]);
-    dispatch(
-      actions.fetchGalleries(galleriesUIProps.queryParams, galleriesUIProps.dealerId)
-    );
+    dispatch(actions.fetchGalleriesByDealer(galleriesUIProps.queryParams, galleriesUIProps.dealerId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [galleriesUIProps.queryParams, dispatch, galleriesUIProps.dealerId]);
   const columns = [
     {
-        dataField: "id",
-        sort: true,
-        text: "Id",
-        sortCaret: sortCaret,
+      dataField: "id",
+      sort: true,
+      text: "Id",
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "name",
+      text: "Galeri Adı",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "level",
+      text: "Seviye",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "taxOffice",
+      text: "Vergi Dairesi",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "taxIdentityNo",
+      text: "Vergi No",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+
+
+    {
+      dataField: "isActive",
+      text: "Durum",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.StatusColumnFormatter,
+    },
+    {
+      dataField: "action",
+      text: "İşlemler",
+      formatter: columnFormatters.ActionsColumnFormatter,
+      formatExtraData: {
+        openUpdateStatusDialog: galleriesUIProps.openUpdateStatusGalleryDialog,
+        openEditPage: galleriesUIProps.openEditGalleryDialog,
+        openDeleteDialog: galleriesUIProps.openDeleteGalleryDialog,
       },
-      {
-        dataField: "name",
-        text:"Galeri Adı",
-        sort: true,
-        sortCaret: sortCaret,
-      },   
-      {
-        dataField: "level",
-        text:"Seviye",
-        sort: true,
-        sortCaret: sortCaret,
-      },   
-      {
-        dataField: "taxOffice",
-        text:"Vergi Dairesi",
-        sort: true,
-        sortCaret: sortCaret,
+      classes: "text-right pr-0",
+      headerClasses: "text-right pr-3",
+
+      style: {
+        minWidth: "100px",
       },
-      {
-        dataField: "taxIdentityNo",
-        text:"Vergi No",
-        sort: true,
-        sortCaret: sortCaret,
-      },
-      
-     
-      {
-        dataField: "isActive",
-        text:"Durum",
-        sort: true,
-        sortCaret: sortCaret,
-       formatter: columnFormatters.StatusColumnFormatter,
-      },
-      {
-        dataField: "action",
-        text:"İşlemler",
-        formatter: columnFormatters.ActionsColumnFormatter,
-        formatExtraData: {
-          openUpdateStatusDialog: galleriesUIProps.openUpdateGalleryStatusDialog,
-          openEditPage: galleriesUIProps.openEditGalleryPage,
-          openDeleteDialog: galleriesUIProps.openDeleteGalleryDialog,
-        },
-        classes: "text-right pr-0",
-        headerClasses:"text-right pr-3",
-  
-        style: {
-          minWidth: "100px",
-        },
-      }
+    }
   ];
 
   const paginationOptions = {

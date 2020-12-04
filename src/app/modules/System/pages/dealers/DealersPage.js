@@ -1,4 +1,5 @@
 import React from "react";
+import { shallowEqual, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { DealersLoadingDialog } from "./dealers-loading-dialog/DealersLoadingDialog";
 import { DealerDeleteDialog } from "./dealer-delete-dialog/DealerDeleteDialog";
@@ -10,6 +11,20 @@ import { DealersDeleteDialog } from "./dealers-delete-dialog/DealersDeleteDialog
 import { DealerUpdateStatusDialog } from "./dealer-update-status-dialog/DealerUpdateStatusDialog";
 
 export const DealersPage=({ history }) =>{
+
+  const { dealer } = useSelector(
+    ({ auth }) => ({
+      dealer: auth.user.dealer,
+    }),
+    shallowEqual
+  );
+  const backToDashboard = () => {
+    history.push(`/dashboard`);
+  };
+  if(dealer==undefined || !dealer?.isManager){
+    alert("Bu Ekranı Görme Yetkiniz Yok!!!");
+    backToDashboard();
+  }
   const dealersUIEvents = {
     newDealerButtonClick: () => {
       history.push("/system/dealers/new");
@@ -34,6 +49,8 @@ export const DealersPage=({ history }) =>{
       history.push(`/system/dealers/${id}/updateStatus`);
     }
   };
+
+
   return (
     <DealersUIProvider dealersUIEvents={dealersUIEvents}>
       <DealersLoadingDialog />

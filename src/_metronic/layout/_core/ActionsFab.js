@@ -58,7 +58,7 @@ export const ActionsFab = (props) => {
           <MenuItem onClick={() => {
             openUpdateStatusDialog(row.id)
             handleClose()
-          }}>{ row.isActive==="0" ? "Aktifleştir" : "Pasifleştir" }</MenuItem>
+          }}>{ row.isActive ? "Pasifleştir" : "Aktifleştir" }</MenuItem>
         )}
       </Menu>
     </>

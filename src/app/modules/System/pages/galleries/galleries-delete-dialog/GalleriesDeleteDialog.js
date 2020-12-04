@@ -3,7 +3,7 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/galleries/galeriesActions";
+import * as actions from "../../../_redux/galleries/galleriesActions";
 import { useGalleriesUIContext } from "../GalleriesUIContext";
 
 export function GalleriesDeleteDialog({ show, onHide }) {

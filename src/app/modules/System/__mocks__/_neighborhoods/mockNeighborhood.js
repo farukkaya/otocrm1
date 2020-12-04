@@ -79,7 +79,7 @@ export default function mockNeighborhoods(mock) {
     const { ids, status } = JSON.parse(config.data);
     neighborhoodTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {
-        el.status = status;
+        el.isActive = status;
       }
     });
     return [200];

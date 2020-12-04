@@ -10,15 +10,28 @@ export default [
     refreshToken: "access-token-f8c137a2c98743f48b643e71161d90aa",
     roles: [1], // Administrator
     pic: toAbsoluteUrl("/media/users/300_25.jpg"),
-    fullname: "Sean S",
-    firstname: "Sean",
-    lastname: "Stark",
+    fullname: "Faruk Kaya",
+    firstname: "Faruk",
+    lastname: "Kaya",
     occupation: "CEO",
-    companyName: "Keenthemes",
+    companyName: "OtoCrm",
     phone: "456669067890",
-    language: "en",
+    language: "tr",
     timeZone: "International Date Line West",
-    website: "https://keenthemes.com",
+    website: "https://otocrm.net",
+    dealer:{
+      id:1,
+      name:"TEST BAYİ 1",
+      isManager:true,
+      dealerTypeId:1,
+      adminId:1
+    },
+    gallery:{
+      id:1,
+      name:"TEST GALERİ 1",
+      levelId:1,
+      adminId:1,
+    },
     emailSettings: {
       emailNotification: true,
       sendCopyToPersonalEmail: false,
@@ -58,9 +71,9 @@ export default [
   },
   {
     id: 2,
-    username: "user",
+    username: "bayi",
     password: "demo",
-    email: "user@demo.com",
+    email: "bayi@demo.com",
     accessToken: "access-token-6829bba69dd3421d8762-991e9e806dbf",
     refreshToken: "access-token-f8e4c61a318e4d618b6c199ef96b9e55",
     roles: [2], // Manager
@@ -73,6 +86,14 @@ export default [
     phone: "456669067891",
     language: "en",
     timeZone: "International Date Line West",
+    dealer:{
+      id:2,
+      name:"TEST BAYİ 2",
+      isManager:false,
+      dealerTypeId:2,
+      adminId:2
+    },
+    gallery:undefined,
     communication: {
       email: true,
       sms: true,
@@ -122,11 +143,24 @@ export default [
     fullname: "Manu G",
     firstname: "Manu",
     lastname: "Ginobili",
-    occupation: "CFO",
+    occupation: "Satışçı",
     companyName: "Keenthemes",
     phone: "456669067892",
     language: "en",
     timeZone: "International Date Line West",
+    dealer:{
+      id:1,
+      name:"TEST BAYİ 1",
+      isManager:true,
+      dealerTypeId:1,
+      adminId:1,
+    },
+    gallery:{
+      id:1,
+      name:"TEST GALERİ 1",
+      levelId:1,
+      adminId:1,
+    },
     communication: {
       email: true,
       sms: true,

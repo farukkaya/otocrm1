@@ -6,7 +6,7 @@ import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import * as actions from "../../../_redux/galleries/galeriesActions"
+import * as actions from "../../../_redux/galleries/galleriesActions"
 import * as uiHelpers from "../GalleriesUIHelpers";
 import {
   getSelectRow,
@@ -38,10 +38,14 @@ export function GalleriesTable() {
   }, [galleriesUIContext]);
 
   // Getting curret state of galleries list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.galleries }),
+  const { currentState,currentDealer } = useSelector(
+    (state) => ({ 
+      currentDealer: state.auth.user.dealer,
+      currentState: state.galleries
+    }),
     shallowEqual
   );
+  console.log(currentDealer)
   const { totalCount, entities, listLoading } = currentState;
   // Galleries Redux state
   const dispatch = useDispatch();
@@ -50,7 +54,11 @@ export function GalleriesTable() {
     // clear selections list
     galleriesUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchGalleries(galleriesUIProps.queryParams));
+    if(currentDealer.isManager)
+       dispatch(actions.fetchGalleries(galleriesUIProps.queryParams));
+    else
+      dispatch(actions.fetchGalleriesByDealer(galleriesUIProps.queryParams, currentDealer.id));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [galleriesUIProps.queryParams, dispatch]);
   // Table columns
@@ -65,6 +73,7 @@ export function GalleriesTable() {
       dataField: "dealer",
       text:"Bayi",
       sort: true,
+      hidden:!currentDealer.isManager,
       sortCaret: sortCaret,
     },
     {

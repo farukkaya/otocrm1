@@ -71,7 +71,7 @@ export default function mockTaxOffices(mock) {
     const { ids, status } = JSON.parse(config.data);
     taxOfficeTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {
-        el.status = status;
+        el.isActive = status;
       }
     });
     return [200];

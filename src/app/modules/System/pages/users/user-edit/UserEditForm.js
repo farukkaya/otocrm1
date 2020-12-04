@@ -110,7 +110,6 @@ export function UserEditForm({
                   />
                 </div>
               </div>
-
               <div className="form-group row">
                 <div className="col-lg-6">
                   <Field
@@ -130,7 +129,6 @@ export function UserEditForm({
                 </div>
 
               </div>
-             
               <button
                 type="submit"
                 style={{ display: "none" }}

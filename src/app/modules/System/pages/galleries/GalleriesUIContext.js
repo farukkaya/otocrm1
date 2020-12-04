@@ -39,6 +39,7 @@ export function GalleriesUIProvider({ galleriesUIEvents, children }) {
     openDeleteGalleryDialog: galleriesUIEvents.openDeleteGalleryDialog,
     openDeleteGalleriesDialog: galleriesUIEvents.openDeleteGalleriesDialog,
     openFetchGalleriesDialog: galleriesUIEvents.openFetchGalleriesDialog,
+    openUpdateGalleryStatusDialog:galleriesUIEvents.openUpdateGalleryStatusDialog,
     openUpdateGalleriesStatusDialog:
       galleriesUIEvents.openUpdateGalleriesStatusDialog,
   };

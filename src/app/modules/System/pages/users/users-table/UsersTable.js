@@ -35,8 +35,10 @@ export function UsersTable() {
   }, [usersUIContext]);
 
   // Getting curret state of users list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.users }),
+  const { currentState,currentDealer } = useSelector(
+    (state) => ({ 
+      currentDealer: state.auth.user.dealer,
+      currentState: state.users }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
@@ -46,8 +48,12 @@ export function UsersTable() {
     // clear selections list
     usersUIProps.setIds([]);
     // server call by queryParams
-    dispatch(actions.fetchUsers(usersUIProps.queryParams));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if(currentDealer.isManager)
+      dispatch(actions.fetchUsers(usersUIProps.queryParams));
+    else
+      dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams, currentDealer.id));
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersUIProps.queryParams, dispatch]);
   // Table columns
   const columns = [
@@ -55,6 +61,13 @@ export function UsersTable() {
       dataField: "id",
       text: "Id",
       sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "dealer",
+      text:"Bayi",
+      sort: true,
+      hidden:!currentDealer.isManager,
       sortCaret: sortCaret,
     },
     {

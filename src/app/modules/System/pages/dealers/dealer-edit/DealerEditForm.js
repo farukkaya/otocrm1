@@ -108,42 +108,6 @@ export function DealerEditForm({
                   />
                 </div>
               </div>
-              <div className="form-group row">
-                <div className="col-lg-6">
-                <Field
-                    name="email"
-                    component={Input}
-                    placeholder="E-Posta"
-                    label="E-Posta"
-                  />
-                </div>
-                <div className="col-lg-6">
-                  <Field
-                    name="fax"
-                    component={Input}
-                    placeholder="Fax"
-                    label="Fax"
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-6">
-                <Field
-                    name="tel1"
-                    component={Input}
-                    placeholder="Telefon No.1"
-                    label="Telefon No.1"
-                  />
-                </div>
-                <div className="col-lg-6">
-                  <Field
-                    name="tel2"
-                    component={Input}
-                    placeholder="Telefon No.2"
-                    label="Telefon No.2"
-                  />
-                </div>
-              </div>
               <button
                 type="reset"
                 style={{ display: "none" }}

@@ -58,6 +58,15 @@ export default function mockUser(mock) {
     return [200, filteredUsers];
   });
 
+  mock.onPost(/api\/usersfind\/\d+/).reply(config => {
+    const urls = config.url.split("/");
+    const id = urls[2];
+    const mockUtils = new MockUtils();
+    const { queryParams } = JSON.parse(config.data);
+    const dealerUsers= userTableMock.filter(el => el.dealerId === +id);
+    const filteredUsers = mockUtils.baseFilter(dealerUsers, queryParams);
+    return [200, filteredUsers];
+  });
   mock.onPost("api/users/deleteUsers").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
@@ -73,7 +82,7 @@ export default function mockUser(mock) {
     const { ids, status } = JSON.parse(config.data);
     userTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {
-        el.status = status;
+        el.isActive = status;
       }
     });
     return [200];

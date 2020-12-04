@@ -5,8 +5,8 @@ export const sizePerPageList = [
   { text: "5", value: 5 },
   { text: "10", value: 10 }
 ];
-export const DealerTypeCssClasses = ["","danger", "warning", "info"];
-export const DealerTypeTitles = [{id:1,name:"Yönetim"},{id:2,name:"Bayi&Galeri"},{id:3,name:"Bayi"}];
+export const DealerTypeCssClasses = ["", "warning", "info"];
+export const DealerTypeTitles = [{id:1,name:"Bayi&Galeri"},{id:2,name:"Bayi"}];
 
 export const initialFilter = {
   filter:{

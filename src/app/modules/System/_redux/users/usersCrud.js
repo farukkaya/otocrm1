@@ -21,7 +21,9 @@ export function getUserById(userId) {
 export function findUsers(queryParams) {
   return axios.post(`${USERS_URL}/find`, { queryParams });
 }
-
+export function findUsersByDealer(queryParams, dealerId) {
+  return axios.post(`${USERS_URL}find/${dealerId}`, { queryParams });
+}
 
 
 // UPDATE => PUT: update the procuct on the server
