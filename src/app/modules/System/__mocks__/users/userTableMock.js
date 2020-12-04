@@ -3,6 +3,7 @@ export default [
         id: 1,
 
         dealerId:1,
+        galleryId:undefined,
         professionId:1,
 
         firstName: "Faruk",
@@ -30,6 +31,7 @@ export default [
         id: 2,
 
         dealerId:1,
+        galleryId:undefined,
         professionId:1,
 
         email: "enesbozok@otocrm.com",
@@ -56,6 +58,7 @@ export default [
         id: 3,
 
         dealerId:2,
+        galleryId:undefined,
         professionId:1,
 
         email: "umutkocak@otocrm.com",
@@ -77,6 +80,34 @@ export default [
         dealer:"TEST BAYİ 2",
         profession:"Satışçı",
         fullName:"Umut Koçak"
+    },
+
+    {
+        id: 4,
+
+        dealerId:undefined,
+        galleryId:1,
+        professionId:1,
+
+        email: "ulaserdegor@otocrm.com",
+        identityNo: "92198765429",
+        firstName: "Ulaş",
+        lastName: "Erdegör",
+        username: "ulaserdegor",
+        workPhone: "",
+        personalPhone: "",
+
+        isActive: true, 
+        createdDate: "2019-11-01T00:00:00+00:00",
+        createdBy:1,
+        updatedDate: null,
+        updatedBy: null,
+        deletedDate: null,
+        deletedBy:null,
+       
+        gallery:"TEST GALERİ 1",
+        profession:"Satışçı",
+        fullName:"Ulaş Erdegör"
     }
     ];
   

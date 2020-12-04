@@ -91,7 +91,7 @@ export function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                   />
                 </div>
                 <div className="col-lg-4">
-                <Select name="professionId" label="Meslek" options={professions}/>
+                  <Select name="professionId" label="Meslek" options={professions}/>
                 </div>
               </div>
               <div className="form-group row">

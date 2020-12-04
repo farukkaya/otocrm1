@@ -22,9 +22,11 @@ export function findUsers(queryParams) {
   return axios.post(`${USERS_URL}/find`, { queryParams });
 }
 export function findUsersByDealer(queryParams, dealerId) {
-  return axios.post(`${USERS_URL}find/${dealerId}`, { queryParams });
+  return axios.post(`${USERS_URL}findByDealer/${dealerId}`, { queryParams });
 }
-
+export function findUsersByGallery(queryParams, galleryId) {
+  return axios.post(`${USERS_URL}findByGallery/${galleryId}`, { queryParams });
+}
 
 // UPDATE => PUT: update the procuct on the server
 export function updateUser(user) {

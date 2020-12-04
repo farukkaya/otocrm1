@@ -14,7 +14,9 @@ import {
 import { GalleryEditForm } from "./GalleryEditForm";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
-import { Alert } from "@material-ui/lab";
+
+import { Users } from "../gallery-users/Users";
+import { UsersUIProvider } from "../gallery-users/UsersUIContext";
 
 
 export function GalleryEdit({
@@ -184,7 +186,9 @@ export function GalleryEdit({
           />
           )}
           {tab === "users" && id && (
-            <h1>Galeri Kullanıcıları</h1>
+            <UsersUIProvider currentGalleryId={id}>
+            <Users />
+          </UsersUIProvider>
           )}
          
         </div>

@@ -80,14 +80,7 @@ export function UserEditForm({
                   />
                 </div>
                 <div className="col-lg-4">
-                  <Select name="professionId" label="Meslek">
-                   <option/>
-                    {professions.map((item) => (
-                      <option key={item.name} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </Select>
+                <Select name="professionId" label="Meslek" options={professions}/>
                 </div>
               </div>
               <div className="form-group row">

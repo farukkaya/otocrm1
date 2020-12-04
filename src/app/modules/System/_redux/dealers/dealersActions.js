@@ -43,6 +43,7 @@ export const fetchDealer = id => dispatch => {
       
       const dealer = response.data;
       dispatch(actions.dealerFetched({ dealerForEdit: dealer }));
+      return dealer;
     })
     .catch(error => {
       error.clientMessage = "Can't find dealer";

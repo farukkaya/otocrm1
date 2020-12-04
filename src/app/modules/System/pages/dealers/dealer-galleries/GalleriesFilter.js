@@ -93,7 +93,7 @@ export function GalleriesFilter() {
               className="btn btn-primary"
               onClick={() => galleriesUIProps.openNewGalleryDialog()}
             >
-              Yeni Galeri Oluştur
+              Yeni Galeri
             </button>
           </div>
         </div>

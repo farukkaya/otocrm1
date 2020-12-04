@@ -13,7 +13,7 @@ export default [
         tel1:"02139876554",
         tel2:"02139876555",
         isManager:true,
-        isActive: "1", 
+        isActive: true, 
         createdDate: "2019-11-01T00:00:00+00:00",
         createdBy:1,
         updatedDate: null,
@@ -42,7 +42,7 @@ export default [
         tel1:"02139876554",
         tel2:"02139876555",
 
-        isActive: "1", 
+        isActive: true, 
         createdDate: "2019-11-01T00:00:00+00:00",
         createdBy:1,
         updatedDate: null,
@@ -59,7 +59,7 @@ export default [
         id: 3,
     
         taxOfficeId: 1,
-        adminId: 2,
+        adminId: 0,
         dealerTypeId:2,
         isManager:false,
 
@@ -70,7 +70,7 @@ export default [
         tel1:"02139876554",
         tel2:"02139876555",
 
-        isActive: "0", 
+        isActive: false, 
         createdDate: "2019-11-01T00:00:00+00:00",
         createdBy:1,
         updatedDate: null,
@@ -79,7 +79,7 @@ export default [
         deletedBy:null,
         guid:"3d64dfc7-480c-41cc-b799-f4d5f9160a9c",
     
-        admin: "Ahmet Engerek",
+        admin: "Bilinmiyor",
         taxOffice: "İstiklal Vergi Dairesi Müdürlğü",
         dealerType:"Bayi"
     }
