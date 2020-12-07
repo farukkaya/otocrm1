@@ -14,6 +14,8 @@ import mockAddress from "../../app/modules/System/__mocks__/addresses/mockAddres
 import mockCities from "../../app/modules/System/__mocks__/_cities/mockCity";
 import mockTowns from "../../app/modules/System/__mocks__/_towns/mockTown";
 import mockNeighborhoods from "../../app/modules/System/__mocks__/_neighborhoods/mockNeighborhood";
+import mockCar from "../../app/modules/System/__mocks__/cars/mockCar";
+import mockStock from "../../app/modules/System/__mocks__/stocks/mockStock";
 
 export default function mockAxios(axios) {
   const mock = new MockAdapter(axios, { delayResponse: 300 });
@@ -32,7 +34,9 @@ export default function mockAxios(axios) {
   mockProfessions(mock);
   mockDealer(mock);
   mockGallery(mock);
-  mockUser(mock)
+  mockUser(mock);
+  mockCar(mock);
+  mockStock(mock);
   mockTaxOffice(mock);
 
   return mock;

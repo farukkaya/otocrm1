@@ -1,0 +1,211 @@
+export default [
+    {
+        id: 1,
+
+        vinNo : "RFSDA2313123123",
+        engineNo : "231232131203",
+        categoryId: 1,// kategoriler
+        brandId: 3,//markalar
+        modelId: 10,//modeller
+        year:2010,
+        plateNo:"34DG4998",
+        colorId: 1,//renkler
+        fuelTypeId: 1,//Yakıt Tipleri
+        kilometer: 213123,
+        gearTypeId: 1,//Vites tipleri
+        caseTypeId: 1,// kasa tipleri
+        enginePower: 55,//motor gücü
+        engineCapacity: 1300,//motor hacmi
+        swap:false,
+        statusId: 1,// Sıfır ,İkinci El
+        buyingPrice: 55000,
+        sellingPrice: 65000,
+        cashSellingPrice: 62500,
+        swapSellingPrice: 66000,
+        fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
+        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        insuranceCode: 310,//Kasko Kodu
+        insuranceValue: 2123123,// Kasko değeri
+        description: "",
+
+
+
+        isActive: true,
+        createdDate: "2019-11-01T00:00:00+00:00",
+        createdBy: 1,
+        updatedDate: null,
+        updatedBy: null,
+        deletedDate: null,
+        deletedBy: null,
+        relationGuid:"6435f2da-b0db-425e-9dcd-f90415b38227",
+        relationTable:"dealers",
+
+        category:"Otomobil",
+        brand:"Fiat",
+        model:"G.Punto 1.3 M.JET (75) ACTIVE",
+        color:"Beyaz",
+        fuelType:"Dizel",
+        gearType:"Manuel",
+        caseType:"HatckBack",
+        status:"İkinci El",
+        fromWho:"Müşteriden",
+        source:"Nakit",
+    },
+    {
+        id: 2,
+
+        vinNo : "RFSDA2313123123",
+        engineNo : "231232131203",
+        categoryId: 1,// kategoriler
+        brandId: 3,//markalar
+        modelId: 10,//modeller
+        year:2010,
+        plateNo:"34DG4998",
+        colorId: 1,//renkler
+        fuelTypeId: 1,//Yakıt Tipleri
+        kilometer: 213123,
+        gearTypeId: 1,//Vites tipleri
+        caseTypeId: 1,// kasa tipleri
+        enginePower: 55,//motor gücü
+        engineCapacity: 1300,//motor hacmi
+        swap:false,
+        statusId: 1,// Sıfır ,İkinci El
+        buyingPrice: 55000,
+        sellingPrice: 65000,
+        cashSellingPrice: 62500,
+        swapSellingPrice: 66000,
+        fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
+        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        insuranceCode: 310,//Kasko Kodu
+        insuranceValue: 2123123,// Kasko değeri
+        description: "",
+
+
+
+        isActive: true,
+        createdDate: "2019-11-01T00:00:00+00:00",
+        createdBy: 1,
+        updatedDate: null,
+        updatedBy: null,
+        deletedDate: null,
+        deletedBy: null,
+        relationGuid:"6435f2da-b0db-425e-9dcd-f90415b38227",
+        relationTable:"dealers",
+
+        category:"Otomobil",
+        brand:"Fiat",
+        model:"G.Punto 1.3 M.JET (75) ACTIVE",
+        color:"Beyaz",
+        fuelType:"Dizel",
+        gearType:"Manuel",
+        caseType:"HatckBack",
+        status:"İkinci El",
+        fromWho:"Müşteriden",
+        source:"Nakit",
+    },
+    {
+        id: 3,
+
+        vinNo : "RFSDA2313123123",
+        engineNo : "231232131203",
+        categoryId: 1,// kategoriler
+        brandId: 3,//markalar
+        modelId: 10,//modeller
+        year:2010,
+        plateNo:"34DG4998",
+        colorId: 1,//renkler
+        fuelTypeId: 1,//Yakıt Tipleri
+        kilometer: 213123,
+        gearTypeId: 1,//Vites tipleri
+        caseTypeId: 1,// kasa tipleri
+        enginePower: 55,//motor gücü
+        engineCapacity: 1300,//motor hacmi
+        swap:false,
+        statusId: 1,// Sıfır ,İkinci El
+        buyingPrice: 55000,
+        sellingPrice: 65000,
+        cashSellingPrice: 62500,
+        swapSellingPrice: 66000,
+        fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
+        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        insuranceCode: 310,//Kasko Kodu
+        insuranceValue: 2123123,// Kasko değeri
+        description: "",
+
+
+
+        isActive: true,
+        createdDate: "2019-11-01T00:00:00+00:00",
+        createdBy: 1,
+        updatedDate: null,
+        updatedBy: null,
+        deletedDate: null,
+        deletedBy: null,
+        relationGuid:"6435f2da-b0db-425e-9dcd-f90415b38227",
+        relationTable:"dealers",
+
+        category:"Otomobil",
+        brand:"Fiat",
+        model:"G.Punto 1.3 M.JET (75) ACTIVE",
+        color:"Beyaz",
+        fuelType:"Dizel",
+        gearType:"Manuel",
+        caseType:"HatckBack",
+        status:"İkinci El",
+        fromWho:"Müşteriden",
+        source:"Nakit",
+    },
+
+    {
+        id: 4,
+
+        vinNo : "RFSDA2313123123",
+        engineNo : "231232131203",
+        categoryId: 1,// kategoriler
+        brandId: 3,//markalar
+        modelId: 10,//modeller
+        year:2010,
+        plateNo:"34DG4998",
+        colorId: 1,//renkler
+        fuelTypeId: 1,//Yakıt Tipleri
+        kilometer: 213123,
+        gearTypeId: 1,//Vites tipleri
+        caseTypeId: 1,// kasa tipleri
+        enginePower: 55,//motor gücü
+        engineCapacity: 1300,//motor hacmi
+        swap:false,
+        statusId: 1,// Sıfır ,İkinci El
+        buyingPrice: 55000,
+        sellingPrice: 65000,
+        cashSellingPrice: 62500,
+        swapSellingPrice: 66000,
+        fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
+        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        insuranceCode: 310,//Kasko Kodu
+        insuranceValue: 2123123,// Kasko değeri
+        description: "",
+
+
+
+        isActive: true,
+        createdDate: "2019-11-01T00:00:00+00:00",
+        createdBy: 1,
+        updatedDate: null,
+        updatedBy: null,
+        deletedDate: null,
+        deletedBy: null,
+        relationGuid:"6435f2da-b0db-425e-9dcd-f90415b38227",
+        relationTable:"dealers",
+
+        category:"Otomobil",
+        brand:"Fiat",
+        model:"G.Punto 1.3 M.JET (75) ACTIVE",
+        color:"Beyaz",
+        fuelType:"Dizel",
+        gearType:"Manuel",
+        caseType:"HatckBack",
+        status:"İkinci El",
+        fromWho:"Müşteriden",
+        source:"Nakit",
+    }
+];

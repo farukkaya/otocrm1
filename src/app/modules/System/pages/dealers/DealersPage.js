@@ -29,11 +29,11 @@ export const DealersPage=({ history }) =>{
     newDealerButtonClick: () => {
       history.push("/system/dealers/new");
     },
-    openEditDealerPage: (id) => {
-      history.push(`/system/dealers/${id}/edit`);
+    openEditDealerPage: (guid) => {
+      history.push(`/system/dealers/${guid}/edit`);
     },
-    openDeleteDealerDialog: (id) => {
-      history.push(`/system/dealers/${id}/delete`);
+    openDeleteDealerDialog: (guid) => {
+      history.push(`/system/dealers/${guid}/delete`);
     },
   
     openDeleteDealersDialog: () => {
@@ -64,12 +64,12 @@ export const DealersPage=({ history }) =>{
           />
         )}
       </Route>
-      <Route path="/system/dealers/:id/delete"> 
+      <Route path="/system/dealers/:guid/delete"> 
         {({ history, match }) => {
           return(
             <DealerDeleteDialog
               show={match != null}
-              id={match && match.params.id}
+              id={match && match.params.guid}
               onHide={() => {
                 history.push("/system/dealers");
               }}
@@ -97,12 +97,12 @@ export const DealersPage=({ history }) =>{
           />
         )}
       </Route>
-      <Route path="/system/dealers/:id/updateStatus"> 
+      <Route path="/system/dealers/:guid/updateStatus"> 
         {({ history, match }) => {
           return(
             <DealerUpdateStatusDialog
               show={match != null}
-              id={match && match.params.id}
+              id={match && match.params.guid}
               onHide={() => {
                 history.push("/system/dealers");
               }}

@@ -15,6 +15,7 @@ import { citiesSlice } from "../app/modules/System/_redux/_cities/citiesSlice";
 import { townsSlice } from "../app/modules/System/_redux/_towns/townsSlice";
 import { neighborhoodsSlice } from "../app/modules/System/_redux/_neighborhoods/neighborhoodsSlice";
 import { addressesSlice } from "../app/modules/System/_redux/addresses/addressesSlice";
+import { stocksSlice } from "../app/modules/System/_redux/stocks/stocksSlice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -32,6 +33,7 @@ export const rootReducer = combineReducers({
 
   dealers: dealersSlice.reducer,
   galleries: galleriesSlice.reducer,
+  stocks: stocksSlice.reducer,
   taxOffices: taxOfficesSlice.reducer,
   users: usersSlice.reducer
 });

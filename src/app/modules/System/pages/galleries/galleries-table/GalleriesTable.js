@@ -7,6 +7,7 @@ import paginationFactory, {
 } from "react-bootstrap-table2-paginator";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/galleries/galleriesActions"
+import * as carsActions from "../../../_redux/cars/carsActions"
 import * as uiHelpers from "../GalleriesUIHelpers";
 import {
   getSelectRow,
@@ -45,7 +46,6 @@ export function GalleriesTable() {
     }),
     shallowEqual
   );
-  console.log(currentDealer)
   const { totalCount, entities, listLoading } = currentState;
   // Galleries Redux state
   const dispatch = useDispatch();
@@ -53,6 +53,8 @@ export function GalleriesTable() {
   useEffect(() => {
     // clear selections list
     galleriesUIProps.setIds([]);
+    dispatch(carsActions.fetchCars(galleriesUIProps.queryParams));
+
     // server call by queryParams
     if(currentDealer.isManager)
        dispatch(actions.fetchGalleries(galleriesUIProps.queryParams));

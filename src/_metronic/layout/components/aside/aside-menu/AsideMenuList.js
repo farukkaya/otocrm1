@@ -22,7 +22,7 @@ export function AsideMenuList({ layoutProps }) {
     shallowEqual
   );
 
-  const {dealer,gallery}=currentUser;
+  const { dealer, gallery } = currentUser;
   return (
     <>
       {/* begin::Menu Nav */}
@@ -176,7 +176,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Bayiler */}
         {/*begin::1 Level*/}
         {
-          (dealer?.isManager&&dealer.adminId==currentUser.id) &&
+          (dealer?.isManager && dealer.adminId == currentUser.id) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/dealers")}`} aria-haspopup="true" >
               <NavLink className="menu-link" to="/system/dealers">
@@ -193,7 +193,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Galeriler */}
         {/*begin::1 Level*/}
         {
-          (dealer&&dealer.adminId==currentUser.id) &&
+          (dealer && dealer.adminId == currentUser.id) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
               <NavLink className="menu-link" to="/system/galleries">
@@ -225,8 +225,8 @@ export function AsideMenuList({ layoutProps }) {
               <div className="menu-submenu">
                 <i className="menu-arrow"></i>
                 <ul className="menu-subnav">
-                  <li className="menu-item" aria-haspopup="true">
-                    <a href="custom/apps/inbox.html" className="menu-link">
+                  <li className={`menu-item ${getMenuItemActive("/system/stocks")}`} aria-haspopup="true" >
+                    <NavLink className="menu-link" to="/system/stocks">
                       <i className="menu-bullet menu-bullet-line">
                         <span></span>
                       </i>
@@ -234,7 +234,7 @@ export function AsideMenuList({ layoutProps }) {
                       <span className="menu-label">
                         <span className="label label-danger label-inline">yeni</span>
                       </span>
-                    </a>
+                    </NavLink>
                   </li>
                   <li className="menu-item" aria-haspopup="true">
                     <a href="custom/apps/inbox.html" className="menu-link">

@@ -10011,6 +10011,13 @@ react-bootstrap@1.0.1:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-currency-formatter@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-currency-formatter/-/react-currency-formatter-1.1.0.tgz#69296c82efd6ef7a9e74bcae52414a5e23bcdba2"
+  integrity sha512-5AIHYk8WKKKfXfxQW7i7V3DTQkDNqRcqAWyTy3KTs89qooOTj1o5VWkPOLjIxKOSGir6nUt8Aw8WXxAGn5nY6w==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-datepicker@2.16.0:
   version "2.16.0"
   resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-2.16.0.tgz#6bd68de94f5fb38c8f6a4370f3c612837c700e4e"

@@ -110,6 +110,7 @@ export function DealersTable() {
         openEditPage: dealersUIProps.openEditDealerPage,
         openDeleteDialog: dealersUIProps.openDeleteDealerDialog,
       },
+
       classes: "text-right pr-0",
       headerClasses:"text-right pr-3",
 

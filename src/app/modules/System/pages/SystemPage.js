@@ -3,6 +3,7 @@ import { Redirect, Switch } from "react-router-dom";
 import { GalleriesPage } from "./galleries/GalleriesPage";
 import { UsersPage } from "./users/UsersPage";
 import { DealersPage } from "./dealers/DealersPage";
+import { StocksPage } from "./stocks/StocksPage";
 import { GalleryEdit } from "./galleries/gallery-edit/GalleryEdit";
 import { UserEdit } from "./users/user-edit/UserEdit";
 import { DealerEdit } from "./dealers/dealer-edit/DealerEdit";
@@ -34,6 +35,12 @@ export default function SystemPage() {
         <ContentRoute exact path="/system/galleries/new" component={GalleryEdit}/>
         <ContentRoute exact path="/system/galleries/:id/edit" component={GalleryEdit} />
         <ContentRoute path="/system/galleries" component={GalleriesPage} />
+
+
+
+        <ContentRoute exact path="/system/stocks/new" component={StocksPage}/>
+        <ContentRoute exact path="/system/stocks/:id/edit" component={StocksPage} />
+        <ContentRoute path="/system/stocks" component={StocksPage} />
       </Switch>
     </Suspense>
   );
