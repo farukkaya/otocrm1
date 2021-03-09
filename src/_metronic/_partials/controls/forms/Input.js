@@ -1,8 +1,8 @@
 import React from "react";
-import {FieldFeedbackLabel} from "./FieldFeedbackLabel";
+import { FieldFeedbackLabel } from "./FieldFeedbackLabel";
 
 const getFieldCSSClasses = (touched, errors) => {
-  const classes = ["form-control","form-control-solid"];
+  const classes = ["form-control", "form-control-solid"];
   if (touched && errors) {
     classes.push("is-invalid");
   }
@@ -13,7 +13,18 @@ const getFieldCSSClasses = (touched, errors) => {
 
   return classes.join(" ");
 };
+const getGroupCSSClasses = (touched, errors) => {
+  const classes = ["input-group","input-group-lg","input-group-solid"];
+  if (touched && errors) {
+    classes.push("is-invalid");
+  }
 
+  if (touched && !errors) {
+    classes.push("is-valid");
+  }
+
+  return classes.join(" ");
+};
 export function Input({
   field, // { name, value, onChange, onBlur }
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
@@ -21,41 +32,61 @@ export function Input({
   withFeedbackLabel = true,
   customFeedbackLabel,
   type = "text",
+  adornment,
   ...props
 }) {
+
   return (
     <>
       {label && <label>{label} girin</label>}
       {
-        type==="textarea" &&(
+        type === "textarea" && (
           <textarea
-        type={type}
-        className={getFieldCSSClasses(touched[field.name], errors[field.name])}
-        {...field}
-        {...props}
-      />
+            type={type}
+            className={getFieldCSSClasses(touched[field.name], errors[field.name])}
+            {...field}
+            {...props}
+          />
         )
       }
-       {
-        type!=="textarea" &&(
-          <input
-          type={type}
-          className={getFieldCSSClasses(touched[field.name], errors[field.name])}
-          {...field}
-          {...props}
-        />
-        )
-      }
+      {
+        type !== "textarea" && (
+          <>
+          <div class={getGroupCSSClasses(touched[field.name], errors[field.name])}>
+            {adornment?.startAdorment && <div class="input-group-prepend"><span class="input-group-text" style={adornment.startAdorment.style}>
+              {
+                adornment?.startAdorment.type == "icon" ? <i class={adornment.startAdorment.icon}></i> : <b>{adornment.startAdorment.icon}</b>
+              }
+            </span></div>}
+
+            <input
+              type={type}
+              className={getFieldCSSClasses(touched[field.name], errors[field.name])}
+              {...field}
+              {...props}
+            />
+  
+            {adornment?.endAdorment && <div class="input-group-prepend"><span class="input-group-text" style={adornment.endAdorment.style}>
+              {
+                adornment?.endAdorment.type == "icon" ? <i class={adornment.endAdorment.icon}></i> : <b>{adornment.endAdorment.icon}</b>
+              }
+            </span></div>}
+    
+          </div>
      
-      {withFeedbackLabel && (
-        <FieldFeedbackLabel
-          error={errors[field.name]}
-          touched={touched[field.name]}
-          label={label}
-          type={type}
-          customFeedbackLabel={customFeedbackLabel}
-        />
-      )}
+        </>
+        )
+      }
+
+         {withFeedbackLabel && (
+          <FieldFeedbackLabel
+            error={errors[field.name]}
+            touched={touched[field.name]}
+            label={label}
+            type={type}
+            customFeedbackLabel={customFeedbackLabel}
+          />
+        )}
     </>
   );
 }

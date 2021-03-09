@@ -110,7 +110,7 @@ export function GalleryEdit({
   const backToGalleriesList = () => {
     history.push(`/system/galleries`);
   };
-  if(currentUser.dealer==undefined){
+  if(currentUser.dealer===undefined){
     alert("Galeri Ekleme Yetkiniz Yok!!!");
     backToGalleriesList();
   }

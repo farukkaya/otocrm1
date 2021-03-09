@@ -8,7 +8,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, AutoSelect, Select } from "../../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
 import * as taxOfficesActions from "../../../../_redux/taxOffices/taxOfficesActions";
 import { GalleryLevelList } from "../../dealer-galleries/GalleriesUIHelper";

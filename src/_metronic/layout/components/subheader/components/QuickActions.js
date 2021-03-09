@@ -22,7 +22,7 @@ const QuickActionsDropdownToggle = forwardRef((props, ref) => {
       <span className="svg-icon svg-icon-lg">
         <SVG src={toAbsoluteUrl("/media/svg/icons/Files/File.svg")} />
       </span>
-      {` `}Rapor Oluştur
+      {` `}Hızlı İşlemler
     </a>
   );
 });

@@ -5,10 +5,16 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, AutoSelect, Select } from "../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
 import { GalleryLevelList } from "../../galleries/GalleriesUIHelpers";
-
+import{ 
+  LESS_THEN,
+  MORE_THEN,
+  MIN_LENGTH ,
+  MAX_LENGTH ,
+  DIGIT_CONTROL,
+  REQUIRED} from "../../../../../validations/validMessages";
 export function GalleryEditForm({
   gallery,
   btnRef,
@@ -19,13 +25,6 @@ export function GalleryEditForm({
 }) {
 
 
-
-  const LESS_THEN = "{0} {1}'den az olmamalı";
-  const MORE_THEN = "{0} {1}'den fazla olmamalı";
-  const MIN_LENGTH = "En az {0} karakter giriniz";
-  const MAX_LENGTH = "En fazla {0} karakter giriniz";
-  const DIGIT_CONTROL = "Sadece sayısal karakter giriniz";
-  const REQUIRED = "{0} Zorunludur";
 
   // Validation schema
   const GalleryEditSchema = Yup.object().shape({

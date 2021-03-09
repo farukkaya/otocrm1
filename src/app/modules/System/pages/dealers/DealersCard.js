@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import SVG from "react-inlinesvg";
+import { toAbsoluteUrl } from "../../../../../_metronic/_helpers";
 import {
     Card,
     CardBody,
@@ -11,7 +12,6 @@ import { DealersFilter, prepareFilter } from "./dealers-filter/DealersFilter";
 import { DealersTable } from "./dealers-table/DealersTable";
 import { DealersGrouping } from "./dealers-grouping/DealersGrouping";
 import { useDealersUIContext } from "./DealersUIContext";
-import { toAbsoluteUrl } from "../../../../../_metronic/_helpers";
 import { shallowEqual, useSelector } from "react-redux";
 
 export function DealersCard() {

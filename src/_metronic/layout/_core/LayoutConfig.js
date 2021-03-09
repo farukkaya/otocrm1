@@ -72,7 +72,7 @@ export function getInitLayoutConfig() {
       enabled: true,
       type: "", // default|spinner-message|spinner-logo
       logo: toAbsoluteUrl("/media/logos/logo-dark-sm.png"),
-      message: "Please wait...",
+      message: "Lütfen Bekleyin...",
     },
     header: {
       self: {
@@ -171,7 +171,7 @@ export function getInitLayoutConfig() {
         },
       },
       languages: {
-        display: false,
+        display: true,
       },
       "quick-panel": {
         display: true,

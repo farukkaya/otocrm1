@@ -22,14 +22,14 @@ export default function mockDealers(mock) {
       updatedBy = null,
       deletedDate = null,
       deletedBy = null,
-      guid = "",
+      guid = ""
     } = dealer;
 
     const id = generateDealerId();
     const newDealer = {
       id,
       name,
-      taxIdentityNo,
+      taxIdentityNo,//string
       taxOfficeId,
       adminId,
       dealerTypeId,
@@ -60,7 +60,7 @@ export default function mockDealers(mock) {
 
   mock.onPost("api/dealers/getusers").reply(config => {
     const { id } = JSON.parse(config.data);
-    const filteredUsers = userTableMock.filter(q => q.dealerId == id);
+    const filteredUsers = userTableMock.filter(q => q.dealerId === id);
 
     var resp = {
       entities: filteredUsers,

@@ -8,6 +8,7 @@ import { GalleryEdit } from "./galleries/gallery-edit/GalleryEdit";
 import { UserEdit } from "./users/user-edit/UserEdit";
 import { DealerEdit } from "./dealers/dealer-edit/DealerEdit";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
+import { StockEdit } from "./stocks/stock-edit/StockEdit";
 
 export default function SystemPage() {
   return (
@@ -21,6 +22,8 @@ export default function SystemPage() {
             to="/system/users"
           />
         }
+
+      
 
         <ContentRoute exact path="/system/users/new" component={UserEdit} />
         <ContentRoute exact path="/system/users/:id/edit" component={UserEdit}/>
@@ -38,8 +41,8 @@ export default function SystemPage() {
 
 
 
-        <ContentRoute exact path="/system/stocks/new" component={StocksPage}/>
-        <ContentRoute exact path="/system/stocks/:id/edit" component={StocksPage} />
+        <ContentRoute exact path="/system/stocks/new" component={StockEdit}/>
+        <ContentRoute exact path="/system/stocks/:id/edit" component={StockEdit} />
         <ContentRoute path="/system/stocks" component={StocksPage} />
       </Switch>
     </Suspense>

@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 import mockAuth from "../../app/modules/Auth/__mocks__/mockAuth";
-import mockCustomers from "../../app/modules/ECommerce/__mocks__/mockCustomer";
+import mockCustomers from "../../app/modules/Sales/__mocks__/customers/mockCustomer";
 import mockProducts from "../../app/modules/ECommerce/__mocks__/mockProduct";
 import mockRemarks from "../../app/modules/ECommerce/__mocks__/mockRemark";
 import mockSpecifications from "../../app/modules/ECommerce/__mocks__/mockSpecification";
@@ -16,6 +16,7 @@ import mockTowns from "../../app/modules/System/__mocks__/_towns/mockTown";
 import mockNeighborhoods from "../../app/modules/System/__mocks__/_neighborhoods/mockNeighborhood";
 import mockCar from "../../app/modules/System/__mocks__/cars/mockCar";
 import mockStock from "../../app/modules/System/__mocks__/stocks/mockStock";
+import mockFile from "../../app/modules/System/__mocks__/_files/mockFile";
 
 export default function mockAxios(axios) {
   const mock = new MockAdapter(axios, { delayResponse: 300 });
@@ -38,6 +39,7 @@ export default function mockAxios(axios) {
   mockCar(mock);
   mockStock(mock);
   mockTaxOffice(mock);
+  mockFile(mock);
 
   return mock;
 }

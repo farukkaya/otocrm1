@@ -6,15 +6,15 @@ export function DropdownMenu1() {
         {/*begin::Navigation*/}
         <ul className="navi navi-hover">
             <li className="navi-header font-weight-bold py-5">
-                <span className="font-size-lg">Choose Label:</span>
+                <span className="font-size-lg">İşlem Seçin:</span>
                 <i className="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right"
                    title="Click to learn more..."></i>
             </li>
             <li className="navi-separator mb-3 opacity-70"></li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/sales/customers/new" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-success">Customer</span>
+                <span className="label label-xl label-inline label-light-success">Yeni Müşteri</span>
             </span>
                 </a>
             </li>

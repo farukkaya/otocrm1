@@ -8,7 +8,6 @@ export const prepareFilter = (queryParams, values) => {
   const { isActive, searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {
-    description:"",
     brand:"",
     model:"",
     color:"",
@@ -22,11 +21,15 @@ export const prepareFilter = (queryParams, values) => {
   };
   // Filter by all fields
   if (searchText) {
-    filter.name= searchText;
-    filter.taxOffice= searchText;
-    filter.stockType= searchText;
-    filter.taxIdentityNo= searchText;
-    filter.admin= searchText;
+    filter.brand= searchText;
+    filter.model= searchText;
+    filter.color= searchText;
+    filter.fuelType= searchText;
+    filter.gearType= searchText;
+    filter.caseType= searchText;
+    filter.status= searchText;
+    filter.fromWho= searchText;
+    filter.source= searchText;
   }
   filter.isActive=isActive;
   // ==="1" ? true

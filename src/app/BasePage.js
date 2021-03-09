@@ -17,6 +17,9 @@ const ECommercePage = lazy(() =>
 const SystemPage = lazy(() =>
   import("./modules/System/pages/SystemPage")
 );
+const SalesPage = lazy(() =>
+  import("./modules/Sales/pages/SalesPage")
+);
 const UserProfilepage = lazy(() =>
   import("./modules/UserProfile/UserProfilePage")
 );
@@ -41,6 +44,7 @@ export default function BasePage() {
         <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/e-commerce" component={ECommercePage} />
         <Route path="/system" component={SystemPage} />
+        <Route path="/sales" component={SalesPage} />
         <Route path="/user-profile" component={UserProfilepage} />
         <Redirect to="error/error-v1" />
       </Switch>

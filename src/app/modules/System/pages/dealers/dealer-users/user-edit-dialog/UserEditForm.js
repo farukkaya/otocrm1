@@ -8,37 +8,44 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, AutoSelect, Select } from "../../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
 import * as professionsActions from "../../../../_redux/professions/professionsActions";
 
-const LESS_THEN = "{0} {1}'den az olmamalı";
-const MORE_THEN = "{0} {1}'den fazla olmamalı";
-const MIN_LENGTH = "En az {0} karakter giriniz";
-const MAX_LENGTH = "En fazla {0} karakter giriniz";
-const DIGIT_CONTROL = "Sadece sayısal karakter giriniz";
-const REQUIRED = "{0} Zorunludur";
+import {
+  LENGTH,
+  MIN_LENGTH,
+  MAX_LENGTH,
+  DIGIT_CONTROL,
+  REQUIRED
+} from "../../../../../../validations/validMessages";
 
-// Validation schema
 const UserEditSchema = Yup.object().shape({
   email: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Model is required"),
+    .min(2, format(MIN_LENGTH, "2"))
+    .max(150, format(MAX_LENGTH, "50"))
+    .email('Geçersiz E-Posta')
+    .required(format(REQUIRED, "E-Posta")),
   identityNo: Yup.string()
-    .min(2, "Minimum 2 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required("Manufacture is required"),
-  firstName: Yup.number()
-    .min(1950, "1950 is minimum")
-    .max(2020, "2020 is maximum")
-    .required("Model year is required"),
-  lastName: Yup.number()
-    .min(0, "0 is minimum")
-    .max(1000000, "1000000 is maximum")
-    .required("Mileage is required")
+    .matches(/^[0-9]+$/, DIGIT_CONTROL)
+    .length(11, format(LENGTH, "Kimlik No", "11"))
+    .required(format(REQUIRED, "Kimlik No")),
+  username: Yup.string()
+    .min(2, format(MIN_LENGTH, "2"))
+    .max(150, format(MAX_LENGTH, "50"))
+    .required(format(REQUIRED, "Kullanıcı Adı")),
+  firstName: Yup.string()
+    .min(2, format(MIN_LENGTH, "2"))
+    .max(150, format(MAX_LENGTH, "50"))
+    .required(format(REQUIRED, "Ad")),
+
+  lastName: Yup.string()
+    .min(2, format(MIN_LENGTH, "2"))
+    .max(150, format(MAX_LENGTH, "50"))
+    .required(format(REQUIRED, "Soyad")),
 
 });
+
 
 export function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
 

@@ -32,7 +32,7 @@ export const AutoSelect = ({
     const { touched, error,value } = meta;
     const [val, setValue] = useState(value)
     useEffect(() => {
-        setValue(options.find((q) => q.id == field.value))
+        setValue(options.find((q) => q.id === field.value))
     }, [value])
     return (
        <>

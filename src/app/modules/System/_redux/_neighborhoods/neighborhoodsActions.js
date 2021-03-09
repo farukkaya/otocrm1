@@ -8,6 +8,7 @@ export const fetchNeighborhoodsByTown = townId => dispatch => {
   return requestFromServer
     .getAllByTown(townId)
     .then(response => {
+      
       const { totalCount, entities } = response.data;
       dispatch(actions.neighborhoodsFetched({ totalCount, entities }));
     })

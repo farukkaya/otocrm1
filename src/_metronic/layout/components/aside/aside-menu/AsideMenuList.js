@@ -176,7 +176,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Bayiler */}
         {/*begin::1 Level*/}
         {
-          (dealer?.isManager && dealer.adminId == currentUser.id) &&
+          (dealer?.isManager && dealer.adminId === currentUser.id) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/dealers")}`} aria-haspopup="true" >
               <NavLink className="menu-link" to="/system/dealers">
@@ -193,7 +193,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Galeriler */}
         {/*begin::1 Level*/}
         {
-          (dealer && dealer.adminId == currentUser.id) &&
+          (dealer && dealer.adminId === currentUser.id) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
               <NavLink className="menu-link" to="/system/galleries">

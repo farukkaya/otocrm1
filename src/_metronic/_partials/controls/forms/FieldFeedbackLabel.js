@@ -1,6 +1,7 @@
 import React from "react";
 
 const inputLabel = ({ label, touched, error, customFeedbackLabel }) => {
+
   if (touched && error) {
     return <div className="invalid-feedback">{error}</div>;
   }
@@ -22,6 +23,8 @@ const inputLabel = ({ label, touched, error, customFeedbackLabel }) => {
 };
 
 const selectLabel = ({ label, touched, error, customFeedbackLabel }) => {
+  
+
   if (touched && error) {
     return <div className="invalid-feedback">{error}</div>;
   }
@@ -47,7 +50,6 @@ export function FieldFeedbackLabel({
   type,
   customFeedbackLabel
 }) {
-
   switch (type) {
     case "select":
       return selectLabel({ label, touched, error, customFeedbackLabel });

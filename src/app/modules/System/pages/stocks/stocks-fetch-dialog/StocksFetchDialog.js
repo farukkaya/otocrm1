@@ -68,7 +68,10 @@ export function StocksFetchDialog({ show, onHide }) {
                     Id: {stock.id}
                   </span>{" "}
                   <span className="ml-5">
-                    {stock.taxIdentityNo}, {stock.name}
+                  <br/>
+                    Araç Kodu: {stock.brandId+stock.modelId}, <br/>
+                    Marka: {stock.brand}, <br/>
+                    Model: {stock.model} <br/>
                   </span>
                 </span>
               </div>

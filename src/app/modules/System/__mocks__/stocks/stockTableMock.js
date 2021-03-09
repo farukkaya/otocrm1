@@ -1,13 +1,13 @@
 export default [
     {
         id: 1,
-
+        galleryId:1,
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
         categoryId: 1,// kategoriler
         brandId: 3,//markalar
         modelId: 10,//modeller
-        year:2010,
+        year:2015,
         plateNo:"34DG4998",
         colorId: 1,//renkler
         fuelTypeId: 1,//Yakıt Tipleri
@@ -19,7 +19,7 @@ export default [
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
-        sellingPrice: 65000,
+        sellingPrice: 175000,
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
@@ -41,11 +41,11 @@ export default [
         relationTable:"dealers",
 
         category:"Otomobil",
-        brand:"Fiat",
-        model:"G.Punto 1.3 M.JET (75) ACTIVE",
-        color:"Beyaz",
+        brand:"Toyota",
+        model:"Corolla",
+        color:"Kırmızı",
         fuelType:"Dizel",
-        gearType:"Manuel",
+        gearType:"Yarı Otomatik",
         caseType:"HatckBack",
         status:"İkinci El",
         fromWho:"Müşteriden",
@@ -53,13 +53,14 @@ export default [
     },
     {
         id: 2,
+        galleryId:1,
 
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
         categoryId: 1,// kategoriler
         brandId: 3,//markalar
         modelId: 10,//modeller
-        year:2010,
+        year:2018,
         plateNo:"34DG4998",
         colorId: 1,//renkler
         fuelTypeId: 1,//Yakıt Tipleri
@@ -71,7 +72,7 @@ export default [
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
-        sellingPrice: 65000,
+        sellingPrice: 220000,
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
@@ -105,13 +106,14 @@ export default [
     },
     {
         id: 3,
+        galleryId:1,
 
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
         categoryId: 1,// kategoriler
         brandId: 3,//markalar
         modelId: 10,//modeller
-        year:2010,
+        year:2013,
         plateNo:"34DG4998",
         colorId: 1,//renkler
         fuelTypeId: 1,//Yakıt Tipleri
@@ -123,7 +125,7 @@ export default [
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
-        sellingPrice: 65000,
+        sellingPrice: 150000,
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
@@ -145,8 +147,8 @@ export default [
         relationTable:"dealers",
 
         category:"Otomobil",
-        brand:"Fiat",
-        model:"G.Punto 1.3 M.JET (75) ACTIVE",
+        brand:"Hyundai",
+        model:"i20 Style",
         color:"Beyaz",
         fuelType:"Dizel",
         gearType:"Manuel",
@@ -158,6 +160,7 @@ export default [
 
     {
         id: 4,
+        galleryId:1,
 
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
@@ -176,7 +179,7 @@ export default [
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
-        sellingPrice: 65000,
+        sellingPrice: 64000,
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
@@ -198,12 +201,12 @@ export default [
         relationTable:"dealers",
 
         category:"Otomobil",
-        brand:"Fiat",
-        model:"G.Punto 1.3 M.JET (75) ACTIVE",
-        color:"Beyaz",
+        brand:"Opel",
+        model:"Corsa",
+        color:"Siyah",
         fuelType:"Dizel",
-        gearType:"Manuel",
-        caseType:"HatckBack",
+        gearType:"Otomatik",
+        caseType:"Sedan",
         status:"İkinci El",
         fromWho:"Müşteriden",
         source:"Nakit",

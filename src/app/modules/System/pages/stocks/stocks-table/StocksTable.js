@@ -76,7 +76,7 @@ export function StocksTable() {
     
     {
       dataField: "year",
-      text:"Model Yılı",
+      text:"Yıl",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -132,12 +132,6 @@ export function StocksTable() {
       sortCaret: sortCaret,
     }, 
     {
-      dataField: "status",
-      text:"Durumu",
-      sort: true,
-      sortCaret: sortCaret,
-    }, 
-    {
       dataField: "fromWho",
       text:"Kimden",
       sort: true,
@@ -164,7 +158,7 @@ export function StocksTable() {
         openUpdateStatusDialog: stocksUIProps.openUpdateStockStatusDialog,
         openEditPage: stocksUIProps.openEditStockPage,
         openDeleteDialog: stocksUIProps.openDeleteStockDialog,
-        key:"guid"
+       // key:"guid"
       },
 
       classes: "text-right pr-0",

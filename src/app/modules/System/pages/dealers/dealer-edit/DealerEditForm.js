@@ -3,29 +3,45 @@
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Input, AutoSelect, Select } from "../../../../../../_metronic/_partials/controls";
+import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
-import {
-  DealerTypeTitles
-} from "../DealersUIHelpers";
+import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
+import { arrayProgress, DealerTypeTitles } from "../DealersUIHelpers"
+import * as townsActions from "../../../_redux/_towns/townsActions"
+import * as neighborhoodsActions from "../../../_redux/_neighborhoods/neighborhoodsActions"
+import * as usersActions from "../../../_redux/users/usersActions"
+import * as addressesActions from "../../../_redux/addresses/addressesActions";
+import * as actions from "../../../_redux/dealers/dealersActions";
+import{ 
+ LENGTH,
+ MIN_LENGTH ,
+ MAX_LENGTH ,
+ DIGIT_CONTROL,
+ REQUIRED} from "../../../../../validations/validMessages";
+
+
+
 export function DealerEditForm({
   dealer,
+  history,
   btnRef,
   btnReset,
   saveDealer,
   handleReset,
   taxOffices,
-  users
+  users, professions, cities, towns, neighborhoods,
 }) {
+  const backToDealersList = () => {
+    history.push(`/system/dealers`);
+  };
 
-  // const LESS_THEN = "{0} {1}'den az olmamalı";
-  // const MORE_THEN = "{0} {1}'den fazla olmamalı";
-  const MIN_LENGTH = "En az {0} karakter giriniz";
-  const MAX_LENGTH = "En fazla {0} karakter giriniz";
-  const DIGIT_CONTROL = "Sadece sayısal karakter giriniz";
-  const REQUIRED = "{0} Zorunludur";
+  const dispatch = useDispatch();
+
+
 
   // Validation schema
   const DealerEditSchema = Yup.object().shape({
@@ -46,84 +62,498 @@ export function DealerEditForm({
       .required(format(REQUIRED, "Vergi Dairesi")),
   });
 
+  const Step1Schema = Yup.object().shape({
+    dealerName: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Bayi Adı")),
+    dealerTypeId: Yup.number()
+      .required(format(REQUIRED, "Bayi Tipi")),
+    taxIdentityNo: Yup.string()
+      .matches(/^[0-9]+$/, DIGIT_CONTROL)
+      .min(10, format(MIN_LENGTH, "10"))
+      .max(11, format(MAX_LENGTH, "11"))
+      .required(format(REQUIRED, "Vergi No")),
+
+    taxOfficeId: Yup.string()
+      .required(format(REQUIRED, "Vergi Dairesi")),
+  });
+  const Step2Schema = Yup.object().shape({
+    email: Yup.string()
+      .max(150, format(MAX_LENGTH, "150"))
+      .email('Geçersiz E-Posta')
+      .required(format(REQUIRED, "E-Posta")),
+
+    tel1: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Telefon No.1")),
+
+  });
+  const Step3Schema = Yup.object().shape({
+    ownerEmail: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .email('Geçersiz E-Posta')
+      .required(format(REQUIRED, "E-Posta")),
+    identityNo: Yup.string()
+      .matches(/^[0-9]+$/, DIGIT_CONTROL)
+      .length(11, format(LENGTH, "Kimlik No", "11"))
+      .required(format(REQUIRED, "Kimlik No")),
+    username: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Kullanıcı Adı")),
+    firstName: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Ad")),
+
+    lastName: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Soyad")),
+    professionId: Yup.string()
+      .required(format(REQUIRED, "Vergi Dairesi")),
+
+  });
+  const Step4Schema = Yup.object().shape({
+    addressName: Yup.string()
+      .min(2, format(MIN_LENGTH, "2"))
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Adres Adı")),
+    cityId: Yup.number()
+      .required(format(REQUIRED, "İl")),
+    townId: Yup.number()
+      .required(format(REQUIRED, "İlçe")),
+    openAddress: Yup.string()
+      .min(30, format(MIN_LENGTH, "30"))
+      .max(500, format(MAX_LENGTH, "500"))
+
+
+  });
+
+  const schemaArray = [Step1Schema, Step2Schema, Step3Schema, Step4Schema];
+
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  //const required = value => (value ? undefined : "Required");
 
   return (
-    <>
-      <Formik
-        enableReinitialize={true}
-        initialValues={dealer}
-        validationSchema={DealerEditSchema}
-        onSubmit={(values) => saveDealer(values)}
-        onReset={(values) => handleReset(values)}
-      >
-        {({ handleSubmit, handleReset }) => (
-          <>
-            <Form className="form form-label-right">
-              <div className="form-group row">
-                {users==undefined ?(
-                  <>
-                    <div className="col-lg-6">
-                      <Field
-                        name="name"
-                        component={Input}
-                        placeholder="Bayi Adı"
-                        label="Bayi Adı"
-                      />
-                    </div>
-                    <div className="col-lg-6">
-                      <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles}  />
 
-                    </div>
-                  </>
-                ): (
-                  <>
-                    <div className="col-lg-4">
-                      <Field
-                        name="name"
-                        component={Input}
-                        placeholder="Bayi Adı"
-                        label="Bayi Adı"
-                      />
-                    </div>
-                    <div className="col-lg-4">
-                      <Select name="adminId" label="Yönetici" options={users} optionLabel="fullName"/>
-                    </div>
-                    <div className="col-lg-4">
-                      <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} />
-                    </div>
-                  </>
-                )}
-               
-              </div>
-              <div className="form-group row">
-                <div className="col-lg-6">
-                <Select name="taxOfficeId"  label="Vergi Dairesi" options={taxOffices}/>
+    dealer.id === undefined ? (
+      <Wizard
+        initialValues={dealer}
+        arrayProgress={arrayProgress}
+        schemaArray={schemaArray}
+        onReset={(values) => handleReset(values)}
+        onSubmit={(values, formActions) => {
+          sleep(300).then(() => {
+            // window.alert(JSON.stringify(values, null, 2));
+            const dealer = {
+              name: values.dealerName,
+              taxIdentityNo: values.taxIdentityNo,
+              taxOfficeId: values.taxOfficeId,
+              dealerTypeId: values.dealerTypeId,
+              email: values.email,
+              fax: values.fax,
+              tel1: values.tel1,
+              tel2: values.tel2,
+              guid: values.guid,
+            }
+            const adminUser = {
+              email: values.ownerEmail,
+              identityNo: values.identityNo,
+              firstName: values.firstName,
+              lastName: values.lastName,
+              username: values.username,
+              professionId: values.professionId,
+              tel1: values.ownerTel,
+              tel2: "",
+              relationGuid: values.guid,
+              relationTable: "Dealers"
+            }
+            const address = {
+              name: values.addressName,
+              cityId: values.cityId,
+              townId: values.townId,
+              neighborhoodId: values.neighborhoodId,
+              openAddress: values.openAddress,
+              relationGuid: values.guid,
+              relationTable: "Dealers"
+            }
+            dispatch(usersActions.createUser(adminUser)).then((response) => {
+
+              dealer.adminId = response?.id;
+              dispatch(actions.createDealer(dealer)).then(() => {
+                dispatch(addressesActions.createAddress(address)).then(() => {
+                  backToDealersList()
+                  // dispatch(actions.fetchCustomers(customersUIProps.queryParams));
+                  // // clear selections list
+                  // customersUIProps.setIds([]);
+                })
+              })
+
+            })
+
+
+            formActions.setSubmitting(false);
+          });
+        }}
+
+      >
+        <Wizard.Page>
+          {props => {
+            console.log(props, "this props 1");
+            return (
+              <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 1).description}</h4>
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="dealerName"
+                      component={Input}
+                      placeholder="Bayi Adı"
+                      label="Bayi Adı"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles}  />
+
+                  </div>
+
                 </div>
-                <div className="col-lg-6">
-                  <Field
-                    name="taxIdentityNo"
-                    component={Input}
-                    placeholder="Vergi No"
-                    label="Vergi No"
-                  />
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} autoSelect={false} />
+
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="taxIdentityNo"
+                      component={Input}
+                      placeholder="Vergi No"
+                      label="Vergi No"
+                    />
+                  </div>
+                </div>
+
+              </div>
+            );
+          }}
+        </Wizard.Page>
+        <Wizard.Page>
+          {props => {
+            console.log(props, "this props 2");
+            return (
+              <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 2).description}</h4>
+
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="email"
+                      component={Input}
+                      placeholder="E-Posta"
+                      label="E-Posta"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="fax"
+                      component={Input}
+                      placeholder="Fax"
+                      label="Fax"
+                    />
+                  </div>
+
+                </div>
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="tel1"
+                      component={Input}
+                      placeholder="Telefon No.1"
+                      label="Telefon No.1"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="tel2"
+                      component={Input}
+                      placeholder="Telefon No.2"
+                      label="Telefon No.2"
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+            );
+          }}
+        </Wizard.Page>
+        <Wizard.Page>
+          {props => {
+            console.log(props, "this props 3");
+            return (
+              <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 3).description}</h4>
+                <div className="form-group row">
+                  <div className="col-lg-4">
+                    <Field
+                      name="firstName"
+                      component={Input}
+                      placeholder="Ad"
+                      label="Ad"
+                    />
+                  </div>
+                  <div className="col-lg-4">
+                    <Field
+                      name="lastName"
+                      component={Input}
+                      placeholder="Soyad"
+                      label="Soyad"
+                    />
+                  </div>
+                  <div className="col-lg-4">
+                    <Select name="professionId" label="Meslek" options={professions} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="identityNo"
+                      component={Input}
+                      placeholder="Kimlik No"
+                      label="Kimlik No"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="username"
+                      component={Input}
+                      placeholder="Kullanıcı Adı"
+                      label="Kullanıcı Adı"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="ownerEmail"
+                      component={Input}
+                      placeholder="E-Posta"
+                      label="E-Posta"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="ownerTel"
+                      component={Input}
+                      placeholder="Telefon"
+                      label="Telefon"
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+            );
+          }}
+        </Wizard.Page>
+        <Wizard.Page>
+          {props => {
+            console.log(props, "this props 4");
+            return (
+              <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
+
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="addressName"
+                      component={Input}
+                      placeholder="Merkez, Şube vb."
+                      label="Adres Adı"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    {/* <Field
+          id="cityId"
+          name="cityId"
+          as="select"
+          value={values.cityId}
+          onChange={async e => {
+            const { value } = e.target;
+            const _towns = await getTowns(value);
+            console.log(_towns);
+            setFieldValue("cityId", value);
+            setFieldValue("townId", "");
+            setFieldValue("towns", _towns);
+          }}
+       /> */}
+                    <Select
+                      name="cityId"
+                      label="İl"
+                      options={cities}
+                      onChange={(e) => {
+                        const { value } = e.target;
+                        dispatch(townsActions.fetchTownsByCity(value))
+                        props.setFieldValue("cityId", value);
+                        props.setFieldValue("townId", "");
+                        props.setFieldValue("neighborhoodId", "");
+                      }} />
+                  </div>
+
+                </div>
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Select
+                      name="townId"
+                      label="İlçe"
+                      options={towns}
+                      onChange={(e) => {
+                        const { value } = e.target;
+                        dispatch(neighborhoodsActions.fetchNeighborhoodsByTown(value))
+                        props.setFieldValue("townId", value);
+                        props.setFieldValue("neighborhoodId", "");
+                      }} />
+                    {/* onchange i kontrol et */}
+                  </div>
+                  <div className="col-lg-6">
+                    <Select
+                      name="neighborhoodId"
+                      label="Mahalle"
+                      options={neighborhoods} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <div className="col-lg-12">
+                    <Field
+                      type="textarea"
+                      rows="4"
+                      name="openAddress"
+                      component={Input}
+                      placeholder="Açık Adres"
+                      label="Açık Adress"
+                    />
+                  </div>
                 </div>
               </div>
-              <button
-                type="reset"
-                style={{ display: "none" }}
-                ref={btnReset}
-                onSubmit={() => handleReset()}
-              ></button>
-              <button
-                type="submit"
-                style={{ display: "none" }}
-                ref={btnRef}
-                onSubmit={() => handleSubmit()}
-              ></button>
-            </Form>
-          </>
-        )}
-      </Formik>
-    </>
+            );
+          }}
+        </Wizard.Page>
+        <Wizard.Page>
+          {props => {
+            const data = props.values;
+            return (
+              <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                {/*begin::Section*/}
+                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 5).description}</h4>
+                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 1).title}:</h6>
+                <div className="text-dark-50 line-height-lg">
+                  <div><span>Bayi Adı:</span> {data.dealerName}</div>
+                  <div><span>Bayi Tipi:</span> {DealerTypeTitles.find(q => q.id === data.dealerTypeId).name}</div>
+                  <div><span>Bayi Dairesi:</span> {taxOffices.find(q => q.id === data.taxOfficeId).name}</div>
+                  <div><span>Vergi No:</span> {data.taxIdentityNo}</div>
+                </div>
+                <div className="separator separator-dashed my-5"></div>
+                {/*end::Section*/}
+                {/*begin::Section*/}
+                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 2).title}:</h6>
+                <div className="text-dark-50 line-height-lg">
+                  <div><span>Adı:</span> {data.firstName}</div>
+                  <div><span>Soyadı:</span> {data.lastName}</div>
+                  <div><span>Kimlik No:</span> {data.identityNo}</div>
+                  <div><span>Kullanıcı Adı:</span> {data.username}</div>
+                  <div><span>E-Posta:</span> {data.ownerEmail}</div>
+                  <div><span>Telefon:</span> {data.phone}</div>
+                </div>
+                <div className="separator separator-dashed my-5"></div>
+                {/*end::Section*/}
+                {/*begin::Section*/}
+                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 3).title}:</h6>
+                <div className="text-dark-50 line-height-lg">
+                  <div><span>E-Posta:</span> {data.email}</div>
+                  <div><span>Fax:</span> {data.fax}</div>
+                  <div><span>Telefon No.1:</span> {data.tel1}</div>
+                  <div><span>Telefon No.2:</span> {data.tel2}</div>
+                </div>
+                <div className="separator separator-dashed my-5"></div>
+                {/*end::Section*/}
+                {/*begin::Section*/}
+                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 4).title}:</h6>
+                <div className="text-dark-50 line-height-lg">
+                  <div><span>Adres Adı:</span> {data.addressName}</div>
+                  <div><span>İl:</span> {cities.find(q => q.id === data.cityId).name}</div>
+                  <div><span>İlçe:</span> {towns.find(q => q.id === data.townId).name}</div>
+                  <div><span>Mahalle:</span> {neighborhoods.find(q => q.id === data.neighborhoodId).name}</div>
+                  <div><span>Açık Adres:</span> {data.openAddress}</div>
+                </div>
+                {/*end::Section*/}
+              </div>
+            );
+          }}
+        </Wizard.Page>
+      </Wizard>
+
+    ) : (<Formik
+      enableReinitialize={true}
+      initialValues={dealer}
+      validationSchema={DealerEditSchema}
+      onSubmit={(values) => saveDealer(values)}
+      onReset={(values) => handleReset(values)}
+    >
+      {({ handleSubmit, handleReset }) => (
+        <>
+          <Form className="form form-label-right">
+            <div className="form-group row">
+              <div className="col-lg-4">
+                <Field
+                  name="name"
+                  component={Input}
+                  placeholder="Bayi Adı"
+                  label="Bayi Adı"
+                />
+              </div>
+              <div className="col-lg-4">
+                <Select name="adminId" label="Yönetici" options={users} optionLabel="fullName" />
+              </div>
+              <div className="col-lg-4">
+                <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} />
+              </div>
+
+            </div>
+            <div className="form-group row">
+              <div className="col-lg-6">
+                <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} />
+              </div>
+              <div className="col-lg-6">
+                <Field
+                  name="taxIdentityNo"
+                  component={Input}
+                  placeholder="Vergi No"
+                  label="Vergi No"
+                />
+              </div>
+            </div>
+            <button
+              type="reset"
+              style={{ display: "none" }}
+              ref={btnReset}
+              onSubmit={() => handleReset()}
+            ></button>
+            <button
+              type="submit"
+              style={{ display: "none" }}
+              ref={btnRef}
+              onSubmit={() => handleSubmit()}
+            ></button>
+          </Form>
+        </>
+      )}
+    </Formik>
+      )
   );
 }

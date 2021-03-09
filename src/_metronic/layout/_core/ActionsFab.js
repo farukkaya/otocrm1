@@ -4,7 +4,6 @@ import { Icon, IconButton, Menu, MenuItem } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 
 export const ActionsFab = (props) => {
-
   const { formatExtraData, row } = props;
   const { openUpdateStatusDialog, openEditPage, openDeleteDialog,key="id" } = formatExtraData;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,6 +44,7 @@ export const ActionsFab = (props) => {
 
 
         <MenuItem onClick={() => {
+          
           openEditPage(row[key])
           handleClose()
         }}>Güncelle</MenuItem>

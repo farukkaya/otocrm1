@@ -17,6 +17,7 @@ export {Select} from "./forms/Select";
 export {AutoSelect} from "./forms/AutoSelect";
 export {Checkbox} from "./forms/Checkbox";
 export {HeaderCheckbox} from "./forms/HeaderCheckbox";
+export {FileUpload} from "./forms/FileUpload";
 
 
 // Paginations

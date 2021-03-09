@@ -22,3 +22,44 @@ export const initialFilter = {
   pageSize: 10
 };
 
+
+export const arrayProgress = [
+  {
+    id: 1,
+    title: "Bayi",
+    description: "Bayi Bilgilerini Giriniz",
+    icon: "/media/svg/icons/Home/Building.svg",
+    iconType:"svg"
+
+  },
+  {
+    id: 2,
+    title: "Bayi İletişim",
+    description: "Bayinin İletişim Bilgilerini Giriniz",
+    icon: "/media/svg/icons/Communication/Adress-book1.svg",
+    iconType:"svg"
+  },
+  {
+    id: 3,
+    title: "Bayi Yöneticisi",
+    description: "Bayi için bir yönetici atayın",
+    icon: "/media/svg/icons/Communication/Add-user.svg",
+    iconType:"svg"
+  },
+
+  {
+    id: 4,
+    title: "Bayi Adres",
+    description: "Bayinin Adres Bilgilerini Giriniz",
+    icon: "/media/svg/icons/Map/Marker1.svg",
+    iconType:"svg"
+  },
+  {
+    id: 5,
+    title: "Sonuç",
+    description: "Bilgilerinizi kontrol ediniz",
+    icon: "/media/svg/icons/Code/Done-circle.svg",
+    iconType:"svg"
+  }
+];
+
