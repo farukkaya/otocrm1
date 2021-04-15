@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const DEALERS_URL = "api/dealers";
+export const USERS_URL = "api/users";
 
 // CREATE =>  POST: add a new dealer to the server
 export function createDealer(dealer) {
@@ -24,7 +25,7 @@ export function findDealers(queryParams) {
 
 
 export function findUsersByDealer(id) {
-  return axios.post(`${DEALERS_URL}/getusers`, { id });
+  return axios.post(`${USERS_URL}/getAllByDealer`, { dealerId:id });
 }
 
 

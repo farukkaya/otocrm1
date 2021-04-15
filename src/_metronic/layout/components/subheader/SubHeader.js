@@ -100,7 +100,7 @@ export function SubHeader() {
                 )}
               />
             </span>
-            {` `}Araç Satış
+            {` `}Hasar Sorgulama
           </button>
 
           <QuickActions />

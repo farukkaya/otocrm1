@@ -1,9 +1,67 @@
 import dealerTableMock from "./dealerTableMock";
 import userTableMock from "../users/userTableMock";
+// import galleryTableMock from "../gallery/galleryTableMock";
 import MockUtils from "./../mock.utils";
 
 export default function mockDealers(mock) {
-  mock.onPost("api/dealers").reply(({ data }) => {
+/////////////////////////////USER CONTROLLER///////////////////////////////////////////////
+// READY
+  mock.onPost("api/users/getAllByDealer").reply(config => {
+    const { dealerId } = JSON.parse(config.data);
+    const filteredUsers = userTableMock.filter(q => q.dealerId == dealerId);
+
+    var resp = {
+      entities: filteredUsers,
+      totalCount: filteredUsers.length
+    }
+    return [200, resp];
+  });
+////////////////////////////USER CONTROLLER////////////////////////////////////////////////
+
+/////////////////////////////GALLERY CONTROLLER///////////////////////////////////////////////
+// READY
+// mock.onPost("api/gallery/getAllByDealer").reply(config => {
+//   const { dealerId } = JSON.parse(config.data);
+//   const filteredGalleries = galleryTableMock.filter(q => q.dealerId == dealerId);
+
+//   var resp = {
+//     entities: filteredGalleries,
+//     totalCount: filteredGalleries.length
+//   }
+//   return [200, resp];
+// });
+////////////////////////////GALLERY CONTROLLER////////////////////////////////////////////////
+
+mock.onPost(/api\/dealers\/GetAllGalleriesByDealer\/\d+/).reply(config => {
+  debugger
+  const urls = config.url.split("/");
+  const id = urls[3];
+  const mockUtils = new MockUtils();
+  const { queryParams } = JSON.parse(config.data);
+  const dealerGalleries = dealerTableMock.filter(el => el.parentId === +id);
+  const filteredGalleries = mockUtils.baseFilter(dealerGalleries, queryParams);
+  return [200, filteredGalleries];
+});
+
+  // READY
+  mock.onPost("api/dealers/find").reply(config => {
+  const mockUtils = new MockUtils();
+  const { queryParams } = JSON.parse(config.data);
+  const filteredDealers = mockUtils.baseFilter(dealerTableMock, queryParams);
+  return [200, filteredDealers];
+  });
+  // READY
+  mock.onGet(/api\/dealers\/\d+/).reply(config => {
+  const id = config.url.match(/api\/dealers\/(\d+)/)[1];
+  const dealer = dealerTableMock.find(el => el.id === +id);
+  if (!dealer) {
+    return [400];
+  }
+  return [200, dealer];
+  });
+
+  // READY
+  mock.onPost("api/dealers/insert").reply(({ data }) => {
     const { dealer } = JSON.parse(data);
     const {
       name = "BZK OTOMOTİV",
@@ -49,57 +107,8 @@ export default function mockDealers(mock) {
     dealerTableMock.push(newDealer);
     return [200, { dealer: newDealer }];
   });
-
-  mock.onPost("api/dealers/find").reply(config => {
-    const mockUtils = new MockUtils();
-    const { queryParams } = JSON.parse(config.data);
-    const filteredDealers = mockUtils.baseFilter(dealerTableMock, queryParams);
-    return [200, filteredDealers];
-  });
-
-
-  mock.onPost("api/dealers/getusers").reply(config => {
-    const { id } = JSON.parse(config.data);
-    const filteredUsers = userTableMock.filter(q => q.dealerId === id);
-
-    var resp = {
-      entities: filteredUsers,
-      totalCount: filteredUsers.length
-    }
-    return [200, resp];
-  });
-  mock.onPost("api/dealers/deleteDealers").reply(config => {
-    const { ids } = JSON.parse(config.data);
-    ids.forEach(id => {
-      const index = dealerTableMock.findIndex(el => el.id === id);
-      if (index > -1) {
-        dealerTableMock.splice(index, 1);
-      }
-    });
-    return [200];
-  });
-
-  mock.onPost("api/dealers/updateStatusForDealers").reply(config => {
-    const { ids, status } = JSON.parse(config.data);
-    dealerTableMock.forEach(el => {
-      if (ids.findIndex(id => id === el.id) > -1) {
-        el.isActive = status;
-      }
-    });
-    return [200];
-  });
-
-  mock.onGet(/api\/dealers\/\d+/).reply(config => {
-    const id = config.url.match(/api\/dealers\/(\d+)/)[1];
-    const dealer = dealerTableMock.find(el => el.id === +id);
-    if (!dealer) {
-      return [400];
-    }
-
-    return [200, dealer];
-  });
-
-  mock.onPut(/api\/dealers\/\d+/).reply(config => {
+  // READY
+  mock.onPut(/api\/dealers\/update\/\d+/).reply(config => {
     const id = config.url.match(/api\/dealers\/(\d+)/)[1];
     const { dealer } = JSON.parse(config.data);
     const index = dealerTableMock.findIndex(el => el.id === +id);
@@ -110,8 +119,8 @@ export default function mockDealers(mock) {
     dealerTableMock[index] = { ...dealer };
     return [200];
   });
-
-  mock.onDelete(/api\/dealers\/\d+/).reply(config => {
+  // READY
+  mock.onDelete(/api\/dealers\/delete\/\d+/).reply(config => {
     const id = config.url.match(/api\/dealers\/(\d+)/)[1];
     const index = dealerTableMock.findIndex(el => el.id === +id);
     dealerTableMock.splice(index, 1);
@@ -121,6 +130,30 @@ export default function mockDealers(mock) {
 
     return [200];
   });
+  // READY
+  mock.onPost("api/dealers/SelectedDelete").reply(config => {
+    const { ids } = JSON.parse(config.data);
+    ids.forEach(id => {
+      const index = dealerTableMock.findIndex(el => el.id == id);
+      if (index > -1) {
+        dealerTableMock.splice(index, 1);
+      }
+    });
+    return [200];
+  });
+  // READY
+  mock.onPost("api/dealers/UpdateStatus").reply(config => {
+    const { ids, status } = JSON.parse(config.data);
+    dealerTableMock.forEach(el => {
+      if (ids.findIndex(id => id === el.id) > -1) {
+        el.isActive = status;
+      }
+    });
+    return [200];
+  });
+ 
+ 
+  
 }
 
 function generateDealerId() {

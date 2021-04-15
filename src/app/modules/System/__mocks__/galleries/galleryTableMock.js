@@ -23,7 +23,7 @@ export default [
     relationGuid: "70f6605b-f7a6-48fb-8c34-c34fd26da79c",
     relationTable: "Dealers",
 
-    level:"1. Seviye (0-5 Kullanıcı)",
+    level:"1. Seviye (0-5 ARAÇ)",
     dealer: "Test Bayi 1",
     admin: "Enes Bozok",
     taxOffice: "Adana İhtisas Vergi Dairesi Müdürlğü"
@@ -52,7 +52,7 @@ export default [
     relationGuid: "e2ddd5ff-a279-42ef-92eb-00649cd644bc",
     relationTable: "Dealers",
 
-    level:"1. Seviye (0-5 Kullanıcı)",
+    level:"1. Seviye (0-5 ARAÇ)",
     dealer: "Test Bayi 2",
     admin: "Faruk Kaya",
     taxOffice: "Adana İhtisas Vergi Dairesi Müdürlğü",
@@ -81,7 +81,7 @@ export default [
     relationGuid: "e2ddd5ff-a279-42ef-92eb-00649cd644bc",
     relationTable: "Dealers",
 
-    level:"2. Seviye (5-10 Kullanıcı)",
+    level:"2. Seviye (5-10 ARAÇ)",
     dealer: "Test Bayi 1",
     admin: "Faruk Kaya",
     taxOffice: "5 Ocak Vergi Dairesi Müdürlğü",

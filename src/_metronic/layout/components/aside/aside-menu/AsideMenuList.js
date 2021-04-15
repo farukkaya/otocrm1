@@ -193,7 +193,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Galeriler */}
         {/*begin::1 Level*/}
         {
-          (dealer && dealer.adminId === currentUser.id) &&
+          (1==0) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
               <NavLink className="menu-link" to="/system/galleries">

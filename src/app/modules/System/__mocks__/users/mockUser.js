@@ -2,6 +2,7 @@ import userTableMock from "./userTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockUser(mock) {
+  
   mock.onPost("api/users").reply(({ data }) => {
     const { user } = JSON.parse(data);
     const {
@@ -58,9 +59,9 @@ export default function mockUser(mock) {
     return [200, filteredUsers];
   });
 
-  mock.onPost(/api\/usersfindByDealer\/\d+/).reply(config => {
+  mock.onPost(/api\/users\/findByDealer\/\d+/).reply(config => {
     const urls = config.url.split("/");
-    const id = urls[2];
+    const id = urls[3];
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const dealerUsers= userTableMock.filter(el => el.dealerId === +id);
@@ -68,9 +69,9 @@ export default function mockUser(mock) {
     return [200, filteredUsers];
   });
 
-  mock.onPost(/api\/usersfindByGallery\/\d+/).reply(config => {
+  mock.onPost(/api\/users\/findByGallery\/\d+/).reply(config => {
     const urls = config.url.split("/");
-    const id = urls[2];
+    const id = urls[3];
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const galleryUsers= userTableMock.filter(el => el.galleryId === +id);

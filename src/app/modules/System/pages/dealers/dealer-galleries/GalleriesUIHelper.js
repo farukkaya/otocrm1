@@ -6,11 +6,11 @@ export const sizePerPageList = [
   { text: "10", value: 10 }
 ];
 export const GalleryLevelList = [
-  { name: "1. Seviye (0-5 Kullanıcı)", id: 1 },
-  { name: "2. Seviye (5-10 Kullanıcı)", id: 2 },
-  { name: "3. Seviye (10-15 Kullanıcı)", id: 3 },
-  { name: "4. Seviye (15-20 Kullanıcı)", id: 4 },
-  { name: "5. Seviye (20-25 Kullanıcı)", id: 5 },
+  { name: "1. Seviye (0-5 ARAÇ)", id: 1 },
+  { name: "2. Seviye (5-10 ARAÇ)", id: 2 },
+  { name: "3. Seviye (10-15 ARAÇ)", id: 3 },
+  { name: "4. Seviye (15-20 ARAÇ)", id: 4 },
+  { name: "5. Seviye (20-25 ARAÇ)", id: 5 },
 ];
 
 

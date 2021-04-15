@@ -19,9 +19,9 @@ export function DropdownMenu1() {
                 </a>
             </li>
             <li className="navi-item">
-                <a href="#" className="navi-link">
+                <a href="/system/stocks/new" className="navi-link">
             <span className="navi-text">
-                <span className="label label-xl label-inline label-light-danger">Partner</span>
+                <span className="label label-xl label-inline label-light-danger">Yeni Stok</span>
             </span>
                 </a>
             </li>

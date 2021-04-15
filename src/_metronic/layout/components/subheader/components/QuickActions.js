@@ -31,8 +31,8 @@ export function QuickActions() {
   return (
     <>
       <OverlayTrigger
-        placement="left"
-        overlay={<Tooltip id="quick-actions-tooltip">Quick actions</Tooltip>}
+        placement="top"
+        overlay={<Tooltip id="quick-actions-tooltip">Hızlı İşlemler</Tooltip>}
       >
         <Dropdown className="dropdown-inline" drop="down" alignRight>
           <Dropdown.Toggle
