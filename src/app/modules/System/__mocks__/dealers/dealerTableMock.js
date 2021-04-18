@@ -143,8 +143,8 @@ export default [
       },
       {
         id: 6,
-        parentId:1,
-        dealerTypeId:2,
+        parentId:null,
+        dealerTypeId:3,
         taxOfficeId: 2,
         adminId: 1,
         levelId:2,

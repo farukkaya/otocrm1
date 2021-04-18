@@ -12,7 +12,7 @@ import { Input, Select } from "../../../../../../../_metronic/_partials/controls
 import { format } from 'react-string-format';
 
 import { LENGTH, MIN_LENGTH, MAX_LENGTH, DIGIT_CONTROL, REQUIRED } from "../../../../../../validations/validMessages";
-import { BrandList, ModelList, Years, CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources, arrayProgress } from "../StocksUIHelper";
+import { BrandList, ModelList, Years, CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources } from "../StocksUIHelper";
 
 // Validation schema
 const StockEditSchema = Yup.object().shape({

@@ -52,7 +52,7 @@ export function UsersCard() {
           </button>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-sm btn-primary mr-1"
             onClick={usersUIProps.newUserButtonClick}
           >
             Yeni Kullanıcı

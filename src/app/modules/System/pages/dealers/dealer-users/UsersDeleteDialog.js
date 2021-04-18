@@ -22,7 +22,7 @@ export function UsersDeleteDialog() {
 
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.users.actionsLoading }),
+    (state) => ({ isLoading: state.users.listLoading }),
     shallowEqual
   );
 

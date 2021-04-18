@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useStocksUIContext } from "./StocksUIContext";
+import { StocksGrouping } from "./StocksGrouping";
 
 const prepareFilter = (queryParams, values) => {
   const { searchText } = values;
@@ -33,6 +34,7 @@ export function StocksFilter() {
       setQueryParams: stocksUIContext.setQueryParams,
       openNewStockDialog: stocksUIContext.openNewStockDialog,
       queryParams: stocksUIContext.queryParams,
+      ids: stocksUIContext.ids
     };
   }, [stocksUIContext]);
 
@@ -49,6 +51,7 @@ export function StocksFilter() {
       <div className="form-filtration">
         <div className="row align-items-center">
           <div className="col-md-2 margin-bottom-10-mobile">
+
             <Formik
               initialValues={{
                 searchText: "",
@@ -86,7 +89,8 @@ export function StocksFilter() {
               )}
             </Formik>
           </div>
-          <div className="col-md-8 margin-bottom-10-mobile"></div>
+          <div className="col-md-3 margin-bottom-10-mobile">{stocksUIProps.ids.length > 0 && <StocksGrouping />} </div>
+          <div className="col-md-5 margin-bottom-10-mobile"></div>
           <div className="col-md-2 text-right margin-bottom-10-mobile">
             <button
               type="button"

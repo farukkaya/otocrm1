@@ -28,7 +28,9 @@ export function findUsersByDealer(id) {
   return axios.post(`${USERS_URL}/getAllByDealer`, { dealerId:id });
 }
 
-
+export function findGalleriesByParent(queryParams, dealerId) {
+  return axios.post(`${DEALERS_URL}/GetAllByParent/${dealerId}`, { queryParams });
+}
 // UPDATE => PUT: update the procuct on the server
 export function updateDealer(dealer) {
   return axios.put(`${DEALERS_URL}/${dealer.id}`, { dealer });

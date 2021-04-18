@@ -366,7 +366,7 @@ export function CustomerEditForm({
             {props => {
               console.log(props, "this props 5");
               const data = props.values;
-              debugger
+              
               return (
                 <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
 

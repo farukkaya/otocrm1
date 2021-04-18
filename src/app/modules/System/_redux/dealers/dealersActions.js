@@ -2,6 +2,58 @@ import * as requestFromServer from "./dealersCrud";
 import {dealersSlice, callTypes} from "./dealersSlice";
 
 const {actions} = dealersSlice;
+//////////////GALLERİES//////////////////
+export const fetchGalleriesByParent = (queryParams, dealerId) => dispatch => {
+  
+  dispatch(actions.startCallForGallery({ callType: callTypes.list }));
+  if (!dealerId) {
+    return dispatch(actions.galleriesFetched({ totalCount: 0, entities: null }));
+  }
+
+  return requestFromServer
+    .findGalleriesByParent(queryParams, dealerId)
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.galleriesFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find remarks";
+      dispatch(actions.catchErrorForGallery({ error, callType: callTypes.list }));
+    });
+};
+export const fetchGallery= id => dispatch => {
+  if (!id) {
+    return dispatch(actions.galleryFetched({ dealerForEdit: undefined }));
+  }
+
+  dispatch(actions.startCallForGallery({ callType: callTypes.action }));
+  return requestFromServer
+    .getDealerById(id)
+    .then(response => {
+      const dealer = response.data;
+      dispatch(actions.galleryFetched({ dealerForEdit: dealer }));
+      return dealer;
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find Gallery";
+      dispatch(actions.catchErrorForGallery({ error, callType: callTypes.action }));
+    });
+};
+export const updateGalleriesStatus = (ids, status) => dispatch => {
+  dispatch(actions.startCallForGallery({ callType: callTypes.action }));
+  return requestFromServer
+    .updateStatusForDealers(ids, status)
+    .then(() => {
+      dispatch(actions.galleriesStatusUpdated({ ids, status }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't update Galleries status";
+      dispatch(actions.catchErrorForGallery({ error, callType: callTypes.action }));
+    });
+};
+
+//////////////GALLERİES//////////////////
+
 
 export const fetchUsersByDealer = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));

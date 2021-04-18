@@ -22,6 +22,8 @@ import * as professionsActions from "../../../_redux/professions/professionsActi
 import * as citiesActions from "../../../_redux/_cities/citiesActions"
 
 import { DealerEditForm } from "./DealerEditForm";
+import { Galleries } from "../dealer-galleries/Galleries";
+import { GalleriesUIProvider } from "../dealer-galleries/GalleriesUIContext";
 import { Stocks } from "../dealer-stocks/Stocks";
 import { StocksUIProvider } from "../dealer-stocks/StocksUIContext";
 import { Users } from "../dealer-users/Users";
@@ -226,7 +228,9 @@ export function DealerEdit({
                   role="tab"
                   aria-selected={(tab === "basic")}
                 >
-                  Bayi
+               {dealerForEdit?.dealerTypeId == 1  ? "Bayi"
+              : dealerForEdit?.dealerTypeId == 2 ? "Galeri"
+              : "Bayi&Galeri" }
                   </a>
               </li>
               {/* {dealerForEdit?.dealerTypeId !== 1 && (  )} */}
@@ -287,8 +291,9 @@ export function DealerEdit({
               </StocksUIProvider>
               )}
               {tab === "galleries" && id && (
-                <h1>Galeriler</h1>
-                
+               <GalleriesUIProvider currentDealerId={id}>
+               <Galleries />
+             </GalleriesUIProvider>
               )}
               {tab === "users" && id && (
                 <UsersUIProvider currentDealerId={id}>

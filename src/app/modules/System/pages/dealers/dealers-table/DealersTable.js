@@ -9,6 +9,10 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/dealers/dealersActions"
 import * as uiHelpers from "../DealersUIHelpers";
 import {
+  DealerTypeTitles,
+  DealerTypeCssClasses
+}from "../DealersUIHelpers";
+import {
   getSelectRow,
   getHandlerTableChange,
   NoRecordsFoundMessage,
@@ -67,6 +71,11 @@ export function DealersTable() {
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.TypeColumnFormatter,
+      formatExtraData: {
+        array: DealerTypeTitles,
+        classList: DealerTypeCssClasses,
+        selector:"dealerTypeId",
+      },
     },
     {
       dataField: "name",

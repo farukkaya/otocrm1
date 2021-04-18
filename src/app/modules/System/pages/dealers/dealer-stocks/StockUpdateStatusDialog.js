@@ -73,7 +73,7 @@ export function StockUpdateStatusDialog() {
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Bu bayiyi güncellemek istediğinize emin misiniz ?</span>
+          <span>Bu stoğu güncellemek istediğinize emin misiniz ?</span>
         )}
         {isLoading && <span>Güncelleniyor...</span>}
       </Modal.Body>

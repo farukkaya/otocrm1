@@ -11,7 +11,7 @@ const selectedStocks = (entities, ids) => {
       _stocks.push(stock);
     }
   });
-  debugger
+  
   return _stocks;
 };
 

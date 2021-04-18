@@ -32,8 +32,8 @@ export default function mockDealers(mock) {
 // });
 ////////////////////////////GALLERY CONTROLLER////////////////////////////////////////////////
 
-mock.onPost(/api\/dealers\/GetAllGalleriesByDealer\/\d+/).reply(config => {
-  debugger
+mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
+  
   const urls = config.url.split("/");
   const id = urls[3];
   const mockUtils = new MockUtils();

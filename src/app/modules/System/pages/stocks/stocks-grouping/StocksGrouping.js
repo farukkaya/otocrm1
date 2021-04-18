@@ -21,13 +21,6 @@ export function StocksGrouping() {
       <div className="row align-items-center form-group-actions margin-top-20 margin-bottom-20">
         <div className="col-xl-12">
           <div className="form-group form-group-inline">
-            <div className="form-label form-label-no-wrap">
-              <label className="-font-bold font-danger-">
-                <span>
-                Seçili Kayıt Sayısı: <b>{stocksUIProps.ids.length}</b>
-                </span>
-              </label>
-            </div>
             <div>
               <button
                 type="button"
@@ -42,7 +35,7 @@ export function StocksGrouping() {
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
                 onClick={stocksUIProps.openFetchStocksDialog}
               >
-                <i className="fa fa-stream"></i>  Seçilileri Getir
+                <i className="fa fa-stream"></i>  Seçilenler ({stocksUIProps.ids.length})
               </button>
               &nbsp;
               <button
@@ -50,7 +43,7 @@ export function StocksGrouping() {
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
                 onClick={stocksUIProps.openUpdateStocksStatusDialog}
               >
-                <i className="fa fa-sync-alt"></i> Güncelle
+                <i className="fa fa-sync-alt"></i> Durum Güncelle
               </button>
             </div>
           </div>

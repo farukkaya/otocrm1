@@ -6,6 +6,14 @@ const initialDealersState = {
   totalCount: 0,
   entities: [],
   usersOfDealer:[],
+  galleriesOfDealer:{
+    listLoading: false,
+    actionsLoading: false,
+    totalCount: 0,
+    entities: null,
+    galleryForEdit: undefined,
+    lastError: null
+  },
   dealerForEdit: undefined,
   lastError: null
 };
@@ -34,6 +42,24 @@ export const dealersSlice = createSlice({
         state.actionsLoading = true;
       }
     },
+
+    catchErrorForGalleryy: (state, action) => {
+      state.error = `${action.type}: ${action.payload.error}`;
+      if (action.payload.callType === callTypes.list) {
+        state.galleriesOfDealer.listLoading = false;
+      } else {
+        state.galleriesOfDealer.actionsLoading = false;
+      }
+    },
+    startCallForGallery: (state, action) => {
+      state.error = null;
+      if (action.payload.callType === callTypes.list) {
+        state.galleriesOfDealer.listLoading = true;
+      } else {
+        state.galleriesOfDealer.actionsLoading = true;
+      }
+    },
+
     // getDealerById
     dealerFetched: (state, action) => {
       state.actionsLoading = false;
@@ -55,6 +81,15 @@ export const dealersSlice = createSlice({
       state.error = null;
       state.usersOfDealer = entities;
       state.totalCount = totalCount;
+    },
+
+    // findGalleriesByParent
+    galleriesFetched: (state, action) => {
+      const { totalCount, entities } = action.payload;
+      state.galleriesOfDealer.listLoading = false;
+      state.galleriesOfDealer.error = null;
+      state.galleriesOfDealer.entities = entities;
+      state.galleriesOfDealer.totalCount = totalCount;
     },
     // createDealer
     dealerCreated: (state, action) => {
@@ -98,6 +133,32 @@ export const dealersSlice = createSlice({
         }
         return entity;
       });
-    }
+    },
+
+
+
+
+
+     // getGalleryById
+    galleryFetched: (state, action) => {
+      debugger
+
+      state.galleriesOfDealer.actionsLoading = false;
+      state.galleriesOfDealer.dealerForEdit = action.payload.dealerForEdit;
+      state.galleriesOfDealer.error = null;
+    },
+
+    // galleriesUpdateState
+    galleriesStatusUpdated: (state, action) => {
+      state.galleriesOfDealer.actionsLoading = false;
+      state.galleriesOfDealer.error = null;
+      const { ids, status } = action.payload;
+      state.galleriesOfDealer.entities = state.galleriesOfDealer.entities.map(entity => {
+        if (ids.findIndex(id => id === entity.id) > -1) {
+          entity.status = status;
+        }
+        return entity;
+      });
+    },
   }
 });

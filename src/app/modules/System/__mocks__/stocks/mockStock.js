@@ -97,7 +97,7 @@ export default function mockStock(mock) {
   });
 
   mock.onPost(/api\/stocks\/findByDealer\/\d+/).reply(config => {
-    debugger
+    
     const urls = config.url.split("/");
     const id = urls[3];
     const mockUtils = new MockUtils();
