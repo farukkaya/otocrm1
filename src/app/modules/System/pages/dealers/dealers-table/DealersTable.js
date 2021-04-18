@@ -35,6 +35,7 @@ export function DealersTable() {
       queryParams: dealersUIContext.queryParams,
       setQueryParams: dealersUIContext.setQueryParams,
       openEditDealerPage: dealersUIContext.openEditDealerPage,
+      openDetailDealerPage: dealersUIContext.openDetailDealerPage,
       openDeleteDealerDialog: dealersUIContext.openDeleteDealerDialog,
       openUpdateDealerStatusDialog:dealersUIContext.openUpdateDealerStatusDialog,
       openUpdateDealersStatusDialog:dealersUIContext.openUpdateDealersStatusDialog,
@@ -117,6 +118,7 @@ export function DealersTable() {
       formatExtraData: {
         openUpdateStatusDialog: dealersUIProps.openUpdateDealerStatusDialog,
         openEditPage: dealersUIProps.openEditDealerPage,
+        openDetailPage: dealersUIProps.openDetailDealerPage,
         openDeleteDialog: dealersUIProps.openDeleteDealerDialog,
       },
 

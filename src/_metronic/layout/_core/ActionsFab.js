@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const ActionsFab = (props) => {
   const { formatExtraData, row } = props;
-  const { openUpdateStatusDialog, openEditPage, openDeleteDialog,key="id" } = formatExtraData;
+  const { openUpdateStatusDialog, openEditPage,openDetailPage, openDeleteDialog,key="id" } = formatExtraData;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
@@ -42,9 +42,11 @@ export const ActionsFab = (props) => {
         onClose={handleClose}
       >
 
-
+        <MenuItem onClick={() => {  
+          openDetailPage(row[key])
+          handleClose()
+        }}>Detay Göster</MenuItem>
         <MenuItem onClick={() => {
-          
           openEditPage(row[key])
           handleClose()
         }}>Güncelle</MenuItem>

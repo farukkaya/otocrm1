@@ -16,6 +16,9 @@ export function UsersPage({ history }) {
     openEditUserPage: (id) => {
       history.push(`/system/users/${id}/edit`);
     },
+    openDetailUserPage: (id) => {
+      history.push(`/system/users/${id}/detail`);
+    },
     openDeleteUserDialog: (id) => {
       history.push(`/system/users/${id}/delete`);
     },

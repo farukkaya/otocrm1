@@ -30,6 +30,7 @@ export function UsersTable() {
       queryParams: usersUIContext.queryParams,
       setQueryParams: usersUIContext.setQueryParams,
       openEditUserPage: usersUIContext.openEditUserPage,
+      openDetailUserPage: usersUIContext.openDetailUserPage,
       openDeleteUserDialog: usersUIContext.openDeleteUserDialog,
     };
   }, [usersUIContext]);
@@ -115,6 +116,7 @@ export function UsersTable() {
       formatExtraData: {
         openUpdateStatusDialog: usersUIProps.openUpdateUserStatusDialog,
         openEditPage: usersUIProps.openEditUserPage,
+        openDetailPage: usersUIProps.openDetailUserPage,
         openDeleteDialog: usersUIProps.openDeleteUserDialog,
       },
       classes: "text-right pr-0",

@@ -38,6 +38,7 @@ export function DealersUIProvider({ dealersUIEvents, children }) {
     setIsFiltering,
     newDealerButtonClick: dealersUIEvents.newDealerButtonClick,
     openEditDealerPage: dealersUIEvents.openEditDealerPage,
+    openDetailDealerPage: dealersUIEvents.openDetailDealerPage,
     openDeleteDealerDialog: dealersUIEvents.openDeleteDealerDialog,
     openDeleteDealersDialog: dealersUIEvents.openDeleteDealersDialog,
     openFetchDealersDialog: dealersUIEvents.openFetchDealersDialog,

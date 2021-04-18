@@ -24,6 +24,7 @@ export function UsersCard() {
       newUserButtonClick: usersUIContext.newUserButtonClick,
       openDeleteUsersDialog: usersUIContext.openDeleteUsersDialog,
       openEditUserPage: usersUIContext.openEditUserPage,
+      openDetailUserPage: usersUIContext.openDetailUserPage,
       openUpdateUsersStatusDialog:
         usersUIContext.openUpdateUsersStatusDialog,
       openFetchUsersDialog: usersUIContext.openFetchUsersDialog,

@@ -38,6 +38,7 @@ export function UsersUIProvider({ usersUIEvents, children }) {
     setIsFiltering,
     newUserButtonClick: usersUIEvents.newUserButtonClick,
     openEditUserPage: usersUIEvents.openEditUserPage,
+    openDetailUserPage: usersUIEvents.openDetailUserPage,
     openDeleteUserDialog: usersUIEvents.openDeleteUserDialog,
     openDeleteUsersDialog: usersUIEvents.openDeleteUsersDialog,
     openFetchUsersDialog: usersUIEvents.openFetchUsersDialog,

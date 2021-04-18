@@ -32,6 +32,9 @@ export const DealersPage=({ history }) =>{
     openEditDealerPage: (guid) => {
       history.push(`/system/dealers/${guid}/edit`);
     },
+    openDetailDealerPage: (guid) => {
+      history.push(`/system/dealers/${guid}/detail`);
+    },
     openDeleteDealerDialog: (guid) => {
       history.push(`/system/dealers/${guid}/delete`);
     },
