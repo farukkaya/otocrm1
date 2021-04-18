@@ -4,26 +4,27 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../../../../../_metronic/_partials/controls";
 
-export function GalleryEditDialogHeader({ id }) {
+export function StockEditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
-  // Galleries Redux state
-  const { galleryForEdit, actionsLoading } = useSelector(
+  // Stocks Redux state
+  const { stockForEdit, actionsLoading } = useSelector(
     (state) => ({
-      galleryForEdit: state.galleries.galleryForEdit,
+      stockForEdit: state.galleries.stockForEdit,
       actionsLoading: state.galleries.actionsLoading,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    let _title = id ? "" : "Yeni Galeri";
-    if (galleryForEdit && id) {
-      _title = "Galeri Düzenle -"+galleryForEdit.name+"-";
+    let _title = id ? "" : "Yeni Stok";
+    if (stockForEdit && id) {
+      //TODO:Marka ve model ismini başlık olarak göster
+      _title = "Stok Düzenle -"+stockForEdit.brandId+"-";
     }
 
     setTitle(_title);
     // eslint-disable-next-line
-  }, [galleryForEdit, actionsLoading]);
+  }, [stockForEdit, actionsLoading]);
 
   return (
     <>

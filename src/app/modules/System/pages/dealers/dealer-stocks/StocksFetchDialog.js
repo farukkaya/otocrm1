@@ -1,69 +1,69 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
-import { useGalleriesUIContext } from "./GalleriesUIContext";
+import { useStocksUIContext } from "./StocksUIContext";
 
-const selectedGalleries = (entities, ids) => {
-  const _galleries = [];
+const selectedStocks = (entities, ids) => {
+  const _stocks = [];
   ids.forEach((id) => {
-    const gallery = entities.find((el) => el.id === id);
-    if (gallery) {
-      _galleries.push(gallery);
+    const stock = entities.find((el) => el.id === id);
+    if (stock) {
+      _stocks.push(stock);
     }
   });
-  return _galleries;
+  return _stocks;
 };
 
-export function GalleriesFetchDialog() {
-  // Galleries UI Context
-  const galleriesUIContext = useGalleriesUIContext();
-  const galleriesUIProps = useMemo(() => {
+export function StocksFetchDialog() {
+  // Stocks UI Context
+  const stocksUIContext = useStocksUIContext();
+  const stocksUIProps = useMemo(() => {
     return {
-      ids: galleriesUIContext.ids,
-      queryParams: galleriesUIContext.queryParams,
-      showFetchGalleriesDialog: galleriesUIContext.showFetchGalleriesDialog,
-      closeFetchGalleriesDialog: galleriesUIContext.closeFetchGalleriesDialog,
+      ids: stocksUIContext.ids,
+      queryParams: stocksUIContext.queryParams,
+      showFetchStocksDialog: stocksUIContext.showFetchStocksDialog,
+      closeFetchStocksDialog: stocksUIContext.closeFetchStocksDialog,
     };
-  }, [galleriesUIContext]);
+  }, [stocksUIContext]);
 
-  const { galleries } = useSelector(
+  const { stocks } = useSelector(
     (state) => ({
-      galleries: selectedGalleries(state.galleries.entities, galleriesUIProps.ids),
+      stocks: selectedStocks(state.stocks.entities, stocksUIProps.ids),
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    if (!galleriesUIProps.ids || galleriesUIProps.ids.length === 0) {
-      galleriesUIProps.closeFetchGalleriesDialog();
+    if (!stocksUIProps.ids || stocksUIProps.ids.length === 0) {
+      stocksUIProps.closeFetchStocksDialog();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [galleriesUIProps.ids]);
+  }, [stocksUIProps.ids]);
 
   return (
     <Modal
-      show={galleriesUIProps.showFetchGalleriesDialog}
-      onHide={galleriesUIProps.closeFetchGalleriesDialog}
+      show={stocksUIProps.showFetchStocksDialog}
+      onHide={stocksUIProps.closeFetchStocksDialog}
       aria-labelledby="example-modal-sizes-title-lg"
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-         Seçili Galeriler
+         Seçili Stoklar
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="list-timeline list-timeline-skin-light padding-30">
           <div className="list-timeline-items">
-            {galleries.map((gallery) => (
-              <div className="list-timeline-item mb-3" key={gallery.id}>
+            {stocks.map((stock) => (
+              <div className="list-timeline-item mb-3" key={stock.id}>
                 <span className="list-timeline-text">
                   <span
                     className="label label-lg label-light-success label-inline"
                     style={{ width: "60px" }}
                   >
-                    Id: {gallery.id}
+                    Id: {stock.id}
                   </span>{" "}
-                  <span className="ml-5">{gallery.name} </span>
+                  <span className="ml-5">{stock.brand} {stock.model} </span>
                 </span>
               </div>
             ))}
@@ -74,7 +74,7 @@ export function GalleriesFetchDialog() {
         <div>
           <button
             type="button"
-            onClick={galleriesUIProps.closeFetchGalleriesDialog}
+            onClick={stocksUIProps.closeFetchStocksDialog}
             className="btn btn-light btn-elevate"
           >
             İptal
@@ -82,7 +82,7 @@ export function GalleriesFetchDialog() {
           <> </>
           <button
             type="button"
-            onClick={galleriesUIProps.closeFetchGalleriesDialog}
+            onClick={stocksUIProps.closeFetchStocksDialog}
             className="btn btn-primary btn-elevate"
           >
             Tamam

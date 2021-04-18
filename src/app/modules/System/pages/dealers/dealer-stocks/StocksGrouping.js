@@ -1,16 +1,16 @@
 import React, { useMemo } from "react";
-import { useGalleriesUIContext } from "./GalleriesUIContext";
+import { useStocksUIContext } from "./StocksUIContext";
 
-export function GalleriesGrouping() {
-  // Galleries UI Context
-  const galleriesUIContext = useGalleriesUIContext();
-  const galleriesUIProps = useMemo(() => {
+export function StocksGrouping() {
+  // Stocks UI Context
+  const stocksUIContext = useStocksUIContext();
+  const stocksUIProps = useMemo(() => {
     return {
-      ids: galleriesUIContext.ids,
-      openDeleteGalleriesDialog: galleriesUIContext.openDeleteGalleriesDialog,
-      openFetchGalleriesDialog: galleriesUIContext.openFetchGalleriesDialog,
+      ids: stocksUIContext.ids,
+      openDeleteStocksDialog: stocksUIContext.openDeleteStocksDialog,
+      openFetchStocksDialog: stocksUIContext.openFetchStocksDialog,
     };
-  }, [galleriesUIContext]);
+  }, [stocksUIContext]);
 
   return (
     <div className="form">
@@ -19,14 +19,14 @@ export function GalleriesGrouping() {
           <div className="form-group form-group-inline">
             <div className="form-label form-label-no-wrap">
               <label className="font-bold font-danger mt-5">
-                <span>Seçili Kayıt Sayısı {galleriesUIProps.ids.length}</span>
+                <span>Seçili Kayıt Sayısı {stocksUIProps.ids.length}</span>
               </label>
             </div>
             <div className="form-group-inline">
               <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={galleriesUIProps.openDeleteGalleriesDialog}
+                onClick={stocksUIProps.openDeleteStocksDialog}
               >
                 <i className="fa fa-trash"></i> Hepsini Sil
               </button>
@@ -34,7 +34,7 @@ export function GalleriesGrouping() {
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={galleriesUIProps.openFetchGalleriesDialog}
+                onClick={stocksUIProps.openFetchStocksDialog}
               >
                 <i className="fa fa-stream"></i> Seçilenler
               </button>

@@ -7,8 +7,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
-import * as actions from "../../../_redux/galleries/galleriesActions";
-import * as uiHelpers from "./GalleriesUIHelper";
+import * as actions from "../../../_redux/stocks/stocksActions";
+import * as uiHelpers from "./StocksUIHelper";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import {
@@ -18,36 +18,36 @@ import {
   PleaseWaitMessage,
   sortCaret,
 } from "../../../../../../_metronic/_helpers";
-import { useGalleriesUIContext } from "./GalleriesUIContext";
+import { useStocksUIContext } from "./StocksUIContext";
 
-export function GalleriesTable() {
-  // Galleries UI Context
-  const galleriesUIContext = useGalleriesUIContext();
-  const galleriesUIProps = useMemo(() => {
+export function StocksTable() {
+  // Stocks UI Context
+  const stocksUIContext = useStocksUIContext();
+  const stocksUIProps = useMemo(() => {
     return {
-      ids: galleriesUIContext.ids,
-      setIds: galleriesUIContext.setIds,
-      queryParams: galleriesUIContext.queryParams,
-      setQueryParams: galleriesUIContext.setQueryParams,
-      dealerId: galleriesUIContext.dealerId,
-      openEditGalleryDialog: galleriesUIContext.openEditGalleryDialog,
-      openUpdateStatusGalleryDialog:galleriesUIContext.openUpdateStatusGalleryDialog,
-      openDeleteGalleryDialog: galleriesUIContext.openDeleteGalleryDialog,
+      ids: stocksUIContext.ids,
+      setIds: stocksUIContext.setIds,
+      queryParams: stocksUIContext.queryParams,
+      setQueryParams: stocksUIContext.setQueryParams,
+      dealerId: stocksUIContext.dealerId,
+      openEditStockDialog: stocksUIContext.openEditStockDialog,
+      openUpdateStatusStockDialog:stocksUIContext.openUpdateStatusStockDialog,
+      openDeleteStockDialog: stocksUIContext.openDeleteStockDialog,
     };
-  }, [galleriesUIContext]);
+  }, [stocksUIContext]);
 
   // Getting curret state of dealers list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.galleries }),
+    (state) => ({ currentState: state.stocks }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
   const dispatch = useDispatch();
   useEffect(() => {
-    galleriesUIProps.setIds([]);
-    dispatch(actions.fetchGalleriesByDealer(galleriesUIProps.queryParams, galleriesUIProps.dealerId));
+    stocksUIProps.setIds([]);
+    dispatch(actions.fetchStocksByDealer(stocksUIProps.queryParams, stocksUIProps.dealerId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [galleriesUIProps.queryParams, dispatch, galleriesUIProps.dealerId]);
+  }, [stocksUIProps.queryParams, dispatch, stocksUIProps.dealerId]);
   const columns = [
     {
       dataField: "id",
@@ -56,29 +56,75 @@ export function GalleriesTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "name",
-      text: "Galeri Adı",
+      dataField: "brand",
+      text:"Marka",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "level",
-      text: "Seviye",
+      dataField: "model",
+      text:"Model",
+      sort: true,
+      sortCaret: sortCaret,
+    },   
+    
+    {
+      dataField: "year",
+      text:"Yıl",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "taxOffice",
-      text: "Vergi Dairesi",
+      dataField: "plateNo",
+      text:"Plaka",
       sort: true,
       sortCaret: sortCaret,
     },
+    // {
+    //   dataField: "buyingPrice",
+    //   text:"Alım Fiyatı",
+    //   sort: true,
+    //   sortCaret: sortCaret,
+    //   formatter:columnFormatters.PriceColumnFormatter, 
+    //   formatExtraData: {
+    //     key:"buyingPrice"
+    //   },
+    // },
+    // {
+    //   dataField: "sellingPrice",
+    //   text:"Satış Fiyatı",
+    //   sort: true,
+    //   sortCaret: sortCaret,
+    //   formatter:columnFormatters.PriceColumnFormatter,
+    //   formatExtraData: {
+    //     key:"sellingPrice"
+    //   },
+
+    // },
+     {
+      dataField: "color",
+      text:"Renk",
+      sort: true,
+      sortCaret: sortCaret,
+    }, 
     {
-      dataField: "taxIdentityNo",
-      text: "Vergi No",
+      dataField: "fuelType",
+      text:"Yakıt Cinsi",
       sort: true,
       sortCaret: sortCaret,
-    },
+    }, 
+    {
+      dataField: "gearType",
+      text:"Vites Tipi",
+      sort: true,
+      sortCaret: sortCaret,
+    }, 
+    {
+      dataField: "caseType",
+      text:"Kasa Tipi",
+      sort: true,
+      sortCaret: sortCaret,
+    }, 
 
 
     {
@@ -93,9 +139,9 @@ export function GalleriesTable() {
       text: "İşlemler",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openUpdateStatusDialog: galleriesUIProps.openUpdateStatusGalleryDialog,
-        openEditPage: galleriesUIProps.openEditGalleryDialog,
-        openDeleteDialog: galleriesUIProps.openDeleteGalleryDialog,
+        openUpdateStatusDialog: stocksUIProps.openUpdateStatusStockDialog,
+        openEditPage: stocksUIProps.openEditStockDialog,
+        openDeleteDialog: stocksUIProps.openDeleteStockDialog,
       },
       classes: "text-right pr-0",
       headerClasses: "text-right pr-3",
@@ -110,8 +156,8 @@ export function GalleriesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: galleriesUIProps.queryParams.pageSize,
-    page: galleriesUIProps.queryParams.pageNumber,
+    sizePerPage: stocksUIProps.queryParams.pageSize,
+    page: stocksUIProps.queryParams.pageNumber,
   };
   return (
     <>
@@ -133,12 +179,12 @@ export function GalleriesTable() {
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  galleriesUIProps.setQueryParams
+                  stocksUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: galleriesUIProps.ids,
-                  setIds: galleriesUIProps.setIds,
+                  ids: stocksUIProps.ids,
+                  setIds: stocksUIProps.setIds,
                 })}
                 {...paginationTableProps}
               >

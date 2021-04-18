@@ -22,8 +22,8 @@ import * as professionsActions from "../../../_redux/professions/professionsActi
 import * as citiesActions from "../../../_redux/_cities/citiesActions"
 
 import { DealerEditForm } from "./DealerEditForm";
-import { Galleries } from "../dealer-galleries/Galleries";
-import { GalleriesUIProvider } from "../dealer-galleries/GalleriesUIContext";
+import { Stocks } from "../dealer-stocks/Stocks";
+import { StocksUIProvider } from "../dealer-stocks/StocksUIContext";
 import { Users } from "../dealer-users/Users";
 import { UsersUIProvider } from "../dealer-users/UsersUIContext";
 
@@ -229,7 +229,20 @@ export function DealerEdit({
                   Bayi
                   </a>
               </li>
-              <li className="nav-item" onClick={() => setTab("galleries")}>
+              {/* {dealerForEdit?.dealerTypeId !== 1 && (  )} */}
+                <li className={`nav-item ${dealerForEdit?.dealerTypeId == 1 && "offcanvas"}`} onClick={() => setTab("stocks")}>
+                  <a
+                    className={`nav-link ${tab === "stocks" && "active"}`}
+                    data-toggle="tab"
+                    role="button"
+                    aria-selected={(tab === "stocks")}
+                  >
+                    Stokları
+                    </a>
+                </li>
+              
+
+              <li className={`nav-item ${dealerForEdit?.dealerTypeId == 2 && "offcanvas"}`} onClick={() => setTab("galleries")}>
                 <a
                   className={`nav-link ${tab === "galleries" && "active"}`}
                   data-toggle="tab"
@@ -268,10 +281,14 @@ export function DealerEdit({
                   neighborhoods={neighborhoods}
                 />
               )}
+              {tab === "stocks" && id && (
+                <StocksUIProvider currentDealerId={id}>
+                <Stocks />
+              </StocksUIProvider>
+              )}
               {tab === "galleries" && id && (
-                <GalleriesUIProvider currentDealerId={id}>
-                  <Galleries />
-                </GalleriesUIProvider>
+                <h1>Galeriler</h1>
+                
               )}
               {tab === "users" && id && (
                 <UsersUIProvider currentDealerId={id}>

@@ -2,11 +2,11 @@ import React, {useEffect} from "react";
 import {shallowEqual, useSelector} from "react-redux";
 import {LoadingDialog} from "../../../../../../_metronic/_partials/controls";
 
-export function GalleriesLoadingDialog() {
+export function StocksLoadingDialog() {
   const { isLoading } = useSelector(
-    state => ({ isLoading: state.galleries.listLoading }),
+    state => ({ isLoading: state.stocks.listLoading }),
     shallowEqual
   );
   useEffect(() => {}, [isLoading]);
-  return <LoadingDialog isLoading={isLoading} text="Galeriler Yükleniyor ..." />;
+  return <LoadingDialog isLoading={isLoading} text="Stoklar Yükleniyor ..." />;
 }

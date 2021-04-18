@@ -5,14 +5,13 @@ export default [
         taxOfficeId: 1,
         adminId: 2,
         dealerTypeId:1,
-
+        levelId:null,
         name: "TEST BAYİ 1",
         taxIdentityNo: "123456790",
         email:"info@bzkotomotiv.com",
         fax:"02139876554",
         tel1:"02139876554",
         tel2:"02139876555",
-        isManager:true,
         isActive: true, 
         createdDate: "2019-11-01T00:00:00+00:00",
         createdBy:1,
@@ -32,8 +31,9 @@ export default [
         parentId:null,
         taxOfficeId: 1,
         adminId: 3,
-        dealerTypeId:1,
-        isManager:false,
+        dealerTypeId:1,    
+        levelId:null,
+
 
         name: "TEST BAYİ 2",
         taxIdentityNo: "123456742",
@@ -60,8 +60,8 @@ export default [
         parentId:null,
         taxOfficeId: 1,
         adminId: 0,
-        dealerTypeId:2,
-        isManager:false,
+        dealerTypeId:1,
+        levelId:null,
 
         name: "TEST BAYİ 3",
         taxIdentityNo: "3425968301",
@@ -86,7 +86,7 @@ export default [
     {
         id: 4,
         parentId:1,
-    
+        dealerTypeId:2,
         taxOfficeId: 1,
         adminId: 2,
         levelId:1,
@@ -115,7 +115,7 @@ export default [
       {
         id: 5,
         parentId:2,
-        
+        dealerTypeId:2,
         taxOfficeId: 3,
         adminId: 1,
         levelId:1,
@@ -144,7 +144,7 @@ export default [
       {
         id: 6,
         parentId:1,
-    
+        dealerTypeId:2,
         taxOfficeId: 2,
         adminId: 1,
         levelId:2,

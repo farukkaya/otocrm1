@@ -23,7 +23,7 @@ export function findStocks(queryParams) {
   return axios.post(`${STOCKS_URL}/find`, { queryParams });
 }
 export function findStocksByDealer(queryParams, dealerId) {
-  return axios.post(`${STOCKS_URL}findByDealer/${dealerId}`, { queryParams });
+  return axios.post(`${STOCKS_URL}/findByDealer/${dealerId}`, { queryParams });
 }
 export function findStocksByGallery(queryParams, galleryId) {
   return axios.post(`${STOCKS_URL}findByGallery/${galleryId}`, { queryParams });

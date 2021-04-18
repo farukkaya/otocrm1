@@ -1,46 +1,46 @@
 import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
-import { useGalleriesUIContext } from "./GalleriesUIContext";
+import { useStocksUIContext } from "./StocksUIContext";
 
 const prepareFilter = (queryParams, values) => {
   const { searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {
-    name: "",
-    //level:0,
-    dealer:"",
-    taxOffice:"",
-    taxIdentityNo: "",
+    brand: "",
+    gearType:"",
+    model:"",
+    color:"",
+    fuelType: "",
   };
   
   if (searchText) {
-    filter.name= searchText;
-   // filter.level= parseInt(searchText);
-    filter.dealer= searchText;
-    filter.taxIdentityNo= searchText;
-    filter.taxOffice=searchText;
+    filter.brand= searchText;
+    filter.gearType= searchText;
+    filter.model= searchText;
+    filter.color= searchText;
+    filter.fuelType=searchText;
   }
   newQueryParams.filter = filter;
   return newQueryParams;
 };
 
-export function GalleriesFilter() {
-  // Galleries UI Context
-  const galleriesUIContext = useGalleriesUIContext();
-  const galleriesUIProps = useMemo(() => {
+export function StocksFilter() {
+  // Stocks UI Context
+  const stocksUIContext = useStocksUIContext();
+  const stocksUIProps = useMemo(() => {
     return {
-      setQueryParams: galleriesUIContext.setQueryParams,
-      openNewGalleryDialog: galleriesUIContext.openNewGalleryDialog,
-      queryParams: galleriesUIContext.queryParams,
+      setQueryParams: stocksUIContext.setQueryParams,
+      openNewStockDialog: stocksUIContext.openNewStockDialog,
+      queryParams: stocksUIContext.queryParams,
     };
-  }, [galleriesUIContext]);
+  }, [stocksUIContext]);
 
   const applyFilter = (values) => {
-    const newQueryParams = prepareFilter(galleriesUIProps.queryParams, values);
-    if (!isEqual(newQueryParams, galleriesUIProps.queryParams)) {
+    const newQueryParams = prepareFilter(stocksUIProps.queryParams, values);
+    if (!isEqual(newQueryParams, stocksUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
-      galleriesUIProps.setQueryParams(newQueryParams);
+      stocksUIProps.setQueryParams(newQueryParams);
     }
   };
 
@@ -91,9 +91,9 @@ export function GalleriesFilter() {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => galleriesUIProps.openNewGalleryDialog()}
+              onClick={() => stocksUIProps.openNewStockDialog()}
             >
-              Yeni Galeri
+              Yeni Stok
             </button>
           </div>
         </div>

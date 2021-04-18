@@ -98,7 +98,8 @@ export function StockEditForm({
    
 
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
+    
+    //TODO: adorments Globale taşınacak 
     const adorments = {
         priceAdorment: {
             endAdorment: {
@@ -429,7 +430,6 @@ export function StockEditForm({
                                     <div className="col-lg-3">
                                         <Select name="colorId" label="Renk" options={CarColors} />
                                     </div>
-
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-lg-3">

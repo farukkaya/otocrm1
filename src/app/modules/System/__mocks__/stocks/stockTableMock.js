@@ -1,7 +1,7 @@
 export default [
     {
         id: 1,
-        galleryId:1,
+        dealerId:4,
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
         categoryId: 1,// kategoriler
@@ -53,7 +53,7 @@ export default [
     },
     {
         id: 2,
-        galleryId:1,
+        dealerId:4,
 
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
@@ -106,7 +106,7 @@ export default [
     },
     {
         id: 3,
-        galleryId:1,
+        dealerId:4,
 
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
@@ -160,7 +160,7 @@ export default [
 
     {
         id: 4,
-        galleryId:1,
+        dealerId:4,
 
         vinNo : "RFSDA2313123123",
         engineNo : "231232131203",
