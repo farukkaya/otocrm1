@@ -10,7 +10,7 @@ import { DealerEdit } from "./dealers/dealer-edit/DealerEdit";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 import { StockEdit } from "./stocks/stock-edit/StockEdit";
 import {UserDetails} from "./users/user-details/UserDetails";
-import DealerDetails from "./dealers/dealer-details/DealerDetails";
+import {DealerDetails} from "./dealers/dealer-details/DealerDetails";
 
 export default function SystemPage() {
   return (
