@@ -2,16 +2,16 @@ import galleryTableMock from "./galleryTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockGalleries(mock) {
-  mock.onPost("api/galleries").reply(({ data }) => {
+  mock.onPost("galleries").reply(({ data }) => {
     const { gallery } = JSON.parse(data);
     const {
       dealer = "",
       name = "",
-      levelId = 0,
+      capacityId = 0,
       taxOffice = 0,
       taxOfficeId = 0,
       taxIdentityNo = "",
-      tel1 = "",
+      phone1 = "",
       fax = "",
       email = "",
       isActive = false,
@@ -29,11 +29,11 @@ export default function mockGalleries(mock) {
       id,
       dealer,
       name,
-      levelId,
+      capacityId,
       taxOffice,
       taxOfficeId,
       taxIdentityNo,
-      tel1,
+      phone1,
       fax,
       email,
       isActive,
@@ -48,10 +48,10 @@ export default function mockGalleries(mock) {
     galleryTableMock.push(newGallery);
     return [200, { gallery: newGallery }];
   });
-  mock.onGet("api/galleries/getall").reply(config => {
+  mock.onGet("galleries/getall").reply(config => {
     return [200, galleryTableMock];
   });
-  mock.onPost("api/galleries/find").reply(config => {
+  mock.onPost("galleries/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredGalleries = mockUtils.baseFilter(galleryTableMock, queryParams);
@@ -67,7 +67,7 @@ export default function mockGalleries(mock) {
     const filteredGalleries = mockUtils.baseFilter(dealerGalleries, queryParams);
     return [200, filteredGalleries];
   });
-  mock.onPost("api/galleries/deleteGalleries").reply(config => {
+  mock.onPost("galleries/deleteGalleries").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = galleryTableMock.findIndex(el => el.id === id);
@@ -78,7 +78,7 @@ export default function mockGalleries(mock) {
     return [200];
   });
 
-  mock.onPost("api/galleries/updateStatusForGalleries").reply(config => {
+  mock.onPost("galleries/updateStatusForGalleries").reply(config => {
     
     const { ids, status } = JSON.parse(config.data);
     galleryTableMock.forEach(el => {

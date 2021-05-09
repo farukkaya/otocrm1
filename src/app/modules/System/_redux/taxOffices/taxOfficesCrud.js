@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-export const TAXOFFICES_URL = "api/taxOffices/getall";
+export const TAXOFFICES_URL = "taxOffices/getall";
 export const TAXOFFICES_GETBYID_URL = "/TaxOffices/GetById";
 export const TAXOFFICES_INSERT_URL = "/TaxOffices/insert";
 export const TAXOFFICES_UPDATE_URL = "/TaxOffices/update";
@@ -20,7 +20,7 @@ export const getTaxOffices=() =>axios.post(TAXOFFICES_URL)
 export const getTaxOfficeById=(taxOfficeId) =>axios.get(`${TAXOFFICES_GETBYID_URL}?id=${taxOfficeId}`)
 
 // Server should return sorted/filtered taxOffices and merge with items from state
-// TODO: Change your URL to REAL API, right now URL is 'api/taxOfficesfind/{professionId}'. Should be 'api/taxOffices/find/{professionId}'!!!
+// TODO: Change your URL to REAL API, right now URL is 'taxOfficesfind/{professionId}'. Should be 'taxOffices/find/{professionId}'!!!
 //export const findTaxOffices=(queryParams:any, professionId:number)=>axios.post(`${TAXOFFICES_FIND_URL}?id=${professionId}`, queryParams)
 
 // UPDATE => PUT: update the taxOffice

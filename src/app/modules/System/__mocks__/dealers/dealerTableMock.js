@@ -5,13 +5,13 @@ export default [
         taxOfficeId: 1,
         adminId: 2,
         dealerTypeId:1,
-        levelId:null,
+        capacityId:null,
         name: "TEST BAYİ 1",
         taxIdentityNo: "123456790",
         email:"info@bzkotomotiv.com",
         fax:"02139876554",
-        tel1:"02139876554",
-        tel2:"02139876555",
+        phone1:"02139876554",
+        phone2:"02139876555",
         isActive: true, 
         createdDate: "2019-11-01T00:00:00+00:00",
         createdBy:1,
@@ -32,15 +32,15 @@ export default [
         taxOfficeId: 1,
         adminId: 3,
         dealerTypeId:1,    
-        levelId:null,
+        capacityId:null,
 
 
         name: "TEST BAYİ 2",
         taxIdentityNo: "123456742",
         email:"info@taksitleotoal.com",
         fax:"02139876554",
-        tel1:"02139876554",
-        tel2:"02139876555",
+        phone1:"02139876554",
+        phone2:"02139876555",
 
         isActive: true, 
         createdDate: "2019-11-01T00:00:00+00:00",
@@ -61,14 +61,14 @@ export default [
         taxOfficeId: 1,
         adminId: 0,
         dealerTypeId:1,
-        levelId:null,
+        capacityId:null,
 
         name: "TEST BAYİ 3",
         taxIdentityNo: "3425968301",
         email:"info@otocrm.com",
         fax:"02139876554",
-        tel1:"02139876554",
-        tel2:"02139876555",
+        phone1:"02139876554",
+        phone2:"02139876555",
 
         isActive: false, 
         createdDate: "2019-11-01T00:00:00+00:00",
@@ -89,11 +89,11 @@ export default [
         dealerTypeId:2,
         taxOfficeId: 1,
         adminId: 2,
-        levelId:1,
+        capacityId:1,
     
         name: "TEST GALERİ 1",
         taxIdentityNo: "4189929680",
-        tel1:"05432324234",
+        phone1:"05432324234",
         fax:"",
         email:"info@bozoktomotiv.com",
     
@@ -107,7 +107,7 @@ export default [
         relationGuid: "70f6605b-f7a6-48fb-8c34-c34fd26da79c",
         relationTable: "Dealers",
     
-        level:"1. Seviye (0-5 ARAÇ)",
+        capacity:"1. Seviye (0-5 ARAÇ)",
         dealer: "Test Bayi 1",
         admin: "Enes Bozok",
         taxOffice: "Adana İhtisas Vergi Dairesi Müdürlğü"
@@ -118,11 +118,11 @@ export default [
         dealerTypeId:2,
         taxOfficeId: 3,
         adminId: 1,
-        levelId:1,
+        capacityId:1,
     
         name: "TEST GALERİ 2",
         taxIdentityNo: "5169657147",
-        tel1:"05432324234",
+        phone1:"05432324234",
         fax:"",
         email:"info@bozoktomotiv.com",
     
@@ -136,7 +136,7 @@ export default [
         relationGuid: "e2ddd5ff-a279-42ef-92eb-00649cd644bc",
         relationTable: "Dealers",
     
-        level:"1. Seviye (0-5 ARAÇ)",
+        capacity:"1. Seviye (0-5 ARAÇ)",
         dealer: "Test Bayi 2",
         admin: "Faruk Kaya",
         taxOffice: "Adana İhtisas Vergi Dairesi Müdürlğü",
@@ -147,11 +147,11 @@ export default [
         dealerTypeId:3,
         taxOfficeId: 2,
         adminId: 1,
-        levelId:2,
+        capacityId:2,
     
         name: "TEST GALERİ 3",
         taxIdentityNo: "5460175213",
-        tel1:"05432324234",
+        phone1:"05432324234",
         fax:"",
         email:"info@bozoktomotiv.com",
     
@@ -165,7 +165,7 @@ export default [
         relationGuid: "e2ddd5ff-a279-42ef-92eb-00649cd644bc",
         relationTable: "Dealers",
     
-        level:"2. Seviye (5-10 ARAÇ)",
+        capacity:"2. Seviye (5-10 ARAÇ)",
         dealer: "Test Bayi 1",
         admin: "Faruk Kaya",
         taxOffice: "5 Ocak Vergi Dairesi Müdürlğü",

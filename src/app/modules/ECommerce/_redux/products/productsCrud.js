@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const PRODUCTS_URL = "api/products";
+export const PRODUCTS_URL = "products";
 
 // CREATE =>  POST: add a new product to the server
 export function createProduct(product) {

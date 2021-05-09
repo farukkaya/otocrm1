@@ -38,6 +38,7 @@ export function StocksUIProvider({ stocksUIEvents, children }) {
     setIsFiltering,
     newStockButtonClick: stocksUIEvents.newStockButtonClick,
     openEditStockPage: stocksUIEvents.openEditStockPage,
+    openDetailStockPage: stocksUIEvents.openDetailStockPage,
     openDeleteStockDialog: stocksUIEvents.openDeleteStockDialog,
     openDeleteStocksDialog: stocksUIEvents.openDeleteStocksDialog,
     openFetchStocksDialog: stocksUIEvents.openFetchStocksDialog,

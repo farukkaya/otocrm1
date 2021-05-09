@@ -84,7 +84,7 @@ export function DealerEditForm({
       .email('Geçersiz E-Posta')
       .required(format(REQUIRED, "E-Posta")),
 
-    tel1: Yup.string()
+    phone1: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Telefon No.1")),
@@ -157,8 +157,8 @@ export function DealerEditForm({
               dealerTypeId: values.dealerTypeId,
               email: values.email,
               fax: values.fax,
-              tel1: values.tel1,
-              tel2: values.tel2,
+              phone1: values.phone1,
+              phone2: values.phone2,
               guid: values.guid,
             }
             const adminUser = {
@@ -168,8 +168,8 @@ export function DealerEditForm({
               lastName: values.lastName,
               username: values.username,
               professionId: values.professionId,
-              tel1: values.ownerTel,
-              tel2: "",
+              phone1: values.ownerTel,
+              phone2: "",
               relationGuid: values.guid,
               relationTable: "Dealers"
             }
@@ -271,7 +271,7 @@ export function DealerEditForm({
                 <div className="form-group row">
                   <div className="col-lg-6">
                     <Field
-                      name="tel1"
+                      name="phone1"
                       component={Input}
                       placeholder="Telefon No.1"
                       label="Telefon No.1"
@@ -279,7 +279,7 @@ export function DealerEditForm({
                   </div>
                   <div className="col-lg-6">
                     <Field
-                      name="tel2"
+                      name="phone2"
                       component={Input}
                       placeholder="Telefon No.2"
                       label="Telefon No.2"
@@ -477,8 +477,8 @@ export function DealerEditForm({
                 <div className="text-dark-50 line-height-lg">
                   <div><span>E-Posta:</span> {data.email}</div>
                   <div><span>Fax:</span> {data.fax}</div>
-                  <div><span>Telefon No.1:</span> {data.tel1}</div>
-                  <div><span>Telefon No.2:</span> {data.tel2}</div>
+                  <div><span>Telefon No.1:</span> {data.phone1}</div>
+                  <div><span>Telefon No.2:</span> {data.phone2}</div>
                 </div>
                 <div className="separator separator-dashed my-5"></div>
                 {/*end::Section*/}

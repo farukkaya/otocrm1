@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const PROFESSIONS_URL = "api/professions";
+export const PROFESSIONS_URL = "professions";
 
 // CREATE =>  POST: add a new profession to the server
 export function createProfession(profession) {
@@ -10,7 +10,7 @@ export function createProfession(profession) {
 // READ
 export function getAllProfessions() {
   
-  return axios.post("api/professions/getall");
+  return axios.post("professions/getall");
 }
 
 export function getProfessionById(professionId) {

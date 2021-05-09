@@ -37,7 +37,7 @@ export function GalleryEditForm({
       .min(10, format(MIN_LENGTH, "10"))
       .max(11, format(MAX_LENGTH, "11"))
       .required(format(REQUIRED, "Vergi No")),
-    level: Yup.number()
+    capacity: Yup.number()
       .moreThan(0, format(MORE_THEN, "Seviye", "0"))
       .lessThan(6, format(LESS_THEN, "Seviye", "6"))
       .required(format(REQUIRED, "Seviye")),
@@ -83,7 +83,7 @@ export function GalleryEditForm({
               </div>
               <div className="form-group row">
                 <div className="col-lg-6">
-                  <Select name="levelId" label="Seviye" options={GalleryLevelList} />
+                  <Select name="capacityId" label="Seviye" options={GalleryLevelList} />
                 </div>
                 <div className="col-lg-6">
                 <Field
@@ -97,7 +97,7 @@ export function GalleryEditForm({
               <div className="form-group row">
                 <div className="col-lg-6">
                 <Field
-                    name="tel1"
+                    name="phone1"
                     component={Input}
                     placeholder="Telefon No"
                     label="Telefon No"

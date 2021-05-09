@@ -2,7 +2,7 @@ import carTableMock from "./carTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockCar(mock) {
-  mock.onPost("api/cars").reply(({ data }) => {
+  mock.onPost("cars").reply(({ data }) => {
     const { car } = JSON.parse(data);
     const {
       _2006= 0,
@@ -54,13 +54,13 @@ export default function mockCar(mock) {
     return [200, { car: newCar }];
   });
 
-  mock.onPost("api/cars/find").reply(config => {
+  mock.onPost("cars/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredCars = mockUtils.baseFilter(carTableMock, queryParams);
     return [200, filteredCars];
   });
-  mock.onPost("api/cars/getall").reply(config => {
+  mock.onPost("cars/getall").reply(config => {
     
     var resp={
       entities:carTableMock,
@@ -89,7 +89,7 @@ export default function mockCar(mock) {
     return [200, filteredCars];
   });
 
-  mock.onPost("api/cars/deleteCars").reply(config => {
+  mock.onPost("cars/deleteCars").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = carTableMock.findIndex(el => el.id === id);
@@ -100,7 +100,7 @@ export default function mockCar(mock) {
     return [200];
   });
 
-  mock.onPost("api/cars/updateStatusForCars").reply(config => {
+  mock.onPost("cars/updateStatusForCars").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     carTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

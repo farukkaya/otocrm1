@@ -3,7 +3,7 @@ import customerTableMock from "./customerTableMock";
 import MockUtils from "./../mock.utils";
 
 export default function mockCustomer(mock) {
-  mock.onPost("api/customers").reply(({ data }) => {
+  mock.onPost("customers").reply(({ data }) => {
     const { customer } = JSON.parse(data);
     const {
       firstName = "",
@@ -50,7 +50,7 @@ export default function mockCustomer(mock) {
     return [200, { customer: newCustomer }];
   });
 
-  mock.onPost("api/customers/find").reply(config => {
+  mock.onPost("customers/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filterdCustomers = mockUtils.baseFilter(
@@ -60,7 +60,7 @@ export default function mockCustomer(mock) {
     return [200, filterdCustomers];
   });
 
-  mock.onPost("api/customers/deleteCustomers").reply(config => {
+  mock.onPost("customers/deleteCustomers").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = customerTableMock.findIndex(el => el.id === id);
@@ -71,7 +71,7 @@ export default function mockCustomer(mock) {
     return [200];
   });
 
-  mock.onPost("api/customers/updateStatusForCustomers").reply(config => {
+  mock.onPost("customers/updateStatusForCustomers").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     customerTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

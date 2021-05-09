@@ -9,7 +9,7 @@ export const prepareFilter = (queryParams, values) => {
   const newQueryParams = { ...queryParams };
   const filter = {
     name: "",
-    level:0,
+    capacity:0,
     dealer:"",
     taxOffice:"",
     taxIdentityNo: "",
@@ -17,7 +17,7 @@ export const prepareFilter = (queryParams, values) => {
   // Filter by all fields
   if (searchText) {
     filter.name= searchText;
-    filter.level= parseInt(searchText);
+    filter.capacity= parseInt(searchText);
     filter.dealer= searchText;
     filter.taxIdentityNo= searchText;
     filter.taxOffice=searchText;

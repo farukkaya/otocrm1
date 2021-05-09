@@ -2,7 +2,7 @@ import townTableMock from "./townTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockTowns(mock) {
-  mock.onPost("api/towns").reply(({ data }) => {
+  mock.onPost("towns").reply(({ data }) => {
     const { town } = JSON.parse(data);
     const {
       townId = 0,
@@ -41,21 +41,21 @@ export default function mockTowns(mock) {
     return [200, { town: newTown }];
   });
   
-  mock.onPost("api/towns/find").reply(config => {
+  mock.onPost("towns/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredTowns = mockUtils.baseFilter(townTableMock, queryParams);
     return [200, filteredTowns];
   });
 
-  mock.onPost("api/towns/getall").reply(config => {
+  mock.onPost("towns/getall").reply(config => {
    var resp={
      entities:townTableMock,
      totalCount:townTableMock.length
    }
     return [200, resp];
   });
-  mock.onPost("api/towns/getAllByCity").reply(config => {
+  mock.onPost("towns/getAllByCity").reply(config => {
     const { cityId } = JSON.parse(config.data);
     var towns=townTableMock.filter(q=>q.cityId==cityId);
     var resp={
@@ -64,7 +64,7 @@ export default function mockTowns(mock) {
     }
      return [200, resp];
    });
-  mock.onPost("api/towns/deleteTowns").reply(config => {
+  mock.onPost("towns/deleteTowns").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = townTableMock.findIndex(el => el.id === id);
@@ -75,7 +75,7 @@ export default function mockTowns(mock) {
     return [200];
   });
 
-  mock.onPost("api/towns/updateStatusForTowns").reply(config => {
+  mock.onPost("towns/updateStatusForTowns").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     townTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

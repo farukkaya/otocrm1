@@ -2,7 +2,7 @@ import professionTableMock from "./professionTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockProfessions(mock) {
-  mock.onPost("api/professions").reply(({ data }) => {
+  mock.onPost("professions").reply(({ data }) => {
     const { profession } = JSON.parse(data);
     const {
         name= "Yönetici",
@@ -34,7 +34,7 @@ export default function mockProfessions(mock) {
     professionTableMock.push(newProfession);
     return [200, { profession: newProfession }];
   });
-  mock.onPost("api/professions/getall").reply(config => {
+  mock.onPost("professions/getall").reply(config => {
     
     var resp={
       entities:professionTableMock,
@@ -43,14 +43,14 @@ export default function mockProfessions(mock) {
     return [200, resp];
   });
 
-  mock.onPost("api/professions/find").reply(config => {
+  mock.onPost("professions/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredProfessions = mockUtils.baseFilter(professionTableMock, queryParams);
     return [200, filteredProfessions];
   });
 
-  mock.onPost("api/professions/deleteProfessions").reply(config => {
+  mock.onPost("professions/deleteProfessions").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = professionTableMock.findIndex(el => el.id === id);
@@ -61,7 +61,7 @@ export default function mockProfessions(mock) {
     return [200];
   });
 
-  mock.onPost("api/professions/updateStatusForProfessions").reply(config => {
+  mock.onPost("professions/updateStatusForProfessions").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     professionTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

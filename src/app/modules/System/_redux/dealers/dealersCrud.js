@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const DEALERS_URL = "api/dealers";
-export const USERS_URL = "api/users";
+export const DEALERS_URL = "dealers";
+export const USERS_URL = "users";
 
 // CREATE =>  POST: add a new dealer to the server
 export function createDealer(dealer) {

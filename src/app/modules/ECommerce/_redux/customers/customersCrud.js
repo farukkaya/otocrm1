@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const CUSTOMERS_URL = "api/customers";
+export const CUSTOMERS_URL = "customers";
 
 // CREATE =>  POST: add a new customer to the server
 export function createCustomer(customer) {

@@ -2,7 +2,7 @@ import remarkTableMock from "./remarkTableMock";
 import MockUtils from "./mock.utils";
 
 export default function mockRemarks(mock) {
-  mock.onPost("api/remarks").reply(({ data }) => {
+  mock.onPost("remarks").reply(({ data }) => {
     const { remark } = JSON.parse(data);
     const { carId, text = "", dueDate = "01/01/2019", type = 0 } = remark;
     const id = generateRemarkId();
@@ -27,7 +27,7 @@ export default function mockRemarks(mock) {
     return [200, filterdRemarks];
   });
 
-  mock.onPost("api/remarks/deleteRemarks").reply(config => {
+  mock.onPost("remarks/deleteRemarks").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = remarkTableMock.findIndex(el => el.id === id);

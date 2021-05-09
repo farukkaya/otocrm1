@@ -11,6 +11,7 @@ import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";
 import { StockEdit } from "./stocks/stock-edit/StockEdit";
 import {UserDetails} from "./users/user-details/UserDetails";
 import {DealerDetails} from "./dealers/dealer-details/DealerDetails";
+import {StockDetails} from "./stocks/stock-details/StockDetails";
 
 export default function SystemPage() {
   return (
@@ -38,15 +39,9 @@ export default function SystemPage() {
         <ContentRoute path="/system/dealers" component={DealersPage} />
 
 
-
-        <ContentRoute exact path="/system/galleries/new" component={GalleryEdit}/>
-        <ContentRoute exact path="/system/galleries/:id/edit" component={GalleryEdit} />
-        <ContentRoute path="/system/galleries" component={GalleriesPage} />
-
-
-
         <ContentRoute exact path="/system/stocks/new" component={StockEdit}/>
         <ContentRoute exact path="/system/stocks/:id/edit" component={StockEdit} />
+        <ContentRoute exact path="/system/stocks/:id/detail" component={StockDetails}/>
         <ContentRoute path="/system/stocks" component={StocksPage} />
       </Switch>
     </Suspense>

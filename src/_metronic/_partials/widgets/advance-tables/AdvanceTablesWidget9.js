@@ -13,10 +13,10 @@ export function AdvanceTablesWidget9({ className }) {
         <div className="card-header border-0 py-5">
           <h3 className="card-title align-items-start flex-column">
             <span className="card-label font-weight-bolder text-dark">
-              Yeni Stoklar
+             İlgilenen Müşteriler
             </span>
             <span className="text-muted mt-3 font-weight-bold font-size-sm">
-              More than 400+ new members
+              20'den fazla müşteri bu stok ile ilgilendi
             </span>
           </h3>
           <div className="card-toolbar">
@@ -45,12 +45,10 @@ export function AdvanceTablesWidget9({ className }) {
                 <thead>
                   <tr className="text-left">
                     <th style={{ minWidth: "250px" }} className="pl-7">
-                      <span className="text-dark-75">products</span>
+                      <span className="text-dark-75">Müşteri Adı</span>
                     </th>
-                    <th style={{ minWidth: "120px" }}>earnings</th>
-                    <th style={{ minWidth: "100px" }}>comission</th>
-                    <th style={{ minWidth: "100px" }}>company</th>
-                    <th style={{ minWidth: "100px" }}>rating</th>
+                    <th style={{ minWidth: "120px" }}>Kazanç</th>
+                    <th style={{ minWidth: "100px" }}>Komisyon</th>
                     <th style={{ minWidth: "100px" }} />
                   </tr>
                 </thead>
@@ -58,16 +56,7 @@ export function AdvanceTablesWidget9({ className }) {
                   <tr>
                     <td className="pl-0 py-8">
                       <div className="d-flex align-items-center">
-                        <div className="symbol symbol-50 symbol-light mr-4">
-                          <span className="symbol-label">
-                            <SVG
-                              className="h-75 align-self-end"
-                              src={toAbsoluteUrl(
-                                "/media/svg/avatars/001-boy.svg"
-                              )}
-                            ></SVG>
-                          </span>
-                        </div>
+                   
                         <div>
                           <a
                             href="#"
@@ -95,46 +84,20 @@ export function AdvanceTablesWidget9({ className }) {
                       </span>
                       <span className="text-muted font-weight-bold">Paid</span>
                     </td>
-                    <td>
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                        Intertico
-                      </span>
-                      <span className="text-muted font-weight-bold">
-                        Web, UI/UX Design
-                      </span>
-                    </td>
-                    <td>
-                      <img
-                        src={`${toAbsoluteUrl("/media/logos/stars.png")}`}
-                        alt="image"
-                        style={{ width: "5rem" }}
-                      />
-                      <span className="text-muted font-weight-bold d-block">
-                        Best Rated
-                      </span>
-                    </td>
-                    <td className="pr-0 text-right">
+                  
+                  
+                    <td className="pr-0 text-center">
                       <a
                         href="#"
-                        className="btn btn-light-success font-weight-bolder font-size-sm"
+                        className="font-weight-bolder font-size-sm"
                       >
-                        View Offer
+                      Teklifi Göster
                       </a>
                     </td>
                   </tr>
                   <tr>
                     <td className="pl-0 py-0">
                       <div className="d-flex align-items-center">
-                        <div className="symbol symbol-50 symbol-light mr-4">
-                          <span className="symbol-label">
-                            <SVG
-                              className="h-75 align-self-end"
-                              src={toAbsoluteUrl(
-                                "/media/svg/avatars/018-girl-9.svg"
-                              )}
-                            ></SVG>{" "}
-                          </span>
-                        </div>
                         <div>
                           <a
                             href="#"
@@ -164,46 +127,21 @@ export function AdvanceTablesWidget9({ className }) {
                         Rejected
                       </span>
                     </td>
-                    <td>
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                        Agoda
-                      </span>
-                      <span className="text-muted font-weight-bold">
-                        Houses & Hotels
-                      </span>
-                    </td>
-                    <td>
-                      <img
-                        src={`${toAbsoluteUrl("/media/logos/stars.png")}`}
-                        alt="image"
-                        style={{ width: "5rem" }}
-                      />
-                      <span className="text-muted font-weight-bold d-block">
-                        Above Average
-                      </span>
-                    </td>
-                    <td className="pr-0 text-right">
+                    
+                   
+                    <td className="pr-0 text-center">
                       <a
                         href="#"
-                        className="btn btn-light-success font-weight-bolder font-size-sm"
+                        className="font-weight-bolder font-size-sm"
                       >
-                        View Offer
+                      Teklifi Göster
                       </a>
                     </td>
                   </tr>
                   <tr>
                     <td className="pl-0 py-8">
                       <div className="d-flex align-items-center">
-                        <div className="symbol symbol-50 symbol-light mr-4">
-                          <span className="symbol-label">
-                            <SVG
-                              className="h-75 align-self-end"
-                              src={toAbsoluteUrl(
-                                "/media/svg/avatars/047-girl-25.svg"
-                              )}
-                            ></SVG>{" "}
-                          </span>
-                        </div>
+                       
                         <div>
                           <a
                             href="#"
@@ -229,101 +167,18 @@ export function AdvanceTablesWidget9({ className }) {
                       </span>
                       <span className="text-muted font-weight-bold">Paid</span>
                     </td>
-                    <td>
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                        RoadGee
-                      </span>
-                      <span className="text-muted font-weight-bold">
-                        Transportation
-                      </span>
-                    </td>
-                    <td>
-                      <img
-                        src={`${toAbsoluteUrl("/media/logos/stars.png")}`}
-                        alt="image"
-                        style={{ width: "5rem" }}
-                      />
-                      <span className="text-muted font-weight-bold d-block">
-                        Best Rated
-                      </span>
-                    </td>
-                    <td className="pr-0 text-right">
+                 
+                    
+                    <td className="pr-0 text-center">
                       <a
                         href="#"
-                        className="btn btn-light-success font-weight-bolder font-size-sm"
+                        className="font-weight-bolder font-size-sm"
                       >
-                        View Offer
+                      Teklifi Göster
                       </a>
                     </td>
                   </tr>
-                  <tr>
-                    <td className="pl-0 py-0">
-                      <div className="d-flex align-items-center">
-                        <div className="symbol symbol-50 symbol-light mr-4">
-                          <span className="symbol-label">
-                            <SVG
-                              className="h-75 align-self-end"
-                              src={toAbsoluteUrl(
-                                "/media/svg/avatars/014-girl-7.svg"
-                              )}
-                            ></SVG>
-                          </span>
-                        </div>
-                        <div>
-                          <a
-                            href="#"
-                            className="text-dark font-weight-bolder text-hover-primary mb-1 font-size-lg"
-                          >
-                            Natali Trump
-                          </a>
-                          <span className="text-muted font-weight-bold d-block">
-                            Python, PostgreSQL, ReactJS
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                        $2,600,000
-                      </span>
-                      <span className="text-muted font-weight-bold">Paid</span>
-                    </td>
-                    <td>
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                        $14,000
-                      </span>
-                      <span className="text-muted font-weight-bold">
-                        Pending
-                      </span>
-                    </td>
-                    <td>
-                      <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                        The Hill
-                      </span>
-                      <span className="text-muted font-weight-bold">
-                        Insurance
-                      </span>
-                    </td>
-                    <td>
-                      <img
-                        src={`${toAbsoluteUrl("/media/logos/stars.png")}`}
-                        alt="image"
-                        style={{ width: "5rem" }}
-                      />
-                      <span className="text-muted font-weight-bold d-block">
-                        Average
-                      </span>
-                    </td>
-                    <td className="pr-0  text-right">
-                      <a
-                        href="#"
-                        className="btn btn-light-success font-weight-bolder font-size-sm"
-                      >
-                        View Offer
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
+                   </tbody>
               </table>
             </div>
             {/* end::Table */}

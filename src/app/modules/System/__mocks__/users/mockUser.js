@@ -3,7 +3,7 @@ import MockUtils from "../mock.utils";
 
 export default function mockUser(mock) {
   
-  mock.onPost("api/users").reply(({ data }) => {
+  mock.onPost("users").reply(({ data }) => {
     const { user } = JSON.parse(data);
     const {
       email = "farukkaya@otocrm.com",
@@ -52,7 +52,7 @@ export default function mockUser(mock) {
     return [200, { user: newUser }];
   });
 
-  mock.onPost("api/users/find").reply(config => {
+  mock.onPost("users/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredUsers = mockUtils.baseFilter(userTableMock, queryParams);
@@ -79,7 +79,7 @@ export default function mockUser(mock) {
     return [200, filteredUsers];
   });
 
-  mock.onPost("api/users/deleteUsers").reply(config => {
+  mock.onPost("users/deleteUsers").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = userTableMock.findIndex(el => el.id === id);
@@ -90,7 +90,7 @@ export default function mockUser(mock) {
     return [200];
   });
 
-  mock.onPost("api/users/updateStatusForUsers").reply(config => {
+  mock.onPost("users/updateStatusForUsers").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     userTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

@@ -6,7 +6,7 @@ const upload = (file, onUploadProgress) => {
 
   formData.append("file", file);
 
-  return http.post("api/files/upload", formData, {
+  return http.post("files/upload", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -15,7 +15,7 @@ const upload = (file, onUploadProgress) => {
 };
 
 const getFiles = () => {
-  return http.post("api/files/find");
+  return http.post("files/find");
 };
 
 export default {

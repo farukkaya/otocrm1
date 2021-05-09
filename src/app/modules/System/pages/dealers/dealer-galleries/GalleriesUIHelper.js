@@ -17,7 +17,7 @@ export const DealerTypeTitles = [{id:2,name:"Galeri"},{id:3,name:"Bayi&Galeri"}]
 export const initialFilter = {
   filter:{
     name: "",
-    level:undefined,
+    capacity:undefined,
     dealer:"",
     taxOffice:"",
     taxIdentityNo: "",

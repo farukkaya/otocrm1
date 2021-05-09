@@ -42,8 +42,8 @@ const initDealer = {
   //STEP2-> İLETİŞİM
   email: "",
   fax: "",
-  tel1: "",
-  tel2: "",
+  phone1: "",
+  phone2: "",
   //STEP3-> YÖNETİCİ(KULLANICI)
   firstName: "",
   professionId: "1",

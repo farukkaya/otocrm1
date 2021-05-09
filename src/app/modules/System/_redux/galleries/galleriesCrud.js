@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const GALLERIES_URL = "api/galleries";
+export const GALLERIES_URL = "galleries";
 
 // CREATE =>  POST: add a new gallery to the server
 export function createGallery(gallery) {

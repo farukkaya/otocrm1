@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const CARS_URL = "api/cars";
+export const CARS_URL = "cars";
 
 // CREATE =>  POST: add a new car to the server
 export function createCar(car) {

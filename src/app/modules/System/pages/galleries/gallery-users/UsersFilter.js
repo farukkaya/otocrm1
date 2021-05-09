@@ -19,7 +19,7 @@ const prepareFilter = (queryParams, values) => {
   
   if (searchText) {
     filter.firstName= searchText;
-   // filter.level= parseInt(searchText);
+   // filter.capacity= parseInt(searchText);
     filter.lastName= searchText;
     filter.email= searchText;
     filter.phone=searchText;

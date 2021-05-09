@@ -31,6 +31,7 @@ export function StocksTable() {
       queryParams: stocksUIContext.queryParams,
       setQueryParams: stocksUIContext.setQueryParams,
       openEditStockPage: stocksUIContext.openEditStockPage,
+      openDetailStockPage: stocksUIContext.openDetailStockPage,
       openDeleteStockDialog: stocksUIContext.openDeleteStockDialog,
       openUpdateStockStatusDialog:stocksUIContext.openUpdateStockStatusDialog,
       openUpdateStocksStatusDialog:stocksUIContext.openUpdateStocksStatusDialog,
@@ -157,6 +158,7 @@ export function StocksTable() {
       formatExtraData: {
         openUpdateStatusDialog: stocksUIProps.openUpdateStockStatusDialog,
         openEditPage: stocksUIProps.openEditStockPage,
+        openDetailPage: stocksUIProps.openDetailStockPage,
         openDeleteDialog: stocksUIProps.openDeleteStockDialog,
        // key:"guid"
       },

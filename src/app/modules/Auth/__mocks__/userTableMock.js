@@ -18,7 +18,7 @@ export default [
     phone: "456669067890",
     language: "tr",
     timeZone: "International Date Line West",
-    website: "https://otocrm.net",
+    website: "http://otocrm.net",
     dealer:{
       id:1,
       name:"TEST BAYİ 1",
@@ -29,7 +29,7 @@ export default [
     gallery:{
       id:1,
       name:"TEST GALERİ 1",
-      levelId:1,
+      capacityId:1,
       adminId:1,
     },
     emailSettings: {
@@ -158,7 +158,7 @@ export default [
     gallery:{
       id:1,
       name:"TEST GALERİ 1",
-      levelId:1,
+      capacityId:1,
       adminId:1,
     },
     communication: {

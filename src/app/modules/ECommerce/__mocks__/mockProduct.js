@@ -2,7 +2,7 @@ import carTableMock from "./carTableMock";
 import MockUtils from "./mock.utils";
 
 export default function mockProducts(mock) {
-  mock.onPost("api/products").reply(({ data }) => {
+  mock.onPost("products").reply(({ data }) => {
     const { product } = JSON.parse(data);
     const {
       model = "",
@@ -35,14 +35,14 @@ export default function mockProducts(mock) {
     return [200, { product: newProduct }];
   });
 
-  mock.onPost("api/products/find").reply(config => {
+  mock.onPost("products/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredProducts = mockUtils.baseFilter(carTableMock, queryParams);
     return [200, filteredProducts];
   });
 
-  mock.onPost("api/products/deleteProducts").reply(config => {
+  mock.onPost("products/deleteProducts").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = carTableMock.findIndex(el => el.id === id);
@@ -53,7 +53,7 @@ export default function mockProducts(mock) {
     return [200];
   });
 
-  mock.onPost("api/products/updateStatusForProducts").reply(config => {
+  mock.onPost("products/updateStatusForProducts").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     carTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

@@ -19,6 +19,9 @@ export const StocksPage=({ history }) =>{
     openEditStockPage: (id) => {
       history.push(`/system/stocks/${id}/edit`);
     },
+    openDetailStockPage: (id) => {
+      history.push(`/system/stocks/${id}/detail`);
+    },
     openDeleteStockDialog: (id) => {
       history.push(`/system/stocks/${id}/delete`);
     },

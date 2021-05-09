@@ -1,13 +1,19 @@
 import axios from "axios";
 
-export const LOGIN_URL = "api/auth/login";
-export const REGISTER_URL = "api/auth/register";
-export const REQUEST_PASSWORD_URL = "api/auth/forgot-password";
+export const LOGIN_URL = "Authorizations/Login";
+export const REGISTER_URL = "auth/register";
+export const REQUEST_PASSWORD_URL = "auth/forgot-password";
 
-export const ME_URL = "api/me";
+export const ME_URL = "Authorizations/GetUserByToken";
 
 export function login(email, password) {
-  return axios.post(LOGIN_URL, { email, password });
+    let data ={
+      "email": email,
+      "password": password,
+      "keepSession": true,
+      "maxSessionLimit": 10
+    }
+  return axios.post(LOGIN_URL, data);
 }
 
 export function register(email, fullname, username, password) {

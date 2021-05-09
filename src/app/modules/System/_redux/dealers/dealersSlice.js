@@ -141,8 +141,6 @@ export const dealersSlice = createSlice({
 
      // getGalleryById
     galleryFetched: (state, action) => {
-      debugger
-
       state.galleriesOfDealer.actionsLoading = false;
       state.galleriesOfDealer.dealerForEdit = action.payload.dealerForEdit;
       state.galleriesOfDealer.error = null;

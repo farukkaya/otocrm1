@@ -33,7 +33,7 @@ export function UsersUIProvider({ currentDealerId, children }) {
   const initUser = {
     id:undefined,
     name: "",
-    levelId:0,
+    capacityId:0,
     dealerId:dealerId,
     taxOfficeId:undefined,
     taxIdentityNo: ""

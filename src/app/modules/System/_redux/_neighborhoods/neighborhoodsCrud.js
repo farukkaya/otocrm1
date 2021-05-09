@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const NEIGHBORHOODS_URL = "api/neighborhoods";
+export const NEIGHBORHOODS_URL = "neighborhoods";
 
 // CREATE =>  POST: add a new neighborhood to the server
 export function createNeighborhood(neighborhood) {

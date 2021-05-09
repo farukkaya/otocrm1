@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const USERS_URL = "api/users";
+export const USERS_URL = "users";
 
 // CREATE =>  POST: add a new user to the server
 export function createUser(user) {

@@ -2,7 +2,7 @@ import specificationTableMock from "./specificationTableMock";
 import MockUtils from "./mock.utils";
 
 export default function mockSpecifications(mock) {
-  mock.onPost("api/specifications").reply(({ data }) => {
+  mock.onPost("specifications").reply(({ data }) => {
     const { specification } = JSON.parse(data);
     const { carId, value = "", specId } = specification;
     const id = generateSpecificationId();
@@ -31,7 +31,7 @@ export default function mockSpecifications(mock) {
     return [200, filterdSpecifications];
   });
 
-  mock.onPost("api/specifications/deleteSpecifications").reply(config => {
+  mock.onPost("specifications/deleteSpecifications").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = specificationTableMock.findIndex(el => el.id === id);

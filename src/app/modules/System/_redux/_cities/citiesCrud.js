@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const CITIES_URL = "api/cities";
+export const CITIES_URL = "cities";
 
 // CREATE =>  POST: add a new city to the server
 export function createCity(city) {

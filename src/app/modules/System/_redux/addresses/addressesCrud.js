@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const USERS_URL = "api/addresses";
+export const USERS_URL = "addresses";
 
 // CREATE =>  POST: add a new address to the server
 export function createAddress(address) {

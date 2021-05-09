@@ -62,7 +62,7 @@ export function GalleriesTable() {
       sortCaret: sortCaret,
     },   
     {
-      dataField: "level",
+      dataField: "capacity",
       text:"Seviye",
       sort: true,
       sortCaret: sortCaret,

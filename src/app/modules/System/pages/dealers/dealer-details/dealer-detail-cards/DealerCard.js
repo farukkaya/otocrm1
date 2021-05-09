@@ -69,7 +69,7 @@ export function DealerCard({ dealer }) {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Telefon:</span>
-                                    <span className="text-muted">{dealer.tel1}</span>
+                                    <span className="text-muted">{dealer.phone1}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between">
                                     <span className="font-weight-bold mr-2">Lokasyon:</span>

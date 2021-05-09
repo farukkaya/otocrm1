@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const REMARKS_URL = "api/remarks";
+export const REMARKS_URL = "remarks";
 
 // CREATE =>  POST: add a new remark to the server
 export function createRemark(remark) {
@@ -18,7 +18,7 @@ export function getRemarkById(remarkId) {
 }
 
 // Server should return sorted/filtered remarks and merge with items from state
-// TODO: Change your URL to REAL API, right now URL is 'api/remarksfind/{productId}'. Should be 'api/remarks/find/{productId}'!!!
+// TODO: Change your URL to REAL API, right now URL is 'remarksfind/{productId}'. Should be 'remarks/find/{productId}'!!!
 export function findRemarks(queryParams, productId) {
   return axios.post(`${REMARKS_URL}find/${productId}`, { queryParams });
 }

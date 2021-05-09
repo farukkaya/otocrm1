@@ -17,7 +17,7 @@ export const GalleryLevelList = [
 export const initialFilter = {
   filter:{
     name: "",
-    level:undefined,
+    capacity:undefined,
     dealer:"",
     taxOffice:"",
     taxIdentityNo: "",

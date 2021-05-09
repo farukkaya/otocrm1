@@ -50,7 +50,7 @@ export function GalleryEdit({
   const initGallery = {
     id:undefined,
     name: "",
-    level:undefined,
+    capacity:undefined,
     dealerId:currentUser.dealer?.id,
     taxOfficeId:undefined,
     taxIdentityNo: "",

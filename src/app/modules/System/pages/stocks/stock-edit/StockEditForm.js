@@ -140,8 +140,8 @@ export function StockEditForm({
                         //     dealerTypeId: values.dealerTypeId,
                         //     email: values.email,
                         //     fax: values.fax,
-                        //     tel1: values.tel1,
-                        //     tel2: values.tel2,
+                        //     phone1: values.phone1,
+                        //     phone2: values.phone2,
                         //     guid: values.guid,
                         //   }
                         //   const adminUser = {
@@ -151,8 +151,8 @@ export function StockEditForm({
                         //     lastName: values.lastName,
                         //     username: values.username,
                         //     professionId: values.professionId,
-                        //     tel1: values.ownerTel,
-                        //     tel2: "",
+                        //     phone1: values.ownerTel,
+                        //     phone2: "",
                         //     relationGuid: values.guid,
                         //     relationTable: "Dealers"
                         //   }

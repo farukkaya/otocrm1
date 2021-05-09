@@ -2,7 +2,7 @@ import taxOfficeTableMock from "./taxOfficeTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockTaxOffices(mock) {
-  mock.onPost("api/taxOffices").reply(({ data }) => {
+  mock.onPost("taxOffices").reply(({ data }) => {
     const { taxOffice } = JSON.parse(data);
     const {
       cityId = 0,
@@ -41,14 +41,14 @@ export default function mockTaxOffices(mock) {
     return [200, { taxOffice: newTaxOffice }];
   });
   
-  mock.onPost("api/taxOffices/find").reply(config => {
+  mock.onPost("taxOffices/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredTaxOffices = mockUtils.baseFilter(taxOfficeTableMock, queryParams);
     return [200, filteredTaxOffices];
   });
 
-  mock.onPost("api/taxOffices/getall").reply(config => {
+  mock.onPost("taxOffices/getall").reply(config => {
    var resp={
      entities:taxOfficeTableMock,
      totalCount:taxOfficeTableMock.length
@@ -56,7 +56,7 @@ export default function mockTaxOffices(mock) {
     return [200, resp];
   });
 
-  mock.onPost("api/taxOffices/deleteTaxOffices").reply(config => {
+  mock.onPost("taxOffices/deleteTaxOffices").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = taxOfficeTableMock.findIndex(el => el.id === id);
@@ -67,7 +67,7 @@ export default function mockTaxOffices(mock) {
     return [200];
   });
 
-  mock.onPost("api/taxOffices/updateStatusForTaxOffices").reply(config => {
+  mock.onPost("taxOffices/updateStatusForTaxOffices").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     taxOfficeTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const SPECIFICATIONS_URL = "api/specifications";
+export const SPECIFICATIONS_URL = "specifications";
 
 // CREATE =>  POST: add a new specifications to the server
 export function createSpecification(specification) {
@@ -18,7 +18,7 @@ export function getSpecificationById(specificationId) {
 }
 
 // Server should return sorted/filtered specifications and merge with items from state
-// TODO: Change your URL to REAL API, right now URL is 'api/specificationsfind/{productId}'. Should be 'api/specifications/find/{productId}'!!!
+// TODO: Change your URL to REAL API, right now URL is 'specificationsfind/{productId}'. Should be 'specifications/find/{productId}'!!!
 export function findSpecifications(queryParams, productId) {
   return axios.post(`${SPECIFICATIONS_URL}find/${productId}`, { queryParams });
 }

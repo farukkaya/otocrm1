@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const STOCKS_URL = "api/stocks";
+export const STOCKS_URL = "stocks";
 
 // CREATE =>  POST: add a new stock to the server
 export function createStock(stock) {

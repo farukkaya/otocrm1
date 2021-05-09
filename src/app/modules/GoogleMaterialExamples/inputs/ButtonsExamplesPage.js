@@ -924,7 +924,7 @@ export default function ButtonsExamplesPage() {
               The Text Buttons, Contained Buttons, Floating Action Buttons and
               Icon Buttons are built on top of the same component: the{" "}
               <code>ButtonBase</code>. You can take advantage of this lower
-              level component to build custom interactions.
+              capacity component to build custom interactions.
             </span>
             <div className="separator separator-dashed my-7" />
             <div className={classes5.root}>

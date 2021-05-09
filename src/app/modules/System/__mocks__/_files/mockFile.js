@@ -2,7 +2,7 @@ import fileTableMock from "./fileTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockFile(mock) {
-  mock.onPost("api/files/upload").reply(({ data }) => {
+  mock.onPost("files/upload").reply(({ data }) => {
 
 
     const { file } = JSON.parse(data);
@@ -27,7 +27,7 @@ export default function mockFile(mock) {
     return [200, { file: newFile }];
   });
 
-  mock.onPost("api/files/find").reply(config => {
+  mock.onPost("files/find").reply(config => {
     var resp={
       entities:fileTableMock,
       totalCount:fileTableMock.length

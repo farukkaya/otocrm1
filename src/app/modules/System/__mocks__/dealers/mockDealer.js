@@ -6,7 +6,7 @@ import MockUtils from "./../mock.utils";
 export default function mockDealers(mock) {
 /////////////////////////////USER CONTROLLER///////////////////////////////////////////////
 // READY
-  mock.onPost("api/users/getAllByDealer").reply(config => {
+  mock.onPost("users/getAllByDealer").reply(config => {
     const { dealerId } = JSON.parse(config.data);
     const filteredUsers = userTableMock.filter(q => q.dealerId == dealerId);
 
@@ -20,7 +20,7 @@ export default function mockDealers(mock) {
 
 /////////////////////////////GALLERY CONTROLLER///////////////////////////////////////////////
 // READY
-// mock.onPost("api/gallery/getAllByDealer").reply(config => {
+// mock.onPost("gallery/getAllByDealer").reply(config => {
 //   const { dealerId } = JSON.parse(config.data);
 //   const filteredGalleries = galleryTableMock.filter(q => q.dealerId == dealerId);
 
@@ -44,7 +44,7 @@ mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
 });
 
   // READY
-  mock.onPost("api/dealers/find").reply(config => {
+  mock.onPost("dealers/find").reply(config => {
   const mockUtils = new MockUtils();
   const { queryParams } = JSON.parse(config.data);
   const filteredDealers = mockUtils.baseFilter(dealerTableMock, queryParams);
@@ -61,7 +61,7 @@ mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
   });
 
   // READY
-  mock.onPost("api/dealers/insert").reply(({ data }) => {
+  mock.onPost("dealers/insert").reply(({ data }) => {
     const { dealer } = JSON.parse(data);
     const {
       name = "BZK OTOMOTİV",
@@ -71,8 +71,8 @@ mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
       dealerTypeId = 1,
       email = "info@bzkotomotiv.com",
       fax = "02139876554",
-      tel1 = "02139876554",
-      tel2 = "02139876555",
+      phone1 = "02139876554",
+      phone2 = "02139876555",
       isActive = false,
       createdDate = "2019-11-01T00:00:00+00:00",
       createdBy = 1,
@@ -93,8 +93,8 @@ mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
       dealerTypeId,
       email,
       fax,
-      tel1,
-      tel2,
+      phone1,
+      phone2,
       isActive,
       createdDate,
       createdBy,
@@ -131,7 +131,7 @@ mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
     return [200];
   });
   // READY
-  mock.onPost("api/dealers/SelectedDelete").reply(config => {
+  mock.onPost("dealers/SelectedDelete").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = dealerTableMock.findIndex(el => el.id == id);
@@ -142,7 +142,7 @@ mock.onPost(/api\/dealers\/GetAllByParent\/\d+/).reply(config => {
     return [200];
   });
   // READY
-  mock.onPost("api/dealers/UpdateStatus").reply(config => {
+  mock.onPost("dealers/UpdateStatus").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     dealerTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

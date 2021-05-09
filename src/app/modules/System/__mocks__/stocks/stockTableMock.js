@@ -148,8 +148,8 @@ export default [
 
         category:"Otomobil",
         brand:"Hyundai",
-        model:"i20 Style",
-        color:"Beyaz",
+        model:"i30 Style",
+        color:"Kırmızı",
         fuelType:"Dizel",
         gearType:"Manuel",
         caseType:"HatckBack",

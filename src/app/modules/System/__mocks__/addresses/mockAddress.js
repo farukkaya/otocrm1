@@ -2,7 +2,7 @@ import addressTableMock from "./addressesTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockAddress(mock) {
-  mock.onPost("api/addresses").reply(({ data }) => {
+  mock.onPost("addresses").reply(({ data }) => {
     const { address } = JSON.parse(data);
     const {
       name = "Merkez",
@@ -45,14 +45,14 @@ export default function mockAddress(mock) {
     return [200, { address: newAddress }];
   });
 
-  mock.onPost("api/addresses/find").reply(config => {
+  mock.onPost("addresses/find").reply(config => {
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
     const filteredAddresses = mockUtils.baseFilter(addressTableMock, queryParams);
     return [200, filteredAddresses];
   });
 
-  mock.onPost("api/addresses/deleteAddresses").reply(config => {
+  mock.onPost("addresses/deleteAddresses").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = addressTableMock.findIndex(el => el.id === id);
@@ -63,7 +63,7 @@ export default function mockAddress(mock) {
     return [200];
   });
 
-  mock.onPost("api/addresses/updateStatusForAddresses").reply(config => {
+  mock.onPost("addresses/updateStatusForAddresses").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     addressTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

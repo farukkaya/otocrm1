@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const TOWNS_URL = "api/towns";
+export const TOWNS_URL = "towns";
 
 // CREATE =>  POST: add a new town to the server
 export function createTown(town) {

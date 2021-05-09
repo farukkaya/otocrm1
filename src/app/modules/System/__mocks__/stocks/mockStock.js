@@ -2,7 +2,7 @@ import stockTableMock from "./stockTableMock";
 import MockUtils from "../mock.utils";
 
 export default function mockStock(mock) {
-  mock.onPost("api/stocks").reply(({ data }) => {
+  mock.onPost("stocks").reply(({ data }) => {
     const { stock } = JSON.parse(data);
     const {
       vinNo = "",
@@ -88,7 +88,7 @@ export default function mockStock(mock) {
     return [200, { stock: newStock }];
   });
 
-  mock.onPost("api/stocks/find").reply(config => {
+  mock.onPost("stocks/find").reply(config => {
     
     const mockUtils = new MockUtils();
     const { queryParams } = JSON.parse(config.data);
@@ -118,7 +118,7 @@ export default function mockStock(mock) {
     return [200, filteredStocks];
   });
 
-  mock.onPost("api/stocks/deleteStocks").reply(config => {
+  mock.onPost("stocks/deleteStocks").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {
       const index = stockTableMock.findIndex(el => el.id === id);
@@ -129,7 +129,7 @@ export default function mockStock(mock) {
     return [200];
   });
 
-  mock.onPost("api/stocks/updateStatusForStocks").reply(config => {
+  mock.onPost("stocks/updateStatusForStocks").reply(config => {
     const { ids, status } = JSON.parse(config.data);
     stockTableMock.forEach(el => {
       if (ids.findIndex(id => id === el.id) > -1) {

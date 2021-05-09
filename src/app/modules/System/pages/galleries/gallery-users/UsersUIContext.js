@@ -33,7 +33,7 @@ export function UsersUIProvider({ currentGalleryId, children }) {
   const initUser = {
     id:undefined,
     name: "",
-    levelId:0,
+    capacityId:0,
     galleryId:galleryId,
     taxOfficeId:undefined,
     taxIdentityNo: ""
