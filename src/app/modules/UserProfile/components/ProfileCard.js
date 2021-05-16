@@ -62,7 +62,7 @@ export function ProfileCard() {
                   >
                     {user.firstname} {user.lastname}
                   </a>
-                  <div className="text-muted">{user.occupation}</div>
+                  <div className="text-muted">{user.profession}</div>
                   <div className="mt-2">
                     <a
                       href="#"

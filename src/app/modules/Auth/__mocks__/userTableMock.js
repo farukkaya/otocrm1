@@ -13,8 +13,7 @@ export default [
     fullname: "Faruk Kaya",
     firstname: "Faruk",
     lastname: "Kaya",
-    occupation: "CEO",
-    companyName: "OtoCrm",
+    profession: "CEO",
     phone: "456669067890",
     language: "tr",
     timeZone: "International Date Line West",
@@ -26,12 +25,7 @@ export default [
       dealerTypeId:1,
       adminId:1
     },
-    gallery:{
-      id:1,
-      name:"TEST GALERİ 1",
-      capacityId:1,
-      adminId:1,
-    },
+    
     emailSettings: {
       emailNotification: true,
       sendCopyToPersonalEmail: false,
@@ -59,7 +53,7 @@ export default [
     address: {
       addressLine: "L-12-20 Vertex, Cybersquare",
       city: "San Francisco",
-      state: "California",
+      town: "California",
       postCode: "45000",
     },
     socialNetworks: {
@@ -81,8 +75,7 @@ export default [
     fullname: "Megan F",
     firstname: "Megan",
     lastname: "Fox",
-    occupation: "Deputy Head of Keenthemes in New York office",
-    companyName: "Keenthemes",
+    profession: "Deputy Head of Keenthemes in New York office",
     phone: "456669067891",
     language: "en",
     timeZone: "International Date Line West",
@@ -93,7 +86,6 @@ export default [
       dealerTypeId:2,
       adminId:2
     },
-    gallery:undefined,
     communication: {
       email: true,
       sms: true,
@@ -121,7 +113,7 @@ export default [
     address: {
       addressLine: "3487  Ingram Road",
       city: "Greensboro",
-      state: "North Carolina",
+      town: "North Carolina",
       postCode: "27409",
     },
     socialNetworks: {
@@ -143,8 +135,7 @@ export default [
     fullname: "Manu G",
     firstname: "Manu",
     lastname: "Ginobili",
-    occupation: "Satışçı",
-    companyName: "Keenthemes",
+    profession: "Satışçı",
     phone: "456669067892",
     language: "en",
     timeZone: "International Date Line West",
@@ -155,12 +146,7 @@ export default [
       dealerTypeId:1,
       adminId:1,
     },
-    gallery:{
-      id:1,
-      name:"TEST GALERİ 1",
-      capacityId:1,
-      adminId:1,
-    },
+   
     communication: {
       email: true,
       sms: true,
@@ -188,7 +174,7 @@ export default [
     address: {
       addressLine: "1467  Griffin Street",
       city: "Phoenix",
-      state: "Arizona",
+      town: "Arizona",
       postCode: "85012",
     },
     socialNetworks: {

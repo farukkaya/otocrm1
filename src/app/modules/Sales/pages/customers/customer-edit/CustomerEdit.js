@@ -173,7 +173,7 @@ export function CustomerEdit({
         customer={customerForEdit || initCustomer}
         cities={cities}
         towns={towns}
-        currentGalleryId={currentUser.gallery?.id}
+        currentGalleryId={currentUser.dealer?.id}
         neighborhoods={neighborhoods}
       />
       </CardBody>

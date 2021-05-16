@@ -21,10 +21,10 @@ export const DealersPage=({ history }) =>{
   const backToDashboard = () => {
     history.push(`/dashboard`);
   };
-  if(dealer==undefined || !dealer?.isManager){
-    alert("Bu Ekranı Görme Yetkiniz Yok!!!");
-    backToDashboard();
-  }
+  // if(dealer==undefined || !dealer?.isManager){
+  //   alert("Bu Ekranı Görme Yetkiniz Yok!!!");
+  //   backToDashboard();
+  // }
   const dealersUIEvents = {
     newDealerButtonClick: () => {
       history.push("/system/dealers/new");

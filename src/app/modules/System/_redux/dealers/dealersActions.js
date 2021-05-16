@@ -71,6 +71,7 @@ export const fetchUsersByDealer = id => dispatch => {
 
 export const fetchDealers = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
+  
   return requestFromServer
     .findDealers(queryParams)
     .then(response => {

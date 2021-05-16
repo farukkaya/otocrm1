@@ -55,6 +55,7 @@ export function DealersTable() {
     // clear selections list
     dealersUIProps.setIds([]);
     // server call by queryParams
+    
     dispatch(actions.fetchDealers(dealersUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dealersUIProps.queryParams, dispatch]);
@@ -97,12 +98,12 @@ export function DealersTable() {
       sort: true,
       sortCaret: sortCaret,
     },
-    {
-      dataField: "admin",
-      text:"Yönetici",
-      sort: true,
-      sortCaret: sortCaret,
-    }, 
+    // {
+    //   dataField: "admin",
+    //   text:"Yönetici",
+    //   sort: true,
+    //   sortCaret: sortCaret,
+    // }, 
     
     {
       dataField: "isActive",

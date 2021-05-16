@@ -7,14 +7,22 @@ export const sizePerPageList = [
 ];
 export const DealerTypeCssClasses = ["", "warning", "info","danger"];
 export const DealerTypeTitles = [{id:1,name:"Bayi"},{id:2,name:"Galeri"},{id:3,name:"Bayi&Galeri"}];
+export const CapacityTitles = [
+  { name: "1. Seviye (0-5 ARAÇ)", id: 1 },
+  { name: "2. Seviye (5-10 ARAÇ)", id: 2 },
+  { name: "3. Seviye (10-15 ARAÇ)", id: 3 },
+  { name: "4. Seviye (15-20 ARAÇ)", id: 4 },
+  { name: "5. Seviye (20-25 ARAÇ)", id: 5 },
+];
 
 export const initialFilter = {
   filter:{
     dealerType:"",
     name: "",
-    admin:"",
+    capacity:"",
     taxOffice:"",
     taxIdentityNo: "",
+    isActive:true
   },
   sortOrder: "asc",
   sortField: "id",

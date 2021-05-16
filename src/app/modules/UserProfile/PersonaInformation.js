@@ -44,7 +44,6 @@ function PersonaInformation(props) {
     pic: user.pic,
     firstname: user.firstname,
     lastname: user.lastname,
-    companyName: user.companyName,
     phone: user.phone,
     email: user.email,
     website: user.website,
@@ -53,7 +52,6 @@ function PersonaInformation(props) {
     pic: Yup.string(),
     firstname: Yup.string().required("First name is required"),
     lastname: Yup.string().required("Last name is required"),
-    companyName: Yup.string(),
     phone: Yup.string().required("Phone is required"),
     email: Yup.string()
       .email("Wrong email format")
@@ -235,24 +233,7 @@ function PersonaInformation(props) {
               ) : null}
             </div>
           </div>
-          <div className="form-group row">
-            <label className="col-xl-3 col-lg-3 col-form-label">
-              Company Name
-            </label>
-            <div className="col-lg-9 col-xl-6">
-              <input
-                type="text"
-                placeholder="Company name"
-                className={`form-control form-control-lg form-control-solid`}
-                name="companyName"
-                {...formik.getFieldProps("companyName")}
-              />
-              <span className="form-text text-muted">
-                If you want your invoices addressed to a company. Leave blank to
-                use your full name.
-              </span>
-            </div>
-          </div>
+        
           <div className="row">
             <label className="col-xl-3"></label>
             <div className="col-lg-9 col-xl-6">

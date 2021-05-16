@@ -20,7 +20,7 @@ export function getDealerById(dealerId) {
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export function findDealers(queryParams) {
-  return axios.post(`${DEALERS_URL}/find`, { queryParams });
+  return axios.post(`${DEALERS_URL}/find`, queryParams);
 }
 
 

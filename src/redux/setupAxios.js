@@ -1,5 +1,6 @@
 export default function setupAxios(axios, store) {
-  axios.defaults.baseURL = 'http://api.otocrm.net/';
+  //axios.defaults.baseURL = 'http://api.otocrm.net/';
+  axios.defaults.baseURL = 'http://localhost:5001/';
 
   axios.interceptors.request.use(config => {
     config.headers["Content-Type"]="application/json";

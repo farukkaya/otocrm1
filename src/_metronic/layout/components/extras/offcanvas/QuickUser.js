@@ -54,7 +54,7 @@ export function QuickUser() {
             >
               {user.firstname} {user.lastname}
             </a>
-            <div className="text-muted mt-1">{user.occupation}</div>
+            <div className="text-muted mt-1">{user.profession}</div>
             <div className="navi mt-2">
               <a href="#" className="navi-item">
                 <span className="navi-link p-0 pb-2">

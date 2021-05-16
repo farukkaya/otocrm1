@@ -22,7 +22,8 @@ export function AsideMenuList({ layoutProps }) {
     shallowEqual
   );
 
-  const { dealer, gallery } = currentUser;
+  const { dealer } = currentUser;
+  
   return (
     <>
       {/* begin::Menu Nav */}
@@ -56,7 +57,7 @@ export function AsideMenuList({ layoutProps }) {
         {/*end::1 Level*/}
 
         {
-          gallery && (
+          dealer.dealerTypeId!==1&& (
             <>
               {/* SALES */}
               {/* begin::section */}
@@ -176,14 +177,14 @@ export function AsideMenuList({ layoutProps }) {
         {/* Bayiler */}
         {/*begin::1 Level*/}
         {
-          (dealer?.isManager && dealer.adminId === currentUser.id) &&
+          (dealer.administrations.includes(currentUser.id)) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/dealers")}`} aria-haspopup="true" >
               <NavLink className="menu-link" to="/system/dealers">
                 <span className="svg-icon menu-icon">
                   <SVG src={toAbsoluteUrl("/media/svg/icons/Home/Building.svg")} />
                 </span>
-                <span className="menu-text">Bayiler&Galeriler</span>
+                <span className="menu-text">Bayiler</span>
               </NavLink>
             </li>
           )
@@ -192,7 +193,7 @@ export function AsideMenuList({ layoutProps }) {
 
         {/* Galeriler */}
         {/*begin::1 Level*/}
-        {
+        {/* {
           (1==0) &&
           (
             <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
@@ -204,14 +205,14 @@ export function AsideMenuList({ layoutProps }) {
               </NavLink>
             </li>
           )
-        }
+        } */}
         {/*end::1 Level*/}
 
 
         {/* Stok Yönetimi */}
         {/*begin::1 Level*/}
         {
-          dealer.dealerTypeId === 1 && (
+         dealer.dealerTypeId!==1 && (
             <li className="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
               <a href="#" className="menu-link menu-toggle">
                 <span className="svg-icon menu-icon">
