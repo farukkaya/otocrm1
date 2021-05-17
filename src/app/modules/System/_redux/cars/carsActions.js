@@ -9,7 +9,7 @@ export const fetchCarsByDealer = (queryParams, dealerId) => dispatch => {
   
   dispatch(actions.startCall({ callType: callTypes.list }));
   if (!dealerId) {
-    return dispatch(actions.carsFetched({ totalCount: 0, entities: null }));
+    return dispatch(actions.carsFetched({ totalCount: 0, entities: [] }));
   }
 
   return requestFromServer
@@ -28,7 +28,7 @@ export const fetchCarsByGallery = (queryParams, galleryId) => dispatch => {
   
   dispatch(actions.startCall({ callType: callTypes.list }));
   if (!galleryId) {
-    return dispatch(actions.carsFetched({ totalCount: 0, entities: null }));
+    return dispatch(actions.carsFetched({ totalCount: 0, entities: [] }));
   }
 
   return requestFromServer

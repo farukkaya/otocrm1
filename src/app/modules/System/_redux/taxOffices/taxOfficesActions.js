@@ -21,7 +21,7 @@ export function fetchAllTaxOffice() {
 // export const fetchTaxOffices = (queryParams:any, professionId:number) => (dispatch:any) => {
 //   dispatch(actions.startCall({ callType: callTypes.list }));
 //   if (!professionId) {
-//     return dispatch(actions.taxOfficesFetched({ totalCount: 0, entities: null }));
+//     return dispatch(actions.taxOfficesFetched({ totalCount: 0, entities: [] }));
 //   }
 
 //   return requestFromServer

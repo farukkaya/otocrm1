@@ -9,8 +9,8 @@ export function createDealer(dealer) {
 }
 
 // READ
-export function getAllDealers() {
-  return axios.get(DEALERS_URL);
+export function getAllDealersForCombo() {
+  return axios.get(`${DEALERS_URL}/GetAllForCombo`);
 }
 
 export function getDealerById(dealerId) {

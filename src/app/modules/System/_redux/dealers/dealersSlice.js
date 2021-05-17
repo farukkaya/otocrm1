@@ -5,12 +5,13 @@ const initialDealersState = {
   actionsLoading: false,
   totalCount: 0,
   entities: [],
+  entitiesForCombo:[],
   usersOfDealer:[],
   galleriesOfDealer:{
     listLoading: false,
     actionsLoading: false,
     totalCount: 0,
-    entities: null,
+    entities: [],
     galleryForEdit: undefined,
     lastError: null
   },
@@ -65,6 +66,14 @@ export const dealersSlice = createSlice({
       state.actionsLoading = false;
       state.dealerForEdit = action.payload.dealerForEdit;
       state.error = null;
+    },
+     // findDealers
+     dealersFetchedForCombo: (state, action) => {
+      const { totalCount, entities } = action.payload;
+      state.listLoading = false;
+      state.error = null;
+      state.entitiesForCombo = entities;
+      state.totalCount = totalCount;
     },
     // findDealers
     dealersFetched: (state, action) => {

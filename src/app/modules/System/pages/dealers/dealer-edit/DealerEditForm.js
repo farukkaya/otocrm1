@@ -11,8 +11,9 @@ import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
 import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
 import { arrayProgress, DealerTypeTitles } from "../DealersUIHelpers"
-import * as townsActions from "../../../_redux/_towns/townsActions"
-import * as neighborhoodsActions from "../../../_redux/_neighborhoods/neighborhoodsActions"
+import * as taxOfficesActions from "../../../_redux/taxOffices/taxOfficesActions"
+import * as professionsActions from "../../../_redux/professions/professionsActions"
+import * as mainActions from "../../../_redux/_main/mainActions"
 import * as usersActions from "../../../_redux/users/usersActions"
 import * as addressesActions from "../../../_redux/addresses/addressesActions";
 import * as actions from "../../../_redux/dealers/dealersActions";
@@ -32,8 +33,9 @@ export function DealerEditForm({
   btnReset,
   saveDealer,
   handleReset,
+  dealersForCombo,
   taxOffices,
-  users, professions, cities, towns, neighborhoods,
+  users, professions, cities, towns, neighborhoods
 }) {
   const backToDealersList = () => {
     history.push(`/system/dealers`);
@@ -204,10 +206,19 @@ export function DealerEditForm({
       >
         <Wizard.Page>
           {props => {
-            console.log(props, "this props 1");
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 1).description}</h4>
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Select name="parentId" 
+                            label="Üst Bayi" 
+                            options={dealersForCombo} 
+                            onFocus={(e)=>dispatch(actions.fetchDealersForCombo())} 
+                      />
+
+                  </div>
+                </div>
                 <div className="form-group row">
                   <div className="col-lg-6">
                     <Field
@@ -225,7 +236,12 @@ export function DealerEditForm({
                 </div>
                 <div className="form-group row">
                   <div className="col-lg-6">
-                    <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} autoSelect={false} />
+                    <Select name="taxOfficeId" 
+                            label="Vergi Dairesi" 
+                            options={taxOffices} 
+                            autoSelect={false} 
+                            onFocus={(e)=>dispatch(taxOfficesActions.fetchAllTaxOffice())}
+                            />
 
                   </div>
                   <div className="col-lg-6">
@@ -244,7 +260,6 @@ export function DealerEditForm({
         </Wizard.Page>
         <Wizard.Page>
           {props => {
-            console.log(props, "this props 2");
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 2).description}</h4>
@@ -294,7 +309,6 @@ export function DealerEditForm({
         </Wizard.Page>
         <Wizard.Page>
           {props => {
-            console.log(props, "this props 3");
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 3).description}</h4>
@@ -316,7 +330,9 @@ export function DealerEditForm({
                     />
                   </div>
                   <div className="col-lg-4">
-                    <Select name="professionId" label="Meslek" options={professions} />
+                    <Select name="professionId" label="Meslek" options={professions} onFocus={(e)=>{
+                      dispatch(professionsActions.fetchAllProfession());
+                    }}/>
                   </div>
                 </div>
                 <div className="form-group row">
@@ -364,7 +380,6 @@ export function DealerEditForm({
         </Wizard.Page>
         <Wizard.Page>
           {props => {
-            console.log(props, "this props 4");
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
@@ -379,27 +394,16 @@ export function DealerEditForm({
                     />
                   </div>
                   <div className="col-lg-6">
-                    {/* <Field
-          id="cityId"
-          name="cityId"
-          as="select"
-          value={values.cityId}
-          onChange={async e => {
-            const { value } = e.target;
-            const _towns = await getTowns(value);
-            console.log(_towns);
-            setFieldValue("cityId", value);
-            setFieldValue("townId", "");
-            setFieldValue("towns", _towns);
-          }}
-       /> */}
                     <Select
                       name="cityId"
                       label="İl"
                       options={cities}
+                      onFocus={(e)=>{
+                        dispatch(mainActions.fetchAllCity());
+                      }}
                       onChange={(e) => {
                         const { value } = e.target;
-                        dispatch(townsActions.fetchTownsByCity(value))
+                        dispatch(mainActions.fetchTownsByCity(value))
                         props.setFieldValue("cityId", value);
                         props.setFieldValue("townId", "");
                         props.setFieldValue("neighborhoodId", "");
@@ -415,7 +419,7 @@ export function DealerEditForm({
                       options={towns}
                       onChange={(e) => {
                         const { value } = e.target;
-                        dispatch(neighborhoodsActions.fetchNeighborhoodsByTown(value))
+                        dispatch(mainActions.fetchNeighborhoodsByTown(value))
                         props.setFieldValue("townId", value);
                         props.setFieldValue("neighborhoodId", "");
                       }} />

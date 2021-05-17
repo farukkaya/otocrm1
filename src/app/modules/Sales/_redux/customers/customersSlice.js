@@ -4,7 +4,7 @@ const initialCustomersState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
-  entities: null,
+  entities: [],
   customerForEdit: undefined,
   lastError: null
 };

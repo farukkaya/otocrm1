@@ -1,8 +1,6 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/role-supports-aria-props */
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import { Field } from "formik";
-import * as Yup from "yup";
 import { format } from 'react-string-format';
 import { v4 as generateGuid } from 'uuid';
 
@@ -11,15 +9,10 @@ import {
   CardBody,
   CardHeader,
   CardHeaderToolbar,
-  Input,
-  Select,
   ModalProgressBar
 } from "../../../../../../_metronic/_partials/controls";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import * as actions from "../../../_redux/dealers/dealersActions";
-import * as taxOfficesActions from "../../../_redux/taxOffices/taxOfficesActions"
-import * as professionsActions from "../../../_redux/professions/professionsActions"
-import * as citiesActions from "../../../_redux/_cities/citiesActions"
 
 import { DealerEditForm } from "./DealerEditForm";
 import { Galleries } from "../dealer-galleries/Galleries";
@@ -80,36 +73,24 @@ export function DealerEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, dealerForEdit, taxOffices, users, professions, cities, towns, neighborhoods, currentUser } = useSelector(
+  const { actionsLoading, dealerForEdit, dealersForCombo,taxOffices, users, professions, cities, towns, neighborhoods, currentUser } = useSelector(
     (state) => ({
       currentUser: state.auth.user,
       actionsLoading: state.dealers.actionsLoading,
       dealerForEdit: state.dealers.dealerForEdit,
+      dealersForCombo: state.dealers.entitiesForCombo,
       taxOffices: state.taxOffices.entities,
       professions: state.professions.entities,
-      cities: state.cities.entities,
-      towns: state.towns.entities,
-      neighborhoods: state.neighborhoods.entities,
+      cities: state.main.cities.entities,
+      towns: state.main.towns.entities,
+      neighborhoods: state.main.neighborhoods.entities,
       users: state.dealers.usersOfDealer
     }),
     shallowEqual
   );
 
-  // const getTowns = (e) => {
-  //   dispatch(townsActions.fetchTownsByCity(e.target.value))
-
-  //   return new Promise((resolve, reject) =>  resolve(towns));
-  // };
-  // const getNeighborhoods = (e) => {
-  //   dispatch(neighborhoodsActions.fetchNeighborhoodsByTown(e.target.value))
-  //   return new Promise((resolve, reject) =>  resolve(neighborhoods));
-  // };
   useEffect(() => {
-    dispatch(taxOfficesActions.fetchAllTaxOffice());
-    dispatch(professionsActions.fetchAllProfession());
-    dispatch(citiesActions.fetchAllCity());
     dispatch(actions.fetchUsersByDealer(id));
-
     dispatch(actions.fetchDealer(id));
   }, [id, dispatch]);
 
@@ -118,7 +99,6 @@ export function DealerEdit({
     if (dealerForEdit && id) {
       _title = format("Bayi Güncelle -'{0}'", `${dealerForEdit.name}`);
     }
-
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -220,6 +200,7 @@ export function DealerEdit({
             cities={cities}
             towns={towns}
             neighborhoods={neighborhoods}
+            dealersForCombo={dealersForCombo}
           /></>) : (<>
             <ul className="nav nav-tabs nav-tabs-line " role="tablist">
               <li className="nav-item" onClick={() => setTab("basic")}>

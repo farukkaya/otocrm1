@@ -9,8 +9,7 @@ export function createProfession(profession) {
 
 // READ
 export function getAllProfessions() {
-  
-  return axios.post("professions/getall");
+  return axios.get(`${PROFESSIONS_URL}/GetAll`);
 }
 
 export function getProfessionById(professionId) {

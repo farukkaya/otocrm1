@@ -52,10 +52,10 @@ export function Input({
       {
         type !== "textarea" && (
           <>
-          <div class={getGroupCSSClasses(touched[field.name], errors[field.name])}>
-            {adornment?.startAdorment && <div class="input-group-prepend"><span class="input-group-text" style={adornment.startAdorment.style}>
+          <div className={getGroupCSSClasses(touched[field.name], errors[field.name])}>
+            {adornment?.startAdorment && <div className="input-group-prepend"><span className="input-group-text" style={adornment.startAdorment.style}>
               {
-                adornment?.startAdorment.type == "icon" ? <i class={adornment.startAdorment.icon}></i> : <b>{adornment.startAdorment.icon}</b>
+                adornment?.startAdorment.type == "icon" ? <i className={adornment.startAdorment.icon}></i> : <b>{adornment.startAdorment.icon}</b>
               }
             </span></div>}
 
@@ -66,9 +66,9 @@ export function Input({
               {...props}
             />
   
-            {adornment?.endAdorment && <div class="input-group-prepend"><span class="input-group-text" style={adornment.endAdorment.style}>
+            {adornment?.endAdorment && <div className="input-group-prepend"><span className="input-group-text" style={adornment.endAdorment.style}>
               {
-                adornment?.endAdorment.type == "icon" ? <i class={adornment.endAdorment.icon}></i> : <b>{adornment.endAdorment.icon}</b>
+                adornment?.endAdorment.type == "icon" ? <i className={adornment.endAdorment.icon}></i> : <b>{adornment.endAdorment.icon}</b>
               }
             </span></div>}
     

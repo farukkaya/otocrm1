@@ -10,7 +10,6 @@ import {
 } from "../../../../../../_metronic/_partials/controls";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import * as actions from "../../../_redux/customers/customersActions";
-import * as citiesActions from "../../../../System/_redux/_cities/citiesActions"
 import { CustomerEditForm } from "./CustomerEditForm";
 import { format } from 'react-string-format';
 import { v4 as generateGuid } from 'uuid';
@@ -57,9 +56,9 @@ export function CustomerEdit({
       currentUser: state.auth.user,
       actionsLoading: state.customers.actionsLoading,
       customerForEdit: state.customers.customerForEdit,
-      cities: state.cities.entities,
-      towns: state.towns.entities,
-      neighborhoods: state.neighborhoods.entities,
+      cities: state.main.cities.entities,
+      towns: state.main.towns.entities,
+      neighborhoods: state.main.neighborhoods.entities,
     }),
     shallowEqual
   );
@@ -74,8 +73,6 @@ export function CustomerEdit({
   //   return new Promise((resolve, reject) =>  resolve(neighborhoods));
   // };
   useEffect(() => {
-    dispatch(citiesActions.fetchAllCity());
-
     dispatch(actions.fetchCustomer(id));
   }, [id, dispatch]);
 

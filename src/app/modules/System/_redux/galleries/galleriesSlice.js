@@ -4,7 +4,7 @@ const initialGalleriesState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
-  entities: null,
+  entities:[],
   galleryForEdit: undefined,
   lastError: null
 };

@@ -16,7 +16,7 @@ export const createTaxOffice=(taxOffice) =>axios.post(TAXOFFICES_INSERT_URL, tax
 // Server should return filtered taxOffices by professionId
 export const getAllByCity=(cityId)=> axios.get(`${TAXOFFICES_URL}ByCity?cityId=${cityId}`);
 
-export const getTaxOffices=() =>axios.post(TAXOFFICES_URL)
+export const getTaxOffices=() =>axios.get(TAXOFFICES_URL)
 export const getTaxOfficeById=(taxOfficeId) =>axios.get(`${TAXOFFICES_GETBYID_URL}?id=${taxOfficeId}`)
 
 // Server should return sorted/filtered taxOffices and merge with items from state

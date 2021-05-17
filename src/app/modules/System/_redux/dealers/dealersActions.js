@@ -7,7 +7,7 @@ export const fetchGalleriesByParent = (queryParams, dealerId) => dispatch => {
   
   dispatch(actions.startCallForGallery({ callType: callTypes.list }));
   if (!dealerId) {
-    return dispatch(actions.galleriesFetched({ totalCount: 0, entities: null }));
+    return dispatch(actions.galleriesFetched({ totalCount: 0, entities: [] }));
   }
 
   return requestFromServer
@@ -83,7 +83,20 @@ export const fetchDealers = queryParams => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
-
+export const fetchDealersForCombo = () => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  
+  return requestFromServer
+    .getAllDealersForCombo()
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.dealersFetchedForCombo({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find dealers";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
 export const fetchDealer = id => dispatch => {
   if (!id) {
     return dispatch(actions.dealerFetched({ dealerForEdit: undefined }));

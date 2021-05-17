@@ -7,6 +7,7 @@ import { StocksUIProvider } from "./customer-stocks/StocksUIContext";
 import { Stocks } from "./customer-stocks/Stocks";
 
 import { useDispatch } from "react-redux";
+import * as mainActions from "../../../../System/_redux/_main/mainActions"
 import { Notice } from "../../../../../../_metronic/_partials/controls";
 import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
 import { Formik, Form, Field } from "formik";
@@ -18,8 +19,6 @@ import {
   arrayProgress,
   CUSTOMERTYPELIST
 } from "../CustomersUIHelpers";
-import * as townsActions from "../../../../System/_redux/_towns/townsActions"
-import * as neighborhoodsActions from "../../../../System/_redux/_neighborhoods/neighborhoodsActions"
 import {
   Input,
   Select
@@ -283,27 +282,14 @@ export function CustomerEditForm({
                       />
                     </div>
                     <div className="col-lg-6">
-                      {/* <Field
-          id="cityId"
-          name="cityId"
-          as="select"
-          value={values.cityId}
-          onChange={async e => {
-            const { value } = e.target;
-            const _towns = await getTowns(value);
-            console.log(_towns);
-            setFieldValue("cityId", value);
-            setFieldValue("townId", "");
-            setFieldValue("towns", _towns);
-          }}
-       /> */}
                       <Select
                         name="cityId"
                         label="İl"
                         options={cities}
+                        onFocus={()=>dispatch(mainActions.fetchAllCity())}
                         onChange={(e) => {
                           const { value } = e.target;
-                          dispatch(townsActions.fetchTownsByCity(value))
+                          dispatch(mainActions.fetchTownsByCity(value))
                           props.setFieldValue("cityId", value);
                           props.setFieldValue("townId", "");
                           props.setFieldValue("neighborhoodId", "");
@@ -320,7 +306,7 @@ export function CustomerEditForm({
                         onChange={(e) => {
 
                           const { value } = e.target;
-                          dispatch(neighborhoodsActions.fetchNeighborhoodsByTown(value))
+                          dispatch(mainActions.fetchNeighborhoodsByTown(value))
                           props.setFieldValue("townId", value);
                           props.setFieldValue("neighborhoodId", "");
                         }} />

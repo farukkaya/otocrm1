@@ -25,7 +25,7 @@ export const fetchGalleriesByDealer = (queryParams, dealerId) => dispatch => {
   
   dispatch(actions.startCall({ callType: callTypes.list }));
   if (!dealerId) {
-    return dispatch(actions.galleriesFetched({ totalCount: 0, entities: null }));
+    return dispatch(actions.galleriesFetched({ totalCount: 0, entities: [] }));
   }
 
   return requestFromServer

@@ -6,14 +6,14 @@ import {customersSlice} from "../app/modules/ECommerce/_redux/customers/customer
 import {productsSlice} from "../app/modules/ECommerce/_redux/products/productsSlice";
 import {remarksSlice} from "../app/modules/ECommerce/_redux/remarks/remarksSlice";
 import {specificationsSlice} from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
+
+
+import {mainSlice} from "../app/modules/System/_redux/_main/mainSlice";
 import {galleriesSlice} from "../app/modules/System/_redux/galleries/galleriesSlice";
 import {taxOfficesSlice} from "../app/modules/System/_redux/taxOffices/taxOfficesSlice";
 import { usersSlice } from "../app/modules/System/_redux/users/usersSlice";
 import { professionsSlice } from "../app/modules/System/_redux/professions/professionsSlice";
 import { dealersSlice } from "../app/modules/System/_redux/dealers/dealersSlice";
-import { citiesSlice } from "../app/modules/System/_redux/_cities/citiesSlice";
-import { townsSlice } from "../app/modules/System/_redux/_towns/townsSlice";
-import { neighborhoodsSlice } from "../app/modules/System/_redux/_neighborhoods/neighborhoodsSlice";
 import { addressesSlice } from "../app/modules/System/_redux/addresses/addressesSlice";
 import { stocksSlice } from "../app/modules/System/_redux/stocks/stocksSlice";
 
@@ -25,11 +25,9 @@ export const rootReducer = combineReducers({
   specifications: specificationsSlice.reducer,
 
   /////////////////////////////////
+  main: mainSlice.reducer,
   professions: professionsSlice.reducer,
   addresses: addressesSlice.reducer,
-  cities: citiesSlice.reducer,
-  towns: townsSlice.reducer,
-  neighborhoods: neighborhoodsSlice.reducer,
 
   dealers: dealersSlice.reducer,
   galleries: galleriesSlice.reducer,
