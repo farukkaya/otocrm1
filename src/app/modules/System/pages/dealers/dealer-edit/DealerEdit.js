@@ -30,8 +30,10 @@ const initDealer = {
   guid: generateGuid(),
   dealerName: "",
   taxIdentityNo: "",
+  parentId: undefined,
   taxOfficeId: undefined,
   dealerTypeId: undefined,
+  capacityId: undefined,
   //STEP2-> İLETİŞİM
   email: "",
   fax: "",

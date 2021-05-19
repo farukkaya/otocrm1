@@ -4,18 +4,15 @@
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
 import React from "react";
 import { useDispatch } from "react-redux";
-
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select } from "../../../../../../_metronic/_partials/controls";
 import { format } from 'react-string-format';
 import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
-import { arrayProgress, DealerTypeTitles } from "../DealersUIHelpers"
+import { arrayProgress, DealerTypeTitles,CapacityTitles } from "../DealersUIHelpers"
 import * as taxOfficesActions from "../../../_redux/taxOffices/taxOfficesActions"
 import * as professionsActions from "../../../_redux/professions/professionsActions"
 import * as mainActions from "../../../_redux/_main/mainActions"
-import * as usersActions from "../../../_redux/users/usersActions"
-import * as addressesActions from "../../../_redux/addresses/addressesActions";
 import * as actions from "../../../_redux/dealers/dealersActions";
 import{ 
  LENGTH,
@@ -52,7 +49,13 @@ export function DealerEditForm({
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Bayi Adı")),
     dealerTypeId: Yup.string()
-      .required(format(REQUIRED, "Bayi Adı")),
+      .required(format(REQUIRED, "Bayi Tipi")),
+    capacityId:Yup.string()
+      .when("dealerTypeId", {
+        is: value => value && value !== 1, 
+        then: Yup.string().required(format(REQUIRED, "Kapasite")),
+        otherwise: Yup.string()
+      }),
     taxIdentityNo: Yup.string()
       .matches(/^[0-9]+$/, DIGIT_CONTROL)
       .min(10, format(MIN_LENGTH, "10"))
@@ -71,6 +74,12 @@ export function DealerEditForm({
       .required(format(REQUIRED, "Bayi Adı")),
     dealerTypeId: Yup.number()
       .required(format(REQUIRED, "Bayi Tipi")),
+    capacityId:Yup.string()
+      .when("dealerTypeId", {
+        is: value => value && value !== 1, 
+        then: Yup.string().required(format(REQUIRED, "Kapasite")),
+        otherwise: Yup.string()
+      }),
     taxIdentityNo: Yup.string()
       .matches(/^[0-9]+$/, DIGIT_CONTROL)
       .min(10, format(MIN_LENGTH, "10"))
@@ -128,7 +137,7 @@ export function DealerEditForm({
       .required(format(REQUIRED, "İl")),
     townId: Yup.number()
       .required(format(REQUIRED, "İlçe")),
-    openAddress: Yup.string()
+    addressLine: Yup.string()
       .min(30, format(MIN_LENGTH, "30"))
       .max(500, format(MAX_LENGTH, "500"))
 
@@ -141,6 +150,10 @@ export function DealerEditForm({
 
   //const required = value => (value ? undefined : "Required");
 
+  let IsDısabledCapacity=true;
+  // let showAlert=false;
+
+  // const handleDismiss = () => showAlert=false;
   return (
 
     dealer.id === undefined ? (
@@ -153,15 +166,17 @@ export function DealerEditForm({
           sleep(300).then(() => {
             // window.alert(JSON.stringify(values, null, 2));
             const dealer = {
+              parentId: parseInt(values.parentId),
               name: values.dealerName,
               taxIdentityNo: values.taxIdentityNo,
-              taxOfficeId: values.taxOfficeId,
-              dealerTypeId: values.dealerTypeId,
+              taxOfficeId: parseInt(values.taxOfficeId),
+              dealerTypeId: parseInt(values.dealerTypeId),
+              capacityId: parseInt(values.capacityId),
               email: values.email,
               fax: values.fax,
               phone1: values.phone1,
               phone2: values.phone2,
-              guid: values.guid,
+              guid: values.guid
             }
             const adminUser = {
               email: values.ownerEmail,
@@ -169,34 +184,42 @@ export function DealerEditForm({
               firstName: values.firstName,
               lastName: values.lastName,
               username: values.username,
-              professionId: values.professionId,
-              phone1: values.ownerTel,
-              phone2: "",
-              relationGuid: values.guid,
-              relationTable: "Dealers"
+              professionId: parseInt(values.professionId),
+              phone: values.ownerTel
             }
             const address = {
+              isPrimaryAddress:true,
               name: values.addressName,
-              cityId: values.cityId,
-              townId: values.townId,
-              neighborhoodId: values.neighborhoodId,
-              openAddress: values.openAddress,
-              relationGuid: values.guid,
-              relationTable: "Dealers"
+              cityId: parseInt(values.cityId),
+              townId: parseInt(values.townId),
+              neighborhoodId: parseInt(values.neighborhoodId),
+              addressLine: values.addressLine,
+              relationGuid: values.guid
             }
-            dispatch(usersActions.createUser(adminUser)).then((response) => {
-
-              dealer.adminId = response?.id;
-              dispatch(actions.createDealer(dealer)).then(() => {
-                dispatch(addressesActions.createAddress(address)).then(() => {
-                  backToDealersList()
-                  // dispatch(actions.fetchCustomers(customersUIProps.queryParams));
-                  // // clear selections list
-                  // customersUIProps.setIds([]);
-                })
-              })
-
+            dispatch(actions.createDealer({
+              dealer,
+              adminUser,
+              address
+            })).then((resp) => {
+                debugger
+              backToDealersList()
+                // dispatch(actions.fetchDealers(deal.queryParams));
+                // //clear selections list
+                // customersUIProps.setIds([]);
             })
+            // dispatch(usersActions.createUser(adminUser)).then((response) => {
+
+            //   dealer.adminId = response?.id;
+            //   dispatch(actions.createDealer(dealer)).then(() => {
+            //     dispatch(addressesActions.createAddress(address)).then(() => {
+            //       backToDealersList()
+                  // dispatch(actions.fetchCustomers(customersUIProps.queryParams));
+                  // clear selections list
+                  // customersUIProps.setIds([]);
+            //     })
+            //   })
+
+            // })
 
 
             formActions.setSubmitting(false);
@@ -206,15 +229,40 @@ export function DealerEditForm({
       >
         <Wizard.Page>
           {props => {
+         
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+               {/* {
+                 !IsDısabledCapacity&&(
+                    <Alert variant="info" onClose={handleDismiss} dismissible>
+                    <Alert.Heading>Düzenlenemez Alan!</Alert.Heading>
+                    <p>
+                      Bu alan yalnızca 'Galeri' ve 'Bayi-Galeri' Tipli kayıtlarda gereklidir.
+                    </p>
+                  </Alert>
+                   )
+                 
+               } */}
                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 1).description}</h4>
                 <div className="form-group row">
                   <div className="col-lg-6">
-                    <Select name="parentId" 
-                            label="Üst Bayi" 
-                            options={dealersForCombo} 
-                            onFocus={(e)=>dispatch(actions.fetchDealersForCombo())} 
+                  <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles}  
+                    onChange={(e) => {
+                      const { value } = e.target;
+                      props.setFieldValue("dealerTypeId", value);
+                      IsDısabledCapacity= value==1;
+                    }} />
+
+                  </div>
+                  <div className="col-lg-6">
+                    <Select name="capacityId" 
+                            label="Kapasite" 
+                            customFeedbackLabel="Galeri işlevi olan kayıtlar için"
+                            disabled={IsDısabledCapacity}
+                            options={CapacityTitles} 
+                            // onFocus={()=>{
+                            //   debugger
+                            // }}
                       />
 
                   </div>
@@ -229,7 +277,12 @@ export function DealerEditForm({
                     />
                   </div>
                   <div className="col-lg-6">
-                    <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles}  />
+                  <Select name="parentId" 
+                            label="Üst Bayi" 
+                            options={dealersForCombo} 
+                            onFocus={(e)=>dispatch(actions.fetchDealersForCombo())} 
+                           />
+                  
 
                   </div>
 
@@ -437,7 +490,7 @@ export function DealerEditForm({
                     <Field
                       type="textarea"
                       rows="4"
-                      name="openAddress"
+                      name="addressLine"
                       component={Input}
                       placeholder="Açık Adres"
                       label="Açık Adress"
@@ -448,9 +501,11 @@ export function DealerEditForm({
             );
           }}
         </Wizard.Page>
-        <Wizard.Page>
+       
+     <Wizard.Page>
           {props => {
             const data = props.values;
+            debugger
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                 {/*begin::Section*/}
@@ -458,14 +513,19 @@ export function DealerEditForm({
                 <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 1).title}:</h6>
                 <div className="text-dark-50 line-height-lg">
                   <div><span>Bayi Adı:</span> {data.dealerName}</div>
-                  <div><span>Bayi Tipi:</span> {DealerTypeTitles.find(q => q.id === data.dealerTypeId).name}</div>
-                  <div><span>Bayi Dairesi:</span> {taxOffices.find(q => q.id === data.taxOfficeId).name}</div>
+                  <div><span>Bayi Tipi:</span> {DealerTypeTitles.find(q => q.id == data.dealerTypeId).name}</div>
+                  {
+                    data.dealerTypeId!=1&&(
+                      <div><span>Kapasite:</span> {CapacityTitles.find(q => q.id == data.capacityId)?.name|| "-"}</div>
+                    )
+                  }
+                  <div><span>Bayi Dairesi:</span> {taxOffices.find(q => q.id == data.taxOfficeId).name}</div>
                   <div><span>Vergi No:</span> {data.taxIdentityNo}</div>
                 </div>
                 <div className="separator separator-dashed my-5"></div>
                 {/*end::Section*/}
                 {/*begin::Section*/}
-                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 2).title}:</h6>
+              <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 2).title}:</h6>
                 <div className="text-dark-50 line-height-lg">
                   <div><span>Adı:</span> {data.firstName}</div>
                   <div><span>Soyadı:</span> {data.lastName}</div>
@@ -477,7 +537,7 @@ export function DealerEditForm({
                 <div className="separator separator-dashed my-5"></div>
                 {/*end::Section*/}
                 {/*begin::Section*/}
-                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 3).title}:</h6>
+               <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 3).title}:</h6>
                 <div className="text-dark-50 line-height-lg">
                   <div><span>E-Posta:</span> {data.email}</div>
                   <div><span>Fax:</span> {data.fax}</div>
@@ -487,19 +547,20 @@ export function DealerEditForm({
                 <div className="separator separator-dashed my-5"></div>
                 {/*end::Section*/}
                 {/*begin::Section*/}
-                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 4).title}:</h6>
+               <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 4).title}:</h6>
                 <div className="text-dark-50 line-height-lg">
                   <div><span>Adres Adı:</span> {data.addressName}</div>
-                  <div><span>İl:</span> {cities.find(q => q.id === data.cityId).name}</div>
-                  <div><span>İlçe:</span> {towns.find(q => q.id === data.townId).name}</div>
-                  <div><span>Mahalle:</span> {neighborhoods.find(q => q.id === data.neighborhoodId).name}</div>
-                  <div><span>Açık Adres:</span> {data.openAddress}</div>
+                  <div><span>İl:</span> {cities.find(q => q.id == data.cityId).name}</div>
+                  <div><span>İlçe:</span> {towns.find(q => q.id == data.townId).name}</div>
+                  <div><span>Mahalle:</span> {neighborhoods.find(q => q.id == data.neighborhoodId).name}</div>
+                  <div><span>Açık Adres:</span> {data.addressLine}</div>
                 </div>
                 {/*end::Section*/}
               </div>
             );
           }}
         </Wizard.Page>
+
       </Wizard>
 
     ) : (<Formik

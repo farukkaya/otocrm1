@@ -1,11 +1,13 @@
 import axios from "axios";
 
-export const DEALERS_URL = "dealers";
+export const DEALERS_URL = "Dealers";
 export const USERS_URL = "users";
 
 // CREATE =>  POST: add a new dealer to the server
-export function createDealer(dealer) {
-  return axios.post(DEALERS_URL, { dealer });
+export function createDealer(dealerWizardDto) {
+  return axios.post(`${DEALERS_URL}/Insert`, dealerWizardDto).then((e)=>{
+    debugger
+  });
 }
 
 // READ

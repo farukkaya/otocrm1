@@ -68,6 +68,12 @@ export function DealersTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "name",
+      text:"Adı",
+      sort: true,
+      sortCaret: sortCaret,
+    }, 
+    {
       dataField: "dealerTypeId",
       text:"Bayi Tipi",
       sort: true,
@@ -80,11 +86,13 @@ export function DealersTable() {
       },
     },
     {
-      dataField: "name",
-      text:"Bayi Adı",
+      dataField: "capacityId",
+      text:"Kapasite",
       sort: true,
       sortCaret: sortCaret,
-    },   
+      formatter: columnFormatters.CapacityColumnFormatter,
+    },
+  
     
     {
       dataField: "taxOffice",
