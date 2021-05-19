@@ -90,7 +90,7 @@ const Step3Schema = Yup.object().shape({
     .required(format(REQUIRED, "İl")),
   townId: Yup.number()
     .required(format(REQUIRED, "İlçe")),
-  openAddress: Yup.string()
+  addressLine: Yup.string()
     .min(30, format(MIN_LENGTH, "30"))
     .max(500, format(MAX_LENGTH, "500"))
 });
@@ -324,7 +324,7 @@ export function CustomerEditForm({
                       <Field
                         type="textarea"
                         rows="4"
-                        name="openAddress"
+                        name="addressLine"
                         component={Input}
                         placeholder="Açık Adres"
                         label="Açık Adress"
@@ -382,7 +382,7 @@ export function CustomerEditForm({
                         <div><span><b>İl:</b></span> {cities.find(q => q.id == data.cityId).name}</div>
                         <div><span><b>İlçe:</b></span> {towns.find(q => q.id == data.townId).name}</div>
                         <div><span><b>Mahalle:</b></span> {neighborhoods.find(q => q.id == data.neighborhoodId).name}</div>
-                        <div><span><b>Açık Adres:</b></span> {data.openAddress}</div>
+                        <div><span><b>Açık Adres:</b></span> {data.addressLine}</div>
                       </div>
                     </div>
                     {/*end::Müşteri Adres Bilgileri*/}

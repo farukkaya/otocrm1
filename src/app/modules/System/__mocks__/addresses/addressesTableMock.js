@@ -6,7 +6,7 @@ export default [
         cityId :1,
         townId :1,
         neighborhoodId :1,
-        openAddress :"",
+        addressLine :"",
 
 
         isActive: true,
@@ -31,7 +31,7 @@ export default [
         cityId :1,
         townId :1,
         neighborhoodId :1,
-        openAddress :"",
+        addressLine :"",
 
 
         isActive: true,
@@ -56,7 +56,7 @@ export default [
         cityId :1,
         townId :1,
         neighborhoodId :1,
-        openAddress :"",
+        addressLine :"",
 
 
         isActive: true,

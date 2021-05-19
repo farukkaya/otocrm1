@@ -51,7 +51,7 @@ const initDealer = {
   cityId: undefined,
   townId: undefined,
   neighborhoodId: undefined,
-  openAddress: "",
+  addressLine: "",
 
 };
 

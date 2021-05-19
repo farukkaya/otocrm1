@@ -85,7 +85,7 @@ export function StockEditForm({
             .required(format(REQUIRED, "İl")),
         townId: Yup.number()
             .required(format(REQUIRED, "İlçe")),
-        openAddress: Yup.string()
+        addressLine: Yup.string()
             .min(30, format(MIN_LENGTH, "30"))
             .max(500, format(MAX_LENGTH, "500"))
 
@@ -161,7 +161,7 @@ export function StockEditForm({
                         //     cityId: values.cityId,
                         //     townId: values.townId,
                         //     neighborhoodId: values.neighborhoodId,
-                        //     openAddress: values.openAddress,
+                        //     addressLine: values.addressLine,
                         //     relationGuid: values.guid,
                         //     relationTable: "Dealers"
                         //   }
