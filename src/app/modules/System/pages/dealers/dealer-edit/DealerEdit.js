@@ -92,7 +92,6 @@ export function DealerEdit({
   );
 
   useEffect(() => {
-    dispatch(actions.fetchUsersByDealer(id));
     dispatch(actions.fetchDealer(id));
   }, [id, dispatch]);
 
@@ -111,6 +110,11 @@ export function DealerEdit({
       dispatch(actions.createDealer(values))
       backToDealersList()
     } else {
+      //TODO: SELECT companenti value type her zaman string dönüyor, eğer number dönerse bu kod bloğuna ihtiyacç kalmaz...
+      values.parentId=+values.parentId;
+      values.dealerTypeId=+values.dealerTypeId;
+      values.capacityId=+values.capacityId;
+      values.taxOfficeId=+values.taxOfficeId;
       dispatch(actions.updateDealer(values))//.then(() => );
       backToDealersList()
     }
@@ -197,7 +201,6 @@ export function DealerEdit({
             saveDealer={saveDealer}
             handleReset={handleReset}
             taxOffices={taxOffices}
-            users={users}
             professions={professions}
             cities={cities}
             towns={towns}

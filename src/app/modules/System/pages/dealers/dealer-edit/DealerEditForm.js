@@ -2,7 +2,7 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -21,8 +21,6 @@ import{
  DIGIT_CONTROL,
  REQUIRED} from "../../../../../validations/validMessages";
 
-
-
 export function DealerEditForm({
   dealer,
   history,
@@ -32,14 +30,18 @@ export function DealerEditForm({
   handleReset,
   dealersForCombo,
   taxOffices,
-  users, professions, cities, towns, neighborhoods
+  professions, cities, towns, neighborhoods
 }) {
   const backToDealersList = () => {
     history.push(`/system/dealers`);
   };
 
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    if(dealer.id === undefined ){
+      dispatch(taxOfficesActions.fetchAllTaxOffice())
+     }
+  }, [dispatch]);
 
 
   // Validation schema
@@ -52,17 +54,14 @@ export function DealerEditForm({
       .required(format(REQUIRED, "Bayi Tipi")),
     capacityId:Yup.string()
       .when("dealerTypeId", {
-        is: value => value && value !== 1, 
-        then: Yup.string().required(format(REQUIRED, "Kapasite")),
-        otherwise: Yup.string()
+        is: value => value && value != 1, 
+        then: Yup.string().required(format(REQUIRED, "Kapasite"))
       }),
     taxIdentityNo: Yup.string()
       .matches(/^[0-9]+$/, DIGIT_CONTROL)
       .min(10, format(MIN_LENGTH, "10"))
       .max(11, format(MAX_LENGTH, "11"))
       .required(format(REQUIRED, "Vergi No")),
-    adminId: Yup.number()
-      .required(format(REQUIRED, "Yönetici")),
     taxOfficeId: Yup.string()
       .required(format(REQUIRED, "Vergi Dairesi")),
   });
@@ -154,6 +153,9 @@ export function DealerEditForm({
   // let showAlert=false;
 
   // const handleDismiss = () => showAlert=false;
+  const handleCapacityChange=(e)=>{
+    dealer.capacityId=e.target.value==1?"":dealer.capacityId;
+  }
   return (
 
     dealer.id === undefined ? (
@@ -201,7 +203,7 @@ export function DealerEditForm({
               adminUser,
               address
             })).then((resp) => {
-                debugger
+                
               backToDealersList()
                 // dispatch(actions.fetchDealers(deal.queryParams));
                 // //clear selections list
@@ -249,7 +251,8 @@ export function DealerEditForm({
                   <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles}  
                     onChange={(e) => {
                       const { value } = e.target;
-                      props.setFieldValue("dealerTypeId", value);
+                      props.setFieldValue("dealerTypeId", +value);
+                      props.setFieldValue("capacityId", value==1?"":+props.values.capacityId);
                       IsDısabledCapacity= value==1;
                     }} />
 
@@ -260,9 +263,6 @@ export function DealerEditForm({
                             customFeedbackLabel="Galeri işlevi olan kayıtlar için"
                             disabled={IsDısabledCapacity}
                             options={CapacityTitles} 
-                            // onFocus={()=>{
-                            //   debugger
-                            // }}
                       />
 
                   </div>
@@ -457,7 +457,7 @@ export function DealerEditForm({
                       onChange={(e) => {
                         const { value } = e.target;
                         dispatch(mainActions.fetchTownsByCity(value))
-                        props.setFieldValue("cityId", value);
+                        props.setFieldValue("cityId", +value);
                         props.setFieldValue("townId", "");
                         props.setFieldValue("neighborhoodId", "");
                       }} />
@@ -473,7 +473,7 @@ export function DealerEditForm({
                       onChange={(e) => {
                         const { value } = e.target;
                         dispatch(mainActions.fetchNeighborhoodsByTown(value))
-                        props.setFieldValue("townId", value);
+                        props.setFieldValue("townId", +value);
                         props.setFieldValue("neighborhoodId", "");
                       }} />
                     {/* onchange i kontrol et */}
@@ -505,7 +505,7 @@ export function DealerEditForm({
      <Wizard.Page>
           {props => {
             const data = props.values;
-            debugger
+            
             return (
               <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                 {/*begin::Section*/}
@@ -570,7 +570,7 @@ export function DealerEditForm({
       onSubmit={(values) => saveDealer(values)}
       onReset={(values) => handleReset(values)}
     >
-      {({ handleSubmit, handleReset }) => (
+      {({ handleSubmit, handleReset,values,setFieldValue }) => (
         <>
           <Form className="form form-label-right">
             <div className="form-group row">
@@ -582,16 +582,24 @@ export function DealerEditForm({
                   label="Bayi Adı"
                 />
               </div>
+             
               <div className="col-lg-4">
-                <Select name="adminId" label="Yönetici" options={users} optionLabel="fullName" />
+                <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} onChange={(e)=>{
+                   const { value } = e.target;
+                   setFieldValue("dealerTypeId", +value);
+                   setFieldValue("capacityId", value==1?"":+dealer.capacityId);
+                }} />
               </div>
               <div className="col-lg-4">
-                <Select name="dealerTypeId" label="Bayi Tipi" options={DealerTypeTitles} />
+                {/* Bayi değilse, Galeri veya Bayi&Galeri ise DISABLED değil */}
+            
+                <Select name="capacityId" label="Kapasite" options={CapacityTitles} disabled={values.dealerTypeId==1} />
               </div>
-
             </div>
+          
             <div className="form-group row">
               <div className="col-lg-6">
+                
                 <Select name="taxOfficeId" label="Vergi Dairesi" options={taxOffices} />
               </div>
               <div className="col-lg-6">
@@ -603,6 +611,45 @@ export function DealerEditForm({
                 />
               </div>
             </div>
+            <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="email"
+                      component={Input}
+                      placeholder="E-Posta"
+                      label="E-Posta"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="fax"
+                      component={Input}
+                      placeholder="Fax"
+                      label="Fax"
+                    />
+                  </div>
+
+                </div>
+                <div className="form-group row">
+                  <div className="col-lg-6">
+                    <Field
+                      name="phone1"
+                      component={Input}
+                      placeholder="Telefon No.1"
+                      label="Telefon No.1"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <Field
+                      name="phone2"
+                      component={Input}
+                      placeholder="Telefon No.2"
+                      label="Telefon No.2"
+                    />
+                  </div>
+
+                </div>
+
             <button
               type="reset"
               style={{ display: "none" }}

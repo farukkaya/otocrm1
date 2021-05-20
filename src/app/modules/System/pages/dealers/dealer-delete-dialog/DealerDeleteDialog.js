@@ -35,9 +35,12 @@ export function DealerDeleteDialog({ id, show, onHide }) {
   // looking for loading/dispatch
   useEffect(() => { }, [isLoading, dispatch]);
 
-  const deleteDealer = () => dispatch(actions.deleteDealer(id)) // server request for deleting user by id
+  const deleteDealer = () => {
+    
+    dispatch(actions.deleteDealer(id)) // server request for deleting user by id
     .then(() => dispatch(actions.fetchDealers(galleriesUIProps.queryParams)))// refresh list after deletion
     .then(() => onHide());// closing delete modal
+  }
 
 
   return (

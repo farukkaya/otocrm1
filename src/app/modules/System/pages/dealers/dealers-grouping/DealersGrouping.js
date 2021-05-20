@@ -28,7 +28,7 @@ export function DealersGrouping() {
                 className="btn btn-danger font-weight-bolder font-size-sm"
                 onClick={dealersUIProps.openDeleteDealersDialog}
               >
-                <i className="fa fa-trash"></i>   Hepsini Sil
+                <i className="fa fa-trash"></i> Sil ({dealersUIProps.ids.length})
               </button>
               &nbsp;
               <button

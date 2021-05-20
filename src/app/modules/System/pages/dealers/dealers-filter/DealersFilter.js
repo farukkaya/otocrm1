@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useDealersUIContext } from "../DealersUIContext";
-import { DealerTypeTitles,CapacityTitles } from "../DealersUIHelpers";
+import { DealerTypeTitles,CapacityTitles,initialFilter } from "../DealersUIHelpers";
 
 
 export const prepareFilter = (queryParams, values) => {
@@ -12,11 +12,10 @@ export const prepareFilter = (queryParams, values) => {
     name: "",
     taxOffice:"",
     taxIdentityNo: "",
-    //admin:"",
-    isActive:true
   };
-  filter.dealerTypeId = dealerTypeId !== "" ? +dealerTypeId : undefined;
-  filter.capacityId = capacityId !== "" ? +capacityId : undefined;
+    filter.dealerTypeId = dealerTypeId 
+    filter.capacityId = capacityId
+    filter.isActive= isActive;
   // Filter by all fields
   if (searchText) {
     filter.name= searchText;
@@ -25,10 +24,6 @@ export const prepareFilter = (queryParams, values) => {
     //filter.admin= searchText;
   }
 
-  filter.isActive= isActive==="1" ? true
-                 : isActive==="0" ? false
-                 : true;
- 
   newQueryParams.filter = filter;
   return newQueryParams;
 };
@@ -44,6 +39,7 @@ export function DealersFilter({ listLoading }) {
   }, [dealersUIContext]);
 
   const applyFilter = (values) => {
+    
     const newQueryParams = prepareFilter(dealersUIProps.queryParams, values);
     if (!isEqual(newQueryParams, dealersUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
@@ -55,7 +51,7 @@ export function DealersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          isActive: "", // values => All=""/Active=0/passive=1
+          isActive: "true", // values => All=""/Active=1/passive=0
           dealerTypeId:"",
           capacityId:"",
           searchText: "",
@@ -86,7 +82,7 @@ export function DealersFilter({ listLoading }) {
                   onBlur={handleBlur}
                   value={values.capacityId}
                 >
-                  <option value="">HEPSİ</option>
+                <option value="">Hepsi</option>
                 {
                   CapacityTitles.map(q=><option value={q.id}>{q.name}</option>)
                 }
@@ -129,9 +125,9 @@ export function DealersFilter({ listLoading }) {
                   onBlur={handleBlur}
                   value={values.isActive}
                 >
-                  <option value="">Tümü</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Pasif</option>
+                  <option value="">Hepsi</option>
+                  <option value="true">Aktif</option>
+                  <option value="false">Pasif</option>
                 </select>
                 <small className="form-text text-muted">
                 Duruma göre filtrele

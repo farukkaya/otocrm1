@@ -3,7 +3,7 @@ export default function setupAxios(axios, store) {
   axios.defaults.baseURL = 'http://localhost:5001/';
 
   axios.interceptors.request.use(config => {
-    config.headers["Content-Type"]="application/json";
+    config.headers["Content-Type"]="application/json;charset=utf-8";
       const {
         auth: { authToken }
       } = store.getState();

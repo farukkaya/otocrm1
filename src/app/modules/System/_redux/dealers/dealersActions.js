@@ -55,20 +55,6 @@ export const updateGalleriesStatus = (ids, status) => dispatch => {
 //////////////GALLERİES//////////////////
 
 
-export const fetchUsersByDealer = id => dispatch => {
-  dispatch(actions.startCall({ callType: callTypes.list }));
-  return requestFromServer
-    .findUsersByDealer(id)
-    .then(response => {
-      const { totalCount, entities } = response.data;
-      dispatch(actions.usersFetched({ totalCount, entities }));
-    })
-    .catch(error => {
-      error.clientMessage = "Can't find users";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
-    });
-};
-
 export const fetchDealers = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   

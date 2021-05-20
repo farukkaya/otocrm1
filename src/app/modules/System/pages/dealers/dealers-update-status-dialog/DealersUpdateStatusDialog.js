@@ -46,7 +46,7 @@ export function DealersUpdateStatusDialog({ show, onHide }) {
   const [status, setStatus] = useState("0");
 
   const dispatch = useDispatch();
-  const updateStatus = () => dispatch(actions.updateDealersStatus(dealersUIProps.ids, status))// server request for updateing dealer by ids
+  const updateStatus = () => dispatch(actions.updateDealersStatus(dealersUIProps.ids, status=="1"))// server request for updateing dealer by ids
     .then(() => dispatch(actions.fetchDealers(dealersUIProps.queryParams))
       .then(() => {
         dealersUIProps.setIds([]);// clear selections list

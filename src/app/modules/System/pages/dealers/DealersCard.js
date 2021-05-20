@@ -5,14 +5,12 @@ import {
     Card,
     CardBody,
     CardHeader,
-    CardHeaderToolbar,
-    Notice,
+    CardHeaderToolbar
 } from "../../../../../_metronic/_partials/controls";
 import { DealersFilter, prepareFilter } from "./dealers-filter/DealersFilter";
 import { DealersTable } from "./dealers-table/DealersTable";
 import { DealersGrouping } from "./dealers-grouping/DealersGrouping";
 import { useDealersUIContext } from "./DealersUIContext";
-import { shallowEqual, useSelector } from "react-redux";
 
 export function DealersCard() {
     const dealersUIContext = useDealersUIContext();
@@ -34,7 +32,7 @@ export function DealersCard() {
         dealersUIContext.setIsFiltering(!dealersUIProps.isFiltering)
 
         if (dealersUIProps.isFiltering) {
-            const newQueryParams = prepareFilter(dealersUIProps.queryParams, {});
+            const newQueryParams = prepareFilter(dealersUIProps.queryParams, {isActive:"true"});
             dealersUIContext.setQueryParams(newQueryParams)
         }
     }
@@ -61,7 +59,7 @@ export function DealersCard() {
                             <span className="svg-icon menu-icon">
                                 <SVG src={toAbsoluteUrl("/media/svg/icons/Text/Filter.svg")} />
                             </span>
-                            <span className="menu-text">Filtre</span>
+                            <span className="menu-text">{dealersUIProps.isFiltering?"Filtreyi Temizle":"Filtrele"}</span>
                         </button>
                         <button
                             type="button"

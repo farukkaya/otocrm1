@@ -17,12 +17,12 @@ export const CapacityTitles = [
 
 export const initialFilter = {
   filter:{
-    dealerType:"",
     name: "",
-    capacity:"",
+    dealerTypeId:"",
+    capacityId:"",
     taxOffice:"",
     taxIdentityNo: "",
-    isActive:true
+    isActive:"true"
   },
   sortOrder: "asc",
   sortField: "id",
