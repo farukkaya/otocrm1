@@ -12,7 +12,7 @@ const prepareFilter = (queryParams, values) => {
   // Filter by type
   filter.type = type !== "" ? +type : undefined;
   // Filter by all fields
-  filter.lastName = searchText;
+  filter.lastname = searchText;
   if (searchText) {
     filter.firstName = searchText;
     filter.email = searchText;

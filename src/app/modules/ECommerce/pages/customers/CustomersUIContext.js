@@ -30,7 +30,7 @@ export function CustomersUIProvider({customersUIEvents, children}) {
   const initCustomer = {
     id: undefined,
     firstName: "",
-    lastName: "",
+    lastname: "",
     email: "",
     userName: "",
     gender: "Female",

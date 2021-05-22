@@ -10,7 +10,7 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    lastName: "",
+    lastname: "",
     firstName: "",
     email: "",
     ipAddress: ""

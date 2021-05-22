@@ -34,7 +34,7 @@ const CustomerSchema = {
     .min(2, format(MIN_LENGTH, "2"))
     .max(50, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Müşteri Adı")),
-  lastName: Yup.string()
+  lastname: Yup.string()
     .when("customerTypeId", (customerTypeId, schema) => {
       if (customerTypeId == 1) {
         return schema
@@ -208,7 +208,7 @@ export function CustomerEditForm({
                     </div>
                     {props.values.customerTypeId == 1 && (<div className="col-lg-4">
                       <Field
-                        name="lastName"
+                        name="lastname"
                         component={Input}
                         placeholder="Müşteri Soyadı"
                         label="Müşteri Soyadı"
@@ -363,7 +363,7 @@ export function CustomerEditForm({
                       <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id == 2).title}:</h6>
                       <div className="text-dark-50 line-height-lg">
                         <div><span><b>Müşteri Tipi:</b></span> {CUSTOMERTYPELIST.find(q => q.id == data.customerTypeId).name}</div>
-                        <div><span><b>Müşteri Adı:</b></span> {data.firstName} {data.lastName}</div>
+                        <div><span><b>Müşteri Adı:</b></span> {data.firstName} {data.lastname}</div>
                         <div><span><b>Tc\Vergi No:</b></span> {data.identityNo}</div>
                         <div><span><b>Peşinat:</b></span> {data.advancePayment}</div>
                         <div><span><b>Email:</b></span> {data.email}</div>
@@ -434,7 +434,7 @@ export function CustomerEditForm({
                 {customer.customerTypeId == 1 ?
                   <div className="col-lg-4">
                     <Field
-                      name="lastName"
+                      name="lastname"
                       component={Input}
                       placeholder="Müşteri Soyadı"
                       label="Müşteri Soyadı"

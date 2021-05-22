@@ -9,7 +9,7 @@ const prepareFilter = (queryParams, values) => {
   const newQueryParams = { ...queryParams };
   const filter = {
     firstName: "",
-    lastName: "",
+    lastname: "",
     email: "",
     phone: "",
     identityNo: "",
@@ -21,7 +21,7 @@ const prepareFilter = (queryParams, values) => {
   if (searchText) {
     filter.firstName= searchText;
    // filter.capacity= parseInt(searchText);
-    filter.lastName= searchText;
+    filter.lastname= searchText;
     filter.email= searchText;
     filter.phone=searchText;
     filter.identityNo=searchText;
