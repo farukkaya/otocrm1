@@ -1,7 +1,7 @@
 export default [
   {
     id: 1,
-    firstName : "Sarrafoğlu Holding A.Ş.",
+    firstname : "Sarrafoğlu Holding A.Ş.",
     lastName : "",
     personalPhone : "05329876543",
     workPhone : "05329876543",
@@ -23,7 +23,7 @@ export default [
   },
   {
     id: 2,
-    firstName : "Deniz",
+    firstname : "Deniz",
     lastName : "Tekin",
     personalPhone : "05329876543",
     workPhone : "05329876543",
@@ -44,7 +44,7 @@ export default [
   },
   {
     id: 3,
-    firstName : "Selim",
+    firstname : "Selim",
     lastName : "Kara",
     personalPhone : "05329876543",
     workPhone : "05329876543",
@@ -67,7 +67,7 @@ export default [
   },
   {
     id: 4,
-    firstName : "Akgün",
+    firstname : "Akgün",
     lastName : "Taşkın",
     personalPhone : "05329876543",
     email:"akgun.taskin@gmail.com",

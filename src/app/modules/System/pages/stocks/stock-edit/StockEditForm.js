@@ -147,7 +147,7 @@ export function StockEditForm({
                         //   const adminUser = {
                         //     email: values.ownerEmail,
                         //     identityNo: values.identityNo,
-                        //     firstName: values.firstName,
+                        //     firstname: values.firstname,
                         //     lastName: values.lastName,
                         //     username: values.username,
                         //     professionId: values.professionId,

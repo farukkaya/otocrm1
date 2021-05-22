@@ -6,7 +6,7 @@ export default [
         galleryId:undefined,
         professionId:1,
 
-        firstName: "Faruk",
+        firstname: "Faruk",
         lastName: "Kaya",
         email: "farukkaya@otocrm.com",
         phone: "05318540220",
@@ -37,7 +37,7 @@ export default [
         email: "enesbozok@otocrm.com",
         phone:"05437652314",
         identityNo: "87708813484",
-        firstName: "Enes",
+        firstname: "Enes",
         lastName: "Bozok",
         username: "enesbozok",
         
@@ -63,7 +63,7 @@ export default [
 
         email: "umutkocak@otocrm.com",
         identityNo: "27715334978",
-        firstName: "Umut",
+        firstname: "Umut",
         lastName: "Koçak",
         username: "umutkocak",
         workPhone: "",
@@ -91,7 +91,7 @@ export default [
 
         email: "ulaserdegor@otocrm.com",
         identityNo: "92198765429",
-        firstName: "Ulaş",
+        firstname: "Ulaş",
         lastName: "Erdegör",
         username: "ulaserdegor",
         workPhone: "",

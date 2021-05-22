@@ -40,7 +40,7 @@ export function UserEditForm({
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Kullanıcı Adı")),
-    firstName: Yup.string()
+    firstname: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Ad")),
@@ -79,7 +79,7 @@ export function UserEditForm({
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
-                    name="firstName"
+                    name="firstname"
                     component={Input}
                     placeholder="İsim"
                     label="İsim"

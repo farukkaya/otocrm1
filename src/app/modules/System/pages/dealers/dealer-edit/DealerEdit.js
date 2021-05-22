@@ -40,7 +40,7 @@ const initDealer = {
   phone1: "",
   phone2: "",
   //STEP3-> YÖNETİCİ(KULLANICI)
-  firstName: "",
+  firstname: "",
   professionId: "1",
   lastName: "",
   identityNo: "",

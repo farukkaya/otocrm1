@@ -113,7 +113,7 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
                 </td>
                 <td>
                   <span className="ml-3">
-                    {customer.lastName}, {customer.firstName}
+                    {customer.lastName}, {customer.firstname}
                   </span>
                 </td>
               </tr>

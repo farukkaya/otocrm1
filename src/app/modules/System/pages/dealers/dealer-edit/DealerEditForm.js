@@ -114,7 +114,7 @@ export function DealerEditForm({
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Kullanıcı Adı")),
-    firstName: Yup.string()
+    firstname: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Ad")),
@@ -183,7 +183,7 @@ export function DealerEditForm({
             const adminUser = {
               email: values.ownerEmail,
               identityNo: values.identityNo,
-              firstName: values.firstName,
+              firstname: values.firstname,
               lastName: values.lastName,
               username: values.username,
               professionId: parseInt(values.professionId),
@@ -368,7 +368,7 @@ export function DealerEditForm({
                 <div className="form-group row">
                   <div className="col-lg-4">
                     <Field
-                      name="firstName"
+                      name="firstname"
                       component={Input}
                       placeholder="Ad"
                       label="Ad"
@@ -527,7 +527,7 @@ export function DealerEditForm({
                 {/*begin::Section*/}
               <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 2).title}:</h6>
                 <div className="text-dark-50 line-height-lg">
-                  <div><span>Adı:</span> {data.firstName}</div>
+                  <div><span>Adı:</span> {data.firstname}</div>
                   <div><span>Soyadı:</span> {data.lastName}</div>
                   <div><span>Kimlik No:</span> {data.identityNo}</div>
                   <div><span>Kullanıcı Adı:</span> {data.username}</div>
