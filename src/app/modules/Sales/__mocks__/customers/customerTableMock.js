@@ -1,13 +1,11 @@
 export default [
   {
     id: 1,
-<<<<<<< HEAD
-    firstName : "Sarrafoğlu Holding A.Ş.",
+
     lastname : "",
-=======
-    firstname : "Sarrafoğlu Holding A.Ş.",
-    lastName : "",
->>>>>>> CFN-230521-firstName
+
+    firstname : "",
+
     personalPhone : "05329876543",
     workPhone : "05329876543",
     email:"info@sarrafoglu.com.tr",
@@ -28,13 +26,11 @@ export default [
   },
   {
     id: 2,
-<<<<<<< HEAD
-    firstName : "Deniz",
+
+    
     lastname : "Tekin",
-=======
     firstname : "Deniz",
-    lastName : "Tekin",
->>>>>>> CFN-230521-firstName
+
     personalPhone : "05329876543",
     workPhone : "05329876543",
     email:"deniz.tekin@gmail.com",
@@ -54,13 +50,13 @@ export default [
   },
   {
     id: 3,
-<<<<<<< HEAD
+
     firstName : "Selim",
     lastname : "Kara",
-=======
+
     firstname : "Selim",
     lastName : "Kara",
->>>>>>> CFN-230521-firstName
+
     personalPhone : "05329876543",
     workPhone : "05329876543",
     email:"selim.kara@gmail.com",
@@ -82,13 +78,13 @@ export default [
   },
   {
     id: 4,
-<<<<<<< HEAD
+
     firstName : "Akgün",
     lastname : "Taşkın",
-=======
+
     firstname : "Akgün",
     lastName : "Taşkın",
->>>>>>> CFN-230521-firstName
+
     personalPhone : "05329876543",
     email:"akgun.taskin@gmail.com",
 

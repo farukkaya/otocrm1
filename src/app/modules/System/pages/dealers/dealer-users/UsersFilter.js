@@ -8,13 +8,10 @@ const prepareFilter = (queryParams, values) => {
   const { searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {
-<<<<<<< HEAD
-    firstName: "",
+
     lastname: "",
-=======
     firstname: "",
-    lastName: "",
->>>>>>> CFN-230521-firstName
+
     email: "",
     phone: "",
     identityNo: "",

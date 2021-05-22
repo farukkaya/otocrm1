@@ -6,13 +6,9 @@ export default function mockCustomer(mock) {
   mock.onPost("customers").reply(({ data }) => {
     const { customer } = JSON.parse(data);
     const {
-<<<<<<< HEAD
-      firstName = "",
+
       lastname = "",
-=======
       firstname = "",
-      lastName = "",
->>>>>>> CFN-230521-firstName
       personalPhone = "",
       workPhone = "",
       identityNo = "",
@@ -34,13 +30,11 @@ export default function mockCustomer(mock) {
     const newCustomer = {
       id,
       customerTypeId,
-<<<<<<< HEAD
-      firstName,
+
       lastname,
-=======
+
       firstname,
-      lastName,
->>>>>>> CFN-230521-firstName
+
       personalPhone,
       workPhone,
       identityNo,

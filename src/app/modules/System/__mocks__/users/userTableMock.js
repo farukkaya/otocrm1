@@ -6,13 +6,13 @@ export default [
         galleryId:undefined,
         professionId:1,
 
-<<<<<<< HEAD
+
         firstName: "Faruk",
         lastname: "Kaya",
-=======
+
         firstname: "Faruk",
         lastName: "Kaya",
->>>>>>> CFN-230521-firstName
+
         email: "farukkaya@otocrm.com",
         phone: "05318540220",
         identityNo: "18757979654",
@@ -42,13 +42,13 @@ export default [
         email: "enesbozok@otocrm.com",
         phone:"05437652314",
         identityNo: "87708813484",
-<<<<<<< HEAD
+
         firstName: "Enes",
         lastname: "Bozok",
-=======
+
         firstname: "Enes",
         lastName: "Bozok",
->>>>>>> CFN-230521-firstName
+
         username: "enesbozok",
         
         isActive: true, 
@@ -73,13 +73,13 @@ export default [
 
         email: "umutkocak@otocrm.com",
         identityNo: "27715334978",
-<<<<<<< HEAD
+
         firstName: "Umut",
         lastname: "Koçak",
-=======
+
         firstname: "Umut",
         lastName: "Koçak",
->>>>>>> CFN-230521-firstName
+
         username: "umutkocak",
         workPhone: "",
         personalPhone: "",
@@ -106,13 +106,13 @@ export default [
 
         email: "ulaserdegor@otocrm.com",
         identityNo: "92198765429",
-<<<<<<< HEAD
+
         firstName: "Ulaş",
         lastname: "Erdegör",
-=======
+
         firstname: "Ulaş",
         lastName: "Erdegör",
->>>>>>> CFN-230521-firstName
+
         username: "ulaserdegor",
         workPhone: "",
         personalPhone: "",

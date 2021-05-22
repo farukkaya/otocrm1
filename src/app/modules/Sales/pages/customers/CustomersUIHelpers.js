@@ -9,13 +9,10 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-<<<<<<< HEAD
+
     lastname: "",
-    firstName: "",
-=======
-    lastName: "",
     firstname: "",
->>>>>>> CFN-230521-firstName
+
     email: "",
     personalPhone: "",
     workPhone: "",

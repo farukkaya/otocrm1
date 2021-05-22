@@ -363,11 +363,10 @@ export function CustomerEditForm({
                       <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id == 2).title}:</h6>
                       <div className="text-dark-50 line-height-lg">
                         <div><span><b>Müşteri Tipi:</b></span> {CUSTOMERTYPELIST.find(q => q.id == data.customerTypeId).name}</div>
-<<<<<<< HEAD
-                        <div><span><b>Müşteri Adı:</b></span> {data.firstName} {data.lastname}</div>
-=======
-                        <div><span><b>Müşteri Adı:</b></span> {data.firstname} {data.lastName}</div>
->>>>>>> CFN-230521-firstName
+
+                        <div><span><b>Müşteri Adı:</b></span> {data.firstname} {data.lastname}</div>
+
+
                         <div><span><b>Tc\Vergi No:</b></span> {data.identityNo}</div>
                         <div><span><b>Peşinat:</b></span> {data.advancePayment}</div>
                         <div><span><b>Email:</b></span> {data.email}</div>

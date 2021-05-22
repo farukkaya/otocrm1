@@ -8,13 +8,13 @@ export default function mockUser(mock) {
     const {
       email = "farukkaya@otocrm.com",
       identityNo = "10447572022",
-<<<<<<< HEAD
+
       firstName = "Faruk",
       lastname = "Kaya",
-=======
+
       firstname = "Faruk",
       lastName = "Kaya",
->>>>>>> CFN-230521-firstName
+
       username = "",
       professionId = null,
       workPhone = "",
@@ -36,13 +36,13 @@ export default function mockUser(mock) {
       id,
       email,
       identityNo,
-<<<<<<< HEAD
+
       firstName,
       lastname,
-=======
+
       firstname,
       lastName,
->>>>>>> CFN-230521-firstName
+
       username,
       professionId,
       workPhone,
