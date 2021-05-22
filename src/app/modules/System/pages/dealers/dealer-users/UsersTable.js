@@ -4,10 +4,10 @@
 import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import BootstrapTable from "react-bootstrap-table-next";
+import * as actions from "../../../_redux/users/usersActions";
 import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
-import * as actions from "../../../_redux/users/usersActions";
 import * as uiHelpers from "./UsersUIHelper";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
@@ -45,7 +45,8 @@ export function UsersTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     usersUIProps.setIds([]);
-    dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams, usersUIProps.dealerId));
+    usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
+    dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersUIProps.queryParams, dispatch, usersUIProps.dealerId]);
   const columns = [
@@ -68,13 +69,13 @@ export function UsersTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "firstName",
+      dataField: "firstname",
       text: "İsim",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "lastName",
+      dataField: "lastname",
       text: "Soyisim",
       sort: true,
       sortCaret: sortCaret,

@@ -17,10 +17,11 @@ export const DealerTypeTitles = [{id:2,name:"Galeri"},{id:3,name:"Bayi&Galeri"}]
 export const initialFilter = {
   filter:{
     name: "",
-    capacity:undefined,
+    capacity:"",
     dealer:"",
     taxOffice:"",
     taxIdentityNo: "",
+    parentId:""
   },
   sortOrder: "asc",
   sortField: "id",

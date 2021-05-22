@@ -45,7 +45,8 @@ export function UsersTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     usersUIProps.setIds([]);
-    dispatch(actions.fetchUsersByGallery(usersUIProps.queryParams, usersUIProps.galleryId));
+    usersUIProps.queryParams.filter.dealerId=usersUIProps.galleryId
+    dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersUIProps.queryParams, dispatch, usersUIProps.galleryId]);
   const columns = [

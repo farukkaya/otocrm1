@@ -37,7 +37,7 @@ export function UsersDeleteDialog() {
   const deleteUsers = () => {
     dispatch(actions.deleteUsers(usersUIProps.ids)).then(() => {
       dispatch(
-        actions.fetchUsersByGallery(
+        actions.fetchUsersByDealer(
           usersUIProps.queryParams,
           usersUIProps.galleryId
         )

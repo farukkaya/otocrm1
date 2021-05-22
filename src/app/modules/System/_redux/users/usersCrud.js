@@ -12,8 +12,9 @@ export function getAllUsers() {
   return axios.get(USERS_URL);
 }
 
+//API=>OK
 export function getUserById(userId) {
-  return axios.get(`${USERS_URL}/${userId}`);
+  return axios.get(`${USERS_URL}/GetById?id=${userId}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
@@ -21,12 +22,13 @@ export function getUserById(userId) {
 export function findUsers(queryParams) {
   return axios.post(`${USERS_URL}/find`, { queryParams });
 }
-export function findUsersByDealer(queryParams, dealerId) {
-  return axios.post(`${USERS_URL}/findByDealer/${dealerId}`, { queryParams });
+
+
+//API=>OK
+export function findUsersByDealer(queryParams) {
+  return axios.post(`${USERS_URL}/Find`, queryParams);
 }
-export function findUsersByGallery(queryParams, galleryId) {
-  return axios.post(`${USERS_URL}/findByGallery/${galleryId}`, { queryParams });
-}
+
 
 // UPDATE => PUT: update the procuct on the server
 export function updateUser(user) {

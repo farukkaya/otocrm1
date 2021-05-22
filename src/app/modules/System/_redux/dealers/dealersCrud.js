@@ -49,7 +49,7 @@ export function updateStatusForDealers(ids, status) {
 // UPDATE => PUT: update the procuct on the server
 //API=>OK
 export function updateDealer(dealer) {
-  return axios.put(`${DEALERS_URL}/update`, dealer);
+  return axios.put(`${DEALERS_URL}/Update`, dealer);
 }
 
 
@@ -59,8 +59,8 @@ export function updateDealer(dealer) {
 
 
 
-export function findGalleriesByParent(queryParams, dealerId) {
-  return axios.post(`${DEALERS_URL}/GetAllByParent/${dealerId}`, { queryParams });
+export function findGalleriesByParent(queryParams) {
+  return axios.post(`${DEALERS_URL}/Find`, queryParams);
 }
 
 

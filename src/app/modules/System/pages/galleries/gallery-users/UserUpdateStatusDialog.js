@@ -47,7 +47,7 @@ export function UserUpdateStatusDialog() {
       
       dispatch(actions.updateUsersStatus([parseInt(usersUIProps.id)], !user.isActive)) // update status this user
       .then(() =>{
-        dispatch(actions.fetchUsersByGallery(
+        dispatch(actions.fetchUsersByDealer(
           usersUIProps.queryParams,
           usersUIProps.galleryId
         ))

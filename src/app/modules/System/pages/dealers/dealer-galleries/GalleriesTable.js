@@ -45,7 +45,8 @@ export function GalleriesTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     galleriesUIProps.setIds([]);
-    dispatch(actions.fetchGalleriesByParent(galleriesUIProps.queryParams, galleriesUIProps.parentId));
+    galleriesUIProps.queryParams.filter.parentId=galleriesUIProps.parentId;
+    dispatch(actions.fetchGalleriesByParent(galleriesUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [galleriesUIProps.queryParams, dispatch, galleriesUIProps.parentId]);
   const columns = [
@@ -62,11 +63,12 @@ export function GalleriesTable() {
       sortCaret: sortCaret,
     },   
     {
-      dataField: "capacity",
-      text:"Seviye",
+      dataField: "capacityId",
+      text:"Kapasite",
       sort: true,
       sortCaret: sortCaret,
-    },   
+      formatter: columnFormatters.CapacityColumnFormatter,
+    },
     {
       dataField: "taxOffice",
       text:"Vergi Dairesi",

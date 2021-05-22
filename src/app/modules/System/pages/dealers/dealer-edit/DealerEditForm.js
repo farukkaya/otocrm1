@@ -55,7 +55,8 @@ export function DealerEditForm({
     capacityId:Yup.string()
       .when("dealerTypeId", {
         is: value => value && value != 1, 
-        then: Yup.string().required(format(REQUIRED, "Kapasite"))
+        then: Yup.string().required(format(REQUIRED, "Kapasite")),
+        otherwise: Yup.string()
       }),
     taxIdentityNo: Yup.string()
       .matches(/^[0-9]+$/, DIGIT_CONTROL)

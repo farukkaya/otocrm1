@@ -3,16 +3,17 @@ import {dealersSlice, callTypes} from "./dealersSlice";
 
 const {actions} = dealersSlice;
 //////////////GALLERİES//////////////////
-export const fetchGalleriesByParent = (queryParams, dealerId) => dispatch => {
+export const fetchGalleriesByParent = (queryParams) => dispatch => {
   
   dispatch(actions.startCallForGallery({ callType: callTypes.list }));
-  if (!dealerId) {
+  if (!queryParams.filter.parentId) {
     return dispatch(actions.galleriesFetched({ totalCount: 0, entities: [] }));
   }
 
   return requestFromServer
-    .findGalleriesByParent(queryParams, dealerId)
+    .findGalleriesByParent(queryParams)
     .then(response => {
+      
       const { totalCount, entities } = response.data;
       dispatch(actions.galleriesFetched({ totalCount, entities }));
     })
@@ -62,6 +63,7 @@ export const fetchDealers = queryParams => dispatch => {
     .findDealers(queryParams)
     .then(response => {
       const { totalCount, entities } = response.data;
+      
       dispatch(actions.dealersFetched({ totalCount, entities }));
     })
     .catch(error => {
