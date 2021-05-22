@@ -7,8 +7,13 @@ const prepareFilter = (queryParams, values) => {
   const { searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {
+<<<<<<< HEAD
     firstName: "",
     lastname: "",
+=======
+    firstname: "",
+    lastName: "",
+>>>>>>> CFN-230521-firstName
     email: "",
     phone: "",
     identityNo: "",
@@ -18,7 +23,7 @@ const prepareFilter = (queryParams, values) => {
   };
   
   if (searchText) {
-    filter.firstName= searchText;
+    filter.firstname= searchText;
    // filter.capacity= parseInt(searchText);
     filter.lastname= searchText;
     filter.email= searchText;

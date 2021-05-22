@@ -61,7 +61,7 @@ export function CustomersTable() {
       headerSortingClasses,
     },
     {
-      dataField: "firstName",
+      dataField: "firstname",
       text: "Firstname",
       sort: true,
       sortCaret: sortCaret,

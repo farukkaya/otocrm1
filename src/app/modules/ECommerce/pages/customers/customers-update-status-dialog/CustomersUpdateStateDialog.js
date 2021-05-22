@@ -113,7 +113,11 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
                 </td>
                 <td>
                   <span className="ml-3">
+<<<<<<< HEAD
                     {customer.lastname}, {customer.firstName}
+=======
+                    {customer.lastName}, {customer.firstname}
+>>>>>>> CFN-230521-firstName
                   </span>
                 </td>
               </tr>

@@ -29,8 +29,13 @@ export function CustomersUIProvider({customersUIEvents, children}) {
 
   const initCustomer = {
     id: undefined,
+<<<<<<< HEAD
     firstName: "",
     lastname: "",
+=======
+    firstname: "",
+    lastName: "",
+>>>>>>> CFN-230521-firstName
     email: "",
     userName: "",
     gender: "Female",

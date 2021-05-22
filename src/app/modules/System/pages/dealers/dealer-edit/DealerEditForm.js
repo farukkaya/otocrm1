@@ -185,7 +185,11 @@ export function DealerEditForm({
               email: values.ownerEmail,
               identityNo: values.identityNo,
               firstname: values.firstname,
+<<<<<<< HEAD
               lastname: values.lastname,
+=======
+              lastName: values.lastName,
+>>>>>>> CFN-230521-firstName
               username: values.username,
               professionId: parseInt(values.professionId),
               phone: values.ownerTel
@@ -529,7 +533,11 @@ export function DealerEditForm({
               <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 2).title}:</h6>
                 <div className="text-dark-50 line-height-lg">
                   <div><span>Adı:</span> {data.firstname}</div>
+<<<<<<< HEAD
                   <div><span>Soyadı:</span> {data.lastname}</div>
+=======
+                  <div><span>Soyadı:</span> {data.lastName}</div>
+>>>>>>> CFN-230521-firstName
                   <div><span>Kimlik No:</span> {data.identityNo}</div>
                   <div><span>Kullanıcı Adı:</span> {data.username}</div>
                   <div><span>E-Posta:</span> {data.ownerEmail}</div>

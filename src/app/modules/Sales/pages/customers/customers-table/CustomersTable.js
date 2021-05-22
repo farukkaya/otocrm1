@@ -72,7 +72,7 @@ export function CustomersTable() {
 
     },
     {
-      dataField: "firstName",
+      dataField: "firstname",
       text: "Müşteri Adı",
       sort: true,
       sortCaret: sortCaret,

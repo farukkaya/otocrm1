@@ -14,7 +14,7 @@ const prepareFilter = (queryParams, values) => {
   // Filter by all fields
   filter.lastname = searchText;
   if (searchText) {
-    filter.firstName = searchText;
+    filter.firstname = searchText;
     filter.email = searchText;
     filter.ipAddress = searchText;
   }

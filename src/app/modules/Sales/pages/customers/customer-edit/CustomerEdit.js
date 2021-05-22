@@ -16,8 +16,13 @@ import { v4 as generateGuid } from 'uuid';
 
 const initCustomer={
   guid: generateGuid(),
+<<<<<<< HEAD
   firstName : "",
   lastname : "",
+=======
+  firstname : "",
+  lastName : "",
+>>>>>>> CFN-230521-firstName
   personalPhone : "",
   workPhone : "",
   identityNo : "",
@@ -79,7 +84,11 @@ export function CustomerEdit({
   useEffect(() => {
     let _title = id ? "" : "Yeni Müşteri"
     if (customerForEdit && id) {
+<<<<<<< HEAD
       _title = format("Müşteri Güncelle -'{0}'", `${customerForEdit.firstName} ${customerForEdit.lastname}`);
+=======
+      _title = format("Müşteri Güncelle -'{0}'", `${customerForEdit.firstname} ${customerForEdit.lastName}`);
+>>>>>>> CFN-230521-firstName
     }
 
     setTitle(_title);

@@ -14,7 +14,7 @@ import {
 
 // Validation schema
 const CustomerEditSchema = Yup.object().shape({
-  firstName: Yup.string()
+  firstname: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Firstname is required"),
@@ -61,7 +61,7 @@ export function CustomerEditForm({
                   {/* First Name */}
                   <div className="col-lg-4">
                     <Field
-                      name="firstName"
+                      name="firstname"
                       component={Input}
                       placeholder="First Name"
                       label="First Name"

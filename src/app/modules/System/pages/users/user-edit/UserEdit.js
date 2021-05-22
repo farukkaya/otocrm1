@@ -18,8 +18,13 @@ const initUser = {
       id: undefined,
       email: "",
       identityNo: "",
+<<<<<<< HEAD
       firstName: "",
       lastname: "",
+=======
+      firstname: "",
+      lastName: "",
+>>>>>>> CFN-230521-firstName
       username: "",
       professionId:0,
       workPhone: "",
@@ -63,7 +68,11 @@ export function UserEdit({
   useEffect(() => {
     let _title = id ? "" : "Yeni Kullanıcı";
     if (userForEdit && id) {
+<<<<<<< HEAD
       _title = `Kullanıcı Düzenle - '${userForEdit.firstName} ${userForEdit.lastname}'`;
+=======
+      _title = `Kullanıcı Düzenle - '${userForEdit.firstname} ${userForEdit.lastName}'`;
+>>>>>>> CFN-230521-firstName
     }
 
     setTitle(_title);
