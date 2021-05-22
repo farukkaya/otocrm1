@@ -82,7 +82,7 @@ export function CustomersFetchDialog({ show, onHide }) {
                 </td>
                 <td>
                   <span className="ml-3">
-                    {customer.lastName}, {customer.firstName}
+                    {customer.lastname}, {customer.firstName}
                   </span>
                 </td>
               </tr>

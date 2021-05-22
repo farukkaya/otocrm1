@@ -69,13 +69,13 @@ export function UsersTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "firstName",
+      dataField: "firstname",
       text: "İsim",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "lastName",
+      dataField: "lastname",
       text: "Soyisim",
       sort: true,
       sortCaret: sortCaret,

@@ -90,7 +90,7 @@ export function UsersTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "lastName",
+      dataField: "lastname",
       text: "Soyisim",
       sort: true,
       sortCaret: sortCaret,

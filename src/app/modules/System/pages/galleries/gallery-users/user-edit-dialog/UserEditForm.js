@@ -39,7 +39,7 @@ const UserEditSchema = Yup.object().shape({
     .max(150, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Ad")),
 
-  lastName: Yup.string()
+  lastname: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
     .max(150, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Soyad")),
@@ -90,7 +90,7 @@ export function UserEditForm({ saveUser, user, actionsLoading, onHide }) {
                 </div>
                 <div className="col-lg-4">
                   <Field
-                    name="lastName"
+                    name="lastname"
                     component={Input}
                     placeholder="Soyisim"
                     label="Soyisim"

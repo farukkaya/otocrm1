@@ -42,7 +42,7 @@ const initDealer = {
   //STEP3-> YÖNETİCİ(KULLANICI)
   firstName: "",
   professionId: "1",
-  lastName: "",
+  lastname: "",
   identityNo: "",
   username: "",
   ownerEmail: "",

@@ -7,7 +7,7 @@ export default function mockCustomer(mock) {
     const { customer } = JSON.parse(data);
     const {
       firstName = "",
-      lastName = "",
+      lastname = "",
       personalPhone = "",
       workPhone = "",
       identityNo = "",
@@ -30,7 +30,7 @@ export default function mockCustomer(mock) {
       id,
       customerTypeId,
       firstName,
-      lastName,
+      lastname,
       personalPhone,
       workPhone,
       identityNo,

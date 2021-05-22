@@ -18,7 +18,7 @@ const CustomerEditSchema = Yup.object().shape({
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Firstname is required"),
-  lastName: Yup.string()
+  lastname: Yup.string()
     .min(3, "Minimum 3 symbols")
     .max(50, "Maximum 50 symbols")
     .required("Lastname is required"),
@@ -70,7 +70,7 @@ export function CustomerEditForm({
                   {/* Last Name */}
                   <div className="col-lg-4">
                     <Field
-                      name="lastName"
+                      name="lastname"
                       component={Input}
                       placeholder="Last Name"
                       label="Last Name"

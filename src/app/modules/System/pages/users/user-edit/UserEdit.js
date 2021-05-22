@@ -19,7 +19,7 @@ const initUser = {
       email: "",
       identityNo: "",
       firstName: "",
-      lastName: "",
+      lastname: "",
       username: "",
       professionId:0,
       workPhone: "",
@@ -63,7 +63,7 @@ export function UserEdit({
   useEffect(() => {
     let _title = id ? "" : "Yeni Kullanıcı";
     if (userForEdit && id) {
-      _title = `Kullanıcı Düzenle - '${userForEdit.firstName} ${userForEdit.lastName}'`;
+      _title = `Kullanıcı Düzenle - '${userForEdit.firstName} ${userForEdit.lastname}'`;
     }
 
     setTitle(_title);

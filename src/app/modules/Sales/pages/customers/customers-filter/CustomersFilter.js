@@ -19,7 +19,7 @@ export const prepareFilter = (queryParams, values) => {
    // Filter by paymentMethodId
    filter.paymentMethodId = paymentMethodId !== "" ? +paymentMethodId : undefined;
   // Filter by all fields
-  filter.lastName = searchText;
+  filter.lastname = searchText;
   if (searchText) {
     filter.firstName = searchText;
     filter.email = searchText;
