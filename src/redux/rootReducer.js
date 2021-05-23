@@ -9,7 +9,6 @@ import {specificationsSlice} from "../app/modules/ECommerce/_redux/specification
 
 
 import {mainSlice} from "../app/modules/System/_redux/_main/mainSlice";
-import {galleriesSlice} from "../app/modules/System/_redux/galleries/galleriesSlice";
 import {taxOfficesSlice} from "../app/modules/System/_redux/taxOffices/taxOfficesSlice";
 import { usersSlice } from "../app/modules/System/_redux/users/usersSlice";
 import { professionsSlice } from "../app/modules/System/_redux/professions/professionsSlice";
@@ -30,7 +29,6 @@ export const rootReducer = combineReducers({
   addresses: addressesSlice.reducer,
 
   dealers: dealersSlice.reducer,
-  galleries: galleriesSlice.reducer,
   stocks: stocksSlice.reducer,
   taxOffices: taxOfficesSlice.reducer,
   users: usersSlice.reducer

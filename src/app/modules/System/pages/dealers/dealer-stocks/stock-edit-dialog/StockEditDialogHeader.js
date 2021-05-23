@@ -9,8 +9,8 @@ export function StockEditDialogHeader({ id }) {
   // Stocks Redux state
   const { stockForEdit, actionsLoading } = useSelector(
     (state) => ({
-      stockForEdit: state.galleries.stockForEdit,
-      actionsLoading: state.galleries.actionsLoading,
+      stockForEdit: state.stocks.stockForEdit,
+      actionsLoading: state.stocks.actionsLoading,
     }),
     shallowEqual
   );

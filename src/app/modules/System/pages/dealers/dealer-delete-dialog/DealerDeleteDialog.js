@@ -20,7 +20,7 @@ export function DealerDeleteDialog({ id, show, onHide }) {
   // Dealers Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.galleries.actionsLoading }),
+    (state) => ({ isLoading: state.dealers.galleriesOfDealer.actionsLoading }),
     shallowEqual
   );
 

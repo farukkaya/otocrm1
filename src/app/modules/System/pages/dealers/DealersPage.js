@@ -11,7 +11,6 @@ import { DealersDeleteDialog } from "./dealers-delete-dialog/DealersDeleteDialog
 import { DealerUpdateStatusDialog } from "./dealer-update-status-dialog/DealerUpdateStatusDialog";
 
 export const DealersPage=({ history }) =>{
-
   const { dealer } = useSelector(
     ({ auth }) => ({
       dealer: auth.user.dealer,

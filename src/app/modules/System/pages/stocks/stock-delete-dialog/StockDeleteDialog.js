@@ -20,7 +20,7 @@ export function StockDeleteDialog({ id, show, onHide }) {
   // Stocks Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.galleries.actionsLoading }),
+    (state) => ({ isLoading: state.stocks.actionsLoading }),
     shallowEqual
   );
 

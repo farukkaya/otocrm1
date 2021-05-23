@@ -1,10 +1,8 @@
 import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
-import { GalleriesPage } from "./galleries/GalleriesPage";
 import { UsersPage } from "./users/UsersPage";
 import { DealersPage } from "./dealers/DealersPage";
 import { StocksPage } from "./stocks/StocksPage";
-import { GalleryEdit } from "./galleries/gallery-edit/GalleryEdit";
 import { UserEdit } from "./users/user-edit/UserEdit";
 import { DealerEdit } from "./dealers/dealer-edit/DealerEdit";
 import { LayoutSplashScreen, ContentRoute } from "../../../../_metronic/layout";

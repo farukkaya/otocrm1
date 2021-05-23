@@ -191,23 +191,6 @@ export function AsideMenuList({ layoutProps }) {
         }
         {/*end::1 Level*/}
 
-        {/* Galeriler */}
-        {/*begin::1 Level*/}
-        {/* {
-          (1==0) &&
-          (
-            <li className={`menu-item ${getMenuItemActive("/system/galleries")}`} aria-haspopup="true" >
-              <NavLink className="menu-link" to="/system/galleries">
-                <span className="svg-icon menu-icon">
-                  <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
-                </span>
-                <span className="menu-text">Galeriler</span>
-              </NavLink>
-            </li>
-          )
-        } */}
-        {/*end::1 Level*/}
-
 
         {/* Stok Yönetimi */}
         {/*begin::1 Level*/}

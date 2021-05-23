@@ -5,7 +5,6 @@ import mockProducts from "../../app/modules/ECommerce/__mocks__/mockProduct";
 import mockRemarks from "../../app/modules/ECommerce/__mocks__/mockRemark";
 import mockSpecifications from "../../app/modules/ECommerce/__mocks__/mockSpecification";
 
-import mockGallery from "../../app/modules/System/__mocks__/galleries/mockGallery";
 import mockProfessions from "../../app/modules/System/__mocks__/professions/mockProfession";
 import mockTaxOffice from "../../app/modules/System/__mocks__/taxOffices/mockTaxOffice";
 import mockDealer from "../../app/modules/System/__mocks__/dealers/mockDealer";
@@ -34,7 +33,6 @@ export default function mockAxios(axios) {
   mockNeighborhoods(mock);
   mockProfessions(mock);
   mockDealer(mock);
-  mockGallery(mock);
   mockUser(mock);
   mockCar(mock);
   mockStock(mock);
