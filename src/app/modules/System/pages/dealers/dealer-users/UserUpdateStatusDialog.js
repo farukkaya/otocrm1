@@ -47,10 +47,8 @@ export function UserUpdateStatusDialog() {
       
       dispatch(actions.updateUsersStatus([parseInt(usersUIProps.id)], !user.isActive)) // update status this user
       .then(() =>{
-        dispatch(actions.fetchUsersByDealer(
-          usersUIProps.queryParams,
-          usersUIProps.dealerId
-        ))
+        usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId;
+        dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams)).then(() => {
         // clear selections list
         usersUIProps.setIds([]);
         // closing delete modal
@@ -58,7 +56,7 @@ export function UserUpdateStatusDialog() {
       }) // refresh dealers
     
     });
- 
+  });
   return (
     <Modal
       show={usersUIProps.showUpdateStatusUserDialog}

@@ -18,7 +18,7 @@ export function UserEditDialogHeader({ id }) {
   useEffect(() => {
     let _title = id ? "" : "Yeni Galeri";
     if (userForEdit && id) {
-      _title = "Kullanıcı Düzenle -"+userForEdit.fullName+"-";
+      _title = "Kullanıcı Düzenle -"+userForEdit.fullname+"-";
     }
 
     setTitle(_title);

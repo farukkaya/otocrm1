@@ -59,12 +59,9 @@ export function UserEditDialog() {
       // server request for creating users
       dispatch(actions.createUser(user)).then(() => {
         // refresh list after deletion
-        dispatch(
-          actions.fetchUser(
-            usersUIProps.queryParams,
-            usersUIProps.dealerId
-          )
-        ).then(() => {
+        usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
+        // refresh list after update
+        dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams)).then(() => {
           // clear selections list
           usersUIProps.setIds([]);
           // closing edit modal
@@ -74,14 +71,10 @@ export function UserEditDialog() {
     } else {
       // server request for updating users
       dispatch(actions.updateUser(user)).then(() => {
-        // refresh list after deletion
-        dispatch(
-          // refresh list after deletion
-          actions.fetchUser(
-            usersUIProps.queryParams,
-            usersUIProps.dealerId
-          )
-        ).then(() => {
+        // refresh list after update
+        usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
+        // refresh list after update
+        dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams)).then(() => {
           // clear selections list
           usersUIProps.setIds([]);
           // closing edit modal

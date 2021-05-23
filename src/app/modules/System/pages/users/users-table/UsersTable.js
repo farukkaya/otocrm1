@@ -52,7 +52,10 @@ export function UsersTable() {
     if(currentDealer.isManager)
       dispatch(actions.fetchUsers(usersUIProps.queryParams));
     else
-      dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams, currentDealer.id));
+     {
+      usersUIProps.queryParams.filter.dealerId=usersUIProps.galleryId
+      dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams))
+     }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersUIProps.queryParams, dispatch]);

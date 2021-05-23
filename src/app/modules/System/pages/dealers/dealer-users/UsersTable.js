@@ -57,6 +57,12 @@ export function UsersTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "profession",
+      text: "Meslek",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
       dataField: "email",
       text: "E-Posta",
       sort: true,

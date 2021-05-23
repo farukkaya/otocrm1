@@ -54,9 +54,13 @@ export function GalleryEditDialog() {
   }, [galleriesUIProps.id, dispatch]);
 
   const saveGallery = (gallery) => {
+    //TODO: CLICK IS NOT WORKING, CHECK THIS FUNCTION
+
     //gallery.dueDate = getFormattedDate(gallery.dueDate);
-    gallery.parentId=galleriesUIProps.id;
     if (!galleriesUIProps.id) {
+
+      gallery.parentId=galleriesUIProps.id;
+
       // server request for creating galleries
       dispatch(actions.createDealer(gallery)).then(() => {
         // refresh list after deletion

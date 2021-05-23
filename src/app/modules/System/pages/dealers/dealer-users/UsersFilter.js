@@ -16,7 +16,6 @@ const prepareFilter = (queryParams, values) => {
     phone: "",
     identityNo: "",
     username: "",
-    dealer:"",
     profession:""
   };
   

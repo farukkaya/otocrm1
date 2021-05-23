@@ -139,8 +139,8 @@ export function GalleryEditForm({ saveGallery, gallery, actionsLoading, onHide }
               </button>
               <> </>
               <button
-                type="submit"
-                onClick={() => handleSubmit()}
+                  type="submit"
+                  onClick={() =>  handleSubmit()}
                 className="btn btn-primary btn-elevate"
               >
                 Kaydet
