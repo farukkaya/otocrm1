@@ -55,6 +55,15 @@ export function updateDealer(dealer) {
 
 
 
+export function getDealerDetail(dealerId) {
+  return axios.get(`${DEALERS_URL}/GetDetailById?id=${dealerId}`);
+}
+
+export function getAdministrations(dealerId) {
+  return axios.get(`${DEALERS_URL}/GetAdministrations?dealerId=${dealerId}`);
+}
+
+
 
 
 

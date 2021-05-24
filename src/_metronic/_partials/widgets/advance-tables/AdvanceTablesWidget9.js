@@ -3,15 +3,18 @@
 import React from "react";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl } from "../../../_helpers";
-
+import {Card, Accordion } from "react-bootstrap";
 export function AdvanceTablesWidget9({ className }) {
   return (
-    <>
+    <Accordion defaultActiveKey="-1" > 
       {/* begin::Advance Table Widget 9 */}
       <div className={`card card-custom ${className}`}>
+      <Accordion.Toggle as={Card.Header} eventKey="0">
+
         {/* begin::Header */}
-        <div className="card-header border-0 py-5">
-          <h3 className="card-title align-items-start flex-column">
+        <Card.Header className="d-flex justify-content-between bg-white  w-100" >
+        <div class="p-2 bd-highlight">
+        <h3 className="card-title align-items-start flex-column">
             <span className="card-label font-weight-bolder text-dark">
              İlgilenen Müşteriler
             </span>
@@ -19,7 +22,9 @@ export function AdvanceTablesWidget9({ className }) {
               20'den fazla müşteri bu stok ile ilgilendi
             </span>
           </h3>
-          <div className="card-toolbar">
+        </div>
+        <div class="p-2 bd-highlight">
+        <div className="card-toolbar">
             <a
               href="#"
               className="btn btn-info font-weight-bolder font-size-sm mr-3"
@@ -33,10 +38,16 @@ export function AdvanceTablesWidget9({ className }) {
               Create
             </a>
           </div>
+      
         </div>
+           </Card.Header>
         {/* end::Header */}
+        </Accordion.Toggle>
+
+
 
         {/* begin::Body */}
+        <Accordion.Collapse eventKey="0">
         <div className="card-body pt-0 pb-3">
           <div className="tab-content">
             {/* begin::Table */}
@@ -184,9 +195,10 @@ export function AdvanceTablesWidget9({ className }) {
             {/* end::Table */}
           </div>
         </div>
+        </Accordion.Collapse>
         {/* end::Body */}
       </div>
       {/* end::Advance Table Widget 9 */}
-    </>
+      </Accordion>
   );
 }

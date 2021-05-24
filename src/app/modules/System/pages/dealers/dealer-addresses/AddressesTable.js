@@ -4,11 +4,11 @@
 import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import BootstrapTable from "react-bootstrap-table-next";
+import * as actions from "../../../_redux/addresses/addressesActions";
 import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
-import * as actions from "../../../_redux/dealers/dealersActions";
-import * as uiHelpers from "./GalleriesUIHelper";
+import * as uiHelpers from "./AddressesUIHelper";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import {
@@ -18,73 +18,93 @@ import {
   PleaseWaitMessage,
   sortCaret,
 } from "../../../../../../_metronic/_helpers";
-import { useGalleriesUIContext } from "./GalleriesUIContext";
+import { useAddressesUIContext } from "./AddressesUIContext";
 
-export function GalleriesTable() {
-  // Galleries UI Context
-  const galleriesUIContext = useGalleriesUIContext();
-  const galleriesUIProps = useMemo(() => {
+export function AddressesTable() {
+  // Addresses UI Context
+  const addressesUIContext = useAddressesUIContext();
+  const addressesUIProps = useMemo(() => {
     return {
-      ids: galleriesUIContext.ids,
-      setIds: galleriesUIContext.setIds,
-      queryParams: galleriesUIContext.queryParams,
-      setQueryParams: galleriesUIContext.setQueryParams,
-      parentId: galleriesUIContext.parentId,
-      dealerTypeId: galleriesUIContext.dealerTypeId,
-      openEditGalleryDialog: galleriesUIContext.openEditGalleryDialog,
-      openUpdateStatusGalleryDialog:galleriesUIContext.openUpdateStatusGalleryDialog,
-      openDeleteGalleryDialog: galleriesUIContext.openDeleteGalleryDialog,
+      ids: addressesUIContext.ids,
+      setIds: addressesUIContext.setIds,
+      queryParams: addressesUIContext.queryParams,
+      setQueryParams: addressesUIContext.setQueryParams,
+      relationGuid: addressesUIContext.relationGuid,
+      openEditAddressDialog: addressesUIContext.openEditAddressDialog,
+      openUpdateStatusAddressDialog:addressesUIContext.openUpdateStatusAddressDialog,
+      openDeleteAddressDialog: addressesUIContext.openDeleteAddressDialog,
     };
-  }, [galleriesUIContext]);
+  }, [addressesUIContext]);
 
   // Getting curret state of dealers list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.dealers.galleriesOfDealer}),
+    (state) => ({ currentState: state.addresses }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
   const dispatch = useDispatch();
   useEffect(() => {
-    galleriesUIProps.setIds([]);
-    galleriesUIProps.queryParams.filter.parentId=galleriesUIProps.parentId;
-    galleriesUIProps.queryParams.filter.dealerTypeId=galleriesUIProps.dealerTypeId;
-    dispatch(actions.fetchGalleriesByParent(galleriesUIProps.queryParams));
+    addressesUIProps.setIds([]);
+    addressesUIProps.queryParams.filter.relationGuid=addressesUIProps.relationGuid
+    dispatch(actions.fetchAddresses(addressesUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [galleriesUIProps.queryParams, dispatch, galleriesUIProps.parentId]);
+  }, [addressesUIProps.queryParams, dispatch, addressesUIProps.relationGuid]);
   const columns = [
     {
       dataField: "id",
-      sort: true,
       text: "Id",
+      sort: true,
       sortCaret: sortCaret,
     },
     {
       dataField: "name",
-      text:"Galeri Adı",
-      sort: true,
-      sortCaret: sortCaret,
-    },   
-    {
-      dataField: "capacityId",
-      text:"Kapasite",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter: columnFormatters.CapacityColumnFormatter,
-    },
-    {
-      dataField: "taxOffice",
-      text:"Vergi Dairesi",
+      text: "Adres Başlığı",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "taxIdentityNo",
-      text:"Vergi No",
+      dataField: "isPrimaryAddress",
+      text: "Statu",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.StatusColumnFormatter,
+      formatExtraData: {
+        trueText:"Birincil",
+        falseText:"Diğer",
+        selector:"isPrimaryAddress",
+      },
+    },
+    {
+      dataField: "city",
+      text: "İl",
       sort: true,
       sortCaret: sortCaret,
     },
-
-
+    {
+      dataField: "town",
+      text: "İlçe",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "neighborhood",
+      text: "Mahalle",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "addressLine",
+      text: "Adres",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "createdDate",
+      text: "Oluşturma Tarihi",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.DateColumnFormatter,
+    },
     {
       dataField: "isActive",
       text: "Durum",
@@ -94,28 +114,28 @@ export function GalleriesTable() {
     },
     {
       dataField: "action",
-      text: "İşlemler",
+      text:"İşlemler",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openUpdateStatusDialog: galleriesUIProps.openUpdateStatusGalleryDialog,
-        openEditPage: galleriesUIProps.openEditGalleryDialog,
-        openDeleteDialog: galleriesUIProps.openDeleteGalleryDialog,
+        openUpdateStatusDialog: addressesUIProps.openUpdateStatusAddressDialog,
+        openEditPage: addressesUIProps.openEditAddressDialog,
+        openDeleteDialog: addressesUIProps.openDeleteAddressDialog,
       },
       classes: "text-right pr-0",
-      headerClasses: "text-right pr-3",
+      headerClasses:"text-right pr-3",
 
       style: {
         minWidth: "100px",
       },
-    }
+    },
   ];
 
   const paginationOptions = {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: galleriesUIProps.queryParams.pageSize,
-    page: galleriesUIProps.queryParams.pageNumber,
+    sizePerPage: addressesUIProps.queryParams.pageSize,
+    page: addressesUIProps.queryParams.pageNumber,
   };
   return (
     <>
@@ -137,12 +157,12 @@ export function GalleriesTable() {
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  galleriesUIProps.setQueryParams
+                  addressesUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: galleriesUIProps.ids,
-                  setIds: galleriesUIProps.setIds,
+                  ids: addressesUIProps.ids,
+                  setIds: addressesUIProps.setIds,
                 })}
                 {...paginationTableProps}
               >

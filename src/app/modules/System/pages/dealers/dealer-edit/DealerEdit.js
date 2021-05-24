@@ -21,7 +21,8 @@ import { Stocks } from "../dealer-stocks/Stocks";
 import { StocksUIProvider } from "../dealer-stocks/StocksUIContext";
 import { Users } from "../dealer-users/Users";
 import { UsersUIProvider } from "../dealer-users/UsersUIContext";
-
+import { Addresses } from "../dealer-addresses/Addresses";
+import { AddressesUIProvider } from "../dealer-addresses/AddressesUIContext";
 
 
 const initDealer = {
@@ -219,8 +220,7 @@ export function DealerEdit({
               : "Bayi&Galeri" }
                   </a>
               </li>
-              {/* {dealerForEdit?.dealerTypeId !== 1 && (  )} */}
-                <li className={`nav-item ${dealerForEdit?.dealerTypeId == 1 && "offcanvas"}`} onClick={() => setTab("stocks")}>
+              <li className={`nav-item ${dealerForEdit?.dealerTypeId == 1 && "offcanvas"}`} onClick={() => setTab("stocks")}>
                   <a
                     className={`nav-link ${tab === "stocks" && "active"}`}
                     data-toggle="tab"
@@ -230,8 +230,6 @@ export function DealerEdit({
                     Stokları
                     </a>
                 </li>
-              
-
               <li className={`nav-item ${dealerForEdit?.dealerTypeId == 2 && "offcanvas"}`} onClick={() => setTab("galleries")}>
                 <a
                   className={`nav-link ${tab === "galleries" && "active"}`}
@@ -250,6 +248,16 @@ export function DealerEdit({
                   aria-selected={(tab === "users")}
                 >
                   Kullanıcıları
+                    </a>
+              </li>
+              <li className="nav-item" onClick={() => setTab("addresses")}>
+                <a
+                  className={`nav-link ${tab === "addresses" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "addresses")}
+                >
+                  Adresleri
                     </a>
               </li>
             </ul>
@@ -285,6 +293,11 @@ export function DealerEdit({
                 <UsersUIProvider currentDealerId={id}>
                   <Users />
                 </UsersUIProvider>
+              )}
+                {tab === "addresses" && id && (
+                <AddressesUIProvider guid={dealerForEdit.guid}>
+                  <Addresses />
+                </AddressesUIProvider>
               )}
             </div>
           </>)}

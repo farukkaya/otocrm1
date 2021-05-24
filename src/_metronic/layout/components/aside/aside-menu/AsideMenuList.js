@@ -1230,6 +1230,21 @@ export function AsideMenuList({ layoutProps }) {
                   </NavLink>
                 </li>
                 {/*end::2 Level*/}
+ {/*begin::2 Level*/}
+ <li
+                  className={`menu-item ${getMenuItemActive(
+                    "/react-bootstrap/alert"
+                  )}`}
+                  aria-haspopup="true"
+                >
+                  <NavLink className="menu-link" to="/react-bootstrap/accordion">
+                    <i className="menu-bullet menu-bullet-dot">
+                      <span />
+                    </i>
+                    <span className="menu-text">Accordion</span>
+                  </NavLink>
+                </li>
+                {/*end::2 Level*/}
 
                 {/*begin::2 Level*/}
                 <li

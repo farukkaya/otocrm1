@@ -43,12 +43,22 @@ export function DealerCard({ dealer }) {
                                 </div>
                                 <div className="text-muted text-hover-primary">
                                     <a href="#" className="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Takip Et</a>
-                                    <a href="#" className="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Güncelle</a>
+                                    <a href={`/system/dealers/${dealer.id}/edit`} className="btn btn-sm btn-primary font-weight-bold py-2 px-3 px-xxl-5 my-1">Güncelle</a>
                                 </div>
                         </div>
                             {/* end::Deaeler */}
                             {/* begin::Contact */}
                             <div className="py-5">
+                                {
+                                    dealer.parent &&(
+                                        <div className="d-flex align-items-center justify-content-between mb-2">
+                                        <span className="font-weight-bold mr-2">Bağlı Olduğu Bayi:</span>
+                                        <span className="text-muted text-hover-primary">
+                                            {dealer.parent}
+                                        </span>
+                                    </div>
+                                    )
+                                }
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Vergi Dairesi:</span>
                                     <span className="text-muted text-hover-primary">
@@ -68,12 +78,22 @@ export function DealerCard({ dealer }) {
                                     </span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
-                                    <span className="font-weight-bold mr-2">Telefon:</span>
+                                    <span className="font-weight-bold mr-2">Fax:</span>
+                                    <span className="text-muted text-hover-primary">
+                                        {dealer.fax}
+                                    </span>
+                                </div>
+                                <div className="d-flex align-items-center justify-content-between mb-2">
+                                    <span className="font-weight-bold mr-2">Telefon1:</span>
                                     <span className="text-muted">{dealer.phone1}</span>
+                                </div>
+                                <div className="d-flex align-items-center justify-content-between mb-2">
+                                    <span className="font-weight-bold mr-2">Telefon2:</span>
+                                    <span className="text-muted">{dealer.phone2}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between">
                                     <span className="font-weight-bold mr-2">Lokasyon:</span>
-                                    <span className="text-muted">ADANA</span>
+                                    <span className="text-muted">{dealer.location}</span>
                                 </div>
                             </div>
                             {/* end::Contact */}

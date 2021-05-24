@@ -104,7 +104,6 @@ export const fetchDealer = id => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
-
 export const deleteDealer = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
@@ -170,3 +169,45 @@ export const deleteDealers = ids => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
+
+
+export const fetchDealerDetail = id => dispatch => {
+  if (!id) {
+    return dispatch(actions.dealerDetailFetched({ dealerForDetail: undefined }));
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getDealerDetail(id)
+    .then(response => {
+      
+      const dealer = response.data;
+      dispatch(actions.dealerDetailFetched({ dealerForDetail: dealer }));
+      return dealer;
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find dealer";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
+
+
+export const fetchAdministrations = dealerId => dispatch => {
+  if (!dealerId) {
+    return dispatch(actions.dealerAdministrationsFetched({ administrations: [] }));
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getAdministrations(dealerId)
+    .then(response => {
+      
+      const administrations = response.data;
+      dispatch(actions.dealerAdministrationsFetched({ administrations: administrations }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find dealer";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
+//

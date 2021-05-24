@@ -4,7 +4,11 @@ import * as actions from "../../../_redux/dealers/dealersActions";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { DealerCard } from "./dealer-detail-cards/DealerCard";
 import { DealerManagerCard } from "./dealer-detail-cards/DealerManagerCard";
-import { AdvanceTablesWidget1,AdvanceTablesWidget9, ListsWidget10 } from '../../../../../../_metronic/_partials/widgets';
+import { ChildrenTabsCard } from "./dealer-children-tables/ChildrenTabsCard"
+import { AdvanceTablesWidget1, AdvanceTablesWidget9, ListsWidget10 } from '../../../../../../_metronic/_partials/widgets';
+import { UsersCard } from "./dealer-children-tables/UsersCard";
+import { StocksCard } from "./dealer-children-tables/StocksCard";
+import { AddressesCard } from "./dealer-children-tables/AddressesCard";
 
 export function DealerDetails({
   history,
@@ -16,42 +20,46 @@ export function DealerDetails({
   suhbeader.setTitle("Bayi Kartı");
   const dispatch = useDispatch();
 
-  const { actionsLoading, dealer ,user} = useSelector(
+  const { actionsLoading, dealer, administrations } = useSelector(
     (state) => ({
       actionsLoading: state.dealers.actionsLoading,
-      dealer: state.dealers.dealerForEdit,
-      user:state.auth.user
+      dealer: state.dealers.dealerForDetail,
+      administrations: state.dealers.administrations
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    dispatch(actions.fetchDealer(id));
-  }, [user,id, dispatch]);
+    dispatch(actions.fetchDealerDetail(id));
+    dispatch(actions.fetchAdministrations(id));
+  }, [id, dispatch]);
   return (
-  <>
-       <div className="row">
+    <>
+      <div className="row">
         <div className="col-md-4">
-         <DealerCard dealer={dealer}></DealerCard>
-          </div>
-          <div className="col-md-4">
-            <DealerManagerCard user={user}></DealerManagerCard>
-          </div>
-          <div className="col-md-4">
-            <ListsWidget10 className="card-stretch gutter-b"></ListsWidget10>
-          </div>
-    </div>
-    <div className="d-flex flex-row">
-     <div className="row">
-     <div className="col-lg-12">
-       <AdvanceTablesWidget1 className="card-stretch gutter-b"></AdvanceTablesWidget1>
-     </div>
-     <div className="col-lg-12">
-       <AdvanceTablesWidget9 className="card-stretch gutter-b"></AdvanceTablesWidget9>
-     </div>
+          <DealerCard dealer={dealer}></DealerCard>
+        </div>
+        <div className="col-md-4">
+          <DealerManagerCard user={administrations[0]} count={administrations.length}></DealerManagerCard>
+        </div>
+        <div className="col-md-4">
+          <ListsWidget10 className="card-stretch gutter-b"></ListsWidget10>
+        </div>
       </div>
-    </div>
-  </>
+
+      {dealer && (
+        <div class="d-flex flex-column bd-highlight mb-3">
+          <div class="p-2 bd-highlight mb-3"><ChildrenTabsCard parentId={id} className="card-stretch gutter-b"></ChildrenTabsCard></div>
+          <div class="p-2 bd-highlight mb-3"><UsersCard parentId={id} className="card-stretch gutter-b"></UsersCard></div>
+          {dealer.dealerTypeId != 1 && (
+              <div class="p-2 bd-highlight mb-3"><StocksCard parentId={id} className="card-stretch gutter-b"></StocksCard></div>
+            )
+          }
+          <div class="p-2 bd-highlight mb-3"><AddressesCard parentGuid={dealer.guid || ""} className="card-stretch gutter-b"></AddressesCard></div></div>
+      )
+      }
+
+    </>
 
   );
 }

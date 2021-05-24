@@ -11,8 +11,9 @@ export function useGalleriesUIContext() {
 
 export const GalleriesUIConsumer = GalleriesUIContext.Consumer;
 
-export function GalleriesUIProvider({ currentDealerId, children }) {
+export function GalleriesUIProvider({ currentDealerId,dealerType="", children }) {
   const [parentId, setParentId] = useState(currentDealerId);
+  const [dealerTypeId, setDealerTypeId] = useState(dealerType);
   const [queryParams, setQueryParamsBase] = useState(initialFilter);
   const [ids, setIds] = useState([]);
   const setQueryParams = useCallback(nextQueryParams => {
@@ -32,9 +33,9 @@ export function GalleriesUIProvider({ currentDealerId, children }) {
   const [showEditGalleryDialog, setShowEditGalleryDialog] = useState(false);
   const initGallery = {
     id:undefined,
-    parentId:parentId,
+    parentId:"",
+    dealerTypeId:"",
     name: "",
-    adminId:0,
     taxOfficeId: 0,
     taxIdentityNo:""
   };
@@ -96,6 +97,8 @@ export function GalleriesUIProvider({ currentDealerId, children }) {
   const value = {
     ids,
     setIds,
+    dealerTypeId,
+    setDealerTypeId,
     parentId,
     setParentId,
     queryParams,

@@ -5,6 +5,7 @@ const initialDealersState = {
   actionsLoading: false,
   totalCount: 0,
   entities: [],
+  administrations:[],
   entitiesForCombo:[],
   usersOfDealer:[],
   galleriesOfDealer:{
@@ -16,6 +17,7 @@ const initialDealersState = {
     lastError: null
   },
   dealerForEdit: undefined,
+  dealerForDetail: undefined,
   lastError: null
 };
 export const callTypes = {
@@ -65,6 +67,17 @@ export const dealersSlice = createSlice({
     dealerFetched: (state, action) => {
       state.actionsLoading = false;
       state.dealerForEdit = action.payload.dealerForEdit;
+      state.error = null;
+    },
+    dealerAdministrationsFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.administrations = action.payload.administrations;
+      state.error = null;
+    },
+    // getDealerDetail
+    dealerDetailFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.dealerForDetail = action.payload.dealerForDetail;
       state.error = null;
     },
      // findDealers

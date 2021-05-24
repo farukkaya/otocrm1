@@ -14,8 +14,8 @@ function PersonaInformation(props) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user, shallowEqual);
   useEffect(() => {
-    if (user.pic) {
-      setPic(user.pic);
+    if (user.picturePath) {
+      setPic(user.picturePath);
     }
   }, [user]);
   // Methods
@@ -41,7 +41,7 @@ function PersonaInformation(props) {
   };
   // UI Helpers
   const initialValues = {
-    pic: user.pic,
+    picturePath: user.picturePath,
     firstname: user.firstname,
     lastname: user.lastname,
     phone: user.phone,

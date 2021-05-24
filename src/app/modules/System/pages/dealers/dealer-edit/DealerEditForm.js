@@ -132,13 +132,13 @@ export function DealerEditForm({
     addressName: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
-      .required(format(REQUIRED, "Adres Adı")),
+      .required(format(REQUIRED, "Adres Adı")),//TODO: İL ve İLÇE yi ata
     cityId: Yup.number()
       .required(format(REQUIRED, "İl")),
     townId: Yup.number()
       .required(format(REQUIRED, "İlçe")),
     addressLine: Yup.string()
-      .min(30, format(MIN_LENGTH, "30"))
+      .min(30, format(MIN_LENGTH, "15"))
       .max(500, format(MAX_LENGTH, "500"))
 
 

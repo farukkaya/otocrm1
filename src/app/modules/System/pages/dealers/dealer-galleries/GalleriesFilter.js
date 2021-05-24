@@ -31,6 +31,7 @@ export function GalleriesFilter() {
       setQueryParams: galleriesUIContext.setQueryParams,
       openNewGalleryDialog: galleriesUIContext.openNewGalleryDialog,
       queryParams: galleriesUIContext.queryParams,
+      dealerTypeId: galleriesUIContext.dealerTypeId,
       ids: galleriesUIContext.ids
     };
   }, [galleriesUIContext]);
@@ -96,7 +97,12 @@ export function GalleriesFilter() {
               className="btn btn-primary"
               onClick={() => galleriesUIProps.openNewGalleryDialog()}
             >
-              Yeni Galeri
+              {galleriesUIProps.dealerTypeId == "1"  ? "Yeni Alt Bayi"
+              : galleriesUIProps.dealerTypeId== "2" ? "Yeni Alt Galeri" 
+              : galleriesUIProps.dealerTypeId== "3" ? "Yeni Alt Bayi&Galeri"
+              : "Yeni Alt Bayi&Galeri" }
+           
+              
             </button>
           </div>
           
