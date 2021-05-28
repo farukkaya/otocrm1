@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, Accordion } from "react-bootstrap";
 import { Users } from "../../dealer-users/Users";
 import { UsersUIProvider } from "../../dealer-users/UsersUIContext";
-export function UsersCard({ parentId, className }) {
+export function UsersCard({ parentId,openDetailUserPage, className }) {
     
     return (
       <Accordion defaultActiveKey="-1" > 
@@ -37,7 +37,7 @@ export function UsersCard({ parentId, className }) {
           {/* begin::Body */}
           <Accordion.Collapse eventKey="0" >
             <Card.Body>
-            <UsersUIProvider currentDealerId={parentId}>
+            <UsersUIProvider currentDealerId={parentId} openDetailUserPage={openDetailUserPage}>
                   <Users />
                 </UsersUIProvider>
             </Card.Body>

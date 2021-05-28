@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useContext, createContext, useState, useCallback } from "react";
-import {isEqual, isFunction} from "lodash";
-import {initialFilter} from "./UsersUIHelper";
+import { isEqual, isFunction } from "lodash";
+import { initialFilter } from "./UsersUIHelper";
 
 const UsersUIContext = createContext();
 
@@ -11,7 +11,7 @@ export function useUsersUIContext() {
 
 export const UsersUIConsumer = UsersUIContext.Consumer;
 
-export function UsersUIProvider({ currentDealerId, children }) {
+export function UsersUIProvider({ currentDealerId,openDetailUserPage, children }) {
   const [dealerId, setDealerId] = useState(currentDealerId);
   const [queryParams, setQueryParamsBase] = useState(initialFilter);
   const [ids, setIds] = useState([]);
@@ -29,19 +29,25 @@ export function UsersUIProvider({ currentDealerId, children }) {
     });
   }, []);
   const [selectedId, setSelectedId] = useState(null);
-  const [showEditUserDialog, setShowEditUserDialog] = useState(false);
   const initUser = {
-    id:undefined,
+    id: undefined,
     name: "",
-    capacityId:0,
-    dealerId:dealerId,
-    taxOfficeId:undefined,
+    capacityId: 0,
+    dealerId: dealerId,
+    taxOfficeId: undefined,
     taxIdentityNo: ""
   };
-  useEffect(()=> {
+  useEffect(() => {
     setDealerId(currentDealerId);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDealerId]);
+  // #region EXAMPLE
+
+  // #endregion
+
+  // #region INSERT-EDIT DIALOG
+  const [showEditUserDialog, setShowEditUserDialog] = useState(false);
+
   const openNewUserDialog = () => {
     setSelectedId(undefined);
     setShowEditUserDialog(true);
@@ -50,12 +56,13 @@ export function UsersUIProvider({ currentDealerId, children }) {
     setSelectedId(id);
     setShowEditUserDialog(true);
   };
- 
-
   const closeEditUserDialog = () => {
     setSelectedId(undefined);
     setShowEditUserDialog(false);
   };
+  // #endregion
+
+  // #region SINGLE DELETE DIALOG
   const [showDeleteUserDialog, setShowDeleteUserDialog] = useState(false);
   const openDeleteUserDialog = id => {
     setSelectedId(id);
@@ -65,7 +72,18 @@ export function UsersUIProvider({ currentDealerId, children }) {
     setSelectedId(undefined);
     setShowDeleteUserDialog(false);
   };
+  // #endregion
+  // #region MULTI DELETE DIALOG
+  const [showDeleteUsersDialog, setShowDeleteUsersDialog] = useState(false);
+  const openDeleteUsersDialog = () => {
+    setShowDeleteUsersDialog(true);
+  };
+  const closeDeleteUsersDialog = () => {
+    setShowDeleteUsersDialog(false);
+  };
+  // #endregion
 
+  // #region SINGLE UPDATE STATUS
   const [showUpdateStatusUserDialog, setShowUpdateStatusUserDialog] = useState(false);
 
   const openUpdateStatusUserDialog = id => {
@@ -76,15 +94,19 @@ export function UsersUIProvider({ currentDealerId, children }) {
     setSelectedId(undefined);
     setShowUpdateStatusUserDialog(false);
   };
-
-  const [showDeleteUsersDialog, setShowDeleteUsersDialog] = useState(false);
-  const openDeleteUsersDialog = () => {
-    setShowDeleteUsersDialog(true);
+  // #endregion
+  // #region MULTI UPDATE STATUS
+  const [showUpdateUsersStatusDialog, setShowUpdateUsersStatusDialog] = useState(false);
+  const openUpdateUsersStatusDialog = () => {
+    setShowUpdateUsersStatusDialog(true);
   };
-  const closeDeleteUsersDialog = () => {
-    setShowDeleteUsersDialog(false);
+  const closeUpdateUsersStatusDialog = () => {
+    setSelectedId(undefined);
+    setShowUpdateUsersStatusDialog(false);
   };
+  // #endregion
 
+  // #region MULTI FETCHH DIALOG
   const [showFetchUsersDialog, setShowFetchUsersDialog] = useState(false);
   const openFetchUsersDialog = () => {
     setShowFetchUsersDialog(true);
@@ -92,6 +114,9 @@ export function UsersUIProvider({ currentDealerId, children }) {
   const closeFetchUsersDialog = () => {
     setShowFetchUsersDialog(false);
   };
+  // #endregion
+
+
 
   const value = {
     ids,
@@ -102,24 +127,34 @@ export function UsersUIProvider({ currentDealerId, children }) {
     setQueryParams,
     initUser,
     selectedId,
+    openDetailUserPage,
+    
     showEditUserDialog,
-    openNewUserDialog,    
+    openNewUserDialog,
     openEditUserDialog,
-    openUpdateStatusUserDialog,
-    closeUpdateStatusUserDialog,
-    showUpdateStatusUserDialog,
     closeEditUserDialog,
+    
     showDeleteUserDialog,
     openDeleteUserDialog,
     closeDeleteUserDialog,
+
     showDeleteUsersDialog,
     openDeleteUsersDialog,
     closeDeleteUsersDialog,
+
+    showFetchUsersDialog,
     openFetchUsersDialog,
     closeFetchUsersDialog,
-    showFetchUsersDialog
+
+    showUpdateStatusUserDialog,
+    openUpdateStatusUserDialog,
+    closeUpdateStatusUserDialog,
+
+    showUpdateUsersStatusDialog,
+    openUpdateUsersStatusDialog,
+    closeUpdateUsersStatusDialog
   };
-  
+
   return (
     <UsersUIContext.Provider value={value}>
       {children}

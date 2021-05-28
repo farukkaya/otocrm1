@@ -9,6 +9,7 @@ export function UsersGrouping() {
       ids: usersUIContext.ids,
       openDeleteUsersDialog: usersUIContext.openDeleteUsersDialog,
       openFetchUsersDialog: usersUIContext.openFetchUsersDialog,
+      openUpdateUsersStatusDialog: usersUIContext.openUpdateUsersStatusDialog
     };
   }, [usersUIContext]);
 
@@ -18,12 +19,12 @@ export function UsersGrouping() {
         <div className="col-xl-12">
           <div className="form-group form-group-inline">
             <div className="form-group-inline">
-              <button
+            <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
                 onClick={usersUIProps.openDeleteUsersDialog}
               >
-                <i className="fa fa-trash"></i> Hepsini Sil
+                <i className="fa fa-trash"></i> Sil ({usersUIProps.ids.length})
               </button>
               &nbsp;
               <button
@@ -32,6 +33,14 @@ export function UsersGrouping() {
                 onClick={usersUIProps.openFetchUsersDialog}
               >
                 <i className="fa fa-stream"></i> Seçilenler ({usersUIProps.ids.length})
+              </button>
+              &nbsp;
+              <button
+                type="button"
+                className="btn btn-light-primary font-weight-bolder font-size-sm"
+                onClick={usersUIProps.openUpdateUsersStatusDialog}
+              >
+                <i className="fa fa-sync-alt"></i> Durum Güncelle
               </button>
             </div>
           </div>

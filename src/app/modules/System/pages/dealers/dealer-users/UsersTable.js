@@ -33,6 +33,7 @@ export function UsersTable() {
       openEditUserDialog: usersUIContext.openEditUserDialog,
       openUpdateStatusUserDialog:usersUIContext.openUpdateStatusUserDialog,
       openDeleteUserDialog: usersUIContext.openDeleteUserDialog,
+      openDetailUserPage: usersUIContext.openDetailUserPage,
     };
   }, [usersUIContext]);
 
@@ -108,6 +109,7 @@ export function UsersTable() {
         openUpdateStatusDialog: usersUIProps.openUpdateStatusUserDialog,
         openEditPage: usersUIProps.openEditUserDialog,
         openDeleteDialog: usersUIProps.openDeleteUserDialog,
+        openDetailPage:usersUIProps.openDetailUserPage
       },
       classes: "text-right pr-0",
       headerClasses:"text-right pr-3",

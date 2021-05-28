@@ -19,7 +19,9 @@ export function DealerDetails({
   const suhbeader = useSubheader();
   suhbeader.setTitle("Bayi Kartı");
   const dispatch = useDispatch();
-
+  const openDetailUserPage= (id) => {
+    history.push(`/system/users/${id}/detail`);
+  };
   const { actionsLoading, dealer, administrations } = useSelector(
     (state) => ({
       actionsLoading: state.dealers.actionsLoading,
@@ -50,7 +52,7 @@ export function DealerDetails({
       {dealer && dealer.id==id&& (
         <div class="d-flex flex-column bd-highlight mb-3">
           <div class="p-2 bd-highlight mb-3"><ChildrenTabsCard parentId={id} className="card-stretch gutter-b"></ChildrenTabsCard></div>
-          <div class="p-2 bd-highlight mb-3"><UsersCard parentId={id} className="card-stretch gutter-b"></UsersCard></div>
+          <div class="p-2 bd-highlight mb-3"><UsersCard openDetailUserPage={openDetailUserPage} parentId={id} className="card-stretch gutter-b"></UsersCard></div>
           {dealer.dealerTypeId != 1 && (
               <div class="p-2 bd-highlight mb-3"><StocksCard parentId={id} className="card-stretch gutter-b"></StocksCard></div>
             )

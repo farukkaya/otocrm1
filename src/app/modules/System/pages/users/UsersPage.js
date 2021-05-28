@@ -37,12 +37,11 @@ export const UsersPage=({ history }) =>{
     openDeleteUserDialog: (guid) => {
       history.push(`/system/users/${guid}/delete`);
     },
-  
-    openDeleteUsersDialog: () => {
-      history.push(`/system/users/deleteUsers`);
-    },
     openFetchUsersDialog: () => {
       history.push(`/system/users/fetch`);
+    },
+    openDeleteUsersDialog: () => {
+      history.push(`/system/users/deleteUsers`);
     },
     openUpdateUsersStatusDialog: () => {
       history.push("/system/users/updateStatus");

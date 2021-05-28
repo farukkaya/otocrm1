@@ -74,7 +74,7 @@ export function UserDeleteDialog({ id, show, onHide }) {
           <button
             type="button"
             onClick={deleteUser}
-            className="btn btn-delete btn-elevate"
+            className="btn btn-primary btn-elevate"
           >
             Sil
           </button>

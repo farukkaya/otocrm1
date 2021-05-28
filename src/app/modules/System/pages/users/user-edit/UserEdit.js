@@ -73,10 +73,9 @@ export function UserEdit({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userForEdit, id]);
 
-  const saveUser = (values) => {
+  const saveUser = (values) => { 
+    values.professionId=+values.professionId;
     if (!id) {
-      values.professionId=+values.professionId;
-      
       values.dealerId=+currentDealer.id;
       dispatch(actions.createUser(values))
       backToUsersList()

@@ -11,12 +11,11 @@ export function getAllUsers() {
 export function getUserById(userId) {
   return axios.get(`${USERS_URL}/GetById?id=${userId}`);
 }
-
-// CREATE =>  POST: add a new user to the server
+//API=>OK
 export function createUser(user) {
   return axios.post(`${USERS_URL}/Insert`, user);
 }
-// UPDATE => PUT: update the procuct on the server
+//API=>OK
 export function updateUser(user) {
   return axios.put(`${USERS_URL}/Update`,  user);
 }
@@ -27,15 +26,14 @@ export function deleteUser(userId) {
 }
 
 
-// Method from server should return QueryResultsModel(items: any[], totalsCount: number)
-// items => filtered/sorted result
+//API=>OK
 export function findUsers(queryParams) {
   return axios.post(`${USERS_URL}/Find`, queryParams);
 }
 
 // UPDATE Status
 export function updateStatusForUsers(ids, status) {
-  return axios.post(`${USERS_URL}/UpdateStatus`, {
+  return axios.put(`${USERS_URL}/UpdateStatus`, {
     ids,
     status
   });

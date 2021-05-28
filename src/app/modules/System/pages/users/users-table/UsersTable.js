@@ -8,10 +8,7 @@ import paginationFactory, {
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import * as actions from "../../../_redux/users/usersActions"
 import * as uiHelpers from "../UsersUIHelpers";
-import {
-  UserTypeTitles,
-  UserTypeCssClasses
-}from "../UsersUIHelpers";
+
 import {
   getSelectRow,
   getHandlerTableChange,

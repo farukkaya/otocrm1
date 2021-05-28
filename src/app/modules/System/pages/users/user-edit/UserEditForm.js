@@ -31,11 +31,10 @@ export function UserEditForm({
   };
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if(user.id === undefined ){
-  //     dispatch(taxOfficesActions.fetchAllTaxOffice())
-  //    }
-  // }, [dispatch]);
+
+  useEffect(() => {
+    if(!user?.id)dispatch(professionsActions.fetchAllProfession())
+  }, [dispatch]);
 
   const UserEditSchema = Yup.object().shape({
     email: Yup.string()
@@ -104,7 +103,7 @@ export function UserEditForm({
                 </div>
                 <div className="col-lg-4">
                 <Select name="professionId" label="Meslek" options={professions} onFocus={(e)=>{
-                      dispatch(professionsActions.fetchAllProfession());
+                      if(professions.length>0)dispatch(professionsActions.fetchAllProfession());
                     }}/>
                 </div>
               </div>
