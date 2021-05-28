@@ -2,20 +2,30 @@ import React, { useMemo } from "react";
 import { Formik } from "formik";
 import { isEqual } from "lodash";
 import { useUsersUIContext } from "../UsersUIContext";
+import { initialFilter } from "../UsersUIHelpers";
 
 export const prepareFilter = (queryParams, values) => {
-  const { status, condition, searchText } = values;
+  const { isActive,searchText } = values;
   const newQueryParams = { ...queryParams };
-  const filter = {};
-  // Filter by status
-  filter.status = status !== "" ? +status : undefined;
-  // Filter by condition
-  filter.condition = condition !== "" ? +condition : undefined;
-  // Filter by all fields
-  filter.model = searchText;
+  const filter = {
+    dealerId:"",
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    identityNo: "",
+    username: "",
+    profession:""
+  };
+  filter.isActive= isActive;
   if (searchText) {
-    filter.manufacture = searchText;
-    filter.VINCode = searchText;
+    filter.firstname= searchText;
+    filter.lastname= searchText;
+    filter.email= searchText;
+    filter.phone=searchText;
+    filter.identityNo=searchText;
+    filter.username=searchText;
+    filter.profession=searchText;
   }
   newQueryParams.filter = filter;
   return newQueryParams;
@@ -32,6 +42,7 @@ export function UsersFilter({ listLoading }) {
   }, [usersUIContext]);
 
   const applyFilter = (values) => {
+    
     const newQueryParams = prepareFilter(usersUIProps.queryParams, values);
     if (!isEqual(newQueryParams, usersUIProps.queryParams)) {
       newQueryParams.pageNumber = 1;
@@ -43,8 +54,9 @@ export function UsersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          status: "", // values => All=""/Selling=0/Sold=1
-          condition: "", // values => All=""/New=0/Used=1
+          isActive: "true", // values => All=""/Active=1/passive=0
+          userTypeId:"",
+          capacityId:"",
           searchText: "",
         }}
         onSubmit={(values) => {
@@ -60,34 +72,37 @@ export function UsersFilter({ listLoading }) {
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
             <div className="form-group row">
-             
-              <div className="col-lg-4"></div>
+           
+              <div className="col-lg-4">
+          
+              </div>
               <div className="col-lg-4">
                 <select
                   className="form-control"
-                  placeholder="Filter by Type"
-                  name="condition"
-                  onBlur={handleBlur}
+                  name="isActive"
+                  placeholder="Duruma göre filtrele"
                   onChange={(e) => {
-                    setFieldValue("condition", e.target.value);
+                    setFieldValue("isActive", e.target.value);
                     handleSubmit();
                   }}
-                  value={values.condition}
+                  onBlur={handleBlur}
+                  value={values.isActive}
                 >
-                  <option value="">All</option>
-                  <option value="0">New</option>
-                  <option value="1">Used</option>
+                  <option value="">Hepsi</option>
+                  <option value="true">Aktif</option>
+                  <option value="false">Pasif</option>
                 </select>
                 <small className="form-text text-muted">
-                  <b>Filter</b> by Condition
+                Duruma göre filtrele
                 </small>
               </div>
-              <div className="col-lg-4">
+           
+              <div className="col-lg-3">
                 <input
                   type="text"
                   className="form-control"
                   name="searchText"
-                  placeholder="Search"
+                  placeholder="Ara.."
                   onBlur={handleBlur}
                   value={values.searchText}
                   onChange={(e) => {
@@ -96,7 +111,7 @@ export function UsersFilter({ listLoading }) {
                   }}
                 />
                 <small className="form-text text-muted">
-                  <b>Search</b> in all fields
+                 Tüm kolonlarda ara...
                 </small>
               </div>
             </div>

@@ -1,5 +1,5 @@
 
-export const defaultSorted = [{ dataField: "id", order: "asc" }];
+export const defaultSorted = [{ dataField: "createdDate", order: "desc" }];
 export const sizePerPageList = [
   { text: "3", value: 3 },
   { text: "5", value: 5 },
@@ -24,8 +24,8 @@ export const initialFilter = {
     taxIdentityNo: "",
     isActive:"true"
   },
-  sortOrder: "asc",
-  sortField: "id",
+  sortOrder: "desc",
+  sortField: "createdDate",
   pageNumber: 1,
   pageSize: 10
 };

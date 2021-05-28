@@ -37,7 +37,7 @@ export function DealersUpdateStatusDialog({ show, onHide }) {
 
   // if there weren't selected dealers we should close modal
   useEffect(() => {
-    if (dealersUIProps.ids || dealersUIProps.ids === 0) {
+    if (dealersUIProps.ids || dealersUIProps.ids.length === 0) {
       onHide();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

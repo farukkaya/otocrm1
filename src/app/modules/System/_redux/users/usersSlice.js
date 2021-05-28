@@ -41,6 +41,7 @@ export const usersSlice = createSlice({
     },
     // findUsers
     usersFetched: (state, action) => {
+      
       const { totalCount, entities } = action.payload;
       state.listLoading = false;
       state.error = null;
@@ -49,9 +50,10 @@ export const usersSlice = createSlice({
     },
     // createUser
     userCreated: (state, action) => {
+      
       state.actionsLoading = false;
       state.error = null;
-      state.entities.push(action.payload.user);
+      action.payload.user&&state.entities.push(action.payload.user);
     },
     // updateUser
     userUpdated: (state, action) => {

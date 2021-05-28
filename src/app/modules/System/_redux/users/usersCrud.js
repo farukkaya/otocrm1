@@ -2,11 +2,6 @@ import axios from "axios";
 
 export const USERS_URL = "Users";
 
-// CREATE =>  POST: add a new user to the server
-export function createUser(user) {
-  return axios.post(USERS_URL, { user });
-}
-
 // READ
 export function getAllUsers() {
   return axios.get(`${USERS_URL}/GetAll`);
@@ -17,22 +12,25 @@ export function getUserById(userId) {
   return axios.get(`${USERS_URL}/GetById?id=${userId}`);
 }
 
-// Method from server should return QueryResultsModel(items: any[], totalsCount: number)
-// items => filtered/sorted result
-export function findUsers(queryParams) {
-  return axios.post(`${USERS_URL}/find`, queryParams);
+// CREATE =>  POST: add a new user to the server
+export function createUser(user) {
+  return axios.post(`${USERS_URL}/Insert`, user);
 }
-
-
-//API=>OK
-export function findUsersByDealer(queryParams) {
-  return axios.post(`${USERS_URL}/Find`, queryParams);
-}
-
-
 // UPDATE => PUT: update the procuct on the server
 export function updateUser(user) {
   return axios.put(`${USERS_URL}/Update`,  user);
+}
+
+// DELETE => delete the user from the server
+export function deleteUser(userId) {
+  return axios.delete(`${USERS_URL}/Delete?id=${userId}`);
+}
+
+
+// Method from server should return QueryResultsModel(items: any[], totalsCount: number)
+// items => filtered/sorted result
+export function findUsers(queryParams) {
+  return axios.post(`${USERS_URL}/Find`, queryParams);
 }
 
 // UPDATE Status
@@ -42,12 +40,6 @@ export function updateStatusForUsers(ids, status) {
     status
   });
 }
-
-// DELETE => delete the user from the server
-export function deleteUser(userId) {
-  return axios.delete(`${USERS_URL}/Delete?id=${userId}`);
-}
-
 // DELETE Users by ids
 export function deleteUsers(ids) {
   return axios.post(`${USERS_URL}/SelectedDelete`, ids);

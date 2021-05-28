@@ -4,8 +4,9 @@ import { Addresses } from "../../dealer-addresses/Addresses";
 import { AddressesUIProvider } from "../../dealer-addresses/AddressesUIContext";
 export function AddressesCard({ parentGuid, className }) {
 // const onToggleAccordion=(e,x)=>{
-// debugger
+// 
 // };
+
     return (
         <Accordion defaultActiveKey="-1" >
             {/* begin::Advance Table Widget 9 */}
@@ -35,11 +36,13 @@ export function AddressesCard({ parentGuid, className }) {
                 {/* begin::Body */}
                 <Accordion.Collapse eventKey="0" >
                     <Card.Body>
-                       
-                    <AddressesUIProvider guid={parentGuid}>
-                       <Addresses />
-                    </AddressesUIProvider>
-
+                       {parentGuid&&(
+                             <AddressesUIProvider guid={parentGuid}>
+                             <Addresses />
+                          </AddressesUIProvider>
+      
+                       )}
+                  
                     </Card.Body>
                 </Accordion.Collapse>
                 {/* end::Body */}

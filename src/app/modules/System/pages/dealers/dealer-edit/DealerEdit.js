@@ -24,11 +24,11 @@ import { UsersUIProvider } from "../dealer-users/UsersUIContext";
 import { Addresses } from "../dealer-addresses/Addresses";
 import { AddressesUIProvider } from "../dealer-addresses/AddressesUIContext";
 
-
+const newGuid=generateGuid();
 const initDealer = {
 
   //STEP1-> BAYİ
-  guid: generateGuid(),
+  guid: newGuid,
   dealerName: "",
   taxIdentityNo: "",
   parentId: undefined,
@@ -55,6 +55,8 @@ const initDealer = {
   townId: undefined,
   neighborhoodId: undefined,
   addressLine: "",
+  isPrimaryAddress:true,
+  relationGuid:newGuid
 
 };
 

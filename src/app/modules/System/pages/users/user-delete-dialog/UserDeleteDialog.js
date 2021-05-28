@@ -3,15 +3,16 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/users/usersActions";
+import * as actions from "../../../_redux/users/usersActions"
 import { useUsersUIContext } from "../UsersUIContext";
+
 
 export function UserDeleteDialog({ id, show, onHide }) {
   // Users UI Context
   const usersUIContext = useUsersUIContext();
   const usersUIProps = useMemo(() => {
     return {
-      setIds: usersUIContext.setIds,
+      //setIds: usersUIContext.setIds,
       queryParams: usersUIContext.queryParams,
     };
   }, [usersUIContext]);
@@ -32,19 +33,15 @@ export function UserDeleteDialog({ id, show, onHide }) {
   }, [id]);
 
   // looking for loading/dispatch
-  useEffect(() => {}, [isLoading, dispatch]);
+  useEffect(() => { }, [isLoading, dispatch]);
 
   const deleteUser = () => {
-    // server request for deleting user by id
-    dispatch(actions.deleteUser(id)).then(() => {
-      // refresh list after deletion
-      dispatch(actions.fetchUsers(usersUIProps.queryParams));
-      // clear selections list
-      usersUIProps.setIds([]);
-      // closing delete modal
-      onHide();
-    });
-  };
+    
+    dispatch(actions.deleteUser(id)) // server request for deleting user by id
+    .then(() => dispatch(actions.fetchUsers(usersUIProps.queryParams)))// refresh list after deletion
+    .then(() => onHide());// closing delete modal
+  }
+
 
   return (
     <Modal
@@ -55,14 +52,14 @@ export function UserDeleteDialog({ id, show, onHide }) {
       {isLoading && <ModalProgressBar variant="query" />}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          User Delete
+         Kullanıcı Sil
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this user?</span>
+          <span>Bu kullanıcıyı kalıcı olarak silmek istediğinizden emin misiniz?</span>
         )}
-        {isLoading && <span>User is deleting...</span>}
+        {isLoading && <span>Kullanıcı siliniyor ...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -71,7 +68,7 @@ export function UserDeleteDialog({ id, show, onHide }) {
             onClick={onHide}
             className="btn btn-light btn-elevate"
           >
-            Cancel
+           Vazgeç
           </button>
           <> </>
           <button
@@ -79,7 +76,7 @@ export function UserDeleteDialog({ id, show, onHide }) {
             onClick={deleteUser}
             className="btn btn-delete btn-elevate"
           >
-            Delete
+            Sil
           </button>
         </div>
       </Modal.Footer>

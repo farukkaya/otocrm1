@@ -1,27 +1,43 @@
 import React from "react";
+import { shallowEqual, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { UsersLoadingDialog } from "./users-loading-dialog/UsersLoadingDialog";
 import { UserDeleteDialog } from "./user-delete-dialog/UserDeleteDialog";
-import { UsersDeleteDialog } from "./users-delete-dialog/UsersDeleteDialog";
-import { UsersFetchDialog } from "./users-fetch-dialog/UsersFetchDialog";
-import { UsersUpdateStatusDialog } from "./users-update-status-dialog/UsersUpdateStatusDialog";
 import { UsersCard } from "./UsersCard";
 import { UsersUIProvider } from "./UsersUIContext";
+import { UsersFetchDialog } from "./users-fetch-dialog/UsersFetchDialog";
+import { UsersUpdateStatusDialog } from "./users-update-status-dialog/UsersUpdateStatusDialog";
+import { UsersDeleteDialog } from "./users-delete-dialog/UsersDeleteDialog";
+import { UserUpdateStatusDialog } from "./user-update-status-dialog/UserUpdateStatusDialog";
 
-export function UsersPage({ history }) {
+export const UsersPage=({ history }) =>{
+  const { user } = useSelector(
+    ({ auth }) => ({
+      user: auth.user.user,
+    }),
+    shallowEqual
+  );
+  const backToDashboard = () => {
+    history.push(`/dashboard`);
+  };
+  // if(user==undefined || !user?.isManager){
+  //   alert("Bu Ekranı Görme Yetkiniz Yok!!!");
+  //   backToDashboard();
+  // }
   const usersUIEvents = {
     newUserButtonClick: () => {
       history.push("/system/users/new");
     },
-    openEditUserPage: (id) => {
-      history.push(`/system/users/${id}/edit`);
+    openEditUserPage: (guid) => {
+      history.push(`/system/users/${guid}/edit`);
     },
-    openDetailUserPage: (id) => {
-      history.push(`/system/users/${id}/detail`);
+    openDetailUserPage: (guid) => {
+      history.push(`/system/users/${guid}/detail`);
     },
-    openDeleteUserDialog: (id) => {
-      history.push(`/system/users/${id}/delete`);
+    openDeleteUserDialog: (guid) => {
+      history.push(`/system/users/${guid}/delete`);
     },
+  
     openDeleteUsersDialog: () => {
       history.push(`/system/users/deleteUsers`);
     },
@@ -31,7 +47,11 @@ export function UsersPage({ history }) {
     openUpdateUsersStatusDialog: () => {
       history.push("/system/users/updateStatus");
     },
+    openUpdateUserStatusDialog: (id) => {
+      history.push(`/system/users/${id}/updateStatus`);
+    }
   };
+
 
   return (
     <UsersUIProvider usersUIEvents={usersUIEvents}>
@@ -46,16 +66,18 @@ export function UsersPage({ history }) {
           />
         )}
       </Route>
-      <Route path="/system/users/:id/delete">
-        {({ history, match }) => (
-          <UserDeleteDialog
-            show={match != null}
-            id={match && match.params.id}
-            onHide={() => {
-              history.push("/system/users");
-            }}
-          />
-        )}
+      <Route path="/system/users/:guid/delete"> 
+        {({ history, match }) => {
+          return(
+            <UserDeleteDialog
+              show={match != null}
+              id={match && match.params.guid}
+              onHide={() => {
+                history.push("/system/users");
+              }}
+            />
+          )
+        }}
       </Route>
       <Route path="/system/users/fetch">
         {({ history, match }) => (
@@ -76,6 +98,19 @@ export function UsersPage({ history }) {
             }}
           />
         )}
+      </Route>
+      <Route path="/system/users/:guid/updateStatus"> 
+        {({ history, match }) => {
+          return(
+            <UserUpdateStatusDialog
+              show={match != null}
+              id={match && match.params.guid}
+              onHide={() => {
+                history.push("/system/users");
+              }}
+            />
+          )
+        }}
       </Route>
       <UsersCard />
     </UsersUIProvider>

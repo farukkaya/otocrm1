@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { UserStatusCssClasses } from "../UsersUIHelpers";
 import * as actions from "../../../_redux/users/usersActions";
 import { useUsersUIContext } from "../UsersUIContext";
 
@@ -28,10 +27,10 @@ export function UsersUpdateStatusDialog({ show, onHide }) {
   }, [usersUIContext]);
 
   // Users Redux state
-  const { users, isLoading } = useSelector(
+  const { users, listLoading } = useSelector(
     (state) => ({
       users: selectedUsers(state.users.entities, usersUIProps.ids),
-      isLoading: state.users.actionsLoading,
+      listLoading: state.users.actionsLoading,
     }),
     shallowEqual
   );
@@ -44,25 +43,15 @@ export function UsersUpdateStatusDialog({ show, onHide }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [usersUIProps.ids]);
 
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState("0");
 
   const dispatch = useDispatch();
-  const updateStatus = () => {
-    // server request for updateing user by ids
-    dispatch(actions.updateUsersStatus(usersUIProps.ids, status)).then(
-      () => {
-        // refresh list after deletion
-        dispatch(actions.fetchUsers(usersUIProps.queryParams)).then(
-          () => {
-            // clear selections list
-            usersUIProps.setIds([]);
-            // closing delete modal
-            onHide();
-          }
-        );
-      }
-    );
-  };
+  const updateStatus = () => dispatch(actions.updateUsersStatus(usersUIProps.ids, status=="1"))// server request for updateing user by ids
+    .then(() => dispatch(actions.fetchUsers(usersUIProps.queryParams))
+      .then(() => {
+        usersUIProps.setIds([]);// clear selections list
+        onHide(); // closing delete modal
+      }))
 
   return (
     <Modal
@@ -72,30 +61,30 @@ export function UsersUpdateStatusDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected users
+        Seçili Kullanıcılar için durum güncellendi
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="overlay overlay-block cursor-default">
-        {isLoading && (
+      <Modal.Body className="overlay overlay-block">
+        {listLoading && (
           <div className="overlay-layer bg-transparent">
             <div className="spinner spinner-lg spinner-warning" />
           </div>
         )}
         <div className="list-timeline list-timeline-skin-light padding-30">
           <div className="list-timeline-items">
+
             {users.map((user) => (
               <div className="list-timeline-item mb-3" key={user.id}>
                 <span className="list-timeline-text">
                   <span
-                    className={`label label-lg label-light-${
-                      UserStatusCssClasses[user.status]
-                    } label-inline`}
+                    className={`label label-lg label-light-${user.isActive ? "success" : "info"
+                      } label-inline`}
                     style={{ width: "60px" }}
                   >
-                    ID: {user.id}
+                    Id: {user.id}
                   </span>{" "}
                   <span className="ml-5">
-                    {user.manufacture}, {user.model}
+                    {user.firstname}, {user.lastname}
                   </span>
                 </span>
               </div>
@@ -106,12 +95,12 @@ export function UsersUpdateStatusDialog({ show, onHide }) {
       <Modal.Footer className="form">
         <div className="form-group">
           <select
-            className={`form-control ${UserStatusCssClasses[status]}`}
+            className={`form-control ${status=="1" ? "success" : "info"}`}
             value={status}
-            onChange={(e) => setStatus(+e.target.value)}
+            onChange={(e) => setStatus(e.target.value /*=== "0" ? false : true*/)}
           >
-            <option value="0">Selling</option>
-            <option value="1">Sold</option>
+            <option value="1">Aktif</option>
+            <option value="0">Pasif</option>
           </select>
         </div>
         <div className="form-group">
@@ -120,7 +109,7 @@ export function UsersUpdateStatusDialog({ show, onHide }) {
             onClick={onHide}
             className="btn btn-light btn-elevate"
           >
-            Cancel
+              İptal
           </button>
           <> </>
           <button
@@ -128,7 +117,7 @@ export function UsersUpdateStatusDialog({ show, onHide }) {
             onClick={updateStatus}
             className="btn btn-primary btn-elevate"
           >
-            Update Status
+          Güncelle
           </button>
         </div>
       </Modal.Footer>

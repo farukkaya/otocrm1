@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
-import { UserStatusCssClasses } from "../UsersUIHelpers";
 import { useUsersUIContext } from "../UsersUIContext";
 
 const selectedUsers = (entities, ids) => {
@@ -49,7 +48,7 @@ export function UsersFetchDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Fetch selected elements
+         Seçili Olan Kullanıcılar
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -60,14 +59,14 @@ export function UsersFetchDialog({ show, onHide }) {
                 <span className="list-timeline-text">
                   <span
                     className={`label label-lg label-light-${
-                      UserStatusCssClasses[user.status]
+                      user.isActive?"success":"info"
                     } label-inline`}
                     style={{ width: "60px" }}
                   >
-                    ID: {user.id}
+                    Id: {user.id}
                   </span>{" "}
                   <span className="ml-5">
-                    {user.manufacture}, {user.model}
+                    {user.firstname}, {user.lastname}
                   </span>
                 </span>
               </div>
@@ -77,20 +76,13 @@ export function UsersFetchDialog({ show, onHide }) {
       </Modal.Body>
       <Modal.Footer>
         <div>
-          <button
-            type="button"
-            onClick={onHide}
-            className="btn btn-light btn-elevate"
-          >
-            Cancel
-          </button>
-          <> </>
+         
           <button
             type="button"
             onClick={onHide}
             className="btn btn-primary btn-elevate"
           >
-            Ok
+               Tamam
           </button>
         </div>
       </Modal.Footer>

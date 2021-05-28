@@ -4,28 +4,39 @@
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { shallowEqual, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Input, Select } from "../../../../../../_metronic/_partials/controls";
-import * as professionsActions from "../../../_redux/professions/professionsActions"
 import { format } from 'react-string-format';
-
-import {
-  LENGTH,
-  MIN_LENGTH,
-  MAX_LENGTH,
-  DIGIT_CONTROL,
-  REQUIRED
-} from "../../../../../validations/validMessages";
+import * as professionsActions from "../../../_redux/professions/professionsActions"
+import * as actions from "../../../_redux/users/usersActions";
+import{ 
+ LENGTH,
+ MIN_LENGTH ,
+ MAX_LENGTH ,
+ DIGIT_CONTROL,
+ REQUIRED} from "../../../../../validations/validMessages";
 
 export function UserEditForm({
   user,
+  history,
   btnRef,
-  saveUser
+  btnReset,
+  saveUser,
+  handleReset,
+  professions
 }) {
-  // Validation schema
- 
+  const backToUsersList = () => {
+    history.push(`/system/users`);
+  };
+
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if(user.id === undefined ){
+  //     dispatch(taxOfficesActions.fetchAllTaxOffice())
+  //    }
+  // }, [dispatch]);
+
   const UserEditSchema = Yup.object().shape({
     email: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
@@ -44,38 +55,36 @@ export function UserEditForm({
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Ad")),
-
+    professionId: Yup.string()
+      .required(format(REQUIRED, "Vergi Dairesi")),
     lastname: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
       .max(150, format(MAX_LENGTH, "50"))
       .required(format(REQUIRED, "Soyad")),
 
   });
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  const { professions } = useSelector(
-    (state) => ({
-      professions: state.professions.entities
-    }),
-    shallowEqual
-  );
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(professionsActions.fetchAllProfession());
-
-  }, [dispatch]);
   return (
     <>
       <Formik
         enableReinitialize={true}
         initialValues={user}
         validationSchema={UserEditSchema}
-        onSubmit={(values) => {
+        onSubmit={(values,formActions) => {
+        
+        
+          sleep(300).then(() => {
           saveUser(values);
+         })
+
+          formActions.setSubmitting(false);
         }}
       >
         {({ handleSubmit }) => (
           <>
             <Form className="form form-label-right">
+           
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
@@ -94,7 +103,9 @@ export function UserEditForm({
                   />
                 </div>
                 <div className="col-lg-4">
-                  <Select name="professionId" label="Meslek" options={professions} />
+                <Select name="professionId" label="Meslek" options={professions} onFocus={(e)=>{
+                      dispatch(professionsActions.fetchAllProfession());
+                    }}/>
                 </div>
               </div>
               <div className="form-group row">
@@ -136,6 +147,7 @@ export function UserEditForm({
                 </div>
 
               </div>
+             
               <button
                 type="submit"
                 style={{ display: "none" }}

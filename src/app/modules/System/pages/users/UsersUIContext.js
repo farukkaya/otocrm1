@@ -42,8 +42,8 @@ export function UsersUIProvider({ usersUIEvents, children }) {
     openDeleteUserDialog: usersUIEvents.openDeleteUserDialog,
     openDeleteUsersDialog: usersUIEvents.openDeleteUsersDialog,
     openFetchUsersDialog: usersUIEvents.openFetchUsersDialog,
-    openUpdateUsersStatusDialog:
-      usersUIEvents.openUpdateUsersStatusDialog,
+    openUpdateUserStatusDialog:usersUIEvents.openUpdateUserStatusDialog,
+    openUpdateUsersStatusDialog:usersUIEvents.openUpdateUsersStatusDialog,
   };
 
   return (

@@ -153,10 +153,6 @@ export function DealerEditForm({
   let IsDısabledCapacity=true;
   // let showAlert=false;
 
-  // const handleDismiss = () => showAlert=false;
-  const handleCapacityChange=(e)=>{
-    dealer.capacityId=e.target.value==1?"":dealer.capacityId;
-  }
   return (
 
     dealer.id === undefined ? (

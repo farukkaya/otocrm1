@@ -61,7 +61,7 @@ export function UserEditDialog() {
         // refresh list after deletion
         usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
         // refresh list after update
-        dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams)).then(() => {
+        dispatch(actions.fetchUsers(usersUIProps.queryParams)).then(() => {
           // clear selections list
           usersUIProps.setIds([]);
           // closing edit modal
@@ -74,7 +74,7 @@ export function UserEditDialog() {
         // refresh list after update
         usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
         // refresh list after update
-        dispatch(actions.fetchUsersByDealer(usersUIProps.queryParams)).then(() => {
+        dispatch(actions.fetchUsers(usersUIProps.queryParams)).then(() => {
           // clear selections list
           usersUIProps.setIds([]);
           // closing edit modal

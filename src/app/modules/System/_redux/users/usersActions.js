@@ -4,27 +4,6 @@ import {usersSlice, callTypes} from "./usersSlice";
 const {actions} = usersSlice;
 
 
-
-export const fetchUsersByDealer = (queryParams) => dispatch => {
-  
-  dispatch(actions.startCall({ callType: callTypes.list }));
-  if (!queryParams.filter.dealerId) {
-    return dispatch(actions.usersFetched({ totalCount: 0, entities: [] }));
-  }
-
-  return requestFromServer
-    .findUsersByDealer(queryParams)
-    .then(response => {
-      const { totalCount, entities } = response.data;
-      dispatch(actions.usersFetched({ totalCount, entities }));
-    })
-    .catch(error => {
-      error.clientMessage = "Can't find remarks";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
-    });
-};
-
-
 export const fetchUsers = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -77,9 +56,11 @@ export const createUser = userForCreation => dispatch => {
   return requestFromServer
     .createUser(userForCreation)
     .then(response => {
-      const { user } = response.data;
-      dispatch(actions.userCreated({ user }));
-      return user;
+     
+      if(response.data.success){
+        const user  = response.data.entities;
+        dispatch(actions.userCreated({ user }));
+      }
     })
     .catch(error => {
       error.clientMessage = "Can't create user";

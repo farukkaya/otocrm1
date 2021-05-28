@@ -15,8 +15,6 @@ const selectedDealers = (entities, ids) => {
 };
 
 export function DealersFetchDialog({ show, onHide }) {
-  
-
   // Dealers UI Context
   const dealersUIContext = useDealersUIContext();
   const dealersUIProps = useMemo(() => {

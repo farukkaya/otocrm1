@@ -3,16 +3,15 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/users/usersActions";
+import * as actions from "../../../_redux/users/usersActions"
 import { useUsersUIContext } from "../UsersUIContext";
 
-export function UsersDeleteDialog({ show, onHide }) {
+
+export function UserUpdateStatusDialog({ id, show, onHide }) {
   // Users UI Context
   const usersUIContext = useUsersUIContext();
   const usersUIProps = useMemo(() => {
     return {
-      ids: usersUIContext.ids,
-      setIds: usersUIContext.setIds,
       queryParams: usersUIContext.queryParams,
     };
   }, [usersUIContext]);
@@ -20,43 +19,44 @@ export function UsersDeleteDialog({ show, onHide }) {
   // Users Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.users.actionsLoading }),
+    (state) => ({
+      isLoading: state.users.actionsLoading
+    }),
     shallowEqual
   );
-
-  // looking for loading/dispatch
-  useEffect(() => { }, [isLoading, dispatch]);
-
   // if there weren't selected users we should close modal
   useEffect(() => {
-    if (!usersUIProps.ids || usersUIProps.ids.length === 0) {
+    if (!id) {
       onHide();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usersUIProps.ids]);
+  }, [id, dispatch]);
 
-  const deleteUsers = () => dispatch(actions.deleteUsers(usersUIProps.ids)) // server request for deleting user by seleted ids
-    .then(() => dispatch(actions.fetchUsers(usersUIProps.queryParams)).then(() => {
-      usersUIProps.setIds([]);
-      onHide();// closing delete modal
-    }))
+
+  const updateUser = () => dispatch(actions.fetchUser(id)) // server request for updateing user by ids
+    .then((user) =>{
+      dispatch(actions.updateUsersStatus([parseInt(id)], !user.isActive)) // update status this user
+      .then(() => dispatch(actions.fetchUsers(usersUIProps.queryParams))) // refresh users
+      .then(() => onHide()) //close modal
+    } 
+    );
+
   return (
     <Modal
       show={show}
       onHide={onHide}
       aria-labelledby="example-modal-sizes-title-lg"
     >
-      {isLoading && <ModalProgressBar />}
+      {isLoading && <ModalProgressBar variant="query" />}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Kullanıcıları Sil
+         Durum Güncellemesi
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Seçili Kullanıcıları silmek istediğinize emin misiniz?</span>
+          <span>Bu Kullanıcı güncellemek istediğinize emin misiniz ?</span>
         )}
-        {isLoading && <span>Kullanıcılar Siliniyor</span>}
+        {isLoading && <span>Güncelleniyor...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -65,15 +65,15 @@ export function UsersDeleteDialog({ show, onHide }) {
             onClick={onHide}
             className="btn btn-light btn-elevate"
           >
-           İptal
+          İptal
           </button>
           <> </>
           <button
             type="button"
-            onClick={deleteUsers}
+            onClick={updateUser}
             className="btn btn-primary btn-elevate"
           >
-           Sil
+           Güncelle
           </button>
         </div>
       </Modal.Footer>

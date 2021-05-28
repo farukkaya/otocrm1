@@ -4,11 +4,11 @@
 import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import BootstrapTable from "react-bootstrap-table-next";
-import * as actions from "../../../_redux/users/usersActions";
+import * as actions from "../../../_redux/addresses/addressesActions";
 import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
-import * as uiHelpers from "./UsersUIHelper";
+import * as uiHelpers from "./AddressesUIHelper";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import {
@@ -18,37 +18,37 @@ import {
   PleaseWaitMessage,
   sortCaret,
 } from "../../../../../../_metronic/_helpers";
-import { useUsersUIContext } from "./UsersUIContext";
+import { useAddressesUIContext } from "./AddressesUIContext";
 
-export function UsersTable() {
-  // Users UI Context
-  const usersUIContext = useUsersUIContext();
-  const usersUIProps = useMemo(() => {
+export function AddressesTable() {
+  // Addresses UI Context
+  const addressesUIContext = useAddressesUIContext();
+  const addressesUIProps = useMemo(() => {
     return {
-      ids: usersUIContext.ids,
-      setIds: usersUIContext.setIds,
-      queryParams: usersUIContext.queryParams,
-      setQueryParams: usersUIContext.setQueryParams,
-      dealerId: usersUIContext.dealerId,
-      openEditUserDialog: usersUIContext.openEditUserDialog,
-      openUpdateStatusUserDialog:usersUIContext.openUpdateStatusUserDialog,
-      openDeleteUserDialog: usersUIContext.openDeleteUserDialog,
+      ids: addressesUIContext.ids,
+      setIds: addressesUIContext.setIds,
+      queryParams: addressesUIContext.queryParams,
+      setQueryParams: addressesUIContext.setQueryParams,
+      relationGuid: addressesUIContext.relationGuid,
+      openEditAddressDialog: addressesUIContext.openEditAddressDialog,
+      openUpdateStatusAddressDialog:addressesUIContext.openUpdateStatusAddressDialog,
+      openDeleteAddressDialog: addressesUIContext.openDeleteAddressDialog,
     };
-  }, [usersUIContext]);
+  }, [addressesUIContext]);
 
   // Getting curret state of dealers list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.users }),
+    (state) => ({ currentState: state.addresses }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
   const dispatch = useDispatch();
   useEffect(() => {
-    usersUIProps.setIds([]);
-    usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
-    dispatch(actions.fetchUsers(usersUIProps.queryParams));
+    addressesUIProps.setIds([]);
+    addressesUIProps.queryParams.filter.relationGuid=addressesUIProps.relationGuid
+    dispatch(actions.fetchAddresses(addressesUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usersUIProps.queryParams, dispatch, usersUIProps.dealerId]);
+  }, [addressesUIProps.queryParams, dispatch, addressesUIProps.relationGuid]);
   const columns = [
     {
       dataField: "id",
@@ -57,32 +57,44 @@ export function UsersTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: "profession",
-      text: "Meslek",
+      dataField: "name",
+      text: "Adres Başlığı",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "email",
-      text: "E-Posta",
+      dataField: "isPrimaryAddress",
+      text: "Statu",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.StatusColumnFormatter,
+      formatExtraData: {
+        trueText:"Birincil",
+        falseText:"Diğer",
+        selector:"isPrimaryAddress",
+      },
+    },
+    {
+      dataField: "city",
+      text: "İl",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "identityNo",
-      text: "Kimlik No",
+      dataField: "town",
+      text: "İlçe",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "firstname",
-      text: "İsim",
+      dataField: "neighborhood",
+      text: "Mahalle",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "lastname",
-      text: "Soyisim",
+      dataField: "addressLine",
+      text: "Adres",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -105,9 +117,9 @@ export function UsersTable() {
       text:"İşlemler",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openUpdateStatusDialog: usersUIProps.openUpdateStatusUserDialog,
-        openEditPage: usersUIProps.openEditUserDialog,
-        openDeleteDialog: usersUIProps.openDeleteUserDialog,
+        openUpdateStatusDialog: addressesUIProps.openUpdateStatusAddressDialog,
+        openEditPage: addressesUIProps.openEditAddressDialog,
+        openDeleteDialog: addressesUIProps.openDeleteAddressDialog,
       },
       classes: "text-right pr-0",
       headerClasses:"text-right pr-3",
@@ -122,8 +134,8 @@ export function UsersTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: usersUIProps.queryParams.pageSize,
-    page: usersUIProps.queryParams.pageNumber,
+    sizePerPage: addressesUIProps.queryParams.pageSize,
+    page: addressesUIProps.queryParams.pageNumber,
   };
   return (
     <>
@@ -145,12 +157,12 @@ export function UsersTable() {
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  usersUIProps.setQueryParams
+                  addressesUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: usersUIProps.ids,
-                  setIds: usersUIProps.setIds,
+                  ids: addressesUIProps.ids,
+                  setIds: addressesUIProps.setIds,
                 })}
                 {...paginationTableProps}
               >

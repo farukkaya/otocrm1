@@ -47,7 +47,7 @@ export function DealerDetails({
         </div>
       </div>
 
-      {dealer && (
+      {dealer && dealer.id==id&& (
         <div class="d-flex flex-column bd-highlight mb-3">
           <div class="p-2 bd-highlight mb-3"><ChildrenTabsCard parentId={id} className="card-stretch gutter-b"></ChildrenTabsCard></div>
           <div class="p-2 bd-highlight mb-3"><UsersCard parentId={id} className="card-stretch gutter-b"></UsersCard></div>
@@ -55,7 +55,7 @@ export function DealerDetails({
               <div class="p-2 bd-highlight mb-3"><StocksCard parentId={id} className="card-stretch gutter-b"></StocksCard></div>
             )
           }
-          <div class="p-2 bd-highlight mb-3"><AddressesCard parentGuid={dealer.guid || ""} className="card-stretch gutter-b"></AddressesCard></div></div>
+          <div class="p-2 bd-highlight mb-3"><AddressesCard parentGuid={dealer.guid} className="card-stretch gutter-b"></AddressesCard></div></div>
       )
       }
 

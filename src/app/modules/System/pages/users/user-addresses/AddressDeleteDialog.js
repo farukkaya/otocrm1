@@ -3,59 +3,60 @@ import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ModalProgressBar } from "../../../../../../_metronic/_partials/controls";
-import * as actions from "../../../_redux/users/usersActions";
+import * as actions from "../../../_redux/addresses/addressesActions";
 
-import { useUsersUIContext } from "./UsersUIContext";
+import { useAddressesUIContext } from "./AddressesUIContext";
 
-export function UserDeleteDialog() {
+export function AddressDeleteDialog() {
   
-  // Users UI Context
-  const usersUIContext = useUsersUIContext();
-  const usersUIProps = useMemo(() => {
+  // Addresses UI Context
+  const addressesUIContext = useAddressesUIContext();
+  const addressesUIProps = useMemo(() => {
     return {
-      id: usersUIContext.selectedId,
-      setIds: usersUIContext.setIds,
-      dealerId: usersUIContext.dealerId,
-      queryParams: usersUIContext.queryParams,
-      showDeleteUserDialog: usersUIContext.showDeleteUserDialog,
-      closeDeleteUserDialog: usersUIContext.closeDeleteUserDialog,
+      id: addressesUIContext.selectedId,
+      setIds: addressesUIContext.setIds,
+      relationGuid: addressesUIContext.relationGuid,
+      queryParams: addressesUIContext.queryParams,
+      showDeleteAddressDialog: addressesUIContext.showDeleteAddressDialog,
+      closeDeleteAddressDialog: addressesUIContext.closeDeleteAddressDialog,
     };
-  }, [usersUIContext]);
+  }, [addressesUIContext]);
 
-  // Users Redux state
+  // Addresses Redux state
   const dispatch = useDispatch();
   const { isLoading } = useSelector(
-    (state) => ({ isLoading: state.users.actionsLoading }),
+    (state) => ({ isLoading: state.addresses.actionsLoading }),
     shallowEqual
   );
 
   // if !id we should close modal
   useEffect(() => {
-    if (!usersUIProps.id) {
-      usersUIProps.closeDeleteUserDialog();
+    if (!addressesUIProps.id) {
+      addressesUIProps.closeDeleteAddressDialog();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usersUIProps.id]);
+  }, [addressesUIProps.id]);
 
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading, dispatch]);
 
-  const deleteUser = () => {
-    // server request for deleting user by id
-    dispatch(actions.deleteUser(usersUIProps.id)).then(() => {
-      usersUIProps.queryParams.filter.dealerId=usersUIProps.dealerId
-      dispatch(actions.fetchUsers(usersUIProps.queryParams));
+  const deleteAddress = () => {
+    // server request for deleting address by id
+    dispatch(actions.deleteAddress(addressesUIProps.id)).then(() => {
+      //addressesUIProps.queryParams.filter.relationGuid=addressesUIProps.relationGuid,
+      // refresh list after deletion
+      dispatch(actions.fetchAddresses(addressesUIProps.queryParams));
       // clear selections list
-      usersUIProps.setIds([]);
+      addressesUIProps.setIds([]);
       // closing delete modal
-      usersUIProps.closeDeleteUserDialog();
+      addressesUIProps.closeDeleteAddressDialog();
     });
   };
 
   return (
     <Modal
-      show={usersUIProps.showDeleteUserDialog}
-      onHide={usersUIProps.closeDeleteUserDialog}
+      show={addressesUIProps.showDeleteAddressDialog}
+      onHide={addressesUIProps.closeDeleteAddressDialog}
       aria-labelledby="example-modal-sizes-title-lg"
     >
       {isLoading && <ModalProgressBar variant="query" />}
@@ -74,7 +75,7 @@ export function UserDeleteDialog() {
         <div>
           <button
             type="button"
-            onClick={usersUIProps.closeDeleteUserDialog}
+            onClick={addressesUIProps.closeDeleteAddressDialog}
             className="btn btn-light btn-elevate"
           >
             İptal
@@ -82,7 +83,7 @@ export function UserDeleteDialog() {
           <> </>
           <button
             type="button"
-            onClick={deleteUser}
+            onClick={deleteAddress}
             className="btn btn-primary btn-elevate"
           >
             Sil
