@@ -31,10 +31,15 @@ export function updateAddress(address) {
 
 // UPDATE Status
 export function updateStatusForAddresses(ids, status) {
-  return axios.post(`${ADDRESSES_URL}/UpdateStatus`, {
+  return axios.put(`${ADDRESSES_URL}/UpdateStatus`, {
     ids,
     status
   });
+}
+
+
+export function setPrimaryAddresses(id) {
+  return axios.post(`${ADDRESSES_URL}/SetPrimaryAdress?id=${id}`);
 }
 
 // DELETE => delete the address from the server

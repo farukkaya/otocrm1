@@ -41,9 +41,13 @@ export function AddressEditDialog() {
   const saveAddress = (address) => {
     
     address.professionId=+address.professionId;
-    //address.dueDate = getFormattedDate(address.dueDate);
+    address.cityId=+address.cityId
+    address.townId= +address.townId
+    address.neighborhoodId=+ address.neighborhoodId
+
     if (!addressesUIProps.id) {
       address.isPrimaryAddress=false;
+      address.relationGuid=addressesUIProps.relationGuid;
       // server request for creating addresses
       dispatch(actions.createAddress(address)).then(() => {
         // refresh list after deletion

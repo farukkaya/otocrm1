@@ -33,6 +33,7 @@ export function AddressesTable() {
       openEditAddressDialog: addressesUIContext.openEditAddressDialog,
       openUpdateStatusAddressDialog:addressesUIContext.openUpdateStatusAddressDialog,
       openDeleteAddressDialog: addressesUIContext.openDeleteAddressDialog,
+      openUpdatePrimaryAddressDialog:addressesUIContext.openUpdatePrimaryAddressDialog,
     };
   }, [addressesUIContext]);
 
@@ -117,9 +118,10 @@ export function AddressesTable() {
       text:"İşlemler",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openUpdateStatusDialog: addressesUIProps.openUpdateStatusAddressDialog,
         openEditPage: addressesUIProps.openEditAddressDialog,
         openDeleteDialog: addressesUIProps.openDeleteAddressDialog,
+        openUpdateStatusDialog: addressesUIProps.openUpdateStatusAddressDialog,
+        openUpdatePrimaryDialog: addressesUIProps.openUpdatePrimaryAddressDialog,
       },
       classes: "text-right pr-0",
       headerClasses:"text-right pr-3",

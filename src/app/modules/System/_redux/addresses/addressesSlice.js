@@ -85,8 +85,19 @@ export const addressesSlice = createSlice({
       const { ids, status } = action.payload;
       state.entities = state.entities.map(entity => {
         if (ids.findIndex(id => id === entity.id) > -1) {
-          entity.status = status;
+          entity.isActive = status;
         }
+        return entity;
+      });
+    },
+
+
+    addressesPrimarySeted: (state, action) => {
+      state.actionsLoading = false;
+      state.error = null;
+      const { id } = action.payload;
+      state.entities = state.entities.map(entity => {
+          entity.isPrimaryAddress = id === entity.id;
         return entity;
       });
     }

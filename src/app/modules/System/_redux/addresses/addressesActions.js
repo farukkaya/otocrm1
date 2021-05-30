@@ -28,9 +28,9 @@ export const fetchAddress = id => dispatch => {
   return requestFromServer
     .getAddressById(id)
     .then(response => {
-      
       const address = response.data;
       dispatch(actions.addressFetched({ addressForEdit: address }));
+      return address;
     })
     .catch(error => {
       error.clientMessage = "Can't find address";
@@ -56,8 +56,10 @@ export const createAddress = addressForCreation => dispatch => {
   return requestFromServer
     .createAddress(addressForCreation)
     .then(response => {
-      const { address } = response.data;
+      if(response.data.success){
+      const address= response.data.entities;
       dispatch(actions.addressCreated({ address }));
+    }
     })
     .catch(error => {
       error.clientMessage = "Can't create address";
@@ -89,6 +91,18 @@ export const updateAddressesStatus = (ids, status) => dispatch => {
       error.clientMessage = "Can't update addresses status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
+};
+export const setAddressesPrimary = id => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+  .setPrimaryAddresses(id)
+  .then(() => {
+    dispatch(actions.addressesPrimarySeted(id));
+  })
+  .catch(error => {
+    error.clientMessage = "Can't update addresses status";
+    dispatch(actions.catchError({ error, callType: callTypes.action }));
+  });
 };
 
 export const deleteAddresses = ids => dispatch => {

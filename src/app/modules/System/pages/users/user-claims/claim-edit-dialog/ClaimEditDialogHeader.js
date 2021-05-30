@@ -4,26 +4,21 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { ModalProgressBar } from "../../../../../../../_metronic/_partials/controls";
 
-export function AddressEditDialogHeader({ id }) {
+export function ClaimEditDialogHeader({ id }) {
   const [title, setTitle] = useState("");
-  // Addresses Redux state
-  const { addressForEdit, actionsLoading } = useSelector(
+  // Claims Redux state
+  const { claimForEdit, actionsLoading } = useSelector(
     (state) => ({
-      addressForEdit: state.addresses.addressForEdit,
-      actionsLoading: state.addresses.actionsLoading,
+      claimForEdit: state.claims.claimForEdit,
+      actionsLoading: state.claims.actionsLoading,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    let _title = id ? "" : "Yeni Adres";
-    if (addressForEdit && id) {
-      _title = "Adres Düzenle -"+addressForEdit.name+"-";
-    }
-
-    setTitle(_title);
+    setTitle("Yetkileri Düzenle");
     // eslint-disable-next-line
-  }, [addressForEdit, actionsLoading]);
+  }, [claimForEdit, actionsLoading]);
 
   return (
     <>

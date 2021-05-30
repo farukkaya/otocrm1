@@ -30,7 +30,7 @@ export function DealerDetails({
     }),
     shallowEqual
   );
-
+//header-mobile-fixed subheader-enabled aside-enabled aside-fixed aside-secondary-enabled aside-minimize
   useEffect(() => {
     dispatch(actions.fetchDealerDetail(id));
     dispatch(actions.fetchAdministrations(id));

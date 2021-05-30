@@ -9,23 +9,23 @@ const prepareFilter = (queryParams, values) => {
   const { searchText } = values;
   const newQueryParams = { ...queryParams };
   const filter = {
-    name:"",
-    country:"",
-    city:"",
-    town:"",
-    neighborhood:"",
-    addressLine:"",
-    isActive:"",
-    isPrimaryAddress:"",
+    name: "",
+    country: "",
+    city: "",
+    town: "",
+    neighborhood: "",
+    addressLine: "",
+    // isActive: "",
+    // isPrimaryAddress: "",
   };
-  
+
   if (searchText) {
-    //filter.name=searchText,
-   // filter.country=searchText,
-   // filter.city=searchText,
-   // filter.town=searchText,
-   // filter.neighborhood=searchText,
-    filter.addressLine=searchText
+    filter.name = searchText;
+    filter.country = searchText;
+    filter.city = searchText;
+    filter.town = searchText;
+    filter.neighborhood = searchText;
+    filter.addressLine = searchText;
     // filter.isActive=searchText,
     // filter.isPrimaryAddress=searchText,
   }
@@ -98,8 +98,8 @@ export function AddressesFilter() {
               )}
             </Formik>
           </div>
-          <div className="col-md-3 margin-bottom-10-mobile">{addressesUIProps.ids.length > 0 && <AddressesGrouping />}</div>
-          <div className="col-md-5 margin-bottom-10-mobile"></div>
+          <div className="col-md-5 margin-bottom-10-mobile">{addressesUIProps.ids.length > 0 && <AddressesGrouping />}</div>
+          <div className="col-md-3 margin-bottom-10-mobile"></div>
           <div className="col-md-2 text-right margin-bottom-10-mobile">
             <button
               type="button"

@@ -28,7 +28,7 @@ const AddressEditSchema = Yup.object().shape({
     townId: Yup.number()
       .required(format(REQUIRED, "İlçe")),
     addressLine: Yup.string()
-      .min(30, format(MIN_LENGTH, "15"))
+      .min(10, format(MIN_LENGTH, "10"))
       .max(500, format(MAX_LENGTH, "500"))
 
 });

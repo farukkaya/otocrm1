@@ -95,6 +95,28 @@ export function AddressesUIProvider({ guid, children }) {
   const closeFetchAddressesDialog = () => {
     setShowFetchAddressesDialog(false);
   };
+  const [showUpdatePrimaryAddressDialog, setShowUpdatePrimaryAddressDialog] = useState(false);
+
+  const openUpdatePrimaryAddressDialog = id => {
+    setSelectedId(id);
+    setShowUpdatePrimaryAddressDialog(true);
+  };
+  const closeUpdatePrimaryAddressDialog = () => {
+    setSelectedId(undefined);
+    setShowUpdatePrimaryAddressDialog(false);
+  };
+
+   // #region MULTI UPDATE STATUS
+   const [showUpdateAddressesStatusDialog, setShowUpdateAddressesStatusDialog] = useState(false);
+   const openUpdateAddressesStatusDialog = () => {
+     setShowUpdateAddressesStatusDialog(true);
+   };
+   const closeUpdateAddressesStatusDialog = () => {
+     setSelectedId(undefined);
+     setShowUpdateAddressesStatusDialog(false);
+   };
+   // #endregion
+
 
   const value = {
     ids,
@@ -120,7 +142,13 @@ export function AddressesUIProvider({ guid, children }) {
     closeDeleteAddressesDialog,
     openFetchAddressesDialog,
     closeFetchAddressesDialog,
-    showFetchAddressesDialog
+    showFetchAddressesDialog,
+    showUpdatePrimaryAddressDialog,
+    openUpdatePrimaryAddressDialog,
+    closeUpdatePrimaryAddressDialog,
+    showUpdateAddressesStatusDialog,
+    openUpdateAddressesStatusDialog,
+    closeUpdateAddressesStatusDialog
   };
   
   return (

@@ -22,13 +22,14 @@ import {
 const AddressEditSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, format(MIN_LENGTH, "2"))
-      .max(150, format(MAX_LENGTH, "50")),
+      .max(150, format(MAX_LENGTH, "50"))
+      .required(format(REQUIRED, "Adres Adı")),
     cityId: Yup.number()
       .required(format(REQUIRED, "İl")),
     townId: Yup.number()
       .required(format(REQUIRED, "İlçe")),
     addressLine: Yup.string()
-      .min(30, format(MIN_LENGTH, "15"))
+      .min(10, format(MIN_LENGTH, "10"))
       .max(500, format(MAX_LENGTH, "500"))
 
 });
@@ -49,10 +50,14 @@ export function AddressEditForm({ saveAddress, address, actionsLoading, onHide }
   );
 
   useEffect(() => {
-    dispatch(mainActions.fetchAllCity());
-    if(address?.cityId) dispatch(mainActions.fetchTownsByCity(address.cityId))
-    if(address?.townId) dispatch(mainActions.fetchNeighborhoodsByTown(address.townId))
-  }, [dispatch]);
+    dispatch(mainActions.fetchAllCity()).then(()=>{
+       if(towns.length==0&&address.cityId) dispatch(mainActions.fetchTownsByCity(address.cityId)).then(()=>{
+        if(neighborhoods.length==0&&address.townId) dispatch(mainActions.fetchNeighborhoodsByTown(address.townId))
+       })
+      
+    })
+   
+  }, [address,dispatch]);
 
   return (
     <>

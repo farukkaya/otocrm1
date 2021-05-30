@@ -93,8 +93,8 @@ export function UsersFilter() {
               )}
             </Formik>
           </div>
-          <div className="col-md-3 margin-bottom-10-mobile">{usersUIProps.ids.length > 0 && <UsersGrouping />}</div>
-          <div className="col-md-5 margin-bottom-10-mobile"></div>
+          <div className="col-md-5 margin-bottom-10-mobile">{usersUIProps.ids.length > 0 && <UsersGrouping />}</div>
+          <div className="col-md-3 margin-bottom-10-mobile"></div>
           <div className="col-md-2 text-right margin-bottom-10-mobile">
             <button
               type="button"

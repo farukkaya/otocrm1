@@ -15,6 +15,7 @@ import { professionsSlice } from "../app/modules/System/_redux/professions/profe
 import { dealersSlice } from "../app/modules/System/_redux/dealers/dealersSlice";
 import { addressesSlice } from "../app/modules/System/_redux/addresses/addressesSlice";
 import { stocksSlice } from "../app/modules/System/_redux/stocks/stocksSlice";
+import { claimsSlice } from "../app/modules/System/_redux/claims/claimsSlice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -25,6 +26,7 @@ export const rootReducer = combineReducers({
 
   /////////////////////////////////
   main: mainSlice.reducer,
+  claims: claimsSlice.reducer,
   professions: professionsSlice.reducer,
   addresses: addressesSlice.reducer,
 

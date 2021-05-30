@@ -9,6 +9,7 @@ export function AddressesGrouping() {
       ids: addressesUIContext.ids,
       openDeleteAddressesDialog: addressesUIContext.openDeleteAddressesDialog,
       openFetchAddressesDialog: addressesUIContext.openFetchAddressesDialog,
+      openUpdateAddressesStatusDialog: addressesUIContext.openUpdateAddressesStatusDialog
     };
   }, [addressesUIContext]);
 
@@ -17,21 +18,29 @@ export function AddressesGrouping() {
       <div className="row align-items-center form-group-actions margin-top-20">
         <div className="col-xl-12">
           <div className="form-group form-group-inline">
-            <div className="form-group-inline">
-              <button
+          <div className="form-group-inline">
+            <button
                 type="button"
                 className="btn btn-danger font-weight-bolder font-size-sm"
-                onClick={addressesUIProps.openDeleteAddressesDialog}
+                onClick={addressesUIProps.openDeleteUsersDialog}
               >
-                <i className="fa fa-trash"></i> Hepsini Sil
+                <i className="fa fa-trash"></i> Sil ({addressesUIProps.ids.length})
               </button>
               &nbsp;
               <button
                 type="button"
                 className="btn btn-light-primary font-weight-bolder font-size-sm"
-                onClick={addressesUIProps.openFetchAddressesDialog}
+                onClick={addressesUIProps.openFetchUsersDialog}
               >
                 <i className="fa fa-stream"></i> Seçilenler ({addressesUIProps.ids.length})
+              </button>
+              &nbsp;
+              <button
+                type="button"
+                className="btn btn-light-primary font-weight-bolder font-size-sm"
+                onClick={addressesUIProps.openUpdateAddressesStatusDialog}
+              >
+                <i className="fa fa-sync-alt"></i> Durum Güncelle
               </button>
             </div>
           </div>

@@ -4,11 +4,11 @@
 import React, { useEffect, useMemo } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import BootstrapTable from "react-bootstrap-table-next";
-import * as actions from "../../../_redux/addresses/addressesActions";
+import * as actions from "../../../_redux/claims/claimsActions";
 import paginationFactory, {
   PaginationProvider,
 } from "react-bootstrap-table2-paginator";
-import * as uiHelpers from "./AddressesUIHelper";
+import * as uiHelpers from "./ClaimsUIHelper";
 import * as columnFormatters from "./column-formatters";
 import { Pagination } from "../../../../../../_metronic/_partials/controls";
 import {
@@ -18,39 +18,39 @@ import {
   PleaseWaitMessage,
   sortCaret,
 } from "../../../../../../_metronic/_helpers";
-import { useAddressesUIContext } from "./AddressesUIContext";
+import { useClaimsUIContext } from "./ClaimsUIContext";
 
-export function AddressesTable() {
-  // Addresses UI Context
-  const addressesUIContext = useAddressesUIContext();
-  const addressesUIProps = useMemo(() => {
+export function ClaimsTable() {
+  // Claims UI Context
+  const claimsUIContext = useClaimsUIContext();
+  const claimsUIProps = useMemo(() => {
     return {
-      ids: addressesUIContext.ids,
-      setIds: addressesUIContext.setIds,
-      queryParams: addressesUIContext.queryParams,
-      setQueryParams: addressesUIContext.setQueryParams,
-      relationGuid: addressesUIContext.relationGuid,
-      openEditAddressDialog: addressesUIContext.openEditAddressDialog,
-      openUpdateStatusAddressDialog:addressesUIContext.openUpdateStatusAddressDialog,
-      openDeleteAddressDialog: addressesUIContext.openDeleteAddressDialog,
-      openUpdatePrimaryAddressDialog:addressesUIContext.openUpdatePrimaryAddressDialog,
-
+      ids: claimsUIContext.ids,
+      setIds: claimsUIContext.setIds,
+      queryParams: claimsUIContext.queryParams,
+      setQueryParams: claimsUIContext.setQueryParams,
+      userId: claimsUIContext.userId,
+      claimType: claimsUIContext.claimType,
+      openEditClaimDialog: claimsUIContext.openEditClaimDialog,
+      openUpdateStatusClaimDialog:claimsUIContext.openUpdateStatusClaimDialog,
+      openDeleteClaimDialog: claimsUIContext.openDeleteClaimDialog
     };
-  }, [addressesUIContext]);
+  }, [claimsUIContext]);
 
   // Getting curret state of dealers list from store (Redux)
   const { currentState } = useSelector(
-    (state) => ({ currentState: state.addresses }),
+    (state) => ({ currentState: state.claims }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
   const dispatch = useDispatch();
   useEffect(() => {
-    addressesUIProps.setIds([]);
-    addressesUIProps.queryParams.filter.relationGuid=addressesUIProps.relationGuid
-    dispatch(actions.fetchAddresses(addressesUIProps.queryParams));
+    claimsUIProps.setIds([]);
+    
+    claimsUIProps.queryParams.filter.userId=claimsUIProps.userId;
+    dispatch(actions.fetchClaims(claimsUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addressesUIProps.queryParams, dispatch, addressesUIProps.relationGuid]);
+  }, [claimsUIProps.queryParams, dispatch, claimsUIProps.userId]);
   const columns = [
     {
       dataField: "id",
@@ -60,43 +60,19 @@ export function AddressesTable() {
     },
     {
       dataField: "name",
-      text: "Adres Başlığı",
+      text: "Yetki Adı",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "isPrimaryAddress",
-      text: "Statu",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter: columnFormatters.StatusColumnFormatter,
-      formatExtraData: {
-        trueText:"Birincil",
-        falseText:"Diğer",
-        selector:"isPrimaryAddress",
-      },
-    },
-    {
-      dataField: "city",
-      text: "İl",
+      dataField: "claim",
+      text: "Key",
       sort: true,
       sortCaret: sortCaret,
     },
     {
-      dataField: "town",
-      text: "İlçe",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "neighborhood",
-      text: "Mahalle",
-      sort: true,
-      sortCaret: sortCaret,
-    },
-    {
-      dataField: "addressLine",
-      text: "Adres",
+      dataField: "description",
+      text: "Açıklama",
       sort: true,
       sortCaret: sortCaret,
     },
@@ -119,10 +95,9 @@ export function AddressesTable() {
       text:"İşlemler",
       formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        openEditPage: addressesUIProps.openEditAddressDialog,
-        openDeleteDialog: addressesUIProps.openDeleteAddressDialog,
-        openUpdateStatusDialog: addressesUIProps.openUpdateStatusAddressDialog,
-        openUpdatePrimaryDialog: addressesUIProps.openUpdatePrimaryAddressDialog,
+        openUpdateStatusDialog: claimsUIProps.openUpdateStatusClaimDialog,
+        openEditPage: claimsUIProps.openEditClaimDialog,
+        openDeleteDialog: claimsUIProps.claimType=="2"?claimsUIProps.openDeleteClaimDialog:undefined
       },
       classes: "text-right pr-0",
       headerClasses:"text-right pr-3",
@@ -137,8 +112,8 @@ export function AddressesTable() {
     custom: true,
     totalSize: totalCount,
     sizePerPageList: uiHelpers.sizePerPageList,
-    sizePerPage: addressesUIProps.queryParams.pageSize,
-    page: addressesUIProps.queryParams.pageNumber,
+    sizePerPage: claimsUIProps.queryParams.pageSize,
+    page: claimsUIProps.queryParams.pageNumber,
   };
   return (
     <>
@@ -160,12 +135,12 @@ export function AddressesTable() {
                 columns={columns}
                 defaultSorted={uiHelpers.defaultSorted}
                 onTableChange={getHandlerTableChange(
-                  addressesUIProps.setQueryParams
+                  claimsUIProps.setQueryParams
                 )}
                 selectRow={getSelectRow({
                   entities,
-                  ids: addressesUIProps.ids,
-                  setIds: addressesUIProps.setIds,
+                  ids: claimsUIProps.ids,
+                  setIds: claimsUIProps.setIds,
                 })}
                 {...paginationTableProps}
               >

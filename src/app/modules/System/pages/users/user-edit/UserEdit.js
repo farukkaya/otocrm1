@@ -9,13 +9,15 @@ import {
   CardHeaderToolbar,
   ModalProgressBar
 } from "../../../../../../_metronic/_partials/controls";
+
 import { useSubheader } from "../../../../../../_metronic/layout";
 import * as actions from "../../../_redux/users/usersActions";
 
 import { UserEditForm } from "./UserEditForm";
 import { Addresses } from "../user-addresses/Addresses";
 import { AddressesUIProvider } from "../user-addresses/AddressesUIContext";
-
+import { Claims } from "../user-claims/Claims";
+import { ClaimsUIProvider } from "../user-claims/ClaimsUIContext";
 
 const initUser = {
 
@@ -44,7 +46,7 @@ export function UserEdit({
   const suhbeader = useSubheader();
 
   // Tabs
-  const [tab, setTab] = useState("basic");
+  const [tab, setTab] = useState("claims");
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
@@ -113,7 +115,6 @@ export function UserEdit({
   };
 
 
- 
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}
@@ -205,10 +206,14 @@ export function UserEdit({
                 />
               )}
               {tab === "claims" && id && (
-                <h3>Yetkileri</h3>
+
+                  <ClaimsUIProvider relId={id}>
+                    <Claims />
+                  </ClaimsUIProvider>
               )}
                 {tab === "addresses" && id && (
                 <AddressesUIProvider guid={userForEdit.guid}>
+    
                   <Addresses />
                 </AddressesUIProvider>
               )}

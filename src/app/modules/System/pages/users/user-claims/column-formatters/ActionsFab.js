@@ -1,11 +1,11 @@
 import React from "react";
 import clsx from 'clsx';
-import { Icon, IconButton, Menu, MenuItem,Divider } from "@material-ui/core";
+import { Icon, IconButton, Menu, MenuItem } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 
 export const ActionsFab = (props) => {
   const { formatExtraData, row } = props;
-  const { openUpdateStatusDialog, openEditPage,openDetailPage, openDeleteDialog,openUpdatePrimaryDialog,key="id" } = formatExtraData;
+  const { openUpdateStatusDialog, openDeleteDialog,key="id" } = formatExtraData;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
@@ -41,43 +41,22 @@ export const ActionsFab = (props) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-
-        {openDetailPage&&(
-          <MenuItem onClick={() => {  
-              openDetailPage(row[key])
-              handleClose()
-            }}>Detay Göster</MenuItem>
-        )}
-        {openEditPage&&(
-          <MenuItem onClick={() => {
-              openEditPage(row[key])
-              handleClose()
-            }}>Güncelle</MenuItem>
-        )}
-        
-        {openDeleteDialog&&(
-          <MenuItem onClick={() => {
-            openDeleteDialog(row[key])
-            handleClose()
-          }}
-          > Sil</MenuItem>
-        )}
-      
-        {openUpdateStatusDialog && (
+      {openUpdateStatusDialog && (
           <MenuItem onClick={() => {
             openUpdateStatusDialog(row[key])
             handleClose()
           }}>{ row.isActive ? "Pasifleştir" : "Aktifleştir" }</MenuItem>
         )}
-  <Divider light />
-{openUpdatePrimaryDialog && (
-
+        {openDeleteDialog&&(
           <MenuItem onClick={() => {
-            openUpdatePrimaryDialog(row[key])
+            openDeleteDialog(row[key])
             handleClose()
-          }}>Birincil Seç</MenuItem>
+          }}
+          > Yetkiyi Kaldır</MenuItem>
         )}
-  <Divider light />
+      
+  
+
       </Menu>
     </>
   )

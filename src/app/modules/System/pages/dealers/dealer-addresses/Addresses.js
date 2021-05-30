@@ -5,6 +5,8 @@ import { AddressesLoadingDialog } from "./AddressesLoadingDialog";
 import { AddressesDeleteDialog } from "./AddressesDeleteDialog";
 import { AddressDeleteDialog } from "./AddressDeleteDialog";
 import { AddressUpdateStatusDialog } from "./AddressUpdateStatusDialog";
+import { AddressesUpdateStatusDialog } from "./AddressesUpdateStatusDialog";
+import { AddressUpdatePrimaryDialog } from "./AddressUpdatePrimaryDialog";
 import { AddressesFetchDialog } from "./AddressesFetchDialog";
 import { AddressEditDialog } from "./address-edit-dialog/AddressEditDialog";
 
@@ -15,6 +17,9 @@ export function Addresses() {
       <AddressEditDialog />
       <AddressDeleteDialog />
       <AddressUpdateStatusDialog />
+      
+      <AddressUpdatePrimaryDialog/>
+      <AddressesUpdateStatusDialog />
       <AddressesDeleteDialog />
       <AddressesFetchDialog />
       <div className="form margin-b-30">
