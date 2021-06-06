@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import * as actions from "../../../_redux/dealers/dealersActions";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import { DealerCard } from "./dealer-detail-cards/DealerCard";
 import { DealerManagerCard } from "./dealer-detail-cards/DealerManagerCard";
 import { ChildrenTabsCard } from "./dealer-children-tables/ChildrenTabsCard"
-import { AdvanceTablesWidget1, AdvanceTablesWidget9, ListsWidget10 } from '../../../../../../_metronic/_partials/widgets';
+import { ListsWidget10 } from '../../../../../../_metronic/_partials/widgets';
 import { UsersCard } from "./dealer-children-tables/UsersCard";
 import { StocksCard } from "./dealer-children-tables/StocksCard";
 import { AddressesCard } from "./dealer-children-tables/AddressesCard";
@@ -30,7 +30,6 @@ export function DealerDetails({
     }),
     shallowEqual
   );
-//header-mobile-fixed subheader-enabled aside-enabled aside-fixed aside-secondary-enabled aside-minimize
   useEffect(() => {
     dispatch(actions.fetchDealerDetail(id));
     dispatch(actions.fetchAdministrations(id));

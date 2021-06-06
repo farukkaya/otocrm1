@@ -6,6 +6,7 @@ const initialUsersState = {
   totalCount: 0,
   entities: [],
   userForEdit: undefined,
+  userForDetail:undefined,
   lastError: null
 };
 export const callTypes = {
@@ -91,6 +92,14 @@ export const usersSlice = createSlice({
         }
         return entity;
       });
-    }
+    },
+
+
+     // getUserDetail
+     userDetailFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.userForDetail = action.payload.userForDetail;
+      state.error = null;
+    },
   }
 });

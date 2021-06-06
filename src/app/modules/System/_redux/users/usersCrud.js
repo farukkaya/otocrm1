@@ -42,3 +42,9 @@ export function updateStatusForUsers(ids, status) {
 export function deleteUsers(ids) {
   return axios.post(`${USERS_URL}/SelectedDelete`, ids);
 }
+
+
+
+export function getUserDetail(userId) {
+  return axios.get(`${USERS_URL}/GetDetailById?id=${userId}`);
+}

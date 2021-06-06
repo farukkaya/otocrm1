@@ -172,7 +172,6 @@ export function StockEdit({
 
         </CardHeaderToolbar>
       </CardHeader>
-      <div className="text-muted">deneme</div>
       <CardBody>
 
         {id === undefined ? (<>

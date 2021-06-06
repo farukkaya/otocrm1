@@ -20,10 +20,8 @@ export function ProfileCard() {
   return (
     <>
       {user && (
-        <div
-          className="flex-row-auto offcanvas-mobile w-250px w-xxl-350px"
-          id="kt_profile_aside"
-        >
+        <div className="flex-row-auto offcanvas-mobile w-250px w-xxl-350px"
+          id="kt_profile_aside" >
           <div className="card card-custom card-stretch">
             {/* begin::Body */}
             <div className="card-body pt-4">

@@ -9,7 +9,7 @@ export default function setupAxios(axios, store) {
       } = store.getState();
 
       if (authToken) {
-        config.headers.Authorization = `Bearer ${authToken.token}`;
+        config.headers.Authorization = `Bearer ${authToken.token||authToken}`;
       }
 
       return config;

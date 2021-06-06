@@ -106,3 +106,24 @@ export const deleteUsers = ids => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
+
+
+export const fetchUserDetail = id => dispatch => {
+  if (!id) {
+    return dispatch(actions.userDetailFetched({ userForDetail: undefined }));
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getUserDetail(id)
+    .then(response => {
+      
+      const user = response.data;
+      dispatch(actions.userDetailFetched({ userForDetail: user }));
+      return user;
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find dealer";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
