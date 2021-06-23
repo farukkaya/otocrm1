@@ -48,7 +48,7 @@ export const initialFilter = {
       cashSellingPrice: 0,
       swapSellingPrice: 0,
       fromWhoId: 0,//kimden (Müşteri,Esnaf,İhale)
-      sourceId: 0,//Kaynak(Kredi Kapama,Takas,Nakit)
+      purchaseTypeId: 0,//Alım Türü(Kredi Kapama,Takas,Nakit)
       insuranceCode: 0,//Kasko Kodu
       insuranceValue: 0,// Kasko değeri
       description: "",

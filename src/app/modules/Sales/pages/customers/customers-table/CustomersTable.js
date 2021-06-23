@@ -107,7 +107,7 @@ export function CustomersTable() {
     },
     {
       dataField: "customerSourceId",
-      text: "Müşteri Kaynak",
+      text: "Müşteri Alım Türü",
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.CustomerSourceColumnFormatter,

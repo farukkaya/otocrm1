@@ -1,10 +1,13 @@
 import axios from "axios";
 
-export const STOCKS_URL = "stocks";
+export const STOCKS_URL = "Stocks";
 
 // CREATE =>  POST: add a new stock to the server
-export function createStock(stock) {
-  return axios.post(STOCKS_URL, { stock });
+//API=>
+export function createStock(stockWizardDto) {
+  return axios.post(`${STOCKS_URL}/Insert`, stockWizardDto).then((e)=>{
+    
+  });
 }
 
 // READ
@@ -14,6 +17,9 @@ export function getAllStocks() {
 
 export function getStockById(stockId) {
   return axios.get(`${STOCKS_URL}/${stockId}`);
+}
+export function getStockInsuranceValue(year,brandCode,typeCode) {
+  return axios.get(`${STOCKS_URL}/GetInsuranceValue?year=${year}&&brandCode=${brandCode}&&typeCode=${typeCode}`);
 }
 
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)

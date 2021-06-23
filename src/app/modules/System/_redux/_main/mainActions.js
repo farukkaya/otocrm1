@@ -2,7 +2,7 @@ import * as requestFromServer from "./mainCrud";
 import {mainSlice, callTypes} from "./mainSlice";
 
 const {actions} = mainSlice;
-
+//#region ABOUT ADDRESS 
 export const fetchAllCity = () => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
@@ -46,3 +46,67 @@ export const fetchNeighborhoodsByTown = townId => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
+//#endregion
+
+//#region ABOUT STOCK
+
+export const fetchAllVehicleCategory = () => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getVehicleCategories()
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.vehicleCategoriesFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find users";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
+
+export const fetchAllVehicleBrand = () => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getVehicleBrands()
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.vehicleBrandsFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find users";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
+export const fetchAllVehicleModel = (categoryId,brandId) => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getVehicleModels(categoryId,brandId)
+    .then(response => {
+      
+      const { totalCount, entities } = response.data;
+      dispatch(actions.vehicleModelsFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find users";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
+export const fetchAllVehicleModelType = (modelId) => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getVehicleModelTypes(modelId)
+    .then(response => {
+      
+      const { totalCount, entities } = response.data;
+      dispatch(actions.vehicleModelTypesFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find users";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
+//#endregion

@@ -23,7 +23,7 @@ export default [
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
-        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
         insuranceValue: 2123123,// Kasko değeri
         description: "",
@@ -76,7 +76,7 @@ export default [
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
-        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
         insuranceValue: 2123123,// Kasko değeri
         description: "",
@@ -129,7 +129,7 @@ export default [
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
-        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
         insuranceValue: 2123123,// Kasko değeri
         description: "",
@@ -183,7 +183,7 @@ export default [
         cashSellingPrice: 62500,
         swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
-        sourceId: 1,//Kaynak(Kredi Kapama,Takas,Nakit)
+        purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
         insuranceValue: 2123123,// Kasko değeri
         description: "",

@@ -26,15 +26,15 @@ const initStock = {
   guid: generateGuid(),
   vinNo: "",
   engineNo: "",
-  brandId: undefined,//markalar                          ---Mock (Gecici Olarak Constant tutlacak)
-  modelId: undefined,//modeller                          ---Mock (Gecici Olarak Constant tutlacak)
+  brandId: undefined,//markalar                        
+  modelId: undefined,//modeller                          
   colorId: undefined,//renkler                            --Constant
   fuelTypeId: undefined,//Yakıt Tipleri                   --Constant
   gearTypeId: undefined,//Vites tipleri                   --Constant
   caseTypeId: undefined,// kasa tipleri                   --Constant
   statusId: undefined,// Sıfır ,İkinci El                 --Constant
   fromWhoId: undefined,//kimden (Müşteri,Esnaf,İhale)     --Constant
-  sourceId: undefined,//Kaynak(Kredi Kapama,Takas,Nakit)  --Constant
+  purchaseTypeId: undefined,//Alım Türü(Kredi Kapama,Takas,Nakit)  --Constant
   year: undefined,
   plateNo: "",
   kilometer: undefined,
@@ -47,9 +47,29 @@ const initStock = {
   swapSellingPrice: undefined,
   insuranceCode: undefined,//Kasko Kodu
   insuranceValue: undefined,// Kasko değeri
+  tramerValue: undefined,// Kasko değeri
+  tramerTypeId: undefined,// Kasko değeri
+
   description: "",
   relationGuid: "",
-  relationTable: ""
+  relationTable: "",
+  expertiseValues:{
+    rightBackFender:"orginal",
+    backHood:"orginal",
+    leftBackFender:"orginal",
+    rightBackDoor:"orginal",
+    rightFrontDoor:"orginal",
+    ceiling:"orginal",
+    leftBackDoor:"orginal", 
+    leftFrontDoor:"orginal",
+    rightFrontFender:"orginal",
+    engineHood:"orginal",
+    leftFrontFender:"orginal",
+    frontBumper:"orginal",
+    backBumper:"orginal"
+  },
+  documents:[],
+  images:[]
 
 };
 
@@ -70,10 +90,15 @@ export function StockEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, stockForEdit } = useSelector(
+  const { actionsLoading, stockForEdit,vehicleCategories ,vehicleBrands,vehicleModels,vehicleModelTypes,stockInsuranceValue} = useSelector(
     (state) => ({
       actionsLoading: state.stocks.actionsLoading,
       stockForEdit: state.stocks.stockForEdit,
+      stockInsuranceValue: state.stocks.stockInsuranceValue,
+      vehicleCategories: state.main.vehicleCategories.entities,
+      vehicleBrands: state.main.vehicleBrands.entities,
+      vehicleModels: state.main.vehicleModels.entities,
+      vehicleModelTypes:state.main.vehicleModelTypes.entities,
     }),
     shallowEqual
   );
@@ -154,7 +179,11 @@ export function StockEdit({
             <i className="fa fa-redo"></i>
              Reset
            </button>
-          {`  `}
+      
+           {id && (
+            <>
+
+                  {`  `}
           <button
             type="submit"
             data-wizard-type="action-submit"
@@ -163,12 +192,8 @@ export function StockEdit({
           >
             Kaydet
             </button>
-          {/* {id && (
-            <>
-
-              
             </>
-          )} */}
+          )} 
 
         </CardHeaderToolbar>
       </CardHeader>
@@ -182,6 +207,11 @@ export function StockEdit({
             btnReset={btnReset}
             saveStock={saveStock}
             handleReset={handleReset}
+            categories={vehicleCategories}
+            brands={vehicleBrands}
+            models={vehicleModels}
+            modelTypes={vehicleModelTypes}
+            insuranceValue={stockInsuranceValue}
           />
         </>) : (<>
           <ul className="nav nav-tabs nav-tabs-line " role="tablist">
@@ -224,6 +254,12 @@ export function StockEdit({
                 btnReset={btnReset}
                 saveStock={saveStock}
                 handleReset={handleReset}
+                categories={vehicleCategories}
+                brands={vehicleBrands}
+                models={vehicleModels}
+                modelTypes={vehicleModelTypes}
+                insuranceValue={stockInsuranceValue}
+
               />
             )}
             {tab === "documents" && id && (

@@ -6,6 +6,7 @@ const initialStocksState = {
   totalCount: 0,
   entities: [],
   stockForEdit: undefined,
+  stockInsuranceValue:undefined,
   lastError: null
 };
 export const callTypes = {
@@ -32,6 +33,12 @@ export const stocksSlice = createSlice({
       } else {
         state.actionsLoading = true;
       }
+    },
+     // getStockById
+     stockInsuranceValueFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.stockInsuranceValue = action.payload.stockInsuranceValue;
+      state.error = null;
     },
     // getStockById
     stockFetched: (state, action) => {

@@ -13,6 +13,7 @@ export {DatePickerField} from "./forms/DatePickerField";
 export {FieldFeedbackLabel} from "./forms/FieldFeedbackLabel";
 export {FormAlert} from "./forms/FormAlert";
 export {Input} from "./forms/Input";
+export {CurrencyInput} from "./forms/CurrencyInput";
 export {Select} from "./forms/Select";
 export {AutoSelect} from "./forms/AutoSelect";
 export {Checkbox} from "./forms/Checkbox";

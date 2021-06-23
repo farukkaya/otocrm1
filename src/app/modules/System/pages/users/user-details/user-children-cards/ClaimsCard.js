@@ -12,7 +12,7 @@ export function ClaimsCard({ parentId, className }) {
   
           {/* begin::Header */}
           <Card.Header className="d-flex justify-content-between bg-white  w-100" >
-          <div class="p-2 bd-highlight">
+          <div className="p-2 bd-highlight">
           <h3 className="card-title align-items-start flex-column">
               <span className="card-label font-weight-bolder text-dark">
                Yetkiler
@@ -22,7 +22,7 @@ export function ClaimsCard({ parentId, className }) {
               </span>
             </h3>
           </div>
-          <div class="p-2 bd-highlight">
+          <div className="p-2 bd-highlight">
           <div className="card-toolbar">
            
             </div>

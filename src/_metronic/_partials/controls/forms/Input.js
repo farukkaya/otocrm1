@@ -51,7 +51,6 @@ export function Input({
       }
       {
         type !== "textarea" && (
-          <>
           <div className={getGroupCSSClasses(touched[field.name], errors[field.name])}>
             {adornment?.startAdorment && <div className="input-group-prepend"><span className="input-group-text" style={adornment.startAdorment.style}>
               {
@@ -73,8 +72,6 @@ export function Input({
             </span></div>}
     
           </div>
-     
-        </>
         )
       }
 

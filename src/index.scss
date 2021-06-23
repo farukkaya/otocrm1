@@ -23,8 +23,193 @@ input[type="radio"]:checked + label {
   box-shadow: 0px 0px 20px #f7d4d4;
 }
 
+.form-element-container.text-detail .title {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.form-element-container.text-detail .orginal {
+  width: 60px;
+}
+.form-element-container.text-detail .painted {
+  width: 60px;
+}
+.form-element-container.text-detail .changed {
+  width: 60px;
+}
+.form-element-container.text-detail .elements-row {
+  background-color: #fff;
+  display: flex;
+  padding: 5px 10px;
+  border: 2px solid #f0f0f0;
+  border-top: 0;
+  width: 364px;
+}
+.form-element-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+}
+.form-element-container.text-detail {
+  width: 364px;
+  -webkit-box-flex: unset;
+  -ms-flex: unset;
+  flex: unset;
+  margin-left:150px ;
+}
+.form-element-container.svg-detail {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 20px;
+  margin-top: 30px;
+  position: relative;
+}
+.form-element-container.svg-detail .guide-of-svg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.form-element-container.svg-detail .guide-of-svg div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.form-element-container.svg-detail .guide-of-svg div:before {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: #ffdb4d;
+}
+.form-element-container.svg-detail .guide-of-svg .changed:before {
+  background-color: #e40030;
+}
+.form-element-container.svg-detail .guide-of-svg .changed {
+  margin-left: 30px;
+}
+.form-element-container.text-detail .elements-title-container {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px 10px;
+  border: 2px solid #f0f0f0;
+}
+.form-element-container.svg-detail .typeOfDamege {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 97px;
+  height: 102px;
+  -webkit-box-shadow: 0 0 55px 0 #e6e6e6;
+  box-shadow: 0 0 55px 0 #e6e6e6;
+  background-color: #fff;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 15px;
+}
+.form-element-container.svg-detail .typeOfDamege.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.form-element-container.svg-detail .typeOfDamege .opetion-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+.form-element-container.svg-detail .typeOfDamege .opetion-item:before {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+.form-element-container.svg-detail .typeOfDamege .opetion-item span {
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.77;
+  letter-spacing: normal;
+  color: #1a1a1a;
+  margin-left: 6.5px;
+}
 
 
+div.elements-row:hover {
+  background-color: #f85365 !important;
+  color:#fff !important;
+}
+
+.page-form path[title] {
+  cursor: pointer;
+}
+.page-form path.hover {
+  fill: gray;
+  stroke: gray;
+}
+.form-element-container.svg-detail svg .changed {
+  fill: #e40030;
+}
+.form-element-container.svg-detail svg .painted {
+  fill: #ffdb4d;
+}
+
+.form-element-container.svg-detail .typeOfDamege:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  margin-left: -10px;
+  clear: both;
+}
+.form-element-container.svg-detail .typeOfDamege .opetion-item.orginal:before {
+  background-color: #fff !important;
+  border: 1px solid #979797 !important;
+}
+.form-element-container.svg-detail .typeOfDamege .opetion-item.painted:before {
+  background-color: #ffdb4d !important;
+}
+.form-element-container.svg-detail .typeOfDamege .opetion-item.changed:before {
+  background-color: #e40030 !important;
+}
 .inner-addon { 
   position: relative; 
 }
@@ -166,3 +351,5 @@ pointer-events: none;
 .cursor-default {
   cursor: default !important;
 }
+
+

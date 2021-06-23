@@ -48,8 +48,8 @@ const StockEditSchema = Yup.object().shape({
     .required(format(REQUIRED, "Motor No")),
   fromWhoId: Yup.number()
     .required(format(REQUIRED, "Kimden")),
-  sourceId: Yup.number()
-    .required(format(REQUIRED, "Kaynak")),
+  purchaseTypeId: Yup.number()
+    .required(format(REQUIRED, "Alım Türü")),
 });
 
 export function StockEditForm({ saveStock, stock, actionsLoading, onHide }) {
@@ -228,7 +228,7 @@ export function StockEditForm({ saveStock, stock, actionsLoading, onHide }) {
                     <Select name="fromWhoId" label="Kimden" options={FromWhoTitles} />
                   </div>
                   <div className="col-lg-6">
-                    <Select name="sourceId" label="Kaynak" options={Sources} />
+                    <Select name="purchaseTypeId" label="Alım Türü" options={Sources} />
                   </div>
                 </div>
 

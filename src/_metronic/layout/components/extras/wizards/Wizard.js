@@ -96,9 +96,9 @@ export class Wizard extends React.Component {
                                     </div>
                                 </div>
 
-                                <div className="wizard-body py-8 px-8 py-lg-20 px-lg-10">
+                                <div className="wizard-body">
                                     <div className="row">
-                                        <div className="offset-xxl-1 col-xxl-10">
+                                        <div className="pl-20 pr-10 col-md-12">
                                             {React.cloneElement(activePage, { parentState: { ...props } })}
 
                                             {/*begin: Wizard Actions*/}

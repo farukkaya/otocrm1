@@ -4,6 +4,21 @@ const initialMainState = {
   listLoading: false,
   actionsLoading: false,
   totalCount: 0,
+  vehicleCategories:{
+    listLoading: false,
+    actionsLoading: false,
+    totalCount: 0,
+    entities: [],
+    townForEdit: undefined,
+    lastError: null
+  },vehicleBrands:{
+    listLoading: false,
+    actionsLoading: false,
+    totalCount: 0,
+    entities: [],
+    townForEdit: undefined,
+    lastError: null
+  },
   cities:{
     listLoading: false,
     actionsLoading: false,
@@ -21,6 +36,24 @@ const initialMainState = {
     lastError: null
   },
   neighborhoods:{
+    listLoading: false,
+    actionsLoading: false,
+    totalCount: 0,
+    entities: [],
+    townForEdit: undefined,
+    lastError: null
+  },
+ 
+  
+  vehicleModels:{
+    listLoading: false,
+    actionsLoading: false,
+    totalCount: 0,
+    entities: [],
+    townForEdit: undefined,
+    lastError: null
+  },
+  vehicleModelTypes:{
     listLoading: false,
     actionsLoading: false,
     totalCount: 0,
@@ -57,6 +90,8 @@ export const mainSlice = createSlice({
     },
    
     // findMain
+
+    //#region ABOUT ADDRESS
     citiesFetched: (state, action) => {
       const { totalCount, entities } = action.payload;
       state.cities.listLoading = false;
@@ -80,5 +115,42 @@ export const mainSlice = createSlice({
       state.neighborhoods.entities = entities;
       state.neighborhoods.totalCount = totalCount;
     },
+  //#endregion
+  
+    //#region ABOUT STOCK
+   vehicleCategoriesFetched: (state, action) => {
+  
+    const { totalCount, entities } = action.payload;
+    state.vehicleCategories.listLoading = false;
+    state.vehicleCategories.error = null;
+    state.vehicleCategories.entities = entities;
+    state.vehicleCategories.totalCount = totalCount;
+  },
+
+  vehicleBrandsFetched: (state, action) => {  
+     
+    const { totalCount, entities } = action.payload;
+    state.vehicleBrands.listLoading = false;
+    state.vehicleBrands.error = null;
+    state.vehicleBrands.entities = entities;
+    state.vehicleBrands.totalCount = totalCount;
+  },
+
+  vehicleModelsFetched: (state, action) => {
+    const { totalCount, entities } = action.payload;
+    state.vehicleModels.listLoading = false;
+    state.vehicleModels.error = null;
+    state.vehicleModels.entities = entities;
+    state.vehicleModels.totalCount = totalCount;
+  },
+
+  vehicleModelTypesFetched: (state, action) => {
+    const { totalCount, entities } = action.payload;
+    state.vehicleModelTypes.listLoading = false;
+    state.vehicleModelTypes.error = null;
+    state.vehicleModelTypes.entities = entities;
+    state.vehicleModelTypes.totalCount = totalCount;
+  },
+//#endregion
   }
 });

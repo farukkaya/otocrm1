@@ -47,33 +47,13 @@ const thumbButton = {
   cursor: "pointer"
 };
 
-const editImage = (image, done) => {
-  const imageFile = image.doka ? image.doka.file : image;
-  const imageState = image.doka ? image.doka.data : {};
-//   create({
-//     // recreate previous state
-//     ...imageState,
 
-//     // load original image file
-//     src: imageFile,
-//     outputData: true,
-
-//     onconfirm: ({ file, data }) => {
-//       Object.assign(file, {
-//         doka: { file: imageFile, data }
-//       });
-//       done(file);
-//     }
-//   });
-};
-
-export function DokaDropzone(props) {
-  const [files, setFiles] = useState([]);
+export function DokaDropzone({images,setImages}) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
         
-      setFiles(
+      setImages(
         acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file)
@@ -83,44 +63,21 @@ export function DokaDropzone(props) {
     }
   });
 
-  const thumbs = files.map((file, index) => (
+  const thumbs = images.map((file, index) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} alt="" />
       </div>
-      <button
-        style={thumbButton}
-        onClick={() =>
-          editImage(file, (output) => {
-            const updatedFiles = [...files];
-
-            // replace original image with new image
-            updatedFiles[index] = output;
-
-            // revoke preview URL for old image
-            if (file.preview) URL.revokeObjectURL(file.preview);
-
-            // set new preview URL
-            Object.assign(output, {
-              preview: URL.createObjectURL(output)
-            });
-
-            // update view
-            setFiles(updatedFiles);
-          })
-        }
-      >
-        dznle
-      </button>
+    
     </div>
   ));
 
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      images.forEach((file) => URL.revokeObjectURL(file.preview));
     },
-    [files]
+    [images]
   );
 
   return (

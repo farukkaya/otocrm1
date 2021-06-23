@@ -140,7 +140,7 @@ export function StocksTable() {
     }, 
     {
       dataField: "source",
-      text:"Kaynak",
+      text:"Alım Türü",
       sort: true,
       sortCaret: sortCaret,
     }, 

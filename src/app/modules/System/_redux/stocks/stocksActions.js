@@ -143,3 +143,22 @@ export const deleteStocks = ids => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
+
+
+
+export const fetchInsuranceValue = (year,brandCode,typeCode) => dispatch => {
+  if (!year ||!brandCode ||!typeCode) {
+    return dispatch(actions.stockInsuranceValueFetched({ stockInsuranceValue: undefined }));
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getStockInsuranceValue(year,brandCode,typeCode)
+    .then(response => {
+      dispatch(actions.stockInsuranceValueFetched({ stockInsuranceValue: response.data }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find stock";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
