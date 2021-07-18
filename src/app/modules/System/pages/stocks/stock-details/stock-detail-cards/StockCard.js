@@ -91,7 +91,7 @@ export function StockCard({ stock }) {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Motor Hacmi:</span>
-                                    <span className="text text-hover-primary">{stock.engineCapacity}</span>
+                                    <span className="text text-hover-primary">{stock.engineCapacityId}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Şaşe No:</span>

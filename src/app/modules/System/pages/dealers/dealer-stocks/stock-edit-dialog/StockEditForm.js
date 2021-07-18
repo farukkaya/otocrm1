@@ -12,7 +12,7 @@ import { Input, Select } from "../../../../../../../_metronic/_partials/controls
 import { format } from 'react-string-format';
 
 import { LENGTH, MIN_LENGTH, MAX_LENGTH, DIGIT_CONTROL, REQUIRED } from "../../../../../../validations/validMessages";
-import { BrandList, ModelList, Years, CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources } from "../StocksUIHelper";
+import { BrandList, ModelList, Years, CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources,EngineCapacities } from "../StocksUIHelper";
 
 // Validation schema
 const StockEditSchema = Yup.object().shape({
@@ -38,7 +38,7 @@ const StockEditSchema = Yup.object().shape({
     .required(format(REQUIRED, "Kilometre")),
   enginePower: Yup.string()
     .required(format(REQUIRED, "Motor Gücü")),
-  engineCapacity: Yup.string()
+  engineCapacityId: Yup.string()
     .required(format(REQUIRED, "Motor Hacmi")),
   vinNo: Yup.string()
     .length(17, format(LENGTH, "Şase No", "17"))
@@ -155,14 +155,7 @@ export function StockEditForm({ saveStock, stock, actionsLoading, onHide }) {
                     />
                   </div>
                   <div className="col-lg-3">
-                    <Field
-                      name="engineCapacity"
-                      component={Input}
-                      placeholder="Motor Hacmi"
-                      label="Motor Hacmi"
-                      adornment={adorments.engineCapacityAdorment}
-
-                    />
+                  <Select name="engineCapacityId" label="Motor Hacmi" options={EngineCapacities} />
                   </div>
 
                 </div>

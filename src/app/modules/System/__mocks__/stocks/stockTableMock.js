@@ -15,7 +15,7 @@ export default [
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
         enginePower: 55,//motor gücü
-        engineCapacity: 1300,//motor hacmi
+        engineCapacityId: 1300,//motor hacmi
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
@@ -68,7 +68,7 @@ export default [
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
         enginePower: 55,//motor gücü
-        engineCapacity: 1300,//motor hacmi
+        engineCapacityId: 1300,//motor hacmi
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
@@ -121,7 +121,7 @@ export default [
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
         enginePower: 55,//motor gücü
-        engineCapacity: 1300,//motor hacmi
+        engineCapacityId: 1300,//motor hacmi
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
@@ -175,7 +175,7 @@ export default [
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
         enginePower: 55,//motor gücü
-        engineCapacity: 1300,//motor hacmi
+        engineCapacityId: 1300,//motor hacmi
         swap:false,
         statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,

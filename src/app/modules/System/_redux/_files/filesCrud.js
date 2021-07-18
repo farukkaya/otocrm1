@@ -1,10 +1,15 @@
 import axios from "axios";
 
-export const USERS_URL = "files";
+export const DOCUMENTS_URL = "Documents";
 
-export function getAllFiles() {
-  return axios.get(USERS_URL);
+export function findFiles(queryParams) {
+  return axios.get(`${DOCUMENTS_URL}/GetAll`);
 }
-export function uploadFile(file) {
-  return axios.post(`${USERS_URL}/upload`, { file });
+export function uploadFile(formData,subDirectory="ForStocks") {
+  return axios.post(`${DOCUMENTS_URL}/UploadFile?subDirectory=${subDirectory}`, formData).then(resp=>resp).catch(
+    function (error) {
+      console.log('Show error notification!')
+      return Promise.reject(error)
+    }
+  );
 }

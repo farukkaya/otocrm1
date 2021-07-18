@@ -5,9 +5,12 @@ export const STOCKS_URL = "Stocks";
 // CREATE =>  POST: add a new stock to the server
 //API=>
 export function createStock(stockWizardDto) {
-  return axios.post(`${STOCKS_URL}/Insert`, stockWizardDto).then((e)=>{
-    
-  });
+  return axios.post(`${STOCKS_URL}/Insert`, stockWizardDto).then(resp=>resp).catch(
+    function (error) {
+      console.log('Show error notification!')
+      return Promise.reject(error)
+    }
+  );
 }
 
 // READ

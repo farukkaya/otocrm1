@@ -90,14 +90,15 @@ export const deleteStock = id => dispatch => {
     });
 };
 
-export const createStock = stockForCreation => dispatch => {
+export const createStock =(stockForCreation) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .createStock(stockForCreation)
     .then(response => {
-      const { stock } = response.data;
+      const { dbPath } = response.data||response;
+      const stock={};
       dispatch(actions.stockCreated({ stock }));
-      return stock;
+      return dbPath;
     })
     .catch(error => {
       error.clientMessage = "Can't create stock";

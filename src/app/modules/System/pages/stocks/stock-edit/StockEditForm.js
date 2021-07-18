@@ -5,11 +5,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup"; import {
-    Button
-} from "react-bootstrap";
-import { FileUpload, Input, Select, CurrencyInput } from "../../../../../../_metronic/_partials/controls";
-import { DokaDropzone } from "../../../../../../_metronic/layout/components/extras/DokaDropzone";
+import * as Yup from "yup";
+
+import { v4 as generateGuid } from 'uuid';
+import { DashboardUpload, Input, Select, CurrencyInput } from "../../../../../../_metronic/_partials/controls";
 import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
 import { format } from 'react-string-format';
 import * as mainActions from "../../../_redux/_main/mainActions"
@@ -17,9 +16,10 @@ import * as actions from "../../../_redux/stocks/stocksActions"
 
 
 import { LENGTH, MIN_LENGTH, MAX_LENGTH, DIGIT_CONTROL, REQUIRED } from "../../../../../validations/validMessages";
-import { CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources, arrayProgress, EngineCapacities, EnginePowers, DocumentTypes, TramerTypes } from "../StocksUIHelper";
-import DocumentsTable from "./stock-documents/Documents";
+import { CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources, arrayProgress, EngineCapacities, EnginePowers, TramerTypes } from "../StocksUIHelper";
 import { ExpertiseForm } from "./stock-expertise/ExpertiseForm";
+import { DocumentForm } from "./stock-documents/DocumentForm";
+import DocumentsTable from "./stock-documents/Documents";
 
 
 const stockSchema = {
@@ -89,39 +89,17 @@ const Step1Schema = Yup.object().shape(stockSchema);
 const Step2Schema = Yup.object().shape(stockPricingSchema);
 const Step3Schema = Yup.object().shape({
     tramerTypeId: Yup.number()
-        .required(format(REQUIRED, "Kimden")),
+        .required(format(REQUIRED, "Tramer Tipi")),
     tramerValue: Yup.string()
-        //  .matches(/^[0-9]+$/, DIGIT_CONTROL)
-        .min(2, format(MIN_LENGTH, "2"))
+        //.matches(/^[0-9]+$/, DIGIT_CONTROL)
+        //.min(2, format(MIN_LENGTH, "2"))
         .max(150, format(MAX_LENGTH, "50"))
-        .required(format(REQUIRED, "Toplam Tramer")),
-});
-const Step4Schema = Yup.object().shape({
-    documentTypeId: Yup.number()
-        .required(format(REQUIRED, "Belge Tipi")),
-    name: Yup.string()
-        .min(2, format(MIN_LENGTH, "2"))
-        .max(150, format(MAX_LENGTH, "50"))
-        .required(format(REQUIRED, "Belge Adı")),
-});
-const Step5Schema = Yup.object().shape({
-    addressName: Yup.string()
-        .min(2, format(MIN_LENGTH, "2"))
-        .max(150, format(MAX_LENGTH, "50"))
-        .required(format(REQUIRED, "Adres Adı")),
-    cityId: Yup.number()
-        .required(format(REQUIRED, "İl")),
-    townId: Yup.number()
-        .required(format(REQUIRED, "İlçe")),
-    addressLine: Yup.string()
-        .min(10, format(MIN_LENGTH, "10"))
-        .max(500, format(MAX_LENGTH, "500"))
-
-
+    //.required(format(REQUIRED, "Toplam Tramer")),
 });
 
-const schemaArray = [Step1Schema, Step2Schema, Step3Schema, Step4Schema, Step5Schema];
-  //TODO: adorments Globale taşınacak 
+
+const schemaArray = [Step1Schema, Step2Schema, Step3Schema];
+//TODO: adorments Globale taşınacak 
 const adorments = {
     priceAdorment: {
         endAdorment: {
@@ -164,11 +142,12 @@ export function StockEditForm({
     const [documents, setDocuments] = useState(stock.documents)
     const [images, setImages] = useState(stock.images)
     const [disabledValue, setDisabledValue] = useState(true)
-    const [attachment, setAttachment] = useState({})
+    const transactionId = generateGuid();
 
     return (
+
         stock.id === undefined ? (
-            
+
             <Wizard
                 initialValues={stock}
                 arrayProgress={arrayProgress}
@@ -176,21 +155,21 @@ export function StockEditForm({
                 onReset={(values) => handleReset(values)}
                 onSubmit={(values, formActions) => {
                     sleep(300).then(() => {
-                    
-                        const formData=new FormData();
-                        formData.append('documents',JSON.stringify(values.documents))
-                        dispatch(actions.createStock(formData)).then((resp) => {
-                            //backToDealersList()
-                              // dispatch(actions.fetchDealers(deal.queryParams));
-                              // //clear selections list
-                              // customersUIProps.setIds([]);
-                          })
-                      
+
+                        //dispatch(actions.createStock({documents},formData)).then((resp) => {
+                        //backToDealersList()
+                        // dispatch(actions.fetchDealers(deal.queryParams));
+                        // //clear selections list
+                        // customersUIProps.setIds([]);
+                        // })
+
                         formActions.setSubmitting(false);
                     });
                 }}
             >
-                  <Wizard.Page>
+
+
+                <Wizard.Page>
                     {props => {
                         console.log(props, "this props 1");
                         return (
@@ -392,7 +371,7 @@ export function StockEditForm({
                 </Wizard.Page>
                 <Wizard.Page className="pl-40 pr-20 col-md-12">
                     {props => {
-                        props.values.expertiseValues=expertiseValues;
+                        props.values.expertiseValues = expertiseValues;
 
                         console.log(props, "this props 3");
                         return (
@@ -407,7 +386,7 @@ export function StockEditForm({
                                         <Select name="tramerTypeId" label="Tramer Tipi" options={TramerTypes}
                                             onChange={(e) => {
                                                 const { value } = e.target;
-                                                props.setFieldValue("tramerTypeId",value)
+                                                props.setFieldValue("tramerTypeId", value)
                                                 props.setFieldValue("tramerValue", value == "2" ? 0 : undefined)
                                                 setDisabledValue(value == "2" || value == "3")
 
@@ -430,130 +409,97 @@ export function StockEditForm({
                         );
                     }}
                 </Wizard.Page>
-                <Wizard.Page>
+
+                <Wizard.Page className="pl-40 pr-20 col-md-12">
                     {props => {
                         console.log(props, "this props 4");
-                        props.values.documents=documents;
-                        let id=0;
-                        const addDocument = () => {
-                            const { name, validityDate, description } = props.values;
-                            id++;
-                            const formData = new FormData();
-                            formData.append("id",id);
-                            formData.append("name",name);
-                            formData.append("validityDate",validityDate);
-                            formData.append("description",description);
-                            formData.append("path",attachment.name.split('.').slice(0, -1).join('.'));
-                            formData.append("attachment",attachment);
-                            
-                            documents.push(formData)
-                            setDocuments(documents)
-                            props.setFieldValue("documentTypeId", undefined)
-                            props.setFieldValue("name", undefined)
-                            props.setFieldValue("decription", undefined)
-                            props.setFieldValue("validityDate", undefined)
-                            //props.setFieldValue("path", undefined)
-                        }
+                        props.values.documents = documents;
+                        // props.setFieldValue("documentTypeId",undefined)
+
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
-                                <form autoComplete={false} noValidate> 
 
-                            
-                                <div className="form-group row">
-                                    <div className="col-lg-4">
-                                        <Select name="documentTypeId" label="Belge Tipi"
-                                            options={DocumentTypes}
-                                            onChange={(e) => {
-                                                const { value } = e.target;
-                                                props.setFieldValue("documentTypeId", value);
-                                                if (value != 4) props.setFieldValue("name", DocumentTypes.find(q => q.id == value).name);
-                                                else props.setFieldValue("name", "");
-                                            }}
-                                        />
-                                    </div>
-                                    <div className="col-lg-4">
-                                        <Field
-                                            name="name"
-                                            component={Input}
-                                            disabled={props.values.documentTypeId != 4}
-                                            placeholder="Belge Adı"
-                                            label="Belge Adı"
-                                        />
-                                    </div>
-                                    <div className="col-lg-4">
-                                        <Field
-                                            name="decription"
-                                            component={Input}
-                                            placeholder="Açıklama"
-                                            label="Açıklama"
-                                        />
-                                    </div>
+                                <DocumentForm documents={documents} setDocuments={setDocuments} transactionId={transactionId} pageProps={props} />
+                                <DocumentsTable documents={documents} />
 
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-4">
-                                        <Field
-                                            name="validityDate"
-                                            component={Input}
-                                            type="date"
-                                            placeholder="Geçerlilik Tarihi"
-                                            min={new Date().toJSON().split('T')[0]}
-                                            label="Geçerlilik Tarihi"
-                                        />
-                                    </div>
-                                    <div className="col-lg-7">
-                                        <Field
-                                            name="file"
-                                            component={Input}
-                                            type="file"
-                                            placeholder="Belge"
-                                            label="Belge"
-                                            accept="image/png, image/jpeg,application/pdf"
-                                            onChange={e => setAttachment(e.currentTarget.files[0])}
-                                        />
-                                    </div>
 
-                                    <div className="col-lg-1">
-                                        <Button variant="danger" className="mt-10" size="sm" onClick={addDocument}>
-                                            Ekle
-                                    </Button>
-                                    </div>
-                                </div>
-                                </form>
-                                  <div className="form-group row">
-                                    <DocumentsTable documents={documents} />
-                                </div>
+
                             </div>
                         );
                     }}
                 </Wizard.Page>
-          
                 <Wizard.Page>
                     {props => {
-                        props.values.images=images;
+                        props.values.images = images;
                         console.log(props, "this props 5");
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 5).description}</h4>
-                                <DokaDropzone images={images} setImages={setImages} />
+                                <DashboardUpload images={images} setImages={setImages} transactionId={transactionId} />
                             </div>
                         );
                     }}
                 </Wizard.Page>
+
                 <Wizard.Page>
                     {props => {
+                        const data = props.values;
+                        debugger
+                        // const temp={
+                            // categoryId: "1"
+                            // brandId: "1"
+                            // modelId: "10"
+                            // modelTypeId: "103725"
+                            // plateNo: "34gg8294"
+                            // kilometer: "2222222"
+                            // year: "2020"
+                            // caseTypeId: "1"
+                            // gearTypeId: "1"
+                            // fuelTypeId: "2"
+                            // colorId: "1"
+                            // engineCapacityId: undefined
+                            // engineCapacityId: "1"
+                            // vinNo: "32165489764554444"
+                            // engineNo: "654654654654654"
+                            // enginePower: undefined
+                            // enginePowerId: "2"
+                            // fromWhoId: "1"
+                            // insuranceCode: undefined
+                            // insuranceValue: 789615
+                            // purchaseTypeId: "1"
+                            // guid: "f4a5d863-28b5-4644-a3b8-ecbb735e7a4d"
+                            // tramerTypeId: "1"
+                            // tramerValue: "23,232"
+
+                        //     images: (19) [File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File]
+                        //     documents: (2) [{…}, {…}]
+                        //     expertiseValues: {rightBackFender: "orginal", backHood: "painted", leftBackFender: "changed", rightBackDoor: "orginal", rightFrontDoor: "painted", …}
+                        
+                        //     buyingPrice: "332,456,546"
+                        //     cashSellingPrice: undefined
+                        //     maxPrice: "654,654,654"
+                        //     minPrice: "654,654,654"
+                        //     sellingPrice: "356,465,465"
+                        //     swapSellingPrice: undefined
+                        
+                        // description: ""
+                        // id: undefined
+                        // relationGuid: ""
+                        // relationTable: ""
+                        // statusId: undefined
+                        // swap: false
+                        // }
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 {/*begin::Section*/}
-                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 6).description}</h4>
-                                <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id === 1).title}:</h6>
-
+                                
+                               
                             </div>
                         );
                     }}
                 </Wizard.Page>
-            </Wizard>
+            </Wizard >
 
         ) : (
             <Formik
@@ -630,9 +576,9 @@ export function StockEditForm({
                                         /> */}
                                 </div>
                                 <div className="col-lg-3">
-                                    <Select name="engineCapacity" label="Motor Hacmi" options={EngineCapacities} />
+                                    <Select name="engineCapacityId" label="Motor Hacmi" options={EngineCapacities} />
                                     {/* <Field
-                                            name="engineCapacity"
+                                            name="engineCapacityId"
                                             component={Input}
                                             placeholder="Motor Hacmi"
                                             label=""

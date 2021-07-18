@@ -39,7 +39,7 @@ const initStock = {
   plateNo: "",
   kilometer: undefined,
   enginePower: undefined,//motor gücü
-  engineCapacity: undefined,//motor hacmi
+  engineCapacityId: undefined,//motor hacmi
   swap: false,
   buyingPrice: undefined,
   sellingPrice: undefined,

@@ -1,7 +1,7 @@
-import * as requestFromServer from "./usersCrud";
-import {usersSlice, callTypes} from "./filesSlice";
+import * as requestFromServer from "./filesCrud";
+import {filesSlice, callTypes} from "./filesSlice";
 
-const {actions} = usersSlice;
+const {actions} = filesSlice;
 
 
 
@@ -21,14 +21,15 @@ export const fetchFiles = queryParams => dispatch => {
 };
 
 
-export const createFile = fileForCreation => dispatch => {
+export  const  createFile =( formData,subDirectory) => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .uploadFile(fileForCreation)
+    .uploadFile(formData,subDirectory)
     .then(response => {
-      const { file } = response.data;
-      dispatch(actions.fileCreated({ file }));
-      return file;
+      
+      //const { guid } = response.data;
+      //dispatch(actions.fileCreated({ file }));
+      return response.data;
     })
     .catch(error => {
       error.clientMessage = "Can't create file";

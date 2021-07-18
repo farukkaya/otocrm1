@@ -40,7 +40,7 @@ export const initialFilter = {
       gearTypeId: 0,//Vites tipleri
       caseTypeId: 0,// kasa tipleri
       enginePower: 0,//motor gücü
-      engineCapacity: 0,//motor hacmi
+      engineCapacityId: 0,//motor hacmi
       swap: false,
       statusId: 0,// Sıfır ,İkinci El
       buyingPrice: 0,

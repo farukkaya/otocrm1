@@ -25,7 +25,8 @@ const getGroupCSSClasses = (touched, errors) => {
 
   return classes.join(" ");
 };
-export function Input({
+
+export const Input = React.memo(({
   field, // { name, value, onChange, onBlur }
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   label,
@@ -34,8 +35,7 @@ export function Input({
   type = "text",
   adornment,
   ...props
-}) {
-
+}) => {
   return (
     <>
       {label && <label>{label} girin</label>}
@@ -85,5 +85,5 @@ export function Input({
           />
         )}
     </>
-  );
-}
+  )
+});

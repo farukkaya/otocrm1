@@ -18,8 +18,10 @@ export {Select} from "./forms/Select";
 export {AutoSelect} from "./forms/AutoSelect";
 export {Checkbox} from "./forms/Checkbox";
 export {HeaderCheckbox} from "./forms/HeaderCheckbox";
-export {FileUpload} from "./forms/FileUpload";
 
+// Forms#UPPY
+export {DashboardUpload} from "./forms/Uppy/DashboardUpload";
+export {FileUpload} from "./forms/Uppy/FileUpload";
 
 // Paginations
 export {Pagination} from "./pagination/Pagination"
@@ -34,3 +36,7 @@ export {Notice} from "./Notice";
 export {SplashScreen} from "./SplashScreen";
 export {SVGIcon} from "./SVGIcon";
 export {ModalProgressBar} from "./ModalProgressBar";
+
+
+
+// Forms

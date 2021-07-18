@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React,{useContext} from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -19,6 +19,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+
 
 // function createData(name, validityDate, description, path) {
 //   return { name, validityDate, description, path };
@@ -216,7 +217,6 @@ export default function DocumentsTable({documents}) {
   const isSelected = name => selected.indexOf(name) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, documents.length - page * rowsPerPage);
-
   return (
     <>
       <Paper className={classes.paper}>
@@ -236,9 +236,8 @@ export default function DocumentsTable({documents}) {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   
-                  const isItemSelected = isSelected(row.get("name"));
+                  const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
-
                   return (
                     <TableRow
                       hover
@@ -256,11 +255,13 @@ export default function DocumentsTable({documents}) {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.get("name")}
+                        {row.name}
                       </TableCell>
-                      <TableCell align="left">{row.get("validityDate")}</TableCell>
-                      <TableCell align="left">{row.get("description")}</TableCell>
-                      <TableCell align="left">{row.get("path")}</TableCell>
+                      <TableCell align="left">{row.validityDate}</TableCell>
+                      <TableCell align="left">{row.description}</TableCell>
+                      <TableCell align="left">
+                      <a target='_blank' href={process.env.REACT_APP_API_DEVELOPMENT_URL+row.path}>Belgeyi Göster</a>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
