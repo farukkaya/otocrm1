@@ -99,10 +99,12 @@ const Step3Schema = Yup.object().shape({
 
 const schemaArray = [Step1Schema, Step2Schema, Step3Schema];
 export function CustomerEditForm({
-  saveCustomer,
   customer,
-  btnRef,
+  btnSave,
   btnReset,
+  btnPrevious,
+  btnNext,
+  saveCustomer,
   handleReset,
   currentGalleryId,
   cities, towns, neighborhoods,
@@ -116,8 +118,12 @@ export function CustomerEditForm({
           initialValues={customer}
           arrayProgress={arrayProgress}
           schemaArray={schemaArray}
+          btnSave={btnSave}
+          btnNext={btnNext}
+          btnPrevious={btnPrevious}
+          btnReset={btnReset}
           onReset={(values) => handleReset(values)}
-          onSubmit={(values, formActions) => { return; }}>
+          onSubmit={(values) => saveCustomer(values)}>
 
 
           <Wizard.Page>
@@ -411,8 +417,8 @@ export function CustomerEditForm({
         enableReinitialize={true}
         initialValues={customer}
         validationSchema={CustomerEditSchema}
-        onSubmit={(values) => saveCustomer(values)}
         onReset={(values) => handleReset(values)}
+        onSubmit={(values) => saveCustomer(values)}
       >
         {({ handleSubmit, handleReset }) => (
           <>
@@ -498,7 +504,7 @@ export function CustomerEditForm({
               <button
                 type="submit"
                 style={{ display: "none" }}
-                ref={btnRef}
+                ref={btnSave}
                 onSubmit={() => handleSubmit()}
               ></button>
             </Form>

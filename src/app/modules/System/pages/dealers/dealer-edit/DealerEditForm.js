@@ -23,19 +23,16 @@ import{
 
 export function DealerEditForm({
   dealer,
-  history,
-  btnRef,
+  btnSave,
   btnReset,
+  btnPrevious,
+  btnNext,
   saveDealer,
   handleReset,
   dealersForCombo,
   taxOffices,
   professions, cities, towns, neighborhoods
 }) {
-  const backToDealersList = () => {
-    history.push(`/system/dealers`);
-  };
-
   const dispatch = useDispatch();
   useEffect(() => {
     if(dealer.id === undefined ){
@@ -146,13 +143,11 @@ export function DealerEditForm({
 
   const schemaArray = [Step1Schema, Step2Schema, Step3Schema, Step4Schema];
 
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
+  //const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
   //const required = value => (value ? undefined : "Required");
-
-  let IsDısabledCapacity=true;
   // let showAlert=false;
-
+  
+  let IsDısabledCapacity=true;
   return (
 
     dealer.id === undefined ? (
@@ -160,71 +155,12 @@ export function DealerEditForm({
         initialValues={dealer}
         arrayProgress={arrayProgress}
         schemaArray={schemaArray}
+        btnSave={btnSave}
+        btnNext={btnNext}
+        btnPrevious={btnPrevious}
+        btnReset={btnReset}
         onReset={(values) => handleReset(values)}
-        onSubmit={(values, formActions) => {
-          sleep(300).then(() => {
-            // window.alert(JSON.stringify(values, null, 2));
-            const dealer = {
-              parentId: parseInt(values.parentId),
-              name: values.dealerName,
-              taxIdentityNo: values.taxIdentityNo,
-              taxOfficeId: parseInt(values.taxOfficeId),
-              dealerTypeId: parseInt(values.dealerTypeId),
-              capacityId: parseInt(values.capacityId),
-              email: values.email,
-              fax: values.fax,
-              phone1: values.phone1,
-              phone2: values.phone2,
-              guid: values.guid
-            }
-            const adminUser = {
-              email: values.ownerEmail,
-              identityNo: values.identityNo,
-              firstname: values.firstname,
-              lastname: values.lastname,
-              username: values.username,
-              professionId: parseInt(values.professionId),
-              phone: values.ownerTel
-            }
-            const address = {
-              isPrimaryAddress:true,
-              name: values.addressName,
-              cityId: parseInt(values.cityId),
-              townId: parseInt(values.townId),
-              neighborhoodId: parseInt(values.neighborhoodId),
-              addressLine: values.addressLine,
-              relationGuid: values.guid
-            }
-            dispatch(actions.createDealer({
-              dealer,
-              adminUser,
-              address
-            })).then((resp) => {
-                
-              backToDealersList()
-                // dispatch(actions.fetchDealers(deal.queryParams));
-                // //clear selections list
-                // customersUIProps.setIds([]);
-            })
-            // dispatch(usersActions.createUser(adminUser)).then((response) => {
-
-            //   dealer.adminId = response?.id;
-            //   dispatch(actions.createDealer(dealer)).then(() => {
-            //     dispatch(addressesActions.createAddress(address)).then(() => {
-            //       backToDealersList()
-                  // dispatch(actions.fetchCustomers(customersUIProps.queryParams));
-                  // clear selections list
-                  // customersUIProps.setIds([]);
-            //     })
-            //   })
-
-            // })
-
-
-            formActions.setSubmitting(false);
-          });
-        }}
-
+        onSubmit={(values) => saveDealer(values)}
       >
         <Wizard.Page>
           {props => {
@@ -660,7 +596,7 @@ export function DealerEditForm({
             <button
               type="submit"
               style={{ display: "none" }}
-              ref={btnRef}
+              ref={btnSave}
               onSubmit={() => handleSubmit()}
             ></button>
           </Form>

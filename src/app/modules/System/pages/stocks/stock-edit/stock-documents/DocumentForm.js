@@ -38,7 +38,6 @@ export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) 
 
     const dispatch = useDispatch();
     const onHandleSubmit=(values, { setSubmitting, setErrors, setStatus, resetForm }) => {
-        debugger
         const { name, validityDate, description } = values;
         id++;
         formData.append(transactionId, attachment);

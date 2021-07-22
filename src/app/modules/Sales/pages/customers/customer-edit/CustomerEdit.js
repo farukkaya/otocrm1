@@ -16,26 +16,16 @@ import { v4 as generateGuid } from 'uuid';
 
 const initCustomer={
   guid: generateGuid(),
-
-  lastname : "",
-
   firstname : "",
-
+  lastname : "",
   personalPhone : "",
   workPhone : "",
   identityNo : "",
   email:"",
   advancePayment: "",
-  customerTypeId : undefined,
-  customerSourceId:undefined,
-  paymentMethodId: undefined,
-  isActive : true,
-  createdDate : "07/03/2015",
-  createdBy : 1,
-  updatedDate : null,
-  updatedBy : null,
-  deletedDate : null,
-  deletedBy : null,
+  customerTypeId : "",
+  customerSourceId:"",
+  paymentMethodId: "",
 }
 export function CustomerEdit({
   history,
@@ -51,6 +41,8 @@ export function CustomerEdit({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
+  const [isFirstPage, setIsFirtPage] = useState(true);
+  const [isLastPage, setIsLastPage] = useState(false);
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
@@ -95,13 +87,12 @@ export function CustomerEdit({
   }, [customerForEdit, id]);
 
   const saveCustomer = (values) => {
-    if (!id) {
+    if (!id) 
       dispatch(actions.createCustomer(values))
-      backToCustomersList()
-    } else {
+    else 
       dispatch(actions.updateCustomer(values))//.then(() => );
-      backToCustomersList()
-    }
+    
+    backToCustomersList()
   };
 
   const handleReset = (values) => {
@@ -111,21 +102,45 @@ export function CustomerEdit({
 
     }
   };
-  const btnRef = useRef();
+  const btnSave = useRef();
   const btnReset = useRef();
+  const btnPrevious = useRef();
+  const btnNext = useRef();
 
   const handleResetClick = () => {
-    if (btnReset && btnReset.current) {
+    if (btnReset && btnReset.current)
+    {
       btnReset.current.click();
+      
+      //AMAÇ: Eğer bu blok olmazsa reset fonksiyonu WizardPage'i başa alıyor ama componentleri temizlemiyor ikinci reset click'e ihtiyac duyuyoruz
+      setTimeout(() => {
+        btnReset.current.click();
+      }, 100);
     }
   };
 
   const saveCustomerClick = () => {
-    if (btnRef && btnRef.current) {
-      btnRef.current.click();
+    if (btnSave && btnSave.current) {
+      btnSave.current.click();
     }
   };
-
+  const previousClick = () => {
+    if (btnPrevious && btnPrevious.current){
+      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
+      setIsFirtPage(nextPageOrder===0)
+      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+        btnPrevious.current.click();
+    }
+    
+  };
+  const nextClick = () => {
+    if (btnNext && btnNext.current){
+      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
+      setIsFirtPage(nextPageOrder===0)
+      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+      btnNext.current.click();
+    }
+  };
   const backToCustomersList = () => {
     history.push(`/sales/customers`);
   };
@@ -141,21 +156,42 @@ export function CustomerEdit({
           onClick={backToCustomersList}
           className="btn btn-light"
         >
-          <i className="fa fa-arrow-left"></i>
-        Geri
+         <i className="fa fa-arrow-left"></i> Listeye Dön
         </button>
         {`  `}
         <button
           className="btn btn-light ml-2"
           onClick={handleResetClick}
         >
-          <i className="fa fa-redo"></i>
-           Reset
+          <i className="fa fa-redo"></i> Reset
          </button>
-        {id && (
-          <>
+         {`  `}
+          {!isFirstPage && (
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={previousClick}
+            >
+              <i className="fa fa-arrow-left"></i> Geri
+            </button>)}
 
-            {`  `}
+          {`  `}
+          {!isLastPage && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={nextClick}
+            >
+              İleri <i className="fa fa-arrow-right"></i> 
+            </button>
+          )}
+
+          {`  `}
+          {isLastPage && (
+
             <button
               type="submit"
               data-wizard-type="action-submit"
@@ -163,18 +199,21 @@ export function CustomerEdit({
               onClick={saveCustomerClick}
             >
               Kaydet
-          </button>
-          </>
-        )}
+            </button>
+          )}
 
       </CardHeaderToolbar>
     </CardHeader>
     <CardBody>
       <CustomerEditForm
-        saveCustomer={saveCustomer}
-        handleReset={handleReset}
         actionsLoading={actionsLoading}
         customer={customerForEdit || initCustomer}
+        btnSave={btnSave}
+        btnReset={btnReset}
+        btnPrevious={btnPrevious}
+        btnNext={btnNext}
+        saveCustomer={saveCustomer}
+        handleReset={handleReset}
         cities={cities}
         towns={towns}
         currentGalleryId={currentUser.dealer?.id}

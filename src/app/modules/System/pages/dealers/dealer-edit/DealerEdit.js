@@ -24,17 +24,17 @@ import { UsersUIProvider } from "../dealer-users/UsersUIContext";
 import { Addresses } from "../dealer-addresses/Addresses";
 import { AddressesUIProvider } from "../dealer-addresses/AddressesUIContext";
 
-const newGuid=generateGuid();
+const newGuid = generateGuid();
 const initDealer = {
 
   //STEP1-> BAYİ
   guid: newGuid,
   dealerName: "",
   taxIdentityNo: "",
-  parentId: undefined,
-  taxOfficeId: undefined,
-  dealerTypeId: undefined,
-  capacityId: undefined,
+  parentId: "",
+  taxOfficeId: "",
+  dealerTypeId: "",
+  capacityId: "",
   //STEP2-> İLETİŞİM
   email: "",
   fax: "",
@@ -42,7 +42,7 @@ const initDealer = {
   phone2: "",
   //STEP3-> YÖNETİCİ(KULLANICI)
   firstname: "",
-  professionId: "1",
+  professionId: "",
   lastname: "",
   identityNo: "",
   username: "",
@@ -51,12 +51,12 @@ const initDealer = {
 
   //STEP4-> ADRES
   addressName: "",
-  cityId: undefined,
-  townId: undefined,
-  neighborhoodId: undefined,
+  cityId: "",
+  townId: "",
+  neighborhoodId: "",
   addressLine: "",
-  isPrimaryAddress:true,
-  relationGuid:newGuid
+  isPrimaryAddress: true,
+  relationGuid: newGuid
 
 };
 
@@ -75,10 +75,12 @@ export function DealerEdit({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
+  const [isFirstPage, setIsFirtPage] = useState(true);
+  const [isLastPage, setIsLastPage] = useState(false);
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, dealerForEdit, dealersForCombo,taxOffices, users, professions, cities, towns, neighborhoods, currentUser } = useSelector(
+  const { actionsLoading, dealerForEdit, dealersForCombo, taxOffices, users, professions, cities, towns, neighborhoods, currentUser } = useSelector(
     (state) => ({
       currentUser: state.auth.user,
       actionsLoading: state.dealers.actionsLoading,
@@ -110,14 +112,49 @@ export function DealerEdit({
 
   const saveDealer = (values) => {
     if (!id) {
-      dispatch(actions.createDealer(values))
-      backToDealersList()
+        const dealerWizardDto ={
+          dealer:{
+            parentId: +values.parentId,
+            name: values.dealerName,
+            taxIdentityNo: values.taxIdentityNo,
+            taxOfficeId: +values.taxOfficeId,
+            dealerTypeId: +values.dealerTypeId,
+            capacityId: +values.capacityId,
+            email: values.email,
+            fax: values.fax,
+            phone1: values.phone1,
+            phone2: values.phone2,
+            guid: values.guid
+          },
+          adminUser : {
+            email: values.ownerEmail,
+            identityNo: values.identityNo,
+            firstname: values.firstname,
+            lastname: values.lastname,
+            username: values.username,
+            professionId: +values.professionId,
+            phone: values.ownerTel
+          },
+          address : {
+            isPrimaryAddress:true,
+            name: values.addressName,
+            cityId: +values.cityId,
+            townId: +values.townId,
+            neighborhoodId: +values.neighborhoodId,
+            addressLine: values.addressLine,
+            relationGuid: values.guid
+          }
+        } 
+        dispatch(actions.createDealer(dealerWizardDto)).then((resp) => {
+          backToDealersList()
+        })
+       
     } else {
       //TODO: SELECT companenti value type her zaman string dönüyor, eğer number dönerse bu kod bloğuna ihtiyacç kalmaz...
-      values.parentId=+values.parentId;
-      values.dealerTypeId=+values.dealerTypeId;
-      values.capacityId=+values.capacityId;
-      values.taxOfficeId=+values.taxOfficeId;
+      values.parentId = +values.parentId;
+      values.dealerTypeId = +values.dealerTypeId;
+      values.capacityId = +values.capacityId;
+      values.taxOfficeId = +values.taxOfficeId;
       dispatch(actions.updateDealer(values))//.then(() => );
       backToDealersList()
     }
@@ -127,24 +164,47 @@ export function DealerEdit({
     if (values.id) {
       values = dealerForEdit
     } else {
-
     }
   };
-  const btnRef = useRef();
+  const btnSave = useRef();
   const btnReset = useRef();
+  const btnPrevious = useRef();
+  const btnNext = useRef();
 
   const handleResetClick = () => {
-    if (btnReset && btnReset.current) {
+    if (btnReset && btnReset.current)
+    {
       btnReset.current.click();
+      
+      //AMAÇ: Eğer bu blok olmazsa reset fonksiyonu WizardPage'i başa alıyor ama componentleri temizlemiyor ikinci reset click'e ihtiyac duyuyoruz
+      setTimeout(() => {
+        btnReset.current.click();
+      }, 100);
     }
   };
 
   const saveDealerClick = () => {
-    if (btnRef && btnRef.current) {
-      btnRef.current.click();
-    }
+    if (btnSave && btnSave.current)
+        btnSave.current.click();
   };
 
+  const previousClick = () => {
+    if (btnPrevious && btnPrevious.current){
+      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
+      setIsFirtPage(nextPageOrder===0)
+      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+        btnPrevious.current.click();
+    }
+    
+  };
+  const nextClick = () => {
+    if (btnNext && btnNext.current){
+      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
+      setIsFirtPage(nextPageOrder===0)
+      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+      btnNext.current.click();
+    }
+  };
   const backToDealersList = () => {
     history.push(`/system/dealers`);
   };
@@ -165,30 +225,50 @@ export function DealerEdit({
             onClick={backToDealersList}
             className="btn btn-light"
           >
-            <i className="fa fa-arrow-left"></i>
-          Geri
+            <i className="fa fa-arrow-left"></i> Listeye Dön
           </button>
           {`  `}
           <button
             className="btn btn-light ml-2"
             onClick={handleResetClick}
           >
-            <i className="fa fa-redo"></i>
-             Reset
-           </button>
-          {id && (
-            <>
+            <i className="fa fa-redo"></i> Reset
+          </button>
+          {`  `}
+          {!isFirstPage && (
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={previousClick}
+            >
+              <i className="fa fa-arrow-left"></i> Geri
+            </button>)}
 
-              {`  `}
-              <button
-                type="submit"
-                data-wizard-type="action-submit"
-                className="btn btn-primary ml-2"
-                onClick={saveDealerClick}
-              >
-                Kaydet
+          {`  `}
+          {!isLastPage && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={nextClick}
+            >
+              İleri <i className="fa fa-arrow-right"></i> 
             </button>
-            </>
+          )}
+
+          {`  `}
+          {isLastPage && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-primary ml-2"
+              onClick={saveDealerClick}
+            >
+              Kaydet
+            </button>
           )}
 
         </CardHeaderToolbar>
@@ -198,9 +278,10 @@ export function DealerEdit({
           <DealerEditForm
             actionsLoading={actionsLoading}
             dealer={initDealer}
-            btnRef={btnRef}
-            history={history}
+            btnSave={btnSave}
             btnReset={btnReset}
+            btnPrevious={btnPrevious}
+            btnNext={btnNext}
             saveDealer={saveDealer}
             handleReset={handleReset}
             taxOffices={taxOffices}
@@ -217,21 +298,21 @@ export function DealerEdit({
                   role="tab"
                   aria-selected={(tab === "basic")}
                 >
-               {dealerForEdit?.dealerTypeId == 1  ? "Bayi"
-              : dealerForEdit?.dealerTypeId == 2 ? "Galeri"
-              : "Bayi&Galeri" }
-                  </a>
+                  {dealerForEdit?.dealerTypeId == 1 ? "Bayi"
+                    : dealerForEdit?.dealerTypeId == 2 ? "Galeri"
+                      : "Bayi&Galeri"}
+                </a>
               </li>
               <li className={`nav-item ${dealerForEdit?.dealerTypeId == 1 && "offcanvas"}`} onClick={() => setTab("stocks")}>
-                  <a
-                    className={`nav-link ${tab === "stocks" && "active"}`}
-                    data-toggle="tab"
-                    role="button"
-                    aria-selected={(tab === "stocks")}
-                  >
-                    Stokları
-                    </a>
-                </li>
+                <a
+                  className={`nav-link ${tab === "stocks" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "stocks")}
+                >
+                  Stokları
+                </a>
+              </li>
               <li className={`nav-item ${dealerForEdit?.dealerTypeId == 2 && "offcanvas"}`} onClick={() => setTab("galleries")}>
                 <a
                   className={`nav-link ${tab === "galleries" && "active"}`}
@@ -240,7 +321,7 @@ export function DealerEdit({
                   aria-selected={(tab === "galleries")}
                 >
                   Galerileri
-                    </a>
+                </a>
               </li>
               <li className="nav-item" onClick={() => setTab("users")}>
                 <a
@@ -250,7 +331,7 @@ export function DealerEdit({
                   aria-selected={(tab === "users")}
                 >
                   Kullanıcıları
-                    </a>
+                </a>
               </li>
               <li className="nav-item" onClick={() => setTab("addresses")}>
                 <a
@@ -260,7 +341,7 @@ export function DealerEdit({
                   aria-selected={(tab === "addresses")}
                 >
                   Adresleri
-                    </a>
+                </a>
               </li>
             </ul>
             <div className="mt-5">
@@ -268,8 +349,7 @@ export function DealerEdit({
                 <DealerEditForm
                   actionsLoading={actionsLoading}
                   dealer={dealerForEdit || initDealer}
-                  btnRef={btnRef}
-                  history={history}
+                  btnSave={btnSave}
                   btnReset={btnReset}
                   saveDealer={saveDealer}
                   handleReset={handleReset}
@@ -283,20 +363,20 @@ export function DealerEdit({
               )}
               {tab === "stocks" && id && (
                 <StocksUIProvider currentDealerId={id}>
-                <Stocks />
-              </StocksUIProvider>
+                  <Stocks />
+                </StocksUIProvider>
               )}
               {tab === "galleries" && id && (
-               <GalleriesUIProvider currentDealerId={id}>
-               <Galleries />
-             </GalleriesUIProvider>
+                <GalleriesUIProvider currentDealerId={id}>
+                  <Galleries />
+                </GalleriesUIProvider>
               )}
               {tab === "users" && id && (
                 <UsersUIProvider currentDealerId={id}>
                   <Users />
                 </UsersUIProvider>
               )}
-                {tab === "addresses" && id && (
+              {tab === "addresses" && id && (
                 <AddressesUIProvider guid={dealerForEdit.guid}>
                   <Addresses />
                 </AddressesUIProvider>

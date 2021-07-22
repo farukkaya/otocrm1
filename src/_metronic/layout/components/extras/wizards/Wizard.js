@@ -13,6 +13,7 @@ export class Wizard extends React.Component {
             page: 0,
             values: props.initialValues,
         };
+        this.baseState = this.state 
     }
 
     next = values => this.setState(state => ({
@@ -44,16 +45,12 @@ export class Wizard extends React.Component {
             this.next(values);
         }
     };
-    // handleReset = () => {
-    //     
-    //     this.setState({
-    //         page: 0,
-    //         values: this.props.initialValues,
-    //     })
-    // };
+    handleReset = () => {   
+        this.setState(this.baseState)
+    };
 
     render() {
-        const { children, arrayProgress, schemaArray } = this.props;
+        const { children, arrayProgress, schemaArray,btnSave,btnPrevious,btnNext,btnReset } = this.props;
         const { page, values } = this.state;
         const activePage = React.Children.toArray(children)[page];
         //console.log(activePage, "activePage");
@@ -64,12 +61,12 @@ export class Wizard extends React.Component {
                 enableReinitialize={false}
                 validationSchema={schemaArray[page]}
                 onSubmit={this.handleSubmit}
-            // onReset={this.handleReset}
+                onReset={this.handleReset}
             >
                 {props => {
-                    const { handleSubmit, /*handleReset,*/ isSubmitting } = props;
+                    const { handleSubmit, handleReset, isSubmitting } = props;
                     return (
-                        <form onSubmit={handleSubmit} /*onReset={handleReset}*/ id="wizardForm">
+                        <form onSubmit={handleSubmit} onReset={handleReset} id="wizardForm">
                             <div className="wizard wizard-2">
                                 <div className="wizard-nav border-right py-8 px-8 py-lg-20 px-lg-10">
                                     <div className="wizard-steps" >
@@ -102,17 +99,19 @@ export class Wizard extends React.Component {
                                             {React.cloneElement(activePage, { parentState: { ...props } })}
 
                                             {/*begin: Wizard Actions*/}
-                                            <div className="d-flex justify-content-between border-top mt-5 pt-10">
+                                            <div className="d-none justify-content-between border-top mt-5 pt-10">
                                                 <div className="mr-2">
-                                                    {page > 0 && <button type="button" onClick={this.previous} className="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" >Geri</button>}
+                                                    {page > 0 && <button ref={btnPrevious} type="button" onClick={this.previous} data-page={page}  className="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" >Geri</button>}
                                                 </div>
                                                 <div>
-                                                    {/* <button type="submit" onClick={this.handleReset} className="btn btn-light font-weight-bolder text-uppercase px-9 py-4" disabled={isSubmitting}>Reset</button> */}
-                                                    {isLastPage && <button type="submit" className="btn btn-success font-weight-bolder text-uppercase px-9 py-4" disabled={isSubmitting}>Tamamla</button>}
-                                                    {!isLastPage && <button type="submit" /*(validation kullanmak istemezsen bunu yorum satırından çıkar) onClick={this.next} */ className="btn btn-primary font-weight-bolder text-uppercase px-9 py-4">İleri</button>}
+                                                    <button ref={btnReset} type="reset" onClick={this.handleReset} className="btn btn-light font-weight-bolder text-uppercase px-9 py-4" disabled={isSubmitting}>Reset</button>
+                                                    <button ref={isLastPage?btnSave:btnNext} data-page={page} data-pagecount={this.props.children.length} type="submit" /*(validation kullanmak istemezsen bunu yorum satırından çıkar) onClick={this.next}*/ className="btn btn-primary font-weight-bolder text-uppercase px-9 py-4">İleri</button> 
+                                                   
+                                                    {/* {isLastPage && <button ref={btnNext} type="submit" className="btn btn-success font-weight-bolder text-uppercase px-9 py-4" disabled={isSubmitting}>Tamamla</button>}
+                                                    {!isLastPage && <button ref={btnNext} data-page={page} data-isLastPage={isLastPage} type="submit" className="btn btn-primary font-weight-bolder text-uppercase px-9 py-4">İleri</button>} */}
                                                 </div>
                                             </div>
-                                            {/*end: Wizard Actions*/}
+                                            {/*end: Wizard Actions*/}                                            
                                         </div>
                                     </div>
                                 </div>

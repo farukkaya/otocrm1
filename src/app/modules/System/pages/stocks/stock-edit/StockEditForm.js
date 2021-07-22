@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-import { v4 as generateGuid } from 'uuid';
 import { DashboardUpload, Input, Select, CurrencyInput } from "../../../../../../_metronic/_partials/controls";
 import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
 import { format } from 'react-string-format';
@@ -124,8 +123,9 @@ const adorments = {
 }
 export function StockEditForm({
     stock,
-    history,
-    btnRef,
+    btnSave,
+    btnNext,
+    btnPrevious,
     btnReset,
     saveStock,
     handleReset,
@@ -143,9 +143,7 @@ export function StockEditForm({
     const [documents, setDocuments] = useState(stock.documents)
     const [images, setImages] = useState(stock.images)
     const [disabledValue, setDisabledValue] = useState(true)
-    const backToDealersList = () => {
-        history.push(`/system/stocks`);
-    };
+   
     return (
 
         stock.id === undefined ? (
@@ -153,57 +151,12 @@ export function StockEditForm({
                 initialValues={stock}
                 arrayProgress={arrayProgress}
                 schemaArray={schemaArray}
+                btnSave={btnSave}
+                btnNext={btnNext}
+                btnPrevious={btnPrevious}
+                btnReset={btnReset}
                 onReset={(values) => handleReset(values)}
-                onSubmit={(values, formActions) => {
-                    sleep(300).then(() => {
-                        const stockWizardData = {
-                            stock: {
-                                dealerId: stock.dealerId,
-                                plateNo: values.plateNo,
-                                categoryId: +values.categoryId,
-                                brandId: +values.brandId,
-                                modelId: +values.modelId,
-                                modelTypeId: +values.modelTypeId,
-                                modelYear: values.modelYear,
-                                kilometer: values.kilometer,
-                                caseTypeId: +values.caseTypeId,
-                                gearTypeId: +values.gearTypeId,
-                                fuelTypeId: +values.fuelTypeId,
-                                colorId: +values.colorId,
-                                enginePowerId: +values.enginePowerId,
-                                engineCapacityId: +values.engineCapacityId,
-                                vinNo: values.vinNo,
-                                engineNo: values.engineNo,
-                                fromWhoId: +values.fromWhoId,
-                                purchaseTypeId: +values.purchaseTypeId,
-                                tramerTypeId: +values.tramerTypeId,
-                                tramerValue: parseFloat(values.tramerValue),
-                                insuranceCode: +values.insuranceCode,
-                                insuranceValue: parseFloat(values.insuranceValue),
-                                buyingPrice: parseFloat(values.buyingPrice),
-                                sellingPrice: parseFloat(values.sellingPrice),
-                                minPrice: parseFloat(values.minPrice),
-                                maxPrice: parseFloat(values.maxPrice),
-                                transactionId:stock.transactionId,
-                            },
-                            stockExpertise: values.stockExpertise
-                        }
-
-                        dispatch(actions.createStock(stockWizardData)).then((responseStock) => {
-                            dispatch(actions.fetchStocks({
-                                filter: {},
-                                sortOrder: "desc",
-                                sortField: "id",
-                                pageNumber: 1,
-                                pageSize: 10
-                            })).then(()=>{
-                                backToDealersList();
-                            })
-                        })
-
-                        formActions.setSubmitting(false);
-                    });
-                }}
+                onSubmit={(values, formActions) => saveStock(values)}
             >
            
                 <Wizard.Page>
@@ -641,7 +594,7 @@ export function StockEditForm({
                             <button
                                 type="submit"
                                 style={{ display: "none" }}
-                                ref={btnRef}
+                                ref={btnSave}
                                 onSubmit={() => handleSubmit()}
                             ></button>
                         </Form>

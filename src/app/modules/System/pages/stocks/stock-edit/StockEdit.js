@@ -28,6 +28,8 @@ export function StockEdit({
   // Tabs
   const [tab, setTab] = useState("basic");
   const [title, setTitle] = useState("");
+  const [isFirstPage, setIsFirtPage] = useState(true);
+  const [isLastPage, setIsLastPage] = useState(false);
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
@@ -53,29 +55,29 @@ export function StockEdit({
     transactionId: generateGuid(),
     vinNo: "",
     engineNo: "",
-    categoryId: undefined,//markalar                        
-    brandId: undefined,//markalar                        
-    modelId: undefined,//modeller                          
-    modelTypeId: undefined,//modeller                          
-    colorId: undefined,//renkler                            --Constant
-    fuelTypeId: undefined,//Yakıt Tipleri                   --Constant
-    gearTypeId: undefined,//Vites tipleri                   --Constant
-    caseTypeId: undefined,// kasa tipleri                   --Constant
-    fromWhoId: undefined,//kimden (Müşteri,Esnaf,İhale)     --Constant
-    purchaseTypeId: undefined,//Alım Türü(Kredi Kapama,Takas,Nakit)  --Constant
-    modelYear: undefined,
+    categoryId: "",//markalar                        
+    brandId: "",//markalar                        
+    modelId: "",//modeller                          
+    modelTypeId: "",//modeller                          
+    colorId: "",//renkler                            --Constant
+    fuelTypeId: "",//Yakıt Tipleri                   --Constant
+    gearTypeId: "",//Vites tipleri                   --Constant
+    caseTypeId: "",// kasa tipleri                   --Constant
+    fromWhoId: "",//kimden (Müşteri,Esnaf,İhale)     --Constant
+    purchaseTypeId: "",//Alım Türü(Kredi Kapama,Takas,Nakit)  --Constant
+    modelYear: "",
     plateNo: "",
-    kilometer: undefined,
-    enginePowerId: undefined,//motor gücü
-    engineCapacityId: undefined,//motor hacmi
-    buyingPrice: undefined,
-    sellingPrice: undefined,
-    minPrice: undefined,
-    maxPrice: undefined,
-    insuranceCode: undefined,//Kasko Kodu
-    insuranceValue: undefined,// Kasko değeri
-    tramerValue: undefined,// Kasko değeri
-    tramerTypeId: undefined,// Kasko değeri
+    kilometer: "",
+    enginePowerId: "",//motor gücü
+    engineCapacityId: "",//motor hacmi
+    buyingPrice: "",
+    sellingPrice: "",
+    minPrice: "",
+    maxPrice: "",
+    insuranceCode: "",//Kasko Kodu
+    insuranceValue: "",// Kasko değeri
+    tramerValue: "",// Kasko değeri
+    tramerTypeId: "",// Kasko değeri
   
     stockExpertise:{
       rightBackFender:"orginal",
@@ -110,8 +112,50 @@ export function StockEdit({
 
   const saveStock = (values) => {
     if (!id) {
-      dispatch(actions.createStock(values))
-      backToStocksList()
+      const stockWizardData = {
+        stock: {
+            dealerId: initStock.dealerId,
+            plateNo: values.plateNo,
+            categoryId: +values.categoryId,
+            brandId: +values.brandId,
+            modelId: +values.modelId,
+            modelTypeId: +values.modelTypeId,
+            modelYear: values.modelYear,
+            kilometer: values.kilometer,
+            caseTypeId: +values.caseTypeId,
+            gearTypeId: +values.gearTypeId,
+            fuelTypeId: +values.fuelTypeId,
+            colorId: +values.colorId,
+            enginePowerId: +values.enginePowerId,
+            engineCapacityId: +values.engineCapacityId,
+            vinNo: values.vinNo,
+            engineNo: values.engineNo,
+            fromWhoId: +values.fromWhoId,
+            purchaseTypeId: +values.purchaseTypeId,
+            tramerTypeId: +values.tramerTypeId,
+            tramerValue: parseFloat(values.tramerValue),
+            insuranceCode: +values.insuranceCode,
+            insuranceValue: parseFloat(values.insuranceValue),
+            buyingPrice: parseFloat(values.buyingPrice),
+            sellingPrice: parseFloat(values.sellingPrice),
+            minPrice: parseFloat(values.minPrice),
+            maxPrice: parseFloat(values.maxPrice),
+            transactionId:initStock.transactionId,
+        },
+        stockExpertise: values.stockExpertise
+    }
+
+    dispatch(actions.createStock(stockWizardData)).then((responseStock) => {
+        dispatch(actions.fetchStocks({
+            filter: {},
+            sortOrder: "desc",
+            sortField: "id",
+            pageNumber: 1,
+            pageSize: 10
+        })).then(()=>{
+          backToStocksList();
+        })
+    })
     } else {
       dispatch(actions.updateStock(values))//.then(() => );
       backToStocksList()
@@ -125,21 +169,46 @@ export function StockEdit({
 
     }
   };
-  const btnRef = useRef();
+  const btnSave = useRef();
   const btnReset = useRef();
+  const btnPrevious = useRef();
+  const btnNext = useRef();
 
   const handleResetClick = () => {
-    if (btnReset && btnReset.current) {
+    if (btnReset && btnReset.current)
+    {
       btnReset.current.click();
+      
+      //AMAÇ: Eğer bu blok olmazsa reset fonksiyonu WizardPage'i başa alıyor ama componentleri temizlemiyor ikinci reset click'e ihtiyac duyuyoruz
+      setTimeout(() => {
+        btnReset.current.click();
+      }, 200);
     }
   };
 
   const saveStockClick = () => {
-    if (btnRef && btnRef.current) {
-      btnRef.current.click();
+    if (btnSave && btnSave.current) {
+      btnSave.current.click();
     }
   };
-
+  const previousClick = () => {
+    if (btnPrevious && btnPrevious.current){
+      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
+      setIsFirtPage(nextPageOrder===0)
+      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+        btnPrevious.current.click();
+    }
+    
+  };
+  const nextClick = () => {
+    
+    if (btnNext && btnNext.current){
+      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
+      setIsFirtPage(nextPageOrder===0)
+      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+      btnNext.current.click();
+    }
+  };
   const backToStocksList = () => {
     history.push(`/system/stocks`);
   };
@@ -152,14 +221,14 @@ export function StockEdit({
     <Card>
       {actionsLoading && <ModalProgressBar />}
       <CardHeader title={title}>
-        <CardHeaderToolbar>
+      <CardHeaderToolbar>
           <button
             type="button"
             onClick={backToStocksList}
             className="btn btn-light"
           >
             <i className="fa fa-arrow-left"></i>
-          Geri
+            Listeye Dön
           </button>
           {`  `}
           <button
@@ -167,23 +236,46 @@ export function StockEdit({
             onClick={handleResetClick}
           >
             <i className="fa fa-redo"></i>
-             Reset
-           </button>
-      
-           {id && (
-            <>
+            Reset
+          </button>
 
-                  {`  `}
-          <button
-            type="submit"
-            data-wizard-type="action-submit"
-            className="btn btn-primary ml-2"
-            onClick={saveStockClick}
-          >
-            Kaydet
+          {`  `}
+
+          {!isFirstPage && (
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={previousClick}
+            >
+              <i className="fa fa-arrow-left"></i> Geri
+            </button>)}
+
+          {`  `}
+          {!isLastPage && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={nextClick}
+            >
+              İleri <i className="fa fa-arrow-right"></i> 
             </button>
-            </>
-          )} 
+          )}
+
+          {`  `}
+          {isLastPage && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-primary ml-2"
+              onClick={saveStockClick}
+            >
+              Kaydet
+            </button>
+          )}
 
         </CardHeaderToolbar>
       </CardHeader>
@@ -192,10 +284,11 @@ export function StockEdit({
         {id === undefined ? (<>
           <StockEditForm
             actionsLoading={actionsLoading}
-            history={history}
-            stock={stockForEdit || initStock}
-            btnRef={btnRef}
+            stock={initStock}
+            btnSave={btnSave}
             btnReset={btnReset}
+            btnPrevious={btnPrevious}
+            btnNext={btnNext}
             saveStock={saveStock}
             handleReset={handleReset}
             categories={vehicleCategories}
@@ -240,8 +333,8 @@ export function StockEdit({
             {tab === "basic" && (
               <StockEditForm
                 actionsLoading={actionsLoading}
-                stock={stockForEdit || initStock}
-                btnRef={btnRef}
+                stock={stockForEdit}
+                btnSave={btnSave}
                 btnReset={btnReset}
                 saveStock={saveStock}
                 handleReset={handleReset}
