@@ -12,7 +12,7 @@ import { Input, Select } from "../../../../../../../_metronic/_partials/controls
 import { format } from 'react-string-format';
 
 import { LENGTH, MIN_LENGTH, MAX_LENGTH, DIGIT_CONTROL, REQUIRED } from "../../../../../../validations/validMessages";
-import { BrandList, ModelList, Years, CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources,EngineCapacities } from "../StocksUIHelper";
+import { BrandList, ModelList, Years, CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, PurchaseTypes,EngineCapacities } from "../StocksUIHelper";
 
 // Validation schema
 const StockEditSchema = Yup.object().shape({
@@ -198,19 +198,19 @@ export function StockEditForm({ saveStock, stock, actionsLoading, onHide }) {
                   </div>
                   <div className="col-lg-3">
                     <Field
-                      name="cashSellingPrice"
+                      name="minPrice"
                       component={Input}
-                      placeholder="Nakit Fiyatı"
-                      label="Nakit Fiyatı"
+                      placeholder="En Düşük Fiyatı"
+                      label="En Düşük Fiyatı"
                       adornment={adorments.priceAdorment}
                     />
                   </div>
                   <div className="col-lg-3">
                     <Field
-                      name="swapSellingPrice"
+                      name="maxPrice"
                       component={Input}
-                      placeholder="Takas Fiyatı"
-                      label="Takas Fiyatı"
+                      placeholder="En Yüksek Fiyatı"
+                      label="En Yükse Fiyatı"
                       adornment={adorments.priceAdorment}
                     />
                   </div>
@@ -221,7 +221,7 @@ export function StockEditForm({ saveStock, stock, actionsLoading, onHide }) {
                     <Select name="fromWhoId" label="Kimden" options={FromWhoTitles} />
                   </div>
                   <div className="col-lg-6">
-                    <Select name="purchaseTypeId" label="Alım Türü" options={Sources} />
+                    <Select name="purchaseTypeId" label="Alım Türü" options={PurchaseTypes} />
                   </div>
                 </div>
 

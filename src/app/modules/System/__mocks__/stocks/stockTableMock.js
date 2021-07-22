@@ -17,11 +17,8 @@ export default [
         enginePower: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
-        statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
         sellingPrice: 175000,
-        cashSellingPrice: 62500,
-        swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
         purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
@@ -70,11 +67,8 @@ export default [
         enginePower: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
-        statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
         sellingPrice: 220000,
-        cashSellingPrice: 62500,
-        swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
         purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
@@ -123,11 +117,8 @@ export default [
         enginePower: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
-        statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
         sellingPrice: 150000,
-        cashSellingPrice: 62500,
-        swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
         purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu
@@ -177,11 +168,8 @@ export default [
         enginePower: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
-        statusId: 1,// Sıfır ,İkinci El
         buyingPrice: 55000,
         sellingPrice: 64000,
-        cashSellingPrice: 62500,
-        swapSellingPrice: 66000,
         fromWhoId: 1,//kimden (Müşteri,Esnaf,İhale)
         purchaseTypeId: 1,//Alım Türü(Kredi Kapama,Takas,Nakit)
         insuranceCode: 310,//Kasko Kodu

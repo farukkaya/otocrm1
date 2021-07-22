@@ -72,10 +72,10 @@ export function StocksCard() {
                 <CardBody>
                     <div className="form-filtration">
                         <div className="row align-items-center">
-                            <div className="col-md-6 margin-bottom-10-mobile">
+                            <div className="col-md-4 margin-bottom-10-mobile">
                                 {stocksUIProps.ids.length > 0 && <StocksGrouping />}
                             </div>
-                            <div className="col-md-6 text-left margin-bottom-10-mobile">
+                            <div className="col-md-8 text-left margin-bottom-10-mobile">
                                 {stocksUIProps.isFiltering && <StocksFilter />}
                             </div>
                         </div>

@@ -28,8 +28,7 @@ export function getStockInsuranceValue(year,brandCode,typeCode) {
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 export function findStocks(queryParams) {
-  
-  return axios.post(`${STOCKS_URL}/find`, { queryParams });
+  return axios.post(`${STOCKS_URL}/Find`, queryParams);
 }
 export function findStocksByDealer(queryParams, dealerId) {
   return axios.post(`${STOCKS_URL}/findByDealer/${dealerId}`, { queryParams });

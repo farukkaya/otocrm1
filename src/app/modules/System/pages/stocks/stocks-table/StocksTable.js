@@ -63,6 +63,12 @@ export function StocksTable() {
       sortCaret: sortCaret,
     },
     {
+      dataField: "category",
+      text:"Kategori",
+      sort: true,
+      sortCaret: sortCaret,
+    },
+    {
       dataField: "brand",
       text:"Marka",
       sort: true,
@@ -74,9 +80,14 @@ export function StocksTable() {
       sort: true,
       sortCaret: sortCaret,
     },   
-    
     {
-      dataField: "year",
+      dataField: "modelType",
+      text:"Tip",
+      sort: true,
+      sortCaret: sortCaret,
+    },   
+    {
+      dataField: "modelYear",
       text:"Yıl",
       sort: true,
       sortCaret: sortCaret,
@@ -87,16 +98,16 @@ export function StocksTable() {
       sort: true,
       sortCaret: sortCaret,
     },
-    {
-      dataField: "buyingPrice",
-      text:"Alım Fiyatı",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter:columnFormatters.PriceColumnFormatter, 
-      formatExtraData: {
-        key:"buyingPrice"
-      },
-    },
+    // {
+    //   dataField: "buyingPrice",
+    //   text:"Alım Fiyatı",
+    //   sort: true,
+    //   sortCaret: sortCaret,
+    //   formatter:columnFormatters.PriceColumnFormatter, 
+    //   formatExtraData: {
+    //     key:"buyingPrice"
+    //   },
+    // },
     {
       dataField: "sellingPrice",
       text:"Satış Fiyatı",
@@ -109,48 +120,78 @@ export function StocksTable() {
 
     },
      {
-      dataField: "color",
+      dataField: "colorId",
       text:"Renk",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.CarColors,
+        selector:"colorId",
+      },
     }, 
     {
-      dataField: "fuelType",
+      dataField: "fuelTypeId",
       text:"Yakıt Cinsi",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.FuelTypes,
+        selector:"fuelTypeId",
+      },
     }, 
     {
-      dataField: "gearType",
+      dataField: "gearTypeId",
       text:"Vites Tipi",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.GearTypes,
+        selector:"gearTypeId",
+      },
     }, 
     {
-      dataField: "caseType",
+      dataField: "caseTypeId",
       text:"Kasa Tipi",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.CaseTypes,
+        selector:"caseTypeId",
+      },
     }, 
     {
-      dataField: "fromWho",
+      dataField: "fromWhoId",
       text:"Kimden",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.FromWhoTitles,
+        selector:"fromWhoId",
+      },
     }, 
     {
-      dataField: "source",
+      dataField: "purchaseTypeId",
       text:"Alım Türü",
       sort: true,
       sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.FromWhoTitles,
+        selector:"purchaseTypeId",
+      },
     }, 
-    {
-      dataField: "isActive",
-      text:"Durum",
-      sort: true,
-      sortCaret: sortCaret,
-     formatter: columnFormatters.StatusColumnFormatter,
-    },
+    // {
+    //   dataField: "isActive",
+    //   text:"Durum",
+    //   sort: true,
+    //   sortCaret: sortCaret,
+    //  formatter: columnFormatters.StatusColumnFormatter,
+  //  },
     {
       dataField: "action",
       text:"İşlemler",

@@ -20,11 +20,9 @@ export default function mockStock(mock) {
       enginePower= 0,//motor gücü
       engineCapacityId= 0,//motor hacmi
       swap=false,
-      statusId= 0,// Sıfır ,İkinci El
       buyingPrice= 0,
       sellingPrice= 0,
       cashSellingPrice= 0,
-      swapSellingPrice= 0,
       fromWhoId= 0,//kimden (Müşteri,Esnaf,İhale)
       purchaseTypeId= 0,//Alım Türü(Kredi Kapama,Takas,Nakit)
       insuranceCode= 0,//Kasko Kodu
@@ -62,11 +60,8 @@ export default function mockStock(mock) {
       enginePower,//motor gücü
       engineCapacityId,//motor hacmi
       swap,
-      statusId,// Sıfır ,İkinci El
       buyingPrice,
       sellingPrice,
-      cashSellingPrice,
-      swapSellingPrice,
       fromWhoId,//kimden (Müşteri,Esnaf,İhale)
       purchaseTypeId,//Alım Türü(Kredi Kapama,Takas,Nakit)
       insuranceCode,//Kasko Kodu

@@ -16,11 +16,10 @@ import * as actions from "../../../_redux/stocks/stocksActions"
 
 
 import { LENGTH, MIN_LENGTH, MAX_LENGTH, DIGIT_CONTROL, REQUIRED } from "../../../../../validations/validMessages";
-import { CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, Sources, arrayProgress, EngineCapacities, EnginePowers, TramerTypes } from "../StocksUIHelper";
+import { CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, PurchaseTypes, arrayProgress, EngineCapacities, EnginePowers, TramerTypes } from "../StocksUIHelper";
 import { ExpertiseForm } from "./stock-expertise/ExpertiseForm";
 import { DocumentForm } from "./stock-documents/DocumentForm";
 import DocumentsTable from "./stock-documents/Documents";
-
 
 const stockSchema = {
     categoryId: Yup.number()
@@ -31,7 +30,7 @@ const stockSchema = {
         .required(format(REQUIRED, "Model")),
     modelTypeId: Yup.number()
         .required(format(REQUIRED, "Model Tipi")),
-    year: Yup.string()
+    modelYear: Yup.string()
         .matches(/^[0-9]+$/, DIGIT_CONTROL)
         .length(4, format(LENGTH, "Model Yılı", "4"))
         .required(format(REQUIRED, "Model Yıl")),
@@ -93,7 +92,7 @@ const Step3Schema = Yup.object().shape({
     tramerValue: Yup.string()
         //.matches(/^[0-9]+$/, DIGIT_CONTROL)
         //.min(2, format(MIN_LENGTH, "2"))
-        .max(150, format(MAX_LENGTH, "50"))
+        .max(25, format(MAX_LENGTH, "25"))
     //.required(format(REQUIRED, "Toplam Tramer")),
 });
 
@@ -125,6 +124,7 @@ const adorments = {
 }
 export function StockEditForm({
     stock,
+    history,
     btnRef,
     btnReset,
     saveStock,
@@ -136,18 +136,19 @@ export function StockEditForm({
     insuranceValue
 
 }) {
+
     const dispatch = useDispatch();
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-    const [expertiseValues, setExpertiseValues] = useState(stock.expertiseValues)
+    const [stockExpertise, setStockExpertise] = useState(stock.stockExpertise)
     const [documents, setDocuments] = useState(stock.documents)
     const [images, setImages] = useState(stock.images)
     const [disabledValue, setDisabledValue] = useState(true)
-    const transactionId = generateGuid();
-
+    const backToDealersList = () => {
+        history.push(`/system/stocks`);
+    };
     return (
 
         stock.id === undefined ? (
-
             <Wizard
                 initialValues={stock}
                 arrayProgress={arrayProgress}
@@ -155,23 +156,58 @@ export function StockEditForm({
                 onReset={(values) => handleReset(values)}
                 onSubmit={(values, formActions) => {
                     sleep(300).then(() => {
+                        const stockWizardData = {
+                            stock: {
+                                dealerId: stock.dealerId,
+                                plateNo: values.plateNo,
+                                categoryId: +values.categoryId,
+                                brandId: +values.brandId,
+                                modelId: +values.modelId,
+                                modelTypeId: +values.modelTypeId,
+                                modelYear: values.modelYear,
+                                kilometer: values.kilometer,
+                                caseTypeId: +values.caseTypeId,
+                                gearTypeId: +values.gearTypeId,
+                                fuelTypeId: +values.fuelTypeId,
+                                colorId: +values.colorId,
+                                enginePowerId: +values.enginePowerId,
+                                engineCapacityId: +values.engineCapacityId,
+                                vinNo: values.vinNo,
+                                engineNo: values.engineNo,
+                                fromWhoId: +values.fromWhoId,
+                                purchaseTypeId: +values.purchaseTypeId,
+                                tramerTypeId: +values.tramerTypeId,
+                                tramerValue: parseFloat(values.tramerValue),
+                                insuranceCode: +values.insuranceCode,
+                                insuranceValue: parseFloat(values.insuranceValue),
+                                buyingPrice: parseFloat(values.buyingPrice),
+                                sellingPrice: parseFloat(values.sellingPrice),
+                                minPrice: parseFloat(values.minPrice),
+                                maxPrice: parseFloat(values.maxPrice),
+                                transactionId:stock.transactionId,
+                            },
+                            stockExpertise: values.stockExpertise
+                        }
 
-                        //dispatch(actions.createStock({documents},formData)).then((resp) => {
-                        //backToDealersList()
-                        // dispatch(actions.fetchDealers(deal.queryParams));
-                        // //clear selections list
-                        // customersUIProps.setIds([]);
-                        // })
+                        dispatch(actions.createStock(stockWizardData)).then((responseStock) => {
+                            dispatch(actions.fetchStocks({
+                                filter: {},
+                                sortOrder: "desc",
+                                sortField: "id",
+                                pageNumber: 1,
+                                pageSize: 10
+                            })).then(()=>{
+                                backToDealersList();
+                            })
+                        })
 
                         formActions.setSubmitting(false);
                     });
                 }}
             >
-
-
+           
                 <Wizard.Page>
                     {props => {
-                        console.log(props, "this props 1");
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 1).description}</h4>
@@ -195,7 +231,7 @@ export function StockEditForm({
                                     </div>
                                     <div className="col-lg-4">
                                         <Field
-                                            name="year"
+                                            name="modelYear"
                                             component={Input}
                                             placeholder="Model Yılı"
                                             label="Yıl"
@@ -240,7 +276,7 @@ export function StockEditForm({
                                                 const { value } = e.target;
                                                 const { brandCode, typeCode } = modelTypes.find(q => q.id == value);
                                                 props.setFieldValue("modelTypeId", value);
-                                                dispatch(actions.fetchInsuranceValue(props.values.year, brandCode, typeCode));
+                                                dispatch(actions.fetchInsuranceValue(props.values.modelYear, brandCode, typeCode));
                                             }} />
                                     </div>
 
@@ -292,7 +328,7 @@ export function StockEditForm({
                                         <Select name="fromWhoId" label="Kimden" options={FromWhoTitles} />
                                     </div>
                                     <div className="col-lg-6">
-                                        <Select name="purchaseTypeId" label="Alım Türü" options={Sources} />
+                                        <Select name="purchaseTypeId" label="Alım Türü" options={PurchaseTypes} />
                                     </div>
                                 </div>
                             </div>
@@ -301,8 +337,6 @@ export function StockEditForm({
                 </Wizard.Page>
                 <Wizard.Page>
                     {props => {
-                        console.log(props, "this props 2");
-
                         props.values.insuranceValue = insuranceValue;
 
                         return (
@@ -371,14 +405,12 @@ export function StockEditForm({
                 </Wizard.Page>
                 <Wizard.Page className="pl-40 pr-20 col-md-12">
                     {props => {
-                        props.values.expertiseValues = expertiseValues;
-
-                        console.log(props, "this props 3");
+                        props.values.stockExpertise = stockExpertise;
                         return (
                             <div className="page-form pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 3).description}</h4>
 
-                                <ExpertiseForm expertiseValues={expertiseValues} setValues={setExpertiseValues} />
+                                <ExpertiseForm stockExpertise={stockExpertise} setValues={setStockExpertise} />
                                 <br />
                                 <br />
                                 <div className="form-group row">
@@ -409,22 +441,16 @@ export function StockEditForm({
                         );
                     }}
                 </Wizard.Page>
-
                 <Wizard.Page className="pl-40 pr-20 col-md-12">
                     {props => {
-                        console.log(props, "this props 4");
                         props.values.documents = documents;
-                        // props.setFieldValue("documentTypeId",undefined)
+                        //props.setFieldValue("file",undefined);
 
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
-
-                                <DocumentForm documents={documents} setDocuments={setDocuments} transactionId={transactionId} pageProps={props} />
+                                <DocumentForm documents={documents} setDocuments={setDocuments} transactionId={stock.transactionId} pageProps={props}/>
                                 <DocumentsTable documents={documents} />
-
-
-
                             </div>
                         );
                     }}
@@ -432,69 +458,22 @@ export function StockEditForm({
                 <Wizard.Page>
                     {props => {
                         props.values.images = images;
-                        console.log(props, "this props 5");
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 5).description}</h4>
-                                <DashboardUpload images={images} setImages={setImages} transactionId={transactionId} />
+                                <DashboardUpload images={images} setImages={setImages} transactionId={stock.transactionId} />
                             </div>
                         );
                     }}
                 </Wizard.Page>
-
                 <Wizard.Page>
                     {props => {
                         const data = props.values;
-                        debugger
-                        // const temp={
-                            // categoryId: "1"
-                            // brandId: "1"
-                            // modelId: "10"
-                            // modelTypeId: "103725"
-                            // plateNo: "34gg8294"
-                            // kilometer: "2222222"
-                            // year: "2020"
-                            // caseTypeId: "1"
-                            // gearTypeId: "1"
-                            // fuelTypeId: "2"
-                            // colorId: "1"
-                            // engineCapacityId: undefined
-                            // engineCapacityId: "1"
-                            // vinNo: "32165489764554444"
-                            // engineNo: "654654654654654"
-                            // enginePower: undefined
-                            // enginePowerId: "2"
-                            // fromWhoId: "1"
-                            // insuranceCode: undefined
-                            // insuranceValue: 789615
-                            // purchaseTypeId: "1"
-                            // guid: "f4a5d863-28b5-4644-a3b8-ecbb735e7a4d"
-                            // tramerTypeId: "1"
-                            // tramerValue: "23,232"
-
-                        //     images: (19) [File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File, File]
-                        //     documents: (2) [{…}, {…}]
-                        //     expertiseValues: {rightBackFender: "orginal", backHood: "painted", leftBackFender: "changed", rightBackDoor: "orginal", rightFrontDoor: "painted", …}
-                        
-                        //     buyingPrice: "332,456,546"
-                        //     cashSellingPrice: undefined
-                        //     maxPrice: "654,654,654"
-                        //     minPrice: "654,654,654"
-                        //     sellingPrice: "356,465,465"
-                        //     swapSellingPrice: undefined
-                        
-                        // description: ""
-                        // id: undefined
-                        // relationGuid: ""
-                        // relationTable: ""
-                        // statusId: undefined
-                        // swap: false
-                        // }
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                 {/*begin::Section*/}
-                                
-                               
+
+
                             </div>
                         );
                     }}
@@ -527,7 +506,7 @@ export function StockEditForm({
                                 </div>
                                 <div className="col-lg-4">
                                     <Field
-                                        name="year"
+                                        name="modelYear"
                                         component={Input}
                                         placeholder="Model Yılı"
                                         label="Yıl"
@@ -627,19 +606,19 @@ export function StockEditForm({
                                 </div>
                                 <div className="col-lg-3">
                                     <Field
-                                        name="cashSellingPrice"
+                                        name="minPrice"
                                         component={Input}
-                                        placeholder="Nakit Fiyatı"
-                                        label="Nakit Fiyatı"
+                                        placeholder="En Düşük Fiyatı"
+                                        label="En Düşük Fiyatı"
                                         adornment={adorments.priceAdorment}
                                     />
                                 </div>
                                 <div className="col-lg-3">
                                     <Field
-                                        name="swapSellingPrice"
+                                        name="maxPrice"
                                         component={Input}
-                                        placeholder="Takas Fiyatı"
-                                        label="Takas Fiyatı"
+                                        placeholder="En Yüksek Fiyatı"
+                                        label="En Yüksek Fiyatı"
                                         adornment={adorments.priceAdorment}
                                     />
                                 </div>
@@ -650,7 +629,7 @@ export function StockEditForm({
                                     <Select name="fromWhoId" label="Kimden" options={FromWhoTitles} />
                                 </div>
                                 <div className="col-lg-6">
-                                    <Select name="purchaseTypeId" label="Alım Türü" options={Sources} />
+                                    <Select name="purchaseTypeId" label="Alım Türü" options={PurchaseTypes} />
                                 </div>
                             </div>
                             <button

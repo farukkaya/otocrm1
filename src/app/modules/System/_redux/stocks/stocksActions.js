@@ -95,10 +95,9 @@ export const createStock =(stockForCreation) => dispatch => {
   return requestFromServer
     .createStock(stockForCreation)
     .then(response => {
-      const { dbPath } = response.data||response;
-      const stock={};
-      dispatch(actions.stockCreated({ stock }));
-      return dbPath;
+      const { entities } = response.data||response;
+      dispatch(actions.stockCreated({ entities }));
+      return entities;
     })
     .catch(error => {
       error.clientMessage = "Can't create stock";

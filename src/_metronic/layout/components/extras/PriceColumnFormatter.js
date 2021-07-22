@@ -5,7 +5,7 @@ export const PriceColumnFormatter = (cellContent, row, rowIndex, { key }) => {
 
    return (
       <Currency
-         quantity={parseInt(row[key])}
+         quantity={parseFloat(row[key])}
          currency="TRY"
       />
    )

@@ -8,12 +8,12 @@ import ExpertiseSelectionSVG from './ExpertiseSelectionSVG';
 import ExpertiseSelectionTable from './ExpertiseSelectionTable';
 
 
-export function ExpertiseForm({ expertiseValues,setValues }) {
+export function ExpertiseForm({ stockExpertise,setValues }) {
     const [seletedPath, setSelectedPath] = useState("-1")
 
     const handleChange = (e) => {
         setValues({
-            ...expertiseValues,
+            ...stockExpertise,
             [e.target.name]: e.target.value,
         })
     }
@@ -27,7 +27,7 @@ export function ExpertiseForm({ expertiseValues,setValues }) {
                 path.classList.add(itemClass);
                 var name = ExpertiseTableItems.find(q => q.id == seletedPath).name;
                 setValues({
-                    ...expertiseValues,
+                    ...stockExpertise,
                     [name]: itemClass,
                 })
                 
@@ -39,10 +39,10 @@ export function ExpertiseForm({ expertiseValues,setValues }) {
     return (
         <div className="form-element-row">
                 <div className="form-element-container text-detail">
-                    <ExpertiseSelectionTable values={expertiseValues} handleChange={handleChange} />
+                    <ExpertiseSelectionTable values={stockExpertise} handleChange={handleChange} />
                 </div>
                 <div className="form-element-container svg-detail">
-                    <ExpertiseSelectionSVG values={expertiseValues} setSelectedPath={setSelectedPath} />
+                    <ExpertiseSelectionSVG values={stockExpertise} setSelectedPath={setSelectedPath} />
                     <div className="guide-of-svg">
                         <div className="painted"><span>Boyalı</span></div>
                         <div className="changed"><span>Değişmiş</span></div>

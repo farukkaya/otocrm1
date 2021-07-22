@@ -17,17 +17,14 @@ const DocumentFormSchema = Yup.object().shape({
         .max(150, format(MAX_LENGTH, "50"))
         .required(format(REQUIRED, "Belge Adı")),
 });
+let id = 0;
+let initialDocument = {
+    documentTypeId: "",
+    name: "",
+    description: "",
+    validityDate: "",
+}
 export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) {
-    let id = 0;
-    let _guid = "";
-    let _path = "";
-    let initialDocument = {
-        documentTypeId: "",
-        name: "",
-        description: "",
-        validityDate: "",
-    }
-
 
     const [attachment, setAttachment] = useState({})
     const formData = new FormData();
@@ -41,9 +38,10 @@ export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) 
 
     const dispatch = useDispatch();
     const onHandleSubmit=(values, { setSubmitting, setErrors, setStatus, resetForm }) => {
-        const { name, validityDate, description } = values; id++;
+        debugger
+        const { name, validityDate, description } = values;
+        id++;
         formData.append(transactionId, attachment);
-       
         documents.push({ id, name, validityDate, description, transactionId})
         setDocuments(documents)
         dispatch(filesActions.createFile(formData)).then(({ guid, path }) => {
@@ -56,10 +54,6 @@ export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) 
             pageProps.setFieldValue("file",undefined)
         })
     }
-    useEffect(() => {
-                 
-                   
-    });
     return (
       <>
         <Formik

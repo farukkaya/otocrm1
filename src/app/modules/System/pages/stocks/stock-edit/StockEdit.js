@@ -1,77 +1,18 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/role-supports-aria-props */
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
-import { Field } from "formik";
-import * as Yup from "yup";
 import { format } from 'react-string-format';
 import { v4 as generateGuid } from 'uuid';
-
 import {
   Card,
   CardBody,
   CardHeader,
   CardHeaderToolbar,
-  Input,
-  Select,
   ModalProgressBar
 } from "../../../../../../_metronic/_partials/controls";
 import { useSubheader } from "../../../../../../_metronic/layout";
 import * as actions from "../../../_redux/stocks/stocksActions";
 import { StockEditForm } from "./StockEditForm";
-
-
-
-const initStock = {
-  id: undefined,
-  guid: generateGuid(),
-  vinNo: "",
-  engineNo: "",
-  brandId: undefined,//markalar                        
-  modelId: undefined,//modeller                          
-  colorId: undefined,//renkler                            --Constant
-  fuelTypeId: undefined,//Yakıt Tipleri                   --Constant
-  gearTypeId: undefined,//Vites tipleri                   --Constant
-  caseTypeId: undefined,// kasa tipleri                   --Constant
-  statusId: undefined,// Sıfır ,İkinci El                 --Constant
-  fromWhoId: undefined,//kimden (Müşteri,Esnaf,İhale)     --Constant
-  purchaseTypeId: undefined,//Alım Türü(Kredi Kapama,Takas,Nakit)  --Constant
-  year: undefined,
-  plateNo: "",
-  kilometer: undefined,
-  enginePower: undefined,//motor gücü
-  engineCapacityId: undefined,//motor hacmi
-  swap: false,
-  buyingPrice: undefined,
-  sellingPrice: undefined,
-  cashSellingPrice: undefined,
-  swapSellingPrice: undefined,
-  insuranceCode: undefined,//Kasko Kodu
-  insuranceValue: undefined,// Kasko değeri
-  tramerValue: undefined,// Kasko değeri
-  tramerTypeId: undefined,// Kasko değeri
-
-  description: "",
-  relationGuid: "",
-  relationTable: "",
-  expertiseValues:{
-    rightBackFender:"orginal",
-    backHood:"orginal",
-    leftBackFender:"orginal",
-    rightBackDoor:"orginal",
-    rightFrontDoor:"orginal",
-    ceiling:"orginal",
-    leftBackDoor:"orginal", 
-    leftFrontDoor:"orginal",
-    rightFrontFender:"orginal",
-    engineHood:"orginal",
-    leftFrontFender:"orginal",
-    frontBumper:"orginal",
-    backBumper:"orginal"
-  },
-  documents:[],
-  images:[]
-
-};
 
 export function StockEdit({
   history,
@@ -90,9 +31,10 @@ export function StockEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, stockForEdit,vehicleCategories ,vehicleBrands,vehicleModels,vehicleModelTypes,stockInsuranceValue} = useSelector(
+  const { actionsLoading,currentUser, stockForEdit,vehicleCategories ,vehicleBrands,vehicleModels,vehicleModelTypes,stockInsuranceValue} = useSelector(
     (state) => ({
       actionsLoading: state.stocks.actionsLoading,
+      currentUser: state.auth.user,
       stockForEdit: state.stocks.stockForEdit,
       stockInsuranceValue: state.stocks.stockInsuranceValue,
       vehicleCategories: state.main.vehicleCategories.entities,
@@ -103,11 +45,59 @@ export function StockEdit({
     shallowEqual
   );
 
+
+  const initStock = {
+    id: undefined,
+    dealerId:currentUser.dealerId,
+    guid: generateGuid(),
+    transactionId: generateGuid(),
+    vinNo: "",
+    engineNo: "",
+    categoryId: undefined,//markalar                        
+    brandId: undefined,//markalar                        
+    modelId: undefined,//modeller                          
+    modelTypeId: undefined,//modeller                          
+    colorId: undefined,//renkler                            --Constant
+    fuelTypeId: undefined,//Yakıt Tipleri                   --Constant
+    gearTypeId: undefined,//Vites tipleri                   --Constant
+    caseTypeId: undefined,// kasa tipleri                   --Constant
+    fromWhoId: undefined,//kimden (Müşteri,Esnaf,İhale)     --Constant
+    purchaseTypeId: undefined,//Alım Türü(Kredi Kapama,Takas,Nakit)  --Constant
+    modelYear: undefined,
+    plateNo: "",
+    kilometer: undefined,
+    enginePowerId: undefined,//motor gücü
+    engineCapacityId: undefined,//motor hacmi
+    buyingPrice: undefined,
+    sellingPrice: undefined,
+    minPrice: undefined,
+    maxPrice: undefined,
+    insuranceCode: undefined,//Kasko Kodu
+    insuranceValue: undefined,// Kasko değeri
+    tramerValue: undefined,// Kasko değeri
+    tramerTypeId: undefined,// Kasko değeri
+  
+    stockExpertise:{
+      rightBackFender:"orginal",
+      backHood:"orginal",
+      leftBackFender:"orginal",
+      rightBackDoor:"orginal",
+      rightFrontDoor:"orginal",
+      ceiling:"orginal",
+      leftBackDoor:"orginal", 
+      leftFrontDoor:"orginal",
+      rightFrontFender:"orginal",
+      engineHood:"orginal",
+      leftFrontFender:"orginal",
+      frontBumper:"orginal",
+      backBumper:"orginal"
+    },
+    documents:[],
+    images:[]
+  
+  };
   useEffect(() => {
     dispatch(actions.fetchStock(id));
-  }, [id, dispatch]);
-
-  useEffect(() => {
     let _title = id ? "" : "Yeni Stok"
     if (stockForEdit && id) {
       _title = format("Stok Güncelle -'{0}'", `${stockForEdit.brand} - ${stockForEdit.model}`);
@@ -116,7 +106,7 @@ export function StockEdit({
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stockForEdit, id]);
+  }, [stockForEdit, id,dispatch]);
 
   const saveStock = (values) => {
     if (!id) {
@@ -202,6 +192,7 @@ export function StockEdit({
         {id === undefined ? (<>
           <StockEditForm
             actionsLoading={actionsLoading}
+            history={history}
             stock={stockForEdit || initStock}
             btnRef={btnRef}
             btnReset={btnReset}
