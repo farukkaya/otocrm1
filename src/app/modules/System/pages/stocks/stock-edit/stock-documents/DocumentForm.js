@@ -27,7 +27,6 @@ let initialDocument = {
 export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) {
 
     const [attachment, setAttachment] = useState({})
-    const formData = new FormData();
     const onHandleInputChangeSingle = useCallback(
         e => {
             e.preventDefault();
@@ -40,7 +39,13 @@ export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) 
     const onHandleSubmit=(values, { setSubmitting, setErrors, setStatus, resetForm }) => {
         const { name, validityDate, description } = values;
         id++;
+        const formData = new FormData();
         formData.append(transactionId, attachment);
+        formData.append("name", name);
+        formData.append("validityDate", validityDate);
+        formData.append("description", description);
+        formData.append("transactionId", transactionId);
+        formData.append("documentTypeId", 1);
         documents.push({ id, name, validityDate, description, transactionId})
         setDocuments(documents)
         dispatch(filesActions.createFile(formData)).then(({ guid, path }) => {
@@ -51,6 +56,10 @@ export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) 
             resetForm(initialDocument);
             document.getElementById("document").value = '';
             pageProps.setFieldValue("file",undefined)
+        }).finally(()=>{
+            
+            for (var key of formData.keys()) 
+                formData.delete(key)
         })
     }
     return (

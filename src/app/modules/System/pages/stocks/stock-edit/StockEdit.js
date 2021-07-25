@@ -94,6 +94,7 @@ export function StockEdit({
       frontBumper:"orginal",
       backBumper:"orginal"
     },
+    stockDamages:[],
     documents:[],
     images:[]
   
@@ -142,7 +143,8 @@ export function StockEdit({
             maxPrice: parseFloat(values.maxPrice),
             transactionId:initStock.transactionId,
         },
-        stockExpertise: values.stockExpertise
+        stockExpertise: values.stockExpertise,
+        stockDamages:values.stockDamages
     }
 
     dispatch(actions.createStock(stockWizardData)).then((responseStock) => {

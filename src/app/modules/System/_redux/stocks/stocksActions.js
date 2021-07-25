@@ -162,3 +162,47 @@ export const fetchInsuranceValue = (year,brandCode,typeCode) => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
+
+
+export const fetchStockDetail = id => dispatch => {
+  if (!id) {
+    return dispatch(actions.stockDetailFetched({ stockForDetail: undefined }));
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getStockDetail(id)
+    .then(response => {
+      
+      const dealer = response.data;
+      dispatch(actions.stockDetailFetched({ stockForDetail: dealer }));
+      return dealer;
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find dealer";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
+
+export const fetchStockExpertise = id => dispatch => {
+  if (!id) {
+    return dispatch(actions.stockExpertiseFetched({ stockExpertise: undefined }));
+  }
+
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getStockExpertise(id)
+    .then(response => {
+      
+      const dealer = response.data;
+      dispatch(actions.stockExpertiseFetched({ stockExpertise: dealer }));
+      return dealer;
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find dealer";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
+
+
+

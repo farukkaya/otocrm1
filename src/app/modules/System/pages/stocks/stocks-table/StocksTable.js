@@ -181,7 +181,7 @@ export function StocksTable() {
       sortCaret: sortCaret,
       formatter: columnFormatters.ArrayColumnFormatter,
       formatExtraData: {
-        array: uiHelpers.FromWhoTitles,
+        array: uiHelpers.PurchaseTypes,
         selector:"purchaseTypeId",
       },
     }, 

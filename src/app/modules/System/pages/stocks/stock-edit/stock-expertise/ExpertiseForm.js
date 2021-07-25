@@ -42,11 +42,14 @@ export function ExpertiseForm({ stockExpertise,setValues }) {
                     <ExpertiseSelectionTable values={stockExpertise} handleChange={handleChange} />
                 </div>
                 <div className="form-element-container svg-detail">
-                    <ExpertiseSelectionSVG values={stockExpertise} setSelectedPath={setSelectedPath} />
                     <div className="guide-of-svg">
-                        <div className="painted"><span>Boyalı</span></div>
-                        <div className="changed"><span>Değişmiş</span></div>
+                            <div className="painted"><span> Boyalı</span></div>
+                            <div className="changed"><span> Değişmiş</span></div>
                     </div>
+                    <br/>
+                    <br/>
+                    <ExpertiseSelectionSVG values={stockExpertise} setSelectedPath={setSelectedPath} />
+                 
                     <div className="typeOfDamege">
                         <div className="opetion-item orginal" onClick={clickOnDamageOptionsItem}>
                             <span>Orjinal</span>

@@ -1,7 +1,11 @@
+
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/img-redundant-alt */
 import React from "react";
+import moment from 'moment';
+import 'moment/locale/tr';
+import { DamageTypes } from "../../StocksUIHelper";
 
-export function DamageRecordsCard({ vinNo, plateNo }) {
+export function DamageRecordsCard({ stockDamages,vinNo, plateNo }) {
   return (
     <div className="card card-custom card-stretch gutter-b">
       {/* Head */}
@@ -28,80 +32,28 @@ export function DamageRecordsCard({ vinNo, plateNo }) {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
+               {stockDamages.map(damage=>(
+                  <tr>
+                  <td>{damage.damageOrder}</td>
                   <td>
                     <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      01.11.2018
+                    {moment(damage.damageDate).locale('tr').format('L')}
                       </span>
                   </td>
                   <td>
                     <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      Çarpma
+                    {DamageTypes.firstOrNew(item=>item.id==damage.damageTypeId).name}
                       </span>
 
                   </td>
                   <td>
                     <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      3200 ₺
+                    {damage.amount} ₺
                       </span>
                   </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      21.08.2020
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      -
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      500 ₺
-                      </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      10.12.2020
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      Çarpışma
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      7500 ₺
-                      </span>
-                  </td>
-                </tr>
-                <tr style={{borderBottomStyle:"solid",border:"1",borderColor:"#f7c9c9"}}>
-                  <td>4</td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      01.01.2021
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      Park Halinde Çarpma
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      2500 ₺
-                      </span>
-                  </td>
-                </tr>
-                <tr>
+               ))}
+                <tr style={{borderTopStyle:"solid",border:"1",borderColor:"#f7c9c9"}}>
                   <td colSpan="2"> 
                   <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
                       Toplam Hasar Kaydı:
@@ -112,10 +64,11 @@ export function DamageRecordsCard({ vinNo, plateNo }) {
                   </td>
                   <td>
                     <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      13700 ₺
-                      </span>
-                  </td>
-                </tr>
+                     {stockDamages.map(damage=>damage.amount).sum()} ₺
+                       </span>
+                   </td>
+                 </tr>
+
               </tbody>
             </table>
           </div>

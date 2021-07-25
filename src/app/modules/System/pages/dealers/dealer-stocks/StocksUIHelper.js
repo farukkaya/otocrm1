@@ -53,7 +53,7 @@ export const initialFilter = {
       kilometer: 0,
       gearTypeId: 0,//Vites tipleri
       caseTypeId: 0,// kasa tipleri
-      enginePower: 0,//motor gücü
+      enginePowerId: 0,//motor gücü
       engineCapacityId: 0,//motor hacmi
       swap: false,
       buyingPrice: 0,

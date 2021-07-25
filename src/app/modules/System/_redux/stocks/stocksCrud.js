@@ -2,8 +2,7 @@ import axios from "axios";
 
 export const STOCKS_URL = "Stocks";
 
-// CREATE =>  POST: add a new stock to the server
-//API=>
+//API=>OK
 export function createStock(stockWizardDto) {
   return axios.post(`${STOCKS_URL}/Insert`, stockWizardDto).then(resp=>resp).catch(
     function (error) {
@@ -12,24 +11,25 @@ export function createStock(stockWizardDto) {
     }
   );
 }
+//API=>OK
+export function findStocks(queryParams) {
+  return axios.post(`${STOCKS_URL}/Find`, queryParams);
+}
+export const getStockById=(stockId) =>axios.get(`${STOCKS_URL}/GetById?id=${stockId}`);
+
+
 
 // READ
 export function getAllStocks() {
   return axios.get(STOCKS_URL);
 }
 
-export function getStockById(stockId) {
-  return axios.get(`${STOCKS_URL}/${stockId}`);
-}
+
 export function getStockInsuranceValue(year,brandCode,typeCode) {
   return axios.get(`${STOCKS_URL}/GetInsuranceValue?year=${year}&&brandCode=${brandCode}&&typeCode=${typeCode}`);
 }
 
-// Method from server should return QueryResultsModel(items: any[], totalsCount: number)
-// items => filtered/sorted result
-export function findStocks(queryParams) {
-  return axios.post(`${STOCKS_URL}/Find`, queryParams);
-}
+
 export function findStocksByDealer(queryParams, dealerId) {
   return axios.post(`${STOCKS_URL}/findByDealer/${dealerId}`, { queryParams });
 }
@@ -59,3 +59,9 @@ export function deleteStock(stockId) {
 export function deleteStocks(ids) {
   return axios.post(`${STOCKS_URL}/deleteStocks`, { ids });
 }
+
+
+
+export const getStockDetail=(stockId)=>axios.get(`${STOCKS_URL}/GetDetailById?id=${stockId}`);
+
+export const getStockExpertise=(stockId)=>axios.get(`${STOCKS_URL}/GetExpertiseById?id=${stockId}`);

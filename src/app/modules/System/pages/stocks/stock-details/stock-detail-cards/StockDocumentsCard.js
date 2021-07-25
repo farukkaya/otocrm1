@@ -1,7 +1,8 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/img-redundant-alt */
 import React from "react";
-
-export function StockDocumentsCard({ vinNo, plateNo }) {
+import moment from 'moment';
+import 'moment/locale/tr';
+export function StockDocumentsCard({ documents, vinNo, plateNo }) {
   return (
     <div className="card card-custom card-stretch gutter-b">
       {/* Head */}
@@ -24,60 +25,51 @@ export function StockDocumentsCard({ vinNo, plateNo }) {
                   <th style={{ minWidth: "50px" }}>#</th>
                   <th style={{ minWidth: "100px" }}>Tarih</th>
                   <th style={{ minWidth: "100px" }}>Belge Adı</th>
-                  <th style={{ minWidth: "100px" }}>Durumu</th>
+                  <th style={{ minWidth: "100px" }}>Geçerlilik Tarihi</th>
+                  <th style={{ minWidth: "100px" }}>Açıklama</th>
                   <th style={{ minWidth: "100px" }}></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      10.03.2021
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      Noter Belgesi - Alış
-                      </span>
+                {documents?.map(document => {
+                  return (
+                    <tr key={document.id}>
+                      <td>{document.id}</td>
+                      <td>
+                        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+                          {moment(document.createdDate).locale('tr').format('L')}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
+                          {document.name}
+                        </span>
 
-                  </td>
+                      </td>
 
-                  <td>
-                  <span className="label label-lg label-light-primary label-inline">
-                        Onaylandı
-                      </span>
-                  </td>
-                  <td className="pr-0 text-center">
-                  <a href="#"className="font-weight-bolder font-size-sm" >
-                        Göster
-                      </a>
-                    </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      20.4.2021
-                      </span>
-                  </td>
-                  <td>
-                    <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                      Expertiz Belgesi
-                      </span>
-                  </td>
-                  <td>
-                  <span className="label label-lg label-light-warning label-inline">
-                        Geçerli
-                      </span>
-                  </td>
-                  <td className="pr-0 text-center">
-                      <a href="#"className="font-weight-bolder font-size-sm" >
-                        Göster
-                      </a>
-                    </td>
-                </tr>
-            </tbody>
+                      <td>
+                        {document.validityDate && (
+                          <span className="label label-lg label-light-primary label-inline">
+                            {moment(document.validityDate).locale('tr').format('L')}
+                          </span>
+                        )}
+
+                      </td>
+                      <td>
+                        {document.description && (
+                          <span className="label label-inline">
+                            {document.description}
+                          </span>
+                        )}
+
+                      </td>
+                      <td className="pr-0 text-center">
+                        <a target='_blank' className="font-weight-bolder font-size-sm" href={process.env.REACT_APP_API_DEVELOPMENT_URL + document.path}>Belgeyi Göster</a>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
             </table>
           </div>
         </div>

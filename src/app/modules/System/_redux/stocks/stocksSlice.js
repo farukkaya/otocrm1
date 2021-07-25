@@ -6,6 +6,13 @@ const initialStocksState = {
   totalCount: 0,
   entities: [],
   stockForEdit: undefined,
+  stockForDetail: {
+    stock:undefined,
+    stockDamages:undefined,
+    stockExpertise: undefined,
+    images: undefined,
+    documents:undefined
+  },
   stockInsuranceValue:undefined,
   lastError: null
 };
@@ -54,6 +61,12 @@ export const stocksSlice = createSlice({
       state.entities = entities;
       state.totalCount = totalCount;
     },
+    // getStockDetail
+    stockDetailFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.stockForDetail = action.payload.stockForDetail;
+      state.error = null;
+    },
     // createStock
     stockCreated: (state, action) => {
       state.actionsLoading = false;
@@ -96,6 +109,15 @@ export const stocksSlice = createSlice({
         }
         return entity;
       });
-    }
+    },
+
+
+
+    
+    stockExpertiseFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.stockExpertise = action.payload.stockExpertise;
+      state.error = null;
+    },
   }
 });

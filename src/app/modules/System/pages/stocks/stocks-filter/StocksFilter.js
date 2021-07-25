@@ -187,11 +187,11 @@ export function StocksFilter({ listLoading }) {
                   placeholder="Kimden alındığına göre"
                   // TODO: Change this code
                   onChange={(e) => {
-                    setFieldValue("caseTypeId", e.target.value);
+                    setFieldValue("fromWhoId", e.target.value);
                     handleSubmit();
                   }}
                   onBlur={handleBlur}
-                  value={values.caseTypeId}
+                  value={values.fromWhoId}
                 >
                 <option value="">Hepsi</option>
                 {

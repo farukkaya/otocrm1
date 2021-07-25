@@ -19,7 +19,9 @@ import { CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, PurchaseType
 import { ExpertiseForm } from "./stock-expertise/ExpertiseForm";
 import { DocumentForm } from "./stock-documents/DocumentForm";
 import DocumentsTable from "./stock-documents/Documents";
-
+import {adorments} from '../../../../../utilities/constans';
+import { DamageForm } from "./stock-damages/DamagesForm";
+import DamagesTable from "./stock-damages/Damages";
 const stockSchema = {
     categoryId: Yup.number()
         .required(format(REQUIRED, "Kategori")),
@@ -95,32 +97,8 @@ const Step3Schema = Yup.object().shape({
     //.required(format(REQUIRED, "Toplam Tramer")),
 });
 
-
 const schemaArray = [Step1Schema, Step2Schema, Step3Schema];
-//TODO: adorments Globale taşınacak 
-const adorments = {
-    priceAdorment: {
-        endAdorment: {
-            icon: "fas fa-lira-sign",
-            type: "icon",
-            style: { color: "GrayText" }
-        }
-    },
-    enginePowerAdorment: {
-        endAdorment: {
-            icon: "HP",
-            type: "text",
-            style: { color: "GrayText" }
-        }
-    },
-    engineCapacityAdorment: {
-        endAdorment: {
-            icon: "CC",
-            type: "text",
-            style: { color: "GrayText" }
-        }
-    },
-}
+
 export function StockEditForm({
     stock,
     btnSave,
@@ -141,6 +119,7 @@ export function StockEditForm({
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
     const [stockExpertise, setStockExpertise] = useState(stock.stockExpertise)
     const [documents, setDocuments] = useState(stock.documents)
+    const [damages, setDamages] = useState(stock.stockDamages)
     const [images, setImages] = useState(stock.images)
     const [disabledValue, setDisabledValue] = useState(true)
    
@@ -158,7 +137,75 @@ export function StockEditForm({
                 onReset={(values) => handleReset(values)}
                 onSubmit={(values, formActions) => saveStock(values)}
             >
-           
+                  <Wizard.Page>
+                    {props => {
+                        props.values.insuranceValue = insuranceValue;
+
+                        return (
+                            <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 2).description}</h4>
+
+                                <div className="form-group row">
+                                    <div className="col-lg-6">
+                                        <Field
+                                            name="buyingPrice"
+                                            component={CurrencyInput}
+                                            placeholder="Alış Fiyatı"
+                                            label="Alış Fiyatı"
+                                            adornment={adorments.priceAdorment}
+
+                                        />
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <Field
+                                            name="sellingPrice"
+                                            component={CurrencyInput}
+                                            placeholder="Satış Fiyatı"
+                                            label="Satış Fiyatı"
+                                            adornment={adorments.priceAdorment}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div className="col-lg-6">
+                                        <Field
+                                            name="minPrice"
+                                            component={CurrencyInput}
+                                            placeholder="Min. Satış Fiyatı"
+                                            label="Min. Nakit Fiyatı"
+                                            adornment={adorments.priceAdorment}
+                                        />
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <Field
+                                            name="maxPrice"
+                                            component={CurrencyInput}
+                                            placeholder="Max. Satış Fiyatı"
+                                            label="Max. Satış Fiyatı"
+                                            adornment={adorments.priceAdorment}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-lg-12">
+                                        <Field
+                                            name="insuranceValue"
+                                            component={CurrencyInput}
+                                            fixedDecimalLength="2"
+                                            placeholder="Kasko Değeri"
+                                            disabled={insuranceValue !== undefined || ""}
+                                            label="Kasko Değeri"
+                                            adornment={adorments.priceAdorment}
+                                        />
+                                    </div>
+                                </div>
+
+                            </div>
+                        );
+                    }}
+                </Wizard.Page>
+              
                 <Wizard.Page>
                     {props => {
                         return (
@@ -288,74 +335,6 @@ export function StockEditForm({
                         );
                     }}
                 </Wizard.Page>
-                <Wizard.Page>
-                    {props => {
-                        props.values.insuranceValue = insuranceValue;
-
-                        return (
-                            <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
-                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 2).description}</h4>
-
-                                <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Field
-                                            name="buyingPrice"
-                                            component={CurrencyInput}
-                                            placeholder="Alış Fiyatı"
-                                            label="Alış Fiyatı"
-                                            adornment={adorments.priceAdorment}
-
-                                        />
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <Field
-                                            name="sellingPrice"
-                                            component={CurrencyInput}
-                                            placeholder="Satış Fiyatı"
-                                            label="Satış Fiyatı"
-                                            adornment={adorments.priceAdorment}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="form-group row">
-                                    <div className="col-lg-6">
-                                        <Field
-                                            name="minPrice"
-                                            component={CurrencyInput}
-                                            placeholder="Min. Satış Fiyatı"
-                                            label="Min. Nakit Fiyatı"
-                                            adornment={adorments.priceAdorment}
-                                        />
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <Field
-                                            name="maxPrice"
-                                            component={CurrencyInput}
-                                            placeholder="Max. Satış Fiyatı"
-                                            label="Max. Satış Fiyatı"
-                                            adornment={adorments.priceAdorment}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="form-group row">
-                                    <div className="col-lg-12">
-                                        <Field
-                                            name="insuranceValue"
-                                            component={CurrencyInput}
-                                            fixedDecimalLength="2"
-                                            placeholder="Kasko Değeri"
-                                            disabled={insuranceValue !== undefined || ""}
-                                            label="Kasko Değeri"
-                                            adornment={adorments.priceAdorment}
-                                        />
-                                    </div>
-                                </div>
-
-                            </div>
-                        );
-                    }}
-                </Wizard.Page>
                 <Wizard.Page className="pl-40 pr-20 col-md-12">
                     {props => {
                         props.values.stockExpertise = stockExpertise;
@@ -396,24 +375,36 @@ export function StockEditForm({
                 </Wizard.Page>
                 <Wizard.Page className="pl-40 pr-20 col-md-12">
                     {props => {
-                        props.values.documents = documents;
-                        //props.setFieldValue("file",undefined);
-
+                        props.values.stockDamages = damages;
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
-                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
+                                <h4 className="mb-5 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
+                                <span className="mb-5 font-weight-bold text-dark">Hasar Sorgulama için <a target="_blank" href="https://www.sigortam360.com/">buraya</a> tıklayınız.</span><br/><br/><br/>
+                                <DamageForm damages={damages} setDamages={setDamages} pageProps={props}/>
+                                <DamagesTable damages={damages} />
+                            </div>
+                        );
+                    }}
+                </Wizard.Page>
+                <Wizard.Page className="pl-40 pr-20 col-md-12">
+                    {props => {
+                        props.values.documents = documents;
+                        return (
+                            <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
+                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 5).description}</h4>
                                 <DocumentForm documents={documents} setDocuments={setDocuments} transactionId={stock.transactionId} pageProps={props}/>
                                 <DocumentsTable documents={documents} />
                             </div>
                         );
                     }}
                 </Wizard.Page>
+               
                 <Wizard.Page>
                     {props => {
                         props.values.images = images;
                         return (
                             <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
-                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 5).description}</h4>
+                                <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 6).description}</h4>
                                 <DashboardUpload images={images} setImages={setImages} transactionId={stock.transactionId} />
                             </div>
                         );
@@ -498,9 +489,9 @@ export function StockEditForm({
                                     />
                                 </div>
                                 <div className="col-lg-3">
-                                    <Select name="enginePower" label="Motor Gücü" options={EnginePowers} />
+                                    <Select name="enginePowerId" label="Motor Gücü" options={EnginePowers} />
                                     {/* <Field
-                                            name="enginePower"
+                                            name="enginePowerId"
                                             component={Input}
                                             placeholder="Motor Gücü"
                                             label="Motor Gücü"

@@ -6,9 +6,7 @@ export const USERS_URL = "users";
 // Method from server should return QueryResultsModel(items: any[], totalsCount: number)
 // items => filtered/sorted result
 //API=>OK
-export function findDealers(queryParams) {
-  return axios.post(`${DEALERS_URL}/find`, queryParams);
-}
+export const findDealers=(queryParams) =>axios.post(`${DEALERS_URL}/find`, queryParams);
 //API=>OK
 export function getAllDealersForCombo() {
   return axios.get(`${DEALERS_URL}/GetAllForCombo`);

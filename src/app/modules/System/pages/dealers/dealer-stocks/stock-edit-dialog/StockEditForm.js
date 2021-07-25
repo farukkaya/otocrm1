@@ -36,7 +36,7 @@ const StockEditSchema = Yup.object().shape({
     .required(format(REQUIRED, "Plaka")),
   kilometer: Yup.string()
     .required(format(REQUIRED, "Kilometre")),
-  enginePower: Yup.string()
+  enginePowerId: Yup.string()
     .required(format(REQUIRED, "Motor Gücü")),
   engineCapacityId: Yup.string()
     .required(format(REQUIRED, "Motor Hacmi")),
@@ -147,7 +147,7 @@ export function StockEditForm({ saveStock, stock, actionsLoading, onHide }) {
                   </div>
                   <div className="col-lg-3">
                     <Field
-                      name="enginePower"
+                      name="enginePowerId"
                       component={Input}
                       placeholder="Motor Gücü"
                       label="Motor Gücü"

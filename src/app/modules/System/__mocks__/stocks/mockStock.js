@@ -17,7 +17,7 @@ export default function mockStock(mock) {
       kilometer= 0,
       gearTypeId= 0,//Vites tipleri
       caseTypeId= 0,// kasa tipleri
-      enginePower= 0,//motor gücü
+      enginePowerId= 0,//motor gücü
       engineCapacityId= 0,//motor hacmi
       swap=false,
       buyingPrice= 0,
@@ -57,7 +57,7 @@ export default function mockStock(mock) {
       kilometer,
       gearTypeId,//Vites tipleri
       caseTypeId,// kasa tipleri
-      enginePower,//motor gücü
+      enginePowerId,//motor gücü
       engineCapacityId,//motor hacmi
       swap,
       buyingPrice,

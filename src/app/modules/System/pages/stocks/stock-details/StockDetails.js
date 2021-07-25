@@ -18,42 +18,42 @@ export function StockDetails({
   suhbeader.setTitle("Stok Kartı");
   const dispatch = useDispatch();
 
-  const { actionsLoading, stock} = useSelector(
+  const { actionsLoading, stockDetail} = useSelector(
     (state) => ({
       actionsLoading: state.stocks.actionsLoading,
-      stock: state.stocks.stockForEdit
+      stockDetail: state.stocks.stockForDetail,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    dispatch(actions.fetchStock(id));
-  }, [stock,id, dispatch]);
+    dispatch(actions.fetchStockDetail(id));
+  }, [id, dispatch]);
   return (
    <div className="d-flex flex-row h-100">
-     <StockCard stock={stock}></StockCard>
+     {stockDetail.stock&& stockDetail.stock.id==id&&(
+       <>
+        <StockCard stock={stockDetail.stock} images={stockDetail.images}></StockCard>
       <div className="flex-row-fluid ml-lg-8">
         <div className="row">
           <div className="col-lg-6">
-          <DamageRecordsCard vinNo={stock?.vinNo}
-                               plateNo={stock?.plateNo}>
-            </DamageRecordsCard>
+          <DamageRecordsCard  stockDamages={stockDetail.stockDamages}vinNo={stockDetail.stock?.vinNo} plateNo={stockDetail.stock?.plateNo}/>
           </div>
           <div className="col-lg-6">
-          <ExperiseViewCard></ExperiseViewCard>
+          <ExperiseViewCard stockExpertise={stockDetail.stockExpertise} tramerTypeId={stockDetail.stock?.tramerTypeId} tramerValue={stockDetail.stock?.tramerValue}/>
           </div>
           <div className="col-lg-12">
-           
-          <StockDocumentsCard vinNo={stock?.vinNo}
-                               plateNo={stock?.plateNo}>
-            </StockDocumentsCard>
+          <StockDocumentsCard documents={stockDetail.documents} vinNo={stockDetail.stock?.vinNo} plateNo={stockDetail.stock?.plateNo}/>
           </div>
           <div className="col-lg-12">
-             <AdvanceTablesWidget9 className="card-stretch gutter-b"></AdvanceTablesWidget9>
+             <AdvanceTablesWidget9 className="card-stretch gutter-b"/>
          </div>
         </div>
 
       </div>
+       </>
+     )}
+    
     </div>
   );
 }

@@ -1,9 +1,8 @@
-import React from 'react'
-import SVG from "react-inlinesvg";
-import { toAbsoluteUrl } from "../../../../../../../_metronic/_helpers";
-import { Badge } from "react-bootstrap";
+import React from "react";
+import ExpertiseSelectionSVG from '../../stock-edit/stock-expertise/ExpertiseSelectionSVG'
+import { TramerTypes } from "../../StocksUIHelper";
 
-export function ExperiseViewCard() {
+export function ExperiseViewCard({stockExpertise,tramerTypeId,tramerValue}) {
     return (
         <div className="card card-custom card-stretch gutter-b">
             {/* Head */}
@@ -17,16 +16,24 @@ export function ExperiseViewCard() {
                 </div>
             </div>
             {/* Body */}
-            <div className="card-body pt-0 pb-3" style={{position:"relative", margin:"auto"}}>
+            <div className="card-body form-element-container svg-detail pt-0 pb-3" >
             <div className="text-muted text-hover-primary align-items-center mt-5">
-                    <Badge  className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1" variant="success">Orjinal</Badge>
-                    <Badge className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1" variant="warning">Boyalı</Badge>
-                    <Badge className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1" variant="info">Lokal Boyalı</Badge>
-                    <Badge className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1" variant="danger">Değişmiş</Badge>
-                    <Badge className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1" variant="secondary">Belirtilmemiş</Badge>
+                    <div className="guide-of-svg">
+                        <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1 painted"><span>Boyalı</span></div>
+                        {/* <div className="painted"><span>Lokal Boyalı</span></div> */}
+                        <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1 changed"><span>Değişmiş</span></div>
+                    </div>
                 </div>
-                <SVG src={toAbsoluteUrl("/media/svg/files/expertise.svg")} />
+                {stockExpertise&&(
 
+                    <ExpertiseSelectionSVG values={stockExpertise} />
+                )}
+<               div className="text-muted text-hover-primary align-items-center mt-5">
+                    <div className="guide-of-svg">
+                        <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1 "><span><b>Tramer Tipi:</b>  {TramerTypes.firstOrNew(item=>item.id==tramerTypeId).name}</span></div>
+                        <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1"><span><b>Tramer Tutarı:</b> {tramerValue}₺</span></div>
+                    </div>
+                </div>
             </div>
         </div>
 

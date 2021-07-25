@@ -14,7 +14,7 @@ export default [
         kilometer: 213123,
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
-        enginePower: 55,//motor gücü
+        enginePowerId: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
         buyingPrice: 55000,
@@ -64,7 +64,7 @@ export default [
         kilometer: 213123,
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
-        enginePower: 55,//motor gücü
+        enginePowerId: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
         buyingPrice: 55000,
@@ -114,7 +114,7 @@ export default [
         kilometer: 213123,
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
-        enginePower: 55,//motor gücü
+        enginePowerId: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
         buyingPrice: 55000,
@@ -165,7 +165,7 @@ export default [
         kilometer: 213123,
         gearTypeId: 1,//Vites tipleri
         caseTypeId: 1,// kasa tipleri
-        enginePower: 55,//motor gücü
+        enginePowerId: 55,//motor gücü
         engineCapacityId: 1300,//motor hacmi
         swap:false,
         buyingPrice: 55000,

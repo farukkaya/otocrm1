@@ -119,6 +119,18 @@ export const ExpertiseTableItems = [
     { id: 3, name: "Bilmiyorum" },
     { id: 4, name: "Ağır Hasar Kayıtlı" }
 ]
+export const DamageTypes = [
+    { id: 1, name: "-" },
+    { id: 2, name: "Çarpma" },
+    { id: 3, name: "ERP-Çarpma" },
+    { id: 4, name: "KTT-Çarpma" },
+    { id: 5, name: "Çarpışma" },
+    { id: 6, name: "ERP-Çarpışma" },
+    { id: 7, name: "KTT-Çarpışma" },
+    { id: 8, name: "Park Halinde Çarpma" },
+    { id: 9, name: "ERP-Park Halinde Çarpma" },
+    { id: 10,name: "KTT-Park Halinde Çarpma" },
+]
 export const initialFilter = {
     filter: {
         
@@ -144,6 +156,7 @@ export const arrayProgress = [
         icon: "fas fa-tag fa-1x",
         iconType: "fontawesome"
     },
+  
     {
         id: 3,
         title: "Expertiz",
@@ -153,6 +166,13 @@ export const arrayProgress = [
     },
     {
         id: 4,
+        title: "Hasar Kayıtları",
+        description: "Hasar Sorgusu Sonuçlarını Giriniz",
+        icon: "fas fa-wrench fa-1x",
+        iconType: "fontawesome"
+    },
+    {
+        id: 5,
         title: "Belgeler",
         description: "Stoğa Ait Belgeleri Yükleyiniz",
         icon: "fas fa-file-contract fa-1x",
@@ -160,14 +180,14 @@ export const arrayProgress = [
     },
 
     {
-        id: 5,
+        id: 6,
         title: "Resimler",
         description: "Stoğa Ait Resimleri Yükleyiniz",
         icon: "fas fa-images fa-1x",
         iconType: "fontawesome"
     },
     {
-        id: 6,
+        id: 7,
         title: "Sonuç",
         description: "Bilgilerinizi kontrol ediniz",
         icon: "/media/svg/icons/Code/Done-circle.svg",
