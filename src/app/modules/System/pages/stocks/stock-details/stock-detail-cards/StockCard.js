@@ -2,7 +2,7 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 import ImageGallery from 'react-image-gallery';
-import JsArrayExtensions from 'js-array-extensions';
+// import JsArrayExtensions from 'js-array-extensions';
 import {
     DropdownCustomToggler,
     DropdownMenu4,
@@ -73,27 +73,27 @@ export function StockCard({ stock, images }) {
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Renk:</span>
-                                    <span className="text text-hover-primary">{CarColors.firstOrNew(item=>item.id==stock.colorId).name}</span>
+                                    <span className="text text-hover-primary">{CarColors.find(item=>item.id==stock.colorId).name}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Yakıt Cinsi:</span>
-                                    <span className="text text-hover-primary">{FuelTypes.firstOrNew(item=>item.id==stock.fuelTypeId).name}</span>
+                                    <span className="text text-hover-primary">{FuelTypes.find(item=>item.id==stock.fuelTypeId).name}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Vites Tipi:</span>
-                                    <span className="text text-hover-primary">{GearTypes.firstOrNew(item=>item.id==stock.gearTypeId).name}</span>
+                                    <span className="text text-hover-primary">{GearTypes.find(item=>item.id==stock.gearTypeId).name}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Kasa Tipi:</span>
-                                    <span className="text text-hover-primary">{CaseTypes.firstOrNew(item=>item.id==stock.caseTypeId).name}</span>
+                                    <span className="text text-hover-primary">{CaseTypes.find(item=>item.id==stock.caseTypeId).name}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Motor Gücü:</span>
-                                    <span className="text">{EnginePowers.firstOrNew(item=>item.id==stock.enginePowerId).name}</span>
+                                    <span className="text">{EnginePowers.find(item=>item.id==stock.enginePowerId).name}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Motor Hacmi:</span>
-                                    <span className="text text-hover-primary">{EngineCapacities.firstOrNew(item=>item.id==stock.engineCapacityId).name}</span>
+                                    <span className="text text-hover-primary">{EngineCapacities.find(item=>item.id==stock.engineCapacityId).name}</span>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-between mb-2">
                                     <span className="font-weight-bold mr-2">Şaşe No:</span>

@@ -2,6 +2,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,jsx-a11y/img-redundant-alt */
 import React from "react";
 import moment from 'moment';
+import lodash from 'lodash'
 import 'moment/locale/tr';
 import { DamageTypes } from "../../StocksUIHelper";
 
@@ -42,7 +43,7 @@ export function DamageRecordsCard({ stockDamages,vinNo, plateNo }) {
                   </td>
                   <td>
                     <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                    {DamageTypes.firstOrNew(item=>item.id==damage.damageTypeId).name}
+                    {DamageTypes.find(item=>item.id==damage.damageTypeId).name}
                       </span>
 
                   </td>
@@ -64,7 +65,7 @@ export function DamageRecordsCard({ stockDamages,vinNo, plateNo }) {
                   </td>
                   <td>
                     <span className="text-dark-75 font-weight-bolder d-block font-size-lg">
-                     {stockDamages.map(damage=>damage.amount).sum()} ₺
+                     {lodash.sum(stockDamages.map(damage=>damage.amount))} ₺
                        </span>
                    </td>
                  </tr>

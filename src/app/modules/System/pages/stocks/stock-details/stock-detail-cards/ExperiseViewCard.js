@@ -30,7 +30,7 @@ export function ExperiseViewCard({stockExpertise,tramerTypeId,tramerValue}) {
                 )}
 <               div className="text-muted text-hover-primary align-items-center mt-5">
                     <div className="guide-of-svg">
-                        <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1 "><span><b>Tramer Tipi:</b>  {TramerTypes.firstOrNew(item=>item.id==tramerTypeId).name}</span></div>
+                        <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1 "><span><b>Tramer Tipi:</b>  {TramerTypes.find(item=>item.id==tramerTypeId).name}</span></div>
                         <div className="font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1"><span><b>Tramer Tutarı:</b> {tramerValue}₺</span></div>
                     </div>
                 </div>
