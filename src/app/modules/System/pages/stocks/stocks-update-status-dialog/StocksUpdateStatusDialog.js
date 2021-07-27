@@ -46,7 +46,7 @@ export function StocksUpdateStatusDialog({ show, onHide }) {
   const [status, setStatus] = useState("0");
 
   const dispatch = useDispatch();
-  const updateStatus = () => dispatch(actions.updateStocksStatus(stocksUIProps.ids, status))// server request for updateing stock by ids
+  const updateStatus = () => dispatch(actions.updateStocksStatus(stocksUIProps.ids, status=="1"))// server request for updateing stock by ids
     .then(() => dispatch(actions.fetchStocks(stocksUIProps.queryParams))
       .then(() => {
         stocksUIProps.setIds([]);// clear selections list
@@ -61,7 +61,7 @@ export function StocksUpdateStatusDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-        Seçili stoklar için durum güncellendi
+          Durumu Güncellenecek Stoklar
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block">
@@ -84,7 +84,7 @@ export function StocksUpdateStatusDialog({ show, onHide }) {
                     Id: {stock.id}
                   </span>{" "}
                   <span className="ml-5">
-                    {stock.brandId+" " +stock.modelId}, {stock.name}
+                    {stock.brand+" " +stock.model}, {stock.plateNo.toUpperCase()}
                   </span>
                 </span>
               </div>

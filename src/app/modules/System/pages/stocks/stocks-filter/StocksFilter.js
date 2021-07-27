@@ -69,7 +69,7 @@ export function StocksFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          isActive: "", // values => All=""/Active=0/passive=1
+          isActive: stocksUIContext.queryParams.filter.isActive, // values => All=""/Active=0/passive=1
           colorId:"",
           fuelTypeId:"",
           gearTypeId:"",
@@ -238,8 +238,8 @@ export function StocksFilter({ listLoading }) {
                   value={values.isActive}
                 >
                   <option value="">Tümü</option>
-                  <option value="1">Aktif</option>
-                  <option value="0">Pasif</option>
+                  <option value="true">Aktif</option>
+                  <option value="false">Pasif</option>
                 </select>
                 <small className="form-text text-muted">
                 <b>Durum</b>a göre

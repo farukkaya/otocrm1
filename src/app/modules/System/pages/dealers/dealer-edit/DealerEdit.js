@@ -246,7 +246,7 @@ export function DealerEdit({
             </button>)}
 
           {`  `}
-          {!isLastPage && (
+          {!isLastPage && !id && (
 
             <button
               type="submit"
@@ -259,7 +259,7 @@ export function DealerEdit({
           )}
 
           {`  `}
-          {isLastPage && (
+          {isLastPage || id && (
 
             <button
               type="submit"
@@ -274,7 +274,7 @@ export function DealerEdit({
         </CardHeaderToolbar>
       </CardHeader>
       <CardBody>
-        {id === undefined ? (<>
+        {!id  &&(<>
           <DealerEditForm
             actionsLoading={actionsLoading}
             dealer={initDealer}
@@ -290,7 +290,9 @@ export function DealerEdit({
             towns={towns}
             neighborhoods={neighborhoods}
             dealersForCombo={dealersForCombo}
-          /></>) : (<>
+          /></>) }
+          {dealerForEdit&&(
+            <>
             <ul className="nav nav-tabs nav-tabs-line " role="tablist">
               <li className="nav-item" onClick={() => setTab("basic")}>
                 <a className={`nav-link ${tab === "basic" && "active"}`}
@@ -382,8 +384,8 @@ export function DealerEdit({
                 </AddressesUIProvider>
               )}
             </div>
-          </>)}
-
+          </>
+          )}
       </CardBody>
     </Card>
   );

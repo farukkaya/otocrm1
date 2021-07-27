@@ -50,7 +50,7 @@ export function StocksFetchDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-         Seçili Olan Galeriler
+         Seçili Olan Stoklar
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -69,9 +69,10 @@ export function StocksFetchDialog({ show, onHide }) {
                   </span>{" "}
                   <span className="ml-5">
                   <br/>
-                    Araç Kodu: {stock.brandId+stock.modelId}, <br/>
+                    Araç Kodu: {stock.id}, <br/>
                     Marka: {stock.brand}, <br/>
                     Model: {stock.model} <br/>
+                    Plaka: {stock.plateNo.toUpperCase()} <br/>
                   </span>
                 </span>
               </div>

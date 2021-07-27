@@ -56,7 +56,7 @@ export function DealersDeleteDialog({ show, onHide }) {
         {!isLoading && (
           <span>Seçili bayileri silmek istediğinize emin misiniz?</span>
         )}
-        {isLoading && <span>Baiyler Siliniyor</span>}
+        {isLoading && <span>Bayiler Siliniyor</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>

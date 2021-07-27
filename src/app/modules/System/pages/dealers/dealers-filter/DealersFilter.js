@@ -51,7 +51,7 @@ export function DealersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
-          isActive: "true", // values => All=""/Active=1/passive=0
+          isActive: dealersUIProps.queryParams.filter.isActive, // values => All=""/Active=1/passive=0
           dealerTypeId:"",
           capacityId:"",
           searchText: "",

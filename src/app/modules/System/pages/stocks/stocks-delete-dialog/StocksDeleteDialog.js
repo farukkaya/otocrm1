@@ -56,7 +56,7 @@ export function StocksDeleteDialog({ show, onHide }) {
         {!isLoading && (
           <span>Seçili stoklari silmek istediğinize emin misiniz?</span>
         )}
-        {isLoading && <span>Baiyler Siliniyor</span>}
+        {isLoading && <span>Stoklar Siliniyor</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>

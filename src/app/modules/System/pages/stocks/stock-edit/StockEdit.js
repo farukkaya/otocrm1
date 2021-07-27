@@ -100,16 +100,18 @@ export function StockEdit({
   
   };
   useEffect(() => {
-    dispatch(actions.fetchStock(id));
+    dispatch(actions.fetchStock(id));  
+  }, [id,dispatch]);
+  useEffect(() => {
     let _title = id ? "" : "Yeni Stok"
     if (stockForEdit && id) {
-      _title = format("Stok Güncelle -'{0}'", `${stockForEdit.brand} - ${stockForEdit.model}`);
+      _title = format("Stok Güncelle -'{0}'", `${stockForEdit.plateNo}, ${stockForEdit.vinNo}`);
     }
 
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stockForEdit, id,dispatch]);
+  }, [stockForEdit,dispatch]);
 
   const saveStock = (values) => {
     if (!id) {
@@ -159,8 +161,10 @@ export function StockEdit({
         })
     })
     } else {
-      dispatch(actions.updateStock(values))//.then(() => );
-      backToStocksList()
+      dispatch(actions.updateStock(values)).then(()=>{
+        backToStocksList();
+      })
+     
     }
   };
 
@@ -254,7 +258,7 @@ export function StockEdit({
             </button>)}
 
           {`  `}
-          {!isLastPage && (
+          {!isLastPage && !id && (
 
             <button
               type="submit"
@@ -267,7 +271,7 @@ export function StockEdit({
           )}
 
           {`  `}
-          {isLastPage && (
+          {isLastPage || id && (
 
             <button
               type="submit"
@@ -283,7 +287,7 @@ export function StockEdit({
       </CardHeader>
       <CardBody>
 
-        {id === undefined ? (<>
+        {!id && (<>
           <StockEditForm
             actionsLoading={actionsLoading}
             stock={initStock}
@@ -299,7 +303,9 @@ export function StockEdit({
             modelTypes={vehicleModelTypes}
             insuranceValue={stockInsuranceValue}
           />
-        </>) : (<>
+        </>) }
+        
+      {stockForEdit&&  (<>
           <ul className="nav nav-tabs nav-tabs-line " role="tablist">
             <li className="nav-item" onClick={() => setTab("basic")}>
               <a className={`nav-link ${tab === "basic" && "active"}`}

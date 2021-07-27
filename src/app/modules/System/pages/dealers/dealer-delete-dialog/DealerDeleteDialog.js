@@ -74,7 +74,7 @@ export function DealerDeleteDialog({ id, show, onHide }) {
           <button
             type="button"
             onClick={deleteDealer}
-            className="btn btn-delete btn-elevate"
+            className="btn btn-primary btn-elevate"
           >
             Sil
           </button>

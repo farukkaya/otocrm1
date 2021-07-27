@@ -27,7 +27,7 @@ export function StocksGrouping() {
                 className="btn btn-danger font-weight-bolder font-size-sm"
                 onClick={stocksUIProps.openDeleteStocksDialog}
               >
-                <i className="fa fa-trash"></i>   Hepsini Sil
+                <i className="fa fa-trash"></i> Sil ({stocksUIProps.ids.length})
               </button>
               &nbsp;
               <button

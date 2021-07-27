@@ -39,12 +39,12 @@ export function findStocksByGallery(queryParams, galleryId) {
 
 // UPDATE => PUT: update the procuct on the server
 export function updateStock(stock) {
-  return axios.put(`${STOCKS_URL}/${stock.id}`, { stock });
+  return axios.put(`${STOCKS_URL}/Update`, stock);
 }
 
 // UPDATE Status
 export function updateStatusForStocks(ids, status) {
-  return axios.post(`${STOCKS_URL}/updateStatusForStocks`, {
+  return axios.put(`${STOCKS_URL}/UpdateStatus`, {
     ids,
     status
   });
@@ -52,12 +52,12 @@ export function updateStatusForStocks(ids, status) {
 
 // DELETE => delete the stock from the server
 export function deleteStock(stockId) {
-  return axios.delete(`${STOCKS_URL}/${stockId}`);
+  return axios.delete(`${STOCKS_URL}/Delete?id=${stockId}`);
 }
 
 // DELETE Stocks by ids
 export function deleteStocks(ids) {
-  return axios.post(`${STOCKS_URL}/deleteStocks`, { ids });
+  return axios.post(`${STOCKS_URL}/SelectedDelete`, ids);
 }
 
 

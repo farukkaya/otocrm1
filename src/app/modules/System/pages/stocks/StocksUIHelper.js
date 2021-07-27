@@ -133,7 +133,7 @@ export const DamageTypes = [
 ]
 export const initialFilter = {
     filter: {
-        
+        isActive:"true"
     },
     sortOrder: "asc",
     sortField: "id",

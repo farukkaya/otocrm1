@@ -61,7 +61,7 @@ export function DealersUpdateStatusDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-        Seçili bayiler için durum güncellendi
+       Durumu Güncellenecek Bayiler
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block">

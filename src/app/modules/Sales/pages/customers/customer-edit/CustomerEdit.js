@@ -177,7 +177,7 @@ export function CustomerEdit({
             </button>)}
 
           {`  `}
-          {!isLastPage && (
+          {!isLastPage && !id && (
 
             <button
               type="submit"
@@ -190,7 +190,7 @@ export function CustomerEdit({
           )}
 
           {`  `}
-          {isLastPage && (
+          {isLastPage || id && (
 
             <button
               type="submit"
