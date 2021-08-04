@@ -22,7 +22,7 @@ export function ExpertiseForm({ stockExpertise,setValues }) {
         if (seletedPath != -1) {
             const n = document.querySelector(".typeOfDamege");
             if (null != n) {
-                var path = document.getElementById(`Path-item${seletedPath}`);
+                var path = document.getElementById(`Path-item-${seletedPath}`);
                 path.classList.value = "";
                 path.classList.add(itemClass);
                 var name = ExpertiseTableItems.find(q => q.id == seletedPath).name;

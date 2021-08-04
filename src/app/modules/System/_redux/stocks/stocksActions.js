@@ -194,12 +194,12 @@ export const fetchStockExpertise = id => dispatch => {
     .getStockExpertise(id)
     .then(response => {
       
-      const dealer = response.data;
-      dispatch(actions.stockExpertiseFetched({ stockExpertise: dealer }));
-      return dealer;
+      const expertiseInfo = response.data;
+      dispatch(actions.stockExpertiseFetched({ stockExpertise: expertiseInfo }));
+      return expertiseInfo;
     })
     .catch(error => {
-      error.clientMessage = "Can't find dealer";
+      error.clientMessage = "Can't find expertiseInfo";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

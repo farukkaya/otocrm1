@@ -5,7 +5,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const ActionsFab = (props) => {
   const { formatExtraData, row } = props;
-  const { openUpdateStatusDialog, openEditPage,openDetailPage, openDeleteDialog,openUpdatePrimaryDialog,key="id" } = formatExtraData;
+  const { 
+    openUpdateStatusDialog
+    ,openEditPage
+    ,openDetailPage
+    ,openDeleteDialog
+    ,openUpdatePrimaryDialog
+    ,openUpdateExpertisDialog
+    ,key="id" } = formatExtraData;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
@@ -78,6 +85,12 @@ export const ActionsFab = (props) => {
           }}>Birincil Seç</MenuItem>
         )}
   <Divider light />
+  {openUpdateExpertisDialog&&(
+          <MenuItem onClick={() => {  
+            openUpdateExpertisDialog(row[key])
+              handleClose()
+            }}>Expertiz Bilgilerini Güncelle</MenuItem>
+        )}
       </Menu>
     </>
   )

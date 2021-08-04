@@ -8,6 +8,7 @@ import { StocksFetchDialog } from "./stocks-fetch-dialog/StocksFetchDialog";
 import { StocksUpdateStatusDialog } from "./stocks-update-status-dialog/StocksUpdateStatusDialog";
 import { StocksDeleteDialog } from "./stocks-delete-dialog/StocksDeleteDialog";
 import { StockUpdateStatusDialog } from "./stock-update-status-dialog/StockUpdateStatusDialog";
+import { StockUpdateExpertiseDialog } from "./stock-update-expertise-dialog/StockUpdateExpertiseDialog";
 
 export const StocksPage=({ history }) =>{
 
@@ -37,6 +38,9 @@ export const StocksPage=({ history }) =>{
     },
     openUpdateStockStatusDialog: (id) => {
       history.push(`/system/stocks/${id}/updateStatus`);
+    },
+    openUpdateExpertisDialog: (id) => {
+      history.push(`/system/stocks/${id}/updateExpertise`);
     }
   };
 
@@ -91,6 +95,19 @@ export const StocksPage=({ history }) =>{
         {({ history, match }) => {
           return(
             <StockUpdateStatusDialog
+              show={match != null}
+              id={match && match.params.id}
+              onHide={() => {
+                history.push("/system/stocks");
+              }}
+            />
+          )
+        }}
+      </Route>
+      <Route path="/system/stocks/:id/updateExpertise"> 
+        {({ history, match }) => {
+          return(
+            <StockUpdateExpertiseDialog
               show={match != null}
               id={match && match.params.id}
               onHide={() => {

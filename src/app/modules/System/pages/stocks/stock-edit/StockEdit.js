@@ -316,16 +316,6 @@ export function StockEdit({
                 Stok
                   </a>
             </li>
-            <li className="nav-item" onClick={() => setTab("documents")}>
-              <a
-                className={`nav-link ${tab === "documents" && "active"}`}
-                data-toggle="tab"
-                role="button"
-                aria-selected={(tab === "documents")}
-              >
-                Dökümanları
-                    </a>
-            </li>
             <li className="nav-item" onClick={() => setTab("damages")}>
               <a
                 className={`nav-link ${tab === "damages" && "active"}`}
@@ -334,6 +324,17 @@ export function StockEdit({
                 aria-selected={(tab === "damages")}
               >
                 Hasar Sorgu Kayıtları
+                    </a>
+            </li>
+           
+            <li className="nav-item" onClick={() => setTab("documents")}>
+              <a
+                className={`nav-link ${tab === "documents" && "active"}`}
+                data-toggle="tab"
+                role="button"
+                aria-selected={(tab === "documents")}
+              >
+                Dökümanları
                     </a>
             </li>
           </ul>
@@ -354,6 +355,7 @@ export function StockEdit({
 
               />
             )}
+           
             {tab === "documents" && id && (
               <h1>Dökümanlar</h1>
             )}

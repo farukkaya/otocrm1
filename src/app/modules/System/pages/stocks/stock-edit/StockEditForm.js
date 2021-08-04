@@ -9,11 +9,11 @@ import * as Yup from "yup";
 
 import { DashboardUpload, Input, Select, CurrencyInput } from "../../../../../../_metronic/_partials/controls";
 import { Wizard } from "../../../../../../_metronic/layout/components/extras/wizards/Wizard";
-import { format } from 'react-string-format';
 import * as mainActions from "../../../_redux/_main/mainActions"
 import * as actions from "../../../_redux/stocks/stocksActions"
 
 
+import { format } from 'react-string-format';
 import { LENGTH, MIN_LENGTH, MAX_LENGTH, DIGIT_CONTROL, REQUIRED } from "../../../../../validations/validMessages";
 import { CaseTypes, GearTypes, FuelTypes, CarColors, FromWhoTitles, PurchaseTypes, arrayProgress, EngineCapacities, EnginePowers, TramerTypes } from "../StocksUIHelper";
 import { ExpertiseForm } from "./stock-expertise/ExpertiseForm";

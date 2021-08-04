@@ -5,7 +5,7 @@ import { ExpertiseTableItems } from '../../StocksUIHelper'
 export default function ExpertiseSelectionTable({ values, handleChange }) {
 
     const addHover = (e) => {
-        const pathId = `Path-item${e.target.id.substring(5)}`
+        const pathId = `Path-${e.target.id}`
         var path = document.getElementById(pathId);
         path && path.classList.add("hover")
     }

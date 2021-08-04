@@ -35,6 +35,7 @@ export function StocksTable() {
       openDeleteStockDialog: stocksUIContext.openDeleteStockDialog,
       openUpdateStockStatusDialog:stocksUIContext.openUpdateStockStatusDialog,
       openUpdateStocksStatusDialog:stocksUIContext.openUpdateStocksStatusDialog,
+      openUpdateExpertisDialog:stocksUIContext.openUpdateExpertisDialog,
     };
   }, [stocksUIContext]);
 
@@ -201,6 +202,7 @@ export function StocksTable() {
         openEditPage: stocksUIProps.openEditStockPage,
         openDetailPage: stocksUIProps.openDetailStockPage,
         openDeleteDialog: stocksUIProps.openDeleteStockDialog,
+        openUpdateExpertisDialog:stocksUIProps.openUpdateExpertisDialog
        // key:"guid"
       },
 

@@ -44,6 +44,7 @@ export function StocksUIProvider({ stocksUIEvents, children }) {
     openFetchStocksDialog: stocksUIEvents.openFetchStocksDialog,
     openUpdateStockStatusDialog:stocksUIEvents.openUpdateStockStatusDialog,
     openUpdateStocksStatusDialog:stocksUIEvents.openUpdateStocksStatusDialog,
+    openUpdateExpertisDialog:stocksUIEvents.openUpdateExpertisDialog,
   };
 
   return (

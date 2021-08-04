@@ -12,6 +12,7 @@ input[type="radio"] {
     cursor: not-allowed;
   }
 }
+
 label#radio_customerType {
   height: 100%;
   display: block;
@@ -56,7 +57,7 @@ input[type="radio"]:checked + label {
   -webkit-box-flex: unset;
   -ms-flex: unset;
   flex: unset;
-  margin-left:150px ;
+  margin-left:120px ;
 }
 .form-element-container.svg-detail {
   -webkit-box-flex: 1;
@@ -173,10 +174,10 @@ div.elements-row:hover {
   color:#fff !important;
 }
 
-.page-form path[title] {
+.form-element-container path[title] {
   cursor: pointer;
 }
-.page-form path.hover {
+.form-element-container path.hover {
   fill: gray;
   stroke: gray;
 }
