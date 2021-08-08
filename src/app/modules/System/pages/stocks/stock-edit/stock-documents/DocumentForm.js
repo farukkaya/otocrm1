@@ -24,7 +24,7 @@ let initialDocument = {
     description: "",
     validityDate: "",
 }
-export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) {
+export function DocumentForm({documents,setDocuments,transactionId,pageProps}) {
 
     const [attachment, setAttachment] = useState({})
     const onHandleInputChangeSingle = useCallback(
@@ -44,6 +44,7 @@ export function DocumentForm({documents,setDocuments,transactionId ,pageProps}) 
         formData.append("name", name);
         formData.append("validityDate", validityDate);
         formData.append("description", description);
+        formData.append("relationGuid", pageProps.values.guid);
         formData.append("transactionId", transactionId);
         formData.append("documentTypeId", 1);
         documents.push({ id, name, validityDate, description, transactionId})

@@ -244,7 +244,7 @@ export default function DamagesTable({damages}) {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.damageOrder}
                       </TableCell>
-                      <TableCell align="left">{DamageTypes.firstOrNew(item=>item.id==row.damageTypeId).name}</TableCell>
+                      <TableCell align="left">{DamageTypes.find(item=>item.id==row.damageTypeId).name}</TableCell>
                       <TableCell align="left">{row.damageDate}</TableCell> 
                       <TableCell align="left">{row.amount} ₺</TableCell>
                     </TableRow>

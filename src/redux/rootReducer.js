@@ -16,6 +16,8 @@ import { dealersSlice } from "../app/modules/System/_redux/dealers/dealersSlice"
 import { addressesSlice } from "../app/modules/System/_redux/addresses/addressesSlice";
 import { stocksSlice } from "../app/modules/System/_redux/stocks/stocksSlice";
 import { stockExpertisesSlice } from "../app/modules/System/_redux/stockExpertises/stockExpertisesSlice";
+import { damagesSlice } from "../app/modules/System/_redux/damages/damagesSlice";
+import { documentsSlice } from "../app/modules/System/_redux/documents/documentsSlice";
 import { claimsSlice } from "../app/modules/System/_redux/claims/claimsSlice";
 
 export const rootReducer = combineReducers({
@@ -27,12 +29,14 @@ export const rootReducer = combineReducers({
 
   /////////////////////////////////
   main: mainSlice.reducer,
+  documents:documentsSlice.reducer,
   claims: claimsSlice.reducer,
   professions: professionsSlice.reducer,
   addresses: addressesSlice.reducer,
 
   dealers: dealersSlice.reducer,
   stocks: stocksSlice.reducer,
+  damages: damagesSlice.reducer,
   stockExpertises: stockExpertisesSlice.reducer,
   taxOffices: taxOfficesSlice.reducer,
   users: usersSlice.reducer

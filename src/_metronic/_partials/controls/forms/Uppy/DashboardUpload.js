@@ -11,7 +11,7 @@ import '@uppy/core/dist/style.css'
 import '@uppy/dashboard/dist/style.css'
 
 
-export function DashboardUpload({ images, setImages, transactionId }) {
+export function DashboardUpload({ images, setImages, transactionId ,stockId}) {
   const { token } = useSelector(
     (state) => ({
       token: state.auth.authToken.token
@@ -29,13 +29,14 @@ export function DashboardUpload({ images, setImages, transactionId }) {
     allowMultipleUploads: true
   })
     .use(XHRUpload, {
-      endpoint: `${process.env.REACT_APP_API_DEVELOPMENT_URL}Documents/UploadFile?subDirectory=ForStocks`,
+      endpoint: `${process.env.REACT_APP_API_DEVELOPMENT_URL}Documents/UploadImages?stockGuid=${stockId}`,
       method: 'POST',
       formData:true, 
       headers: {
         'authorization': `Bearer ${token}`
       },
-      fieldName:transactionId
+      fieldName:transactionId,
+     // metaFields:[{ transactionId,stockId}]
     })
     // .use(Url)
     // .use(Url, {

@@ -424,7 +424,7 @@ export function StockEditForm({
                             return (
                                 <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                                     <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 6).description}</h4>
-                                    <DashboardUpload images={images} setImages={setImages} transactionId={stock.transactionId} />
+                                    <DashboardUpload images={images} setImages={setImages} transactionId={stock.transactionId} stockId={stock.guid} />
                                 </div>
                             );
                         }}
@@ -434,13 +434,12 @@ export function StockEditForm({
                             const data = props.values;
                             return (
                                 <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
-                                    {/*begin::Section*/}
     
     
                                 </div>
                             );
                         }}
-                    </Wizard.Page>
+                    </Wizard.Page> 
                 </Wizard >
     
             ) : (

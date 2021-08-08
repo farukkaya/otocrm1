@@ -13,7 +13,12 @@ import {
 import { useSubheader } from "../../../../../../_metronic/layout";
 import * as actions from "../../../_redux/stocks/stocksActions";
 import { StockEditForm } from "./StockEditForm";
-
+import { DamagesUIProvider } from "../stock-damages/DamagesUIContext";
+import { Damages } from "../stock-damages/Damages";
+import { Documents } from "../stock-documents/Documents";
+import { DocumentsUIProvider } from "../stock-documents/DocumentsUIContext";
+import { ImagesUIProvider } from "../stock-images/ImagesUIContext";
+import { Images } from "../stock-images/Images";
 export function StockEdit({
   history,
   match: {
@@ -33,16 +38,17 @@ export function StockEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading,currentUser, stockForEdit,vehicleCategories ,vehicleBrands,vehicleModels,vehicleModelTypes,stockInsuranceValue} = useSelector(
+  const { actionsLoading, currentUser, stockImages,stockForEdit, vehicleCategories, vehicleBrands, vehicleModels, vehicleModelTypes, stockInsuranceValue } = useSelector(
     (state) => ({
       actionsLoading: state.stocks.actionsLoading,
       currentUser: state.auth.user,
       stockForEdit: state.stocks.stockForEdit,
+      stockImages: state.documents.stockImages,
       stockInsuranceValue: state.stocks.stockInsuranceValue,
       vehicleCategories: state.main.vehicleCategories.entities,
       vehicleBrands: state.main.vehicleBrands.entities,
       vehicleModels: state.main.vehicleModels.entities,
-      vehicleModelTypes:state.main.vehicleModelTypes.entities,
+      vehicleModelTypes: state.main.vehicleModelTypes.entities,
     }),
     shallowEqual
   );
@@ -50,7 +56,7 @@ export function StockEdit({
 
   const initStock = {
     id: undefined,
-    dealerId:currentUser.dealerId,
+    dealerId: currentUser.dealerId,
     guid: generateGuid(),
     transactionId: generateGuid(),
     vinNo: "",
@@ -78,93 +84,94 @@ export function StockEdit({
     insuranceValue: "",// Kasko değeri
     tramerValue: "",// Kasko değeri
     tramerTypeId: "",// Kasko değeri
-  
-    stockExpertise:{
-      rightBackFender:"orginal",
-      backHood:"orginal",
-      leftBackFender:"orginal",
-      rightBackDoor:"orginal",
-      rightFrontDoor:"orginal",
-      ceiling:"orginal",
-      leftBackDoor:"orginal", 
-      leftFrontDoor:"orginal",
-      rightFrontFender:"orginal",
-      engineHood:"orginal",
-      leftFrontFender:"orginal",
-      frontBumper:"orginal",
-      backBumper:"orginal"
+
+    stockExpertise: {
+      rightBackFender: "orginal",
+      backHood: "orginal",
+      leftBackFender: "orginal",
+      rightBackDoor: "orginal",
+      rightFrontDoor: "orginal",
+      ceiling: "orginal",
+      leftBackDoor: "orginal",
+      leftFrontDoor: "orginal",
+      rightFrontFender: "orginal",
+      engineHood: "orginal",
+      leftFrontFender: "orginal",
+      frontBumper: "orginal",
+      backBumper: "orginal"
     },
-    stockDamages:[],
-    documents:[],
-    images:[]
-  
+    stockDamages: [],
+    documents: [],
+    images: []
+
   };
   useEffect(() => {
-    dispatch(actions.fetchStock(id));  
-  }, [id,dispatch]);
+    dispatch(actions.fetchStock(id));
+  }, [id, dispatch]);
+
+ 
   useEffect(() => {
     let _title = id ? "" : "Yeni Stok"
     if (stockForEdit && id) {
       _title = format("Stok Güncelle -'{0}'", `${stockForEdit.plateNo}, ${stockForEdit.vinNo}`);
     }
-
     setTitle(_title);
     suhbeader.setTitle(_title);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stockForEdit,dispatch]);
+  }, [stockForEdit, dispatch]);
 
   const saveStock = (values) => {
     if (!id) {
       const stockWizardData = {
         stock: {
-            dealerId: initStock.dealerId,
-            plateNo: values.plateNo,
-            categoryId: +values.categoryId,
-            brandId: +values.brandId,
-            modelId: +values.modelId,
-            modelTypeId: +values.modelTypeId,
-            modelYear: values.modelYear,
-            kilometer: values.kilometer,
-            caseTypeId: +values.caseTypeId,
-            gearTypeId: +values.gearTypeId,
-            fuelTypeId: +values.fuelTypeId,
-            colorId: +values.colorId,
-            enginePowerId: +values.enginePowerId,
-            engineCapacityId: +values.engineCapacityId,
-            vinNo: values.vinNo,
-            engineNo: values.engineNo,
-            fromWhoId: +values.fromWhoId,
-            purchaseTypeId: +values.purchaseTypeId,
-            tramerTypeId: +values.tramerTypeId,
-            tramerValue: parseFloat(values.tramerValue),
-            insuranceCode: +values.insuranceCode,
-            insuranceValue: parseFloat(values.insuranceValue),
-            buyingPrice: parseFloat(values.buyingPrice),
-            sellingPrice: parseFloat(values.sellingPrice),
-            minPrice: parseFloat(values.minPrice),
-            maxPrice: parseFloat(values.maxPrice),
-            transactionId:initStock.transactionId,
+          dealerId: initStock.dealerId,
+          plateNo: values.plateNo,
+          categoryId: +values.categoryId,
+          brandId: +values.brandId,
+          modelId: +values.modelId,
+          modelTypeId: +values.modelTypeId,
+          modelYear: values.modelYear,
+          kilometer: values.kilometer,
+          caseTypeId: +values.caseTypeId,
+          gearTypeId: +values.gearTypeId,
+          fuelTypeId: +values.fuelTypeId,
+          colorId: +values.colorId,
+          enginePowerId: +values.enginePowerId,
+          engineCapacityId: +values.engineCapacityId,
+          vinNo: values.vinNo,
+          engineNo: values.engineNo,
+          fromWhoId: +values.fromWhoId,
+          purchaseTypeId: +values.purchaseTypeId,
+          tramerTypeId: +values.tramerTypeId,
+          tramerValue: parseFloat(values.tramerValue),
+          insuranceCode: +values.insuranceCode,
+          insuranceValue: parseFloat(values.insuranceValue),
+          buyingPrice: parseFloat(values.buyingPrice),
+          sellingPrice: parseFloat(values.sellingPrice),
+          minPrice: parseFloat(values.minPrice),
+          maxPrice: parseFloat(values.maxPrice),
+          transactionId: initStock.transactionId,
         },
         stockExpertise: values.stockExpertise,
-        stockDamages:values.stockDamages
-    }
+        stockDamages: values.stockDamages
+      }
 
-    dispatch(actions.createStock(stockWizardData)).then((responseStock) => {
+      dispatch(actions.createStock(stockWizardData)).then((responseStock) => {
         dispatch(actions.fetchStocks({
-            filter: {},
-            sortOrder: "desc",
-            sortField: "id",
-            pageNumber: 1,
-            pageSize: 10
-        })).then(()=>{
+          filter: {},
+          sortOrder: "desc",
+          sortField: "id",
+          pageNumber: 1,
+          pageSize: 10
+        })).then(() => {
           backToStocksList();
         })
-    })
+      })
     } else {
-      dispatch(actions.updateStock(values)).then(()=>{
+      dispatch(actions.updateStock(values)).then(() => {
         backToStocksList();
       })
-     
+
     }
   };
 
@@ -181,10 +188,9 @@ export function StockEdit({
   const btnNext = useRef();
 
   const handleResetClick = () => {
-    if (btnReset && btnReset.current)
-    {
+    if (btnReset && btnReset.current) {
       btnReset.current.click();
-      
+
       //AMAÇ: Eğer bu blok olmazsa reset fonksiyonu WizardPage'i başa alıyor ama componentleri temizlemiyor ikinci reset click'e ihtiyac duyuyoruz
       setTimeout(() => {
         btnReset.current.click();
@@ -198,20 +204,21 @@ export function StockEdit({
     }
   };
   const previousClick = () => {
-    if (btnPrevious && btnPrevious.current){
-      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
-      setIsFirtPage(nextPageOrder===0)
-      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
-        btnPrevious.current.click();
+    if (btnPrevious && btnPrevious.current) {
+      const nextPageOrder = parseInt(btnNext.current.dataset.page) + 1;
+      setIsFirtPage(nextPageOrder === 0)
+      setIsLastPage(btnNext.current.dataset.pagecount - 1 == nextPageOrder)
+      btnPrevious.current.click();
     }
-    
+
   };
   const nextClick = () => {
-    
-    if (btnNext && btnNext.current){
-      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
-      setIsFirtPage(nextPageOrder===0)
-      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+
+    if (btnNext && btnNext.current) {
+      
+      const nextPageOrder = parseInt(btnNext.current.dataset.page) + 1;
+      setIsFirtPage(nextPageOrder === 0)
+      setIsLastPage(btnNext.current.dataset.pagecount - 1 == nextPageOrder)
       btnNext.current.click();
     }
   };
@@ -223,11 +230,12 @@ export function StockEdit({
   //   alert("Stok Ekleme Yetkiniz Yok!!!");
   //   backToStocksList();
   // }
+
   return (
     <Card>
       {actionsLoading && <ModalProgressBar />}
       <CardHeader title={title}>
-      <CardHeaderToolbar>
+        <CardHeaderToolbar>
           <button
             type="button"
             onClick={backToStocksList}
@@ -266,12 +274,12 @@ export function StockEdit({
               className="btn btn-outline-primary ml-2"
               onClick={nextClick}
             >
-              İleri <i className="fa fa-arrow-right"></i> 
+              İleri <i className="fa fa-arrow-right"></i>
             </button>
           )}
 
           {`  `}
-          {isLastPage || id && (
+          {isLastPage  && (
 
             <button
               type="submit"
@@ -303,9 +311,9 @@ export function StockEdit({
             modelTypes={vehicleModelTypes}
             insuranceValue={stockInsuranceValue}
           />
-        </>) }
-        
-      {stockForEdit&&  (<>
+        </>)}
+
+        {stockForEdit && (<>
           <ul className="nav nav-tabs nav-tabs-line " role="tablist">
             <li className="nav-item" onClick={() => setTab("basic")}>
               <a className={`nav-link ${tab === "basic" && "active"}`}
@@ -314,7 +322,7 @@ export function StockEdit({
                 aria-selected={(tab === "basic")}
               >
                 Stok
-                  </a>
+              </a>
             </li>
             <li className="nav-item" onClick={() => setTab("damages")}>
               <a
@@ -324,9 +332,9 @@ export function StockEdit({
                 aria-selected={(tab === "damages")}
               >
                 Hasar Sorgu Kayıtları
-                    </a>
+              </a>
             </li>
-           
+
             <li className="nav-item" onClick={() => setTab("documents")}>
               <a
                 className={`nav-link ${tab === "documents" && "active"}`}
@@ -335,7 +343,17 @@ export function StockEdit({
                 aria-selected={(tab === "documents")}
               >
                 Dökümanları
-                    </a>
+              </a>
+            </li>
+            <li className="nav-item" onClick={() => setTab("images")}>
+              <a
+                className={`nav-link ${tab === "images" && "active"}`}
+                data-toggle="tab"
+                role="button"
+                aria-selected={(tab === "images")}
+              >
+                Resimler
+              </a>
             </li>
           </ul>
           <div className="mt-5">
@@ -355,13 +373,20 @@ export function StockEdit({
 
               />
             )}
-           
-            {tab === "documents" && id && (
-              <h1>Dökümanlar</h1>
-            )}
             {tab === "damages" && id && (
-              <h1>Hasar Sorgu Kayıtları</h1>
-
+              <DamagesUIProvider currentStockId={id}>
+                <Damages />
+              </DamagesUIProvider>
+            )}
+            {tab === "documents" && id && (
+             <DocumentsUIProvider currentStockId={stockForEdit.guid}>
+             <Documents />
+           </DocumentsUIProvider>
+            )}
+          {tab === "images" && id && (
+             <ImagesUIProvider currentStockId={stockForEdit.guid}>
+             <Images />
+           </ImagesUIProvider>
             )}
           </div>
         </>)}
