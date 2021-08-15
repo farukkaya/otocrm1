@@ -9,6 +9,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Routes } from "../app/Routes";
 import { I18nProvider } from "../_metronic/i18n";
 import { LayoutSplashScreen, MaterialThemeProvider } from "../_metronic/layout";
+import { Toaster } from 'react-hot-toast';
 
 export default function App({ store, persistor, basename }) {
   return (
@@ -26,6 +27,9 @@ export default function App({ store, persistor, basename }) {
               <I18nProvider>
                 {/* Render routes with provided `Layout`. */}
                 <Routes />
+                <Toaster toastOptions={{
+                    duration: 5000,
+                  }}/>
               </I18nProvider>
             </MaterialThemeProvider>
           </BrowserRouter>
