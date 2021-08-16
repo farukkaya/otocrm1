@@ -79,15 +79,7 @@ export default function mockCar(mock) {
     return [200, filteredCars];
   });
 
-  mock.onPost(/api\/carsfindByGallery\/\d+/).reply(config => {
-    const urls = config.url.split("/");
-    const id = urls[2];
-    const mockUtils = new MockUtils();
-    const { queryParams } = JSON.parse(config.data);
-    const galleryCars= carTableMock.filter(el => el.galleryId === +id);
-    const filteredCars = mockUtils.baseFilter(galleryCars, queryParams);
-    return [200, filteredCars];
-  });
+
 
   mock.onPost("cars/deleteCars").reply(config => {
     const { ids } = JSON.parse(config.data);

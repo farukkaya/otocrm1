@@ -29,7 +29,7 @@ export function StocksTable() {
       setIds: stocksUIContext.setIds,
       queryParams: stocksUIContext.queryParams,
       setQueryParams: stocksUIContext.setQueryParams,
-      galleryId: stocksUIContext.galleryId,
+      dealerId: stocksUIContext.dealerId,
       openEditGalleryDialog: stocksUIContext.openEditGalleryDialog,
       openUpdateStatusGalleryDialog:stocksUIContext.openUpdateStatusGalleryDialog,
       openDeleteGalleryDialog: stocksUIContext.openDeleteGalleryDialog,
@@ -45,8 +45,7 @@ export function StocksTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     stocksUIProps.setIds([]);
-    
-    dispatch(actions.fetchStocksByGallery(stocksUIProps.queryParams, stocksUIProps.galleryId));
+    dispatch(actions.fetchStocksByDealer(stocksUIProps.queryParams, stocksUIProps.dealerId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stocksUIProps.queryParams, dispatch, stocksUIProps.galleryId]);
   const columns = [
@@ -56,13 +55,12 @@ export function StocksTable() {
       text: "Id",
       sortCaret: sortCaret,
     },
-    // {
-    //   dataField: "name",
-    //   text: "Galeri Adı",
-    //   sort: true,
-    //   sortCaret: sortCaret,
-    // },
-    
+    {
+      dataField: "category",
+      text:"Kategori",
+      sort: true,
+      sortCaret: sortCaret,
+    },
     {
       dataField: "brand",
       text:"Marka",
@@ -75,42 +73,27 @@ export function StocksTable() {
       sort: true,
       sortCaret: sortCaret,
     },   
-    
     {
-      dataField: "year",
+      dataField: "modelType",
+      text:"Tip",
+      sort: true,
+      sortCaret: sortCaret,
+    },   
+    {
+      dataField: "modelYear",
       text:"Yıl",
       sort: true,
       sortCaret: sortCaret,
     },
-   
-    
-     {
-      dataField: "color",
-      text:"Renk",
-      sort: true,
-      sortCaret: sortCaret,
-    }, 
     {
-      dataField: "fuelType",
-      text:"Yakıt",
-      sort: true,
-      sortCaret: sortCaret,
-    }, 
-    {
-      dataField: "gearType",
-      text:"Vites Tipi",
-      sort: true,
-      sortCaret: sortCaret,
-    }, 
-    {
-      dataField: "caseType",
-      text:"Kasa Tipi",
+      dataField: "plateNo",
+      text:"Plaka",
       sort: true,
       sortCaret: sortCaret,
     },
     {
       dataField: "sellingPrice",
-      text:"Fiyat",
+      text:"Satış Fiyatı",
       sort: true,
       sortCaret: sortCaret,
       formatter:columnFormatters.PriceColumnFormatter,
@@ -119,6 +102,73 @@ export function StocksTable() {
       },
 
     },
+     {
+      dataField: "colorId",
+      text:"Renk",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.CarColors,
+        selector:"colorId",
+      },
+    }, 
+    {
+      dataField: "fuelTypeId",
+      text:"Yakıt Cinsi",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.FuelTypes,
+        selector:"fuelTypeId",
+      },
+    }, 
+    {
+      dataField: "gearTypeId",
+      text:"Vites Tipi",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.GearTypes,
+        selector:"gearTypeId",
+      },
+    }, 
+    {
+      dataField: "caseTypeId",
+      text:"Kasa Tipi",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.CaseTypes,
+        selector:"caseTypeId",
+      },
+    }, 
+    {
+      dataField: "fromWhoId",
+      text:"Kimden",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.FromWhoTitles,
+        selector:"fromWhoId",
+      },
+    }, 
+    {
+      dataField: "purchaseTypeId",
+      text:"Alım Türü",
+      sort: true,
+      sortCaret: sortCaret,
+      formatter: columnFormatters.ArrayColumnFormatter,
+      formatExtraData: {
+        array: uiHelpers.PurchaseTypes,
+        selector:"purchaseTypeId",
+      }
+    }
+
   ];
 
   const paginationOptions = {

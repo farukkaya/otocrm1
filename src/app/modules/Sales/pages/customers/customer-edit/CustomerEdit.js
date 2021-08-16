@@ -14,19 +14,6 @@ import { CustomerEditForm } from "./CustomerEditForm";
 import { format } from 'react-string-format';
 import { v4 as generateGuid } from 'uuid';
 
-const initCustomer={
-  guid: generateGuid(),
-  firstname : "",
-  lastname : "",
-  personalPhone : "",
-  workPhone : "",
-  identityNo : "",
-  email:"",
-  advancePayment: "",
-  customerTypeId : "",
-  customerSourceId:"",
-  paymentMethodId: "",
-}
 export function CustomerEdit({
   history,
   match: {
@@ -58,6 +45,23 @@ export function CustomerEdit({
     shallowEqual
   );
 
+  const initCustomer={
+    dealerId: currentUser.dealerId,
+    salesPersonId: currentUser.id,
+
+    guid: generateGuid(),
+    firstName : "",
+    lastName : "",
+    phone1 : "",
+    phone2 : "",
+    identityNo : "",
+    email:"",
+    advancePayment: "",
+    customerTypeId : "",
+    customerSourceId:"",
+    paymentMethodId: "",
+    selectedStocks:[]
+  }
   // const getTowns = (e) => {
   //   dispatch(townsActions.fetchTownsByCity(e.target.value))
 
@@ -74,11 +78,7 @@ export function CustomerEdit({
   useEffect(() => {
     let _title = id ? "" : "Yeni Müşteri"
     if (customerForEdit && id) {
-
-      _title = format("Müşteri Güncelle -'{0}'", `${customerForEdit.firstName} ${customerForEdit.lastname}`);
-
-      _title = format("Müşteri Güncelle -'{0}'", `${customerForEdit.firstname} ${customerForEdit.lastName}`);
-
+      _title = format("Müşteri Güncelle -'{0}'", `${customerForEdit.firstName} ${customerForEdit.lastName}`);
     }
 
     setTitle(_title);
@@ -87,8 +87,35 @@ export function CustomerEdit({
   }, [customerForEdit, id]);
 
   const saveCustomer = (values) => {
-    if (!id) 
-      dispatch(actions.createCustomer(values))
+    if (!id) {
+      const customerkWizardData = {
+        customer: {
+          dealerId: initCustomer.dealerId,
+          salesPersonId: initCustomer.salesPersonId,
+          customerTypeId: +values.customerTypeId,
+          paymentMethodId: +values.paymentMethodId,
+          customerSourceId: +values.customerSourceId,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          identityNo: values.identityNo,
+          email: values.email,
+          phone1: values.personalPhone,
+          phone2: values.workPhone,
+          advancePayment: parseFloat(values.advancePayment),
+        },
+        address : {
+          isPrimaryAddress:true,
+          name: values.addressName,
+          cityId: +values.cityId,
+          townId: +values.townId,
+          neighborhoodId: +values.neighborhoodId,
+          addressLine: values.addressLine,
+          relationGuid: values.guid
+        },
+        stocks: values.selectedStocks,
+      }
+      dispatch(actions.createCustomer(customerkWizardData))
+    }
     else 
       dispatch(actions.updateCustomer(values))//.then(() => );
     
@@ -190,7 +217,7 @@ export function CustomerEdit({
           )}
 
           {`  `}
-          {isLastPage || id && (
+          {isLastPage && (
 
             <button
               type="submit"
@@ -216,7 +243,7 @@ export function CustomerEdit({
         handleReset={handleReset}
         cities={cities}
         towns={towns}
-        currentGalleryId={currentUser.dealer?.id}
+        currentDealerId={currentUser.dealer?.id}
         neighborhoods={neighborhoods}
       />
       </CardBody>

@@ -79,16 +79,6 @@ export default function mockUser(mock) {
     return [200, filteredUsers];
   });
 
-  mock.onPost(/api\/users\/findByGallery\/\d+/).reply(config => {
-    const urls = config.url.split("/");
-    const id = urls[3];
-    const mockUtils = new MockUtils();
-    const { queryParams } = JSON.parse(config.data);
-    const galleryUsers= userTableMock.filter(el => el.galleryId === +id);
-    const filteredUsers = mockUtils.baseFilter(galleryUsers, queryParams);
-    return [200, filteredUsers];
-  });
-
   mock.onPost("users/deleteUsers").reply(config => {
     const { ids } = JSON.parse(config.data);
     ids.forEach(id => {

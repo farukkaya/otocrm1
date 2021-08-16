@@ -24,9 +24,7 @@ export function findCars(queryParams) {
 export function findCarsByDealer(queryParams, dealerId) {
   return axios.post(`${CARS_URL}findByDealer/${dealerId}`, { queryParams });
 }
-export function findCarsByGallery(queryParams, galleryId) {
-  return axios.post(`${CARS_URL}findByGallery/${galleryId}`, { queryParams });
-}
+
 
 // UPDATE => PUT: update the procuct on the server
 export function updateCar(car) {

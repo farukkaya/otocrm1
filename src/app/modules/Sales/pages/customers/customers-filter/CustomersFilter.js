@@ -19,11 +19,11 @@ export const prepareFilter = (queryParams, values) => {
    // Filter by paymentMethodId
    filter.paymentMethodId = paymentMethodId !== "" ? +paymentMethodId : undefined;
   // Filter by all fields
-  filter.lastname = searchText;
   if (searchText) {
-    filter.firstname = searchText;
-    filter.email = searchText;
-    filter.ipAddress = searchText;
+    filter.firstName = searchText;
+    filter.lastName = searchText;
+    filter.identityNo = searchText;
+    filter.salesPerson = searchText;
   }
   newQueryParams.filter = filter;
   return newQueryParams;
@@ -54,7 +54,6 @@ export function CustomersFilter({ listLoading }) {
       <Formik
         initialValues={{
           customerTypeId: "",
-          customerSourceId: "", 
           paymentMethodId: "", 
           searchText: "",
         }}

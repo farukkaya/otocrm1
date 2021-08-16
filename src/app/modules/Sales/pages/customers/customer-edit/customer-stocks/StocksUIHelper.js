@@ -16,49 +16,124 @@ export const sizePerPageList = [{
 }
 ];
 
-export const CarColors = [{ id: 1, name: "Beyaz" }, { id: 2, name: "Siyah" }, { id: 3, name: "Lacivert" }, { id: 4, name: "Kırmızı" }, { id: 5, name: "Sarı" }];
-export const FuelTypes = [{ id: 1, name: "Dizel" }, { id: 2, name: "Benzin" }, { id: 3, name: "Benzin&LPG" }, { id: 4, name: "Elektirik" }];
-export const GearTypes = [{ id: 1, name: "Manuel" }, { id: 2, name: "Otomatik" }, { id: 3, name: "Yarı Otomatik" }];
-export const CaseTypes = [{ id: 1, name: "Sedan" }, { id: 2, name: "Hackback" }];
+export const CarColors = [
+{ id: 1, name: "Bej" },
+{ id: 2, name: "Beyaz" },
+{ id: 3, name: "Bordo" },
+{ id: 4, name: "Füme" },
+{ id: 5, name: "Gri" },
+{ id: 6, name: "Gümüş Gri" },
+{ id: 7, name: "Kahverengi" },
+{ id: 8, name: "Kırmızı" },
+{ id: 9, name: "Lacivert" },
+{ id: 10, name: "Mavi" },
+{ id: 11, name: "Mor" },
+{ id: 12, name: "Pembe" },
+{ id: 13, name: "Sarı" },
+{ id: 14, name: "Siyah" },
+{ id: 15, name: "Şampanya" },
+{ id: 16, name: "Turkuaz" },
+{ id: 17, name: "Turuncu" },
+{ id: 18, name: "Yeşil" },
+{ id: 19, name: "Diğer" }
+];
+export const DocumentTypes = [{ id: 1, name: "Ruhsat" }, { id: 2, name: "Satış Sözleşmesi" }, { id: 3, name: "Expertiz" },{id:4, name:"Diğer"}];
+export const FuelTypes = [{ id: 1, name: "Benzin" }, { id: 2, name: "Benzin & LPG" }, { id: 3, name: "Dizel" }, { id: 4, name: "Hybrid" },{ id: 5, name: "Elektirik" }];
+export const GearTypes = [{ id: 1, name: "Manuel" }, { id: 2, name: "Yarı Otomatik" }, { id: 3, name: "Otomatik" }];
+export const CaseTypes = [
+{ id: 1, name: "Cabrio" },
+{ id: 2, name: "Coupe" },
+{ id: 3, name: "Hatchback 3 kapı" },
+{ id: 4, name: "Hatchback 5 kapı" },
+{ id: 5, name: "Sedan" },
+{ id: 6, name: "Station Wago" },
+{ id: 7, name: "Crossover" }]
 export const CarStatus = [{ id: 1, name: "Sıfır" }, { id: 2, name: "İkinci El" }];
-export const FromWhoTitles = [{ id: 1, name: "Müşteri" }, { id: 2, name: "Esnaf" }, { id: 3, name: "İhale" }];
-export const PurchaseTypes = [{ id: 1, name: "Kredi Kapama" }, { id: 2, name: "Takas" }, { id: 3, name: "Nakit" }];
-export const Years = [{ id: 1940, name: "1940" }, { id: 1941, name: "1941" }, { id: 1942, name: "1942" }, { id: 1943, name: "1943" }, { id: 1944, name: "1944" }, { id: 1945, name: "1945" }, { id: 1946, name: "1946" }, { id: 1947, name: "1947" }, { id: 1948, name: "1948" }, { id: 1949, name: "1949" }, { id: 1950, name: "1950" }, { id: 1951, name: "1951" }, { id: 1952, name: "1952" }, { id: 1953, name: "1953" }, { id: 1954, name: "1954" }, { id: 1955, name: "1955" }, { id: 1956, name: "1956" }, { id: 1957, name: "1957" }, { id: 1958, name: "1958" }, { id: 1959, name: "1959" }, { id: 1960, name: "1960" }, { id: 1961, name: "1961" }, { id: 1962, name: "1962" }, { id: 1963, name: "1963" }, { id: 1964, name: "1964" }, { id: 1965, name: "1965" }, { id: 1966, name: "1966" }, { id: 1967, name: "1967" }, { id: 1968, name: "1968" }, { id: 1969, name: "1969" }, { id: 1970, name: "1970" }, { id: 1971, name: "1971" }, { id: 1972, name: "1972" }, { id: 1973, name: "1973" }, { id: 1974, name: "1974" }, { id: 1975, name: "1975" }, { id: 1976, name: "1976" }, { id: 1977, name: "1977" }, { id: 1978, name: "1978" }, { id: 1979, name: "1979" }, { id: 1980, name: "1980" }, { id: 1981, name: "1981" }, { id: 1982, name: "1982" }, { id: 1983, name: "1983" }, { id: 1984, name: "1984" }, { id: 1985, name: "1985" }, { id: 1986, name: "1986" }, { id: 1987, name: "1987" }, { id: 1988, name: "1988" }, { id: 1989, name: "1989" }, { id: 1990, name: "1990" }, { id: 1991, name: "1991" }, { id: 1992, name: "1992" }, { id: 1993, name: "1993" }, { id: 1994, name: "1994" }, { id: 1995, name: "1995" }, { id: 1996, name: "1996" }, { id: 1997, name: "1997" }, { id: 1998, name: "1998" }, { id: 1999, name: "1999" }, { id: 2000, name: "2000" }, { id: 2001, name: "2001" }, { id: 2002, name: "2002" }, { id: 2003, name: "2003" }, { id: 2004, name: "2004" }, { id: 2005, name: "2005" }, { id: 2006, name: "2006" }, { id: 2007, name: "2007" }, { id: 2008, name: "2008" }, { id: 2009, name: "2009" }, { id: 2010, name: "2010" }, { id: 2011, name: "2011" }, { id: 2012, name: "2012" }, { id: 2013, name: "2013" }, { id: 2014, name: "2014" }, { id: 2015, name: "2015" }, { id: 2016, name: "2016" }, { id: 2017, name: "2017" }, { id: 2018, name: "2018" }, { id: 2019, name: "2019" }, { id: 2020, name: "2020" }].reverse();
-
+export const FromWhoTitles = [{ id: 1, name: "Sahibinden" }, { id: 2, name: "Galeriden" }, { id: 3, name: "Yetkili Bayiden" }];
+export const PurchaseTypes = [{ id: 1, name: "Kredi Kapama" }, { id: 2, name: "İhale" }, { id: 3, name: "Nakit" }];
+export const TractionUnit =[
+  { id: 1, name: "Önden Çekiş" },
+  { id: 2, name: "Arkadan İtiş" },
+  { id: 3, name: "4WD (Sürekli)" },
+  { id: 4, name: "AWD (Elektronik)" }
+]
+export const EngineCapacities = [
+  { id: 1, name: "1300 cm3' e kadar" },
+  { id: 2, name: "1301 - 1600 cm3" },
+  { id: 3, name: "1601 - 1800 cm3" },
+  { id: 4, name: "1801 - 2000 cm3" },
+  { id: 5, name: "2001 - 2500 cm3" },
+  { id: 6, name: "2501 - 3000 cm3" },
+  { id: 7, name: "3001 - 3500 cm3" },
+  { id: 8, name: "3501 - 4000 cm3" },
+  { id: 9, name: "4001 - 4500 cm3" },
+  { id: 10, name: "4501 - 5000 cm3" },
+  { id: 11, name: "5001 - 5500 cm3" },
+  { id: 12, name: "5501 - 6000 cm3" },
+  { id: 13, name: "6001 cm3 ve üzeri" }
+]
+export const EnginePowers = [
+ { id: 1, name: "50 HP'ye kadar" },
+ { id: 2, name: "51 - 75 HP" },
+ { id: 3, name: "76 - 100 HP" },
+ { id: 4, name: "101 - 125 HP" },
+ { id: 5, name: "126 - 150 HP" },
+ { id: 6, name: "151 - 175 HP" },
+ { id: 7, name: "176 - 200 HP" },
+ { id: 8, name: "201 - 225 HP" },
+ { id: 9, name: "226 - 250 HP" },
+ { id: 10, name: "251 - 275 HP" },
+ { id: 11, name: "276 - 300 HP" },
+ { id: 12, name: "301 - 325 HP" },
+ { id: 13, name: "326 - 350 HP" },
+ { id: 14, name: "351 - 375 HP" },
+ { id: 15, name: "376 - 400 HP" },
+ { id: 16, name: "401 - 425 HP" },
+ { id: 17, name: "426 - 450 HP" },
+ { id: 18, name: "451 - 475 HP" },
+ { id: 19, name: "476 - 500 HP" },
+ { id: 20, name: "501 - 525 HP" },
+ { id: 21, name: "526 - 550 HP" },
+ { id: 22, name: "551 - 575 HP" },
+ { id: 23, name: "576 - 600 HP" },
+ { id: 24, name: "601 HP ve üzeri" }
+]
+export const ExpertiseTableItems = [
+  { id: 1,name:"rightBackFender" ,title: "Sağ arka çamurluk" },
+  { id: 2,name:"backHood" , title: "Arka kaput" },
+  { id: 3,name:"leftBackFender" , title: "Sol arka çamurluk" },
+  { id: 4,name:"rightBackDoor" , title: "Sağ arka kapı" },
+  { id: 5,name:"rightFrontDoor" , title: "Sağ ön kapı" },
+  { id: 6,name:"ceiling" , title: "Tavan" },
+  { id: 7,name:"leftBackDoor" , title: "Sol arka kapı" },
+  { id: 8,name:"leftFrontDoor" , title: "Sol ön kapı" },
+  { id: 9,name:"rightFrontFender" , title: "Sağ ön çamurluk" },
+  { id: 10,name:"engineHood" , title: "Motor kaputu" },
+  { id: 11,name:"leftFrontFender" , title: "Sol ön çamurluk" },
+  { id: 12,name:"frontBumper" , title: "Ön tampon" },
+  { id: 13,name:"backBumper" , title: "Arka tampon" }
+]
+export const TramerTypes = [
+  { id: 1, name: "Var" },
+  { id: 2, name: "Yok" },
+  { id: 3, name: "Bilmiyorum" },
+  { id: 4, name: "Ağır Hasar Kayıtlı" }
+]
+export const DamageTypes = [
+  { id: 1, name: "-" },
+  { id: 2, name: "Çarpma" },
+  { id: 3, name: "ERP-Çarpma" },
+  { id: 4, name: "KTT-Çarpma" },
+  { id: 5, name: "Çarpışma" },
+  { id: 6, name: "ERP-Çarpışma" },
+  { id: 7, name: "KTT-Çarpışma" },
+  { id: 8, name: "Park Halinde Çarpma" },
+  { id: 9, name: "ERP-Park Halinde Çarpma" },
+  { id: 10,name: "KTT-Park Halinde Çarpma" },
+]
 export const initialFilter = {
   filter: {
-      vinNo: "",
-      engineNo: "",
-      categoryId: 0,// kategoriler
-      brandId: 0,//markalar
-      modelId: 0,//modeller
-      year: "",
-      plateNo: "",
-      colorId: 0,//renkler
-      fuelTypeId: 0,//Yakıt Tipleri
-      kilometer: 0,
-      gearTypeId: 0,//Vites tipleri
-      caseTypeId: 0,// kasa tipleri
-      enginePowerId: 0,//motor gücü
-      engineCapacityId: 0,//motor hacmi
-      swap: false,
-      buyingPrice: 0,
-      sellingPrice: 0,
-      cashSellingPrice: 0,
-      fromWhoId: 0,//kimden (Müşteri,Esnaf,İhale)
-      purchaseTypeId: 0,//Alım Türü(Kredi Kapama,Takas,Nakit)
-      insuranceCode: 0,//Kasko Kodu
-      insuranceValue: 0,// Kasko değeri
-      description: "",
-      brand: "",
-      model: "",
-      color: "",
-      fuelType: "",
-      gearType: "",
-      caseType: "",
-      status: "",
-      fromWho: "",
-      source: "",
+      isActive:"true"
   },
   sortOrder: "asc",
   sortField: "id",

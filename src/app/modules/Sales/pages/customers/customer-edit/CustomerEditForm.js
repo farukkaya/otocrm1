@@ -2,7 +2,7 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React from "react";
+import React,{useState} from "react";
 import { StocksUIProvider } from "./customer-stocks/StocksUIContext";
 import { Stocks } from "./customer-stocks/Stocks";
 
@@ -30,11 +30,11 @@ import { StocksFetchDialog } from "./customer-stocks/StocksFetchDialog";
 const CustomerSchema = {
 
 
-  firstname: Yup.string()
+  firstName: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
     .max(50, format(MAX_LENGTH, "50"))
     .required(format(REQUIRED, "Müşteri Adı")),
-  lastname: Yup.string()
+  lastName: Yup.string()
     .when("customerTypeId", (customerTypeId, schema) => {
       if (customerTypeId == 1) {
         return schema
@@ -106,14 +106,16 @@ export function CustomerEditForm({
   btnNext,
   saveCustomer,
   handleReset,
-  currentGalleryId,
+  currentDealerId,
   cities, towns, neighborhoods,
 }) {
   const dispatch = useDispatch();
+  const [selectedStocks, setSelectedStocks] = useState(customer.selectedStocks)
 
   return (
     customer.id == undefined ? (
-      <StocksUIProvider currentGalleryId={currentGalleryId}>
+      <StocksUIProvider currentDealerId={currentDealerId}>
+       
         <Wizard
           initialValues={customer}
           arrayProgress={arrayProgress}
@@ -206,7 +208,7 @@ export function CustomerEditForm({
                     </div>
                     <div className={`${props.values.customerTypeId == 1 ? "col-lg-4" : "col-lg-6"}`}>
                       <Field
-                        name="firstname"
+                        name="firstName"
                         component={Input}
                         placeholder="Müşteri Adı"
                         label="Müşteri Adı"
@@ -214,7 +216,7 @@ export function CustomerEditForm({
                     </div>
                     {props.values.customerTypeId == 1 && (<div className="col-lg-4">
                       <Field
-                        name="lastname"
+                        name="lastName"
                         component={Input}
                         placeholder="Müşteri Soyadı"
                         label="Müşteri Soyadı"
@@ -347,8 +349,6 @@ export function CustomerEditForm({
               return (
                 <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
                   <h4 className="mb-10 font-weight-bold text-dark">{arrayProgress.find(q => q.id === 4).description}</h4>
-
-
                   <Stocks />
                 </div>
               );
@@ -358,7 +358,7 @@ export function CustomerEditForm({
             {props => {
               console.log(props, "this props 5");
               const data = props.values;
-              
+              data.selectedStocks=selectedStocks;
               return (
                 <div className="pb-5" data-wizard-type="step-content" data-wizard-state="current"/*{activeStep === 1 ? "current" : ""}*/>
 
@@ -370,7 +370,7 @@ export function CustomerEditForm({
                       <div className="text-dark-50 line-height-lg">
                         <div><span><b>Müşteri Tipi:</b></span> {CUSTOMERTYPELIST.find(q => q.id == data.customerTypeId).name}</div>
 
-                        <div><span><b>Müşteri Adı:</b></span> {data.firstname} {data.lastname}</div>
+                        <div><span><b>Müşteri Adı:</b></span> {data.firstName} {data.lastName}</div>
 
 
                         <div><span><b>Tc\Vergi No:</b></span> {data.identityNo}</div>
@@ -402,7 +402,7 @@ export function CustomerEditForm({
                   {/*begin::Müşterinin İlgilendiği Araçlar*/}
                   <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id == 4).title}:</h6>
                   <div className="text-dark-50 line-height-lg">
-                    <StocksFetchDialog />
+                    <StocksFetchDialog setSelectedStocks={setSelectedStocks} />
                   </div>
                   {/*begin::Müşterinin İlgilendiği Araçlar*/}
 
@@ -434,7 +434,7 @@ export function CustomerEditForm({
                 </div>
                 <div className={`${customer.customerTypeId == 1 ? "col-lg-4" : "col-lg-6"}`}>
                   <Field
-                    name="firstname"
+                    name="firstName"
                     component={Input}
                     placeholder="Müşteri Adı"
                     label="Müşteri Adı"
@@ -443,7 +443,7 @@ export function CustomerEditForm({
                 {customer.customerTypeId == 1 ?
                   <div className="col-lg-4">
                     <Field
-                      name="lastname"
+                      name="lastName"
                       component={Input}
                       placeholder="Müşteri Soyadı"
                       label="Müşteri Soyadı"

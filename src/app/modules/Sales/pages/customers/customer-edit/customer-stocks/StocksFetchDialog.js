@@ -15,7 +15,7 @@ const selectedStocks = (entities, ids) => {
   return _stocks;
 };
 
-export function StocksFetchDialog() {
+export function StocksFetchDialog({setSelectedStocks}) {
   // Stocks UI Context
   const stocksUIContext = useStocksUIContext();
   const stocksUIProps = useMemo(() => {
@@ -26,13 +26,13 @@ export function StocksFetchDialog() {
       closeFetchStocksDialog: stocksUIContext.closeFetchStocksDialog,
     };
   }, [stocksUIContext]);
-
   const { stocks } = useSelector(
     (state) => ({
       stocks: selectedStocks(state.stocks.entities, stocksUIProps.ids),
     }),
     shallowEqual
   );
+  setSelectedStocks(stocksUIProps.ids);
 
   useEffect(() => {
     if (!stocksUIProps.ids || stocksUIProps.ids.length === 0) {

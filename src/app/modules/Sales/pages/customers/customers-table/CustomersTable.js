@@ -39,8 +39,11 @@ export function CustomersTable() {
   }, [customersUIContext]);
 
   // Getting curret state of customers list from store (Redux)
-  const { currentState } = useSelector(
-    (state) => ({ currentState: state.customers }),
+  const { currentState,currentUser } = useSelector(
+    (state) => ({
+       currentState: state.customers,
+       currentUser: state.auth.user
+    }),
     shallowEqual
   );
   const { totalCount, entities, listLoading } = currentState;
@@ -51,6 +54,9 @@ export function CustomersTable() {
     // clear selections list
     customersUIProps.setIds([]);
     // server call by queryParams
+
+    customersUIProps.queryParams.filter.dealerId=currentUser.dealerId.toString();
+    customersUIProps.queryParams.filter.salesPersonId=currentUser.id.toString();
     dispatch(actions.fetchCustomers(customersUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customersUIProps.queryParams, dispatch]);
@@ -58,7 +64,7 @@ export function CustomersTable() {
   const columns = [
     {
       dataField: "id",
-      text: "ID",
+      text: "Id",
       sort: true,
       sortCaret: sortCaret,
       headerSortingClasses,
@@ -107,7 +113,7 @@ export function CustomersTable() {
     },
     {
       dataField: "customerSourceId",
-      text: "Müşteri Alım Türü",
+      text: "Alım Türü",
       sort: true,
       sortCaret: sortCaret,
       formatter: columnFormatters.CustomerSourceColumnFormatter,

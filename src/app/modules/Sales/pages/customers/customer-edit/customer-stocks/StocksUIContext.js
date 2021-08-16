@@ -11,8 +11,8 @@ export function useStocksUIContext() {
 
 export const StocksUIConsumer = StocksUIContext.Consumer;
 
-export function StocksUIProvider({ currentGalleryId, children }) {
-  const [galleryId, setGalleryId] = useState(currentGalleryId);
+export function StocksUIProvider({ currentDealerId, children }) {
+  const [dealerId, setDealerId] = useState(currentDealerId);
   const [queryParams, setQueryParamsBase] = useState(initialFilter);
   const [ids, setIds] = useState([]);
   const setQueryParams = useCallback(nextQueryParams => {
@@ -31,9 +31,9 @@ export function StocksUIProvider({ currentGalleryId, children }) {
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(()=> {
-    setGalleryId(currentGalleryId);
+    setDealerId(currentDealerId);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentGalleryId]);
+  }, [currentDealerId]);
 
 
 
@@ -49,8 +49,8 @@ export function StocksUIProvider({ currentGalleryId, children }) {
   const value = {
     ids,
     setIds,
-   galleryId,
-   setGalleryId,
+   dealerId,
+   setDealerId,
     queryParams,
     setQueryParams,
     selectedId,

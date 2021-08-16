@@ -24,27 +24,7 @@ export const fetchStocksByDealer = (queryParams, dealerId) => dispatch => {
     });
 };
 
-export const fetchStocksByGallery = (queryParams, galleryId) => dispatch => {
-  
-  
-  dispatch(actions.startCall({ callType: callTypes.list }));
-  if (!galleryId) {
-    return dispatch(actions.stocksFetched({ totalCount: 0, entities: [] }));
-  }
 
-  return requestFromServer
-    .findStocksByGallery(queryParams, galleryId)
-    .then(response => {
-      
-  
-      const { totalCount, entities } = response.data;
-      dispatch(actions.stocksFetched({ totalCount, entities }));
-    })
-    .catch(error => {
-      error.clientMessage = "Can't find remarks";
-      dispatch(actions.catchError({ error, callType: callTypes.list }));
-    });
-};
 
 export const fetchStocks = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));

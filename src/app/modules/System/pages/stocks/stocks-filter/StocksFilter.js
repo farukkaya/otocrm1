@@ -40,9 +40,6 @@ export const prepareFilter = (queryParams, values) => {
     filter.sellingPrice= searchText;
   }
   filter.isActive=isActive;
-  // ==="1" ? true
-  // : isActive==="0" ? false
-  // : undefined;
   newQueryParams.filter = filter;
   return newQueryParams;
 };

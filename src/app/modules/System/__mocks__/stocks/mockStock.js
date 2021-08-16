@@ -102,16 +102,6 @@ export default function mockStock(mock) {
     return [200, filteredStocks];
   });
 
-  mock.onPost(/api\/stocks\/findByGallery\/\d+/).reply(config => {
-    const urls = config.url.split("/");
-    const id = urls[3];
-    const mockUtils = new MockUtils();
-    const { queryParams } = JSON.parse(config.data);
-    const galleryStocks = stockTableMock.filter(el => el.galleryId === +id);
-    
-    const filteredStocks = mockUtils.baseFilter(galleryStocks, queryParams);
-    return [200, filteredStocks];
-  });
 
   mock.onPost("stocks/deleteStocks").reply(config => {
     const { ids } = JSON.parse(config.data);

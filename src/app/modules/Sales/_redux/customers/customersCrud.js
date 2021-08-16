@@ -1,46 +1,28 @@
 import axios from "axios";
 
-export const CUSTOMERS_URL = "customers";
+export const CUSTOMERS_URL = "Customers";
 
-// CREATE =>  POST: add a new customer to the server
-export function createCustomer(customer) {
-  return axios.post(CUSTOMERS_URL, { customer });
-}
 
-// READ
-export function getAllCustomers() {
-  return axios.get(CUSTOMERS_URL);
-}
+export const createCustomer=customerWizardDto=>axios.post(`${CUSTOMERS_URL}/Insert`, customerWizardDto).then(resp=>resp).catch(
+  function (error) {
+    console.log('Show error notification!')
+    return Promise.reject(error)
+  }
+);
 
-export function getCustomerById(customerId) {
-  return axios.get(`${CUSTOMERS_URL}/${customerId}`);
-}
+export const getAllCustomers=()=>axios.get(CUSTOMERS_URL+"/GetAll");
 
-// Method from server should return QueryResultsModel(items: any[], totalsCount: number)
-// items => filtered/sorted result
-export function findCustomers(queryParams) {
-  return axios.post(`${CUSTOMERS_URL}/find`, { queryParams });
-}
+export const getCustomerById=(customerId) =>axios.get(`${CUSTOMERS_URL}/GetById?id=${customerId}`);
 
-// UPDATE => PUT: update the customer on the server
-export function updateCustomer(customer) {
-  return axios.put(`${CUSTOMERS_URL}/${customer.id}`, { customer });
-}
+export const findCustomers=queryParams=> axios.post(`${CUSTOMERS_URL}/Find`, queryParams);
 
-// UPDATE Status
-export function updateStatusForCustomers(ids, status) {
-  return axios.post(`${CUSTOMERS_URL}/updateStatusForCustomers`, {
-    ids,
-    status
-  });
-}
+export const updateCustomer=customer=>axios.put(`${CUSTOMERS_URL}/Update`, customer);
 
-// DELETE => delete the customer from the server
-export function deleteCustomer(customerId) {
-  return axios.delete(`${CUSTOMERS_URL}/${customerId}`);
-}
+export const updateStatusForCustomers=(ids, status) =>axios.post(`${CUSTOMERS_URL}/updateStatusForCustomers`, {
+  ids,
+  status
+});
 
-// DELETE Customers by ids
-export function deleteCustomers(ids) {
-  return axios.post(`${CUSTOMERS_URL}/deleteCustomers`, { ids });
-}
+export const deleteCustomer=customerId=> axios.delete(`${CUSTOMERS_URL}/Delete?id=${customerId}`);
+
+export const deleteCustomers=ids=> axios.post(`${CUSTOMERS_URL}/SelectedDelete`, ids);

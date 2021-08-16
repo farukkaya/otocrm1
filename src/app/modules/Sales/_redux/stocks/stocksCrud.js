@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const STOCKS_URL = "stocks";
+export const STOCKS_URL = "Stocks";
 
 // CREATE =>  POST: add a new stock to the server
 export function createStock(stock) {
@@ -20,15 +20,12 @@ export function getStockById(stockId) {
 // items => filtered/sorted result
 export function findStocks(queryParams) {
   
-  return axios.post(`${STOCKS_URL}/find`, { queryParams });
+  return axios.post(`${STOCKS_URL}/Find`, { queryParams });
 }
 export function findStocksByDealer(queryParams, dealerId) {
-  return axios.post(`${STOCKS_URL}/findByDealer/${dealerId}`, { queryParams });
+  return axios.post(`${STOCKS_URL}/FindByDealer?dealerId=${dealerId}`,  queryParams);
 }
-export function findStocksByGallery(queryParams, galleryId) {
-  
-  return axios.post(`${STOCKS_URL}/findByGallery/${galleryId}`, { queryParams });
-}
+
 
 // UPDATE => PUT: update the procuct on the server
 export function updateStock(stock) {

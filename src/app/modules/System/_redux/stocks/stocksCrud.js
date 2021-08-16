@@ -13,7 +13,13 @@ export function createStock(stockWizardDto) {
 }
 //API=>OK
 export function findStocks(queryParams) {
-  return axios.post(`${STOCKS_URL}/Find`, queryParams);
+  return axios.post(`${STOCKS_URL}/Find`, queryParams).then(resp=>console.log(resp)).catch(
+    function (error) {
+      debugger
+      console.log('Show error notification!')
+      return Promise.reject(error)
+    }
+    )
 }
 export const getStockById=(stockId) =>axios.get(`${STOCKS_URL}/GetById?id=${stockId}`);
 
@@ -31,10 +37,7 @@ export function getStockInsuranceValue(year,brandCode,typeCode) {
 
 
 export function findStocksByDealer(queryParams, dealerId) {
-  return axios.post(`${STOCKS_URL}/findByDealer/${dealerId}`, { queryParams });
-}
-export function findStocksByGallery(queryParams, galleryId) {
-  return axios.post(`${STOCKS_URL}findByGallery/${galleryId}`, { queryParams });
+  return axios.post(`${STOCKS_URL}/FindByDealer/${dealerId}`, { queryParams });
 }
 
 // UPDATE => PUT: update the procuct on the server
