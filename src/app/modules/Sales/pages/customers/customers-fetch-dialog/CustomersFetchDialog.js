@@ -1,10 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useSelector } from "react-redux";
-import {
-  CustomerStatusCssClasses,
-  CustomerStatusTitles,
-} from "../CustomersUIHelpers";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
 const selectedCustomers = (entities, ids) => {
@@ -54,16 +50,16 @@ export function CustomersFetchDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Fetch selected elements
+          Seçilen Müşteriler
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <table className="table table table-head-custom table-vertical-center overflow-hidden">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>STATUS</th>
-              <th>CUSTOMER</th>
+              <th>Id</th>
+              <th>Kimlik/VergiNo</th>
+              <th>Müşteri</th>
             </tr>
           </thead>
           <tbody>
@@ -71,21 +67,10 @@ export function CustomersFetchDialog({ show, onHide }) {
               <tr key={`id${customer.id}`}>
                 <td>{customer.id}</td>
                 <td>
-                  <span
-                    className={`label label-lg label-light-${
-                      CustomerStatusCssClasses[customer.status]
-                    } label-inline`}
-                  >
-                    {" "}
-                    {CustomerStatusTitles[customer.status]}
-                  </span>
+                {customer.identityNo}
                 </td>
                 <td>
-                  <span className="ml-3">
-
-                    {customer.lastname}, {customer.firstname}
-
-                  </span>
+                {customer.lastName} {customer.firstName}  
                 </td>
               </tr>
             ))}
@@ -97,17 +82,9 @@ export function CustomersFetchDialog({ show, onHide }) {
           <button
             type="button"
             onClick={onHide}
-            className="btn btn-light btn-elevate"
-          >
-            Cancel
-          </button>
-          <> </>
-          <button
-            type="button"
-            onClick={onHide}
             className="btn btn-primary btn-elevate"
           >
-            Ok
+            Kapat
           </button>
         </div>
       </Modal.Footer>

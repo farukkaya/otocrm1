@@ -119,7 +119,14 @@ export function CustomersTable() {
       formatter: columnFormatters.CustomerSourceColumnFormatter,
     },
     {
-      dataField: "workPhone",
+      dataField: "phone1",
+      text: "Kişisel Telefonu",
+      sort: true,
+      sortCaret: sortCaret,
+      headerSortingClasses,
+    },
+    {
+      dataField: "phone2",
       text: "İş Telefonu",
       sort: true,
       sortCaret: sortCaret,

@@ -22,10 +22,9 @@ export function findStocks(queryParams) {
   
   return axios.post(`${STOCKS_URL}/Find`, { queryParams });
 }
-export function findStocksByDealer(queryParams, dealerId) {
-  return axios.post(`${STOCKS_URL}/FindByDealer?dealerId=${dealerId}`,  queryParams);
-}
+export const findStocksByDealer=(queryParams, dealerId) =>axios.post(`${STOCKS_URL}/FindByDealer?dealerId=${dealerId}`,  queryParams);
 
+export const findInterestedStocks=(queryParams, customerId) =>axios.post(`${STOCKS_URL}/FindInterestedStocks?customerId=${customerId}`,  queryParams);
 
 // UPDATE => PUT: update the procuct on the server
 export function updateStock(stock) {
@@ -49,3 +48,4 @@ export function deleteStock(stockId) {
 export function deleteStocks(ids) {
   return axios.post(`${STOCKS_URL}/deleteStocks`, { ids });
 }
+export const deleteInterestedStocks=(customerId, ids) =>axios.post(`${STOCKS_URL}/DeleteInterestedStocks?customerId=${customerId}`,  ids);

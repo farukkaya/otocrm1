@@ -11,19 +11,8 @@ export function createStock(stockWizardDto) {
     }
   );
 }
-//API=>OK
-export function findStocks(queryParams) {
-  return axios.post(`${STOCKS_URL}/Find`, queryParams).then(resp=>console.log(resp)).catch(
-    function (error) {
-      debugger
-      console.log('Show error notification!')
-      return Promise.reject(error)
-    }
-    )
-}
-export const getStockById=(stockId) =>axios.get(`${STOCKS_URL}/GetById?id=${stockId}`);
-
-
+export const findStocks= queryParams => axios.post(`${STOCKS_URL}/Find`, queryParams);
+export const getStockById= stockId => axios.get(`${STOCKS_URL}/GetById?id=${stockId}`);
 
 // READ
 export function getAllStocks() {

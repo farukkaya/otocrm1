@@ -146,6 +146,7 @@ export function DealerEdit({
           }
         } 
         dispatch(actions.createDealer(dealerWizardDto)).then((resp) => {
+          //Burde Hata Alırsan actions response kısmını incele
           backToDealersList()
         })
        
@@ -259,7 +260,18 @@ export function DealerEdit({
           )}
 
           {`  `}
-          {isLastPage || id && (
+          {id && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-primary ml-2"
+              onClick={saveDealerClick}
+            >
+              Kaydet
+            </button>
+          )}
+          {isLastPage  && (
 
             <button
               type="submit"

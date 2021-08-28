@@ -2,7 +2,6 @@ import {all} from "redux-saga/effects";
 import {combineReducers} from "redux";
 
 import * as auth from "../app/modules/Auth/_redux/authRedux";
-import {customersSlice} from "../app/modules/ECommerce/_redux/customers/customersSlice";
 import {productsSlice} from "../app/modules/ECommerce/_redux/products/productsSlice";
 import {remarksSlice} from "../app/modules/ECommerce/_redux/remarks/remarksSlice";
 import {specificationsSlice} from "../app/modules/ECommerce/_redux/specifications/specificationsSlice";
@@ -19,6 +18,9 @@ import { stockExpertisesSlice } from "../app/modules/System/_redux/stockExpertis
 import { damagesSlice } from "../app/modules/System/_redux/damages/damagesSlice";
 import { documentsSlice } from "../app/modules/System/_redux/documents/documentsSlice";
 import { claimsSlice } from "../app/modules/System/_redux/claims/claimsSlice";
+
+
+import {customersSlice} from "../app/modules/Sales/_redux/customers/customersSlice";
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,

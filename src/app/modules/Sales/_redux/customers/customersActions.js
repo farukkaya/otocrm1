@@ -53,8 +53,9 @@ export const createCustomer = customerForCreation => dispatch => {
   return requestFromServer
     .createCustomer(customerForCreation)
     .then(response => {
-      const { customer } = response.data;
-      dispatch(actions.customerCreated({ customer }));
+      const { entities } = response.data||response;
+      dispatch(actions.customerCreated({ entities }));
+      return entities;
     })
     .catch(error => {
       error.clientMessage = "Can't create customer";

@@ -35,14 +35,10 @@ export function CustomersDeleteDialog({ show, onHide }) {
   useEffect(() => {}, [isLoading, dispatch]);
 
   const deleteCustomers = () => {
-    // server request for deleting customer by selected ids
     dispatch(actions.deleteCustomers(customersUIProps.ids)).then(() => {
-      // refresh list after deletion
       dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
         () => {
-          // clear selections list
           customersUIProps.setIds([]);
-          // closing delete modal
           onHide();
         }
       );
@@ -65,9 +61,9 @@ export function CustomersDeleteDialog({ show, onHide }) {
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete selected customers?</span>
+          <span>Seçili Müşterileri silmek istediğinize emin misiniz ?</span>
         )}
-        {isLoading && <span>Customer are deleting...</span>}
+        {isLoading && <span>Müşteriler Siliniyor...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -76,7 +72,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
             onClick={onHide}
             className="btn btn-light btn-elevate"
           >
-            Cancel
+            Vazgeç
           </button>
           <> </>
           <button
@@ -84,7 +80,7 @@ export function CustomersDeleteDialog({ show, onHide }) {
             onClick={deleteCustomers}
             className="btn btn-primary btn-elevate"
           >
-            Delete
+            Sil
           </button>
         </div>
       </Modal.Footer>

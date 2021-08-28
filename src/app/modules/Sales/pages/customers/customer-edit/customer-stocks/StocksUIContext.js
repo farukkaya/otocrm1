@@ -11,8 +11,9 @@ export function useStocksUIContext() {
 
 export const StocksUIConsumer = StocksUIContext.Consumer;
 
-export function StocksUIProvider({ currentDealerId, children }) {
+export function StocksUIProvider({ currentDealerId,currentCustomerId,openDetailStockPage, children }) {
   const [dealerId, setDealerId] = useState(currentDealerId);
+  const [customerId, setCustomerId] = useState(currentCustomerId);
   const [queryParams, setQueryParamsBase] = useState(initialFilter);
   const [ids, setIds] = useState([]);
   const setQueryParams = useCallback(nextQueryParams => {
@@ -39,27 +40,63 @@ export function StocksUIProvider({ currentDealerId, children }) {
 
 
   const [showFetchStocksDialog, setShowFetchStocksDialog] = useState(false);
+
+  const [showSelectStockDialog, setShowSelectStockDialog] = useState(false);
   const openFetchStocksDialog = () => {
     setShowFetchStocksDialog(true);
   };
   const closeFetchStocksDialog = () => {
     setShowFetchStocksDialog(false);
   };
+  const openSelectNewStockDialog = () => {
+    setSelectedId(undefined);
+    setShowSelectStockDialog(true);
+  };
 
+  const [showDeleteStocksDialog, setShowDeleteStocksDialog] = useState(false);
+  const openDeleteStocksDialog = () => {
+    setShowDeleteStocksDialog(true);
+  };
+  const closeDeleteStocksDialog = () => {
+    setShowDeleteStocksDialog(false);
+  };
+
+  const [showDeleteStockDialog, setShowDeleteStockDialog] = useState(false);
+  const openDeleteStockDialog = id => {
+    setSelectedId(id);
+    setShowDeleteStockDialog(true);
+  };
+  const closeDeleteStockDialog = () => {
+    setSelectedId(undefined);
+    setShowDeleteStockDialog(false);
+  };
+  
   const value = {
     ids,
     setIds,
    dealerId,
    setDealerId,
+   customerId,
+   setCustomerId,
     queryParams,
     setQueryParams,
     selectedId,
+    openDetailStockPage,
+    showDeleteStockDialog,
+    openDeleteStockDialog,
+    closeDeleteStockDialog,
+
+    showDeleteStocksDialog,
+    openDeleteStocksDialog,
+    closeDeleteStocksDialog,
     
+    showSelectStockDialog,
+    openSelectNewStockDialog,
+
     openFetchStocksDialog,
     closeFetchStocksDialog,
     showFetchStocksDialog
   };
-  
   return (
     <StocksUIContext.Provider value={value}>
       {children}

@@ -13,6 +13,12 @@ import * as actions from "../../../_redux/customers/customersActions";
 import { CustomerEditForm } from "./CustomerEditForm";
 import { format } from 'react-string-format';
 import { v4 as generateGuid } from 'uuid';
+import { DocumentsUIProvider } from "../../../../System/pages/stocks/stock-documents/DocumentsUIContext";
+import { Documents } from "../../../../System/pages/stocks/stock-documents/Documents";
+import { AddressesUIProvider } from "../../../../System/pages/dealers/dealer-addresses/AddressesUIContext";
+import { Addresses } from "../../../../System/pages/dealers/dealer-addresses/Addresses";
+import { StocksUIProvider } from "./customer-stocks/StocksUIContext";
+import { Stocks } from "./customer-stocks/Stocks";
 
 export function CustomerEdit({
   history,
@@ -20,7 +26,10 @@ export function CustomerEdit({
     params: { id },
   },
 }) {
- 
+  const openDetailStockPage= (id) => {
+    window.open(`/system/stocks/${id}/detail`, "_blank")
+    //history.push(`/system/stocks/${id}/detail`);
+  };
   // Customers UI Context
   // Subheader
   const suhbeader = useSubheader();
@@ -33,7 +42,7 @@ export function CustomerEdit({
   const dispatch = useDispatch();
   // const layoutDispatch = useContext(LayoutContext.Dispatch);
 
-  const { actionsLoading, customerForEdit,currentUser,cities, towns, neighborhoods } = useSelector(
+  const { actionsLoading, customerForEdit, currentUser, cities, towns, neighborhoods } = useSelector(
     (state) => ({
       currentUser: state.auth.user,
       actionsLoading: state.customers.actionsLoading,
@@ -45,22 +54,22 @@ export function CustomerEdit({
     shallowEqual
   );
 
-  const initCustomer={
+  const initCustomer = {
     dealerId: currentUser.dealerId,
     salesPersonId: currentUser.id,
 
     guid: generateGuid(),
-    firstName : "",
-    lastName : "",
-    phone1 : "",
-    phone2 : "",
-    identityNo : "",
-    email:"",
+    firstName: "",
+    lastName: "",
+    phone1: "",
+    phone2: "",
+    identityNo: "",
+    email: "",
     advancePayment: "",
-    customerTypeId : "",
-    customerSourceId:"",
+    customerTypeId: "",
+    customerSourceId: "",
     paymentMethodId: "",
-    selectedStocks:[]
+    selectedStocks: []
   }
   // const getTowns = (e) => {
   //   dispatch(townsActions.fetchTownsByCity(e.target.value))
@@ -99,12 +108,12 @@ export function CustomerEdit({
           lastName: values.lastName,
           identityNo: values.identityNo,
           email: values.email,
-          phone1: values.personalPhone,
-          phone2: values.workPhone,
+          phone1: values.phone1,
+          phone2: values.phone2,
           advancePayment: parseFloat(values.advancePayment),
         },
-        address : {
-          isPrimaryAddress:true,
+        address: {
+          isPrimaryAddress: true,
           name: values.addressName,
           cityId: +values.cityId,
           townId: +values.townId,
@@ -114,12 +123,15 @@ export function CustomerEdit({
         },
         stocks: values.selectedStocks,
       }
-      dispatch(actions.createCustomer(customerkWizardData))
+      dispatch(actions.createCustomer(customerkWizardData)).then((resp) => {
+        backToCustomersList()
+      })
     }
-    else 
+    else{
       dispatch(actions.updateCustomer(values))//.then(() => );
-    
-    backToCustomersList()
+      backToCustomersList()
+    }
+
   };
 
   const handleReset = (values) => {
@@ -135,10 +147,9 @@ export function CustomerEdit({
   const btnNext = useRef();
 
   const handleResetClick = () => {
-    if (btnReset && btnReset.current)
-    {
+    if (btnReset && btnReset.current) {
       btnReset.current.click();
-      
+
       //AMAÇ: Eğer bu blok olmazsa reset fonksiyonu WizardPage'i başa alıyor ama componentleri temizlemiyor ikinci reset click'e ihtiyac duyuyoruz
       setTimeout(() => {
         btnReset.current.click();
@@ -152,19 +163,19 @@ export function CustomerEdit({
     }
   };
   const previousClick = () => {
-    if (btnPrevious && btnPrevious.current){
-      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
-      setIsFirtPage(nextPageOrder===0)
-      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
-        btnPrevious.current.click();
+    if (btnPrevious && btnPrevious.current) {
+      const nextPageOrder = parseInt(btnNext.current.dataset.page) + 1;
+      setIsFirtPage(nextPageOrder === 0)
+      setIsLastPage(btnNext.current.dataset.pagecount - 1 == nextPageOrder)
+      btnPrevious.current.click();
     }
-    
+
   };
   const nextClick = () => {
-    if (btnNext && btnNext.current){
-      const nextPageOrder=parseInt(btnNext.current.dataset.page)+1;
-      setIsFirtPage(nextPageOrder===0)
-      setIsLastPage(btnNext.current.dataset.pagecount-1==nextPageOrder)
+    if (btnNext && btnNext.current) {
+      const nextPageOrder = parseInt(btnNext.current.dataset.page) + 1;
+      setIsFirtPage(nextPageOrder === 0)
+      setIsLastPage(btnNext.current.dataset.pagecount - 1 == nextPageOrder)
       btnNext.current.click();
     }
   };
@@ -172,27 +183,26 @@ export function CustomerEdit({
     history.push(`/sales/customers`);
   };
 
-
   return (
     <Card>
-    {actionsLoading && <ModalProgressBar />}
-    <CardHeader title={title}>
-      <CardHeaderToolbar>
-        <button
-          type="button"
-          onClick={backToCustomersList}
-          className="btn btn-light"
-        >
-         <i className="fa fa-arrow-left"></i> Listeye Dön
-        </button>
-        {`  `}
-        <button
-          className="btn btn-light ml-2"
-          onClick={handleResetClick}
-        >
-          <i className="fa fa-redo"></i> Reset
-         </button>
-         {`  `}
+      {actionsLoading && <ModalProgressBar />}
+      <CardHeader title={title}>
+        <CardHeaderToolbar>
+          <button
+            type="button"
+            onClick={backToCustomersList}
+            className="btn btn-light"
+          >
+            <i className="fa fa-arrow-left"></i> Listeye Dön
+          </button>
+          {`  `}
+          <button
+            className="btn btn-light ml-2"
+            onClick={handleResetClick}
+          >
+            <i className="fa fa-redo"></i> Reset
+          </button>
+          {`  `}
           {!isFirstPage && (
             <button
               type="submit"
@@ -203,21 +213,18 @@ export function CustomerEdit({
               <i className="fa fa-arrow-left"></i> Geri
             </button>)}
 
-          {`  `}
-          {!isLastPage && !id && (
+            {id && (
 
-            <button
-              type="submit"
-              data-wizard-type="action-submit"
-              className="btn btn-outline-primary ml-2"
-              onClick={nextClick}
-            >
-              İleri <i className="fa fa-arrow-right"></i> 
-            </button>
-          )}
-
-          {`  `}
-          {isLastPage && (
+<button
+  type="submit"
+  data-wizard-type="action-submit"
+  className="btn btn-primary ml-2"
+  onClick={saveCustomerClick}
+>
+  Kaydet
+</button>
+)}
+          {isLastPage  && (
 
             <button
               type="submit"
@@ -228,24 +235,125 @@ export function CustomerEdit({
               Kaydet
             </button>
           )}
+          {`  `}
 
-      </CardHeaderToolbar>
-    </CardHeader>
-    <CardBody>
-      <CustomerEditForm
-        actionsLoading={actionsLoading}
-        customer={customerForEdit || initCustomer}
-        btnSave={btnSave}
-        btnReset={btnReset}
-        btnPrevious={btnPrevious}
-        btnNext={btnNext}
-        saveCustomer={saveCustomer}
-        handleReset={handleReset}
-        cities={cities}
-        towns={towns}
-        currentDealerId={currentUser.dealer?.id}
-        neighborhoods={neighborhoods}
-      />
+          {!isLastPage && !id && (
+
+            <button
+              type="submit"
+              data-wizard-type="action-submit"
+              className="btn btn-outline-primary ml-2"
+              onClick={nextClick}
+            >
+              İleri <i className="fa fa-arrow-right"></i>
+            </button>
+          )}
+
+       
+
+        </CardHeaderToolbar>
+      </CardHeader>
+      <CardBody>
+        {!id && (
+          <CustomerEditForm
+            actionsLoading={actionsLoading}
+            customer={initCustomer}
+            btnSave={btnSave}
+            btnReset={btnReset}
+            btnPrevious={btnPrevious}
+            btnNext={btnNext}
+            saveCustomer={saveCustomer}
+            handleReset={handleReset}
+            cities={cities}
+            towns={towns}
+            currentDealerId={currentUser.dealer?.id}
+            neighborhoods={neighborhoods}
+            openDetailStockPage={openDetailStockPage}
+          />
+        )}
+        {customerForEdit && (
+          <>
+            <ul className="nav nav-tabs nav-tabs-line " role="tablist">
+              <li className="nav-item" onClick={() => setTab("basic")}>
+                <a className={`nav-link ${tab === "basic" && "active"}`}
+                  data-toggle="tab"
+                  role="tab"
+                  aria-selected={(tab === "basic")}
+                >
+                  Müşteri
+                </a>
+              </li>
+              <li className="nav-item" onClick={() => setTab("interestedStocks")}>
+                <a
+                  className={`nav-link ${tab === "interestedStocks" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "interestedStocks")}
+                >
+                  İlgilendiği Araçlar
+                </a>
+              </li>
+              <li className="nav-item" onClick={() => setTab("documents")}>
+                <a
+                  className={`nav-link ${tab === "documents" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "documents")}
+                >
+                  Belgeler
+                </a>
+              </li>
+              <li className="nav-item" onClick={() => setTab("addresses")}>
+                <a
+                  className={`nav-link ${tab === "addresses" && "active"}`}
+                  data-toggle="tab"
+                  role="button"
+                  aria-selected={(tab === "addresses")}
+                >
+                  Adresleri
+                </a>
+              </li>
+
+            
+
+            </ul>
+            <div className="mt-5">
+              {tab === "basic" && (
+                <CustomerEditForm
+                  actionsLoading={actionsLoading}
+                  customer={customerForEdit}
+                  btnSave={btnSave}
+                  btnReset={btnReset}
+                  btnPrevious={btnPrevious}
+                  btnNext={btnNext}
+                  saveCustomer={saveCustomer}
+                  handleReset={handleReset}
+                  cities={cities}
+                  towns={towns}
+                  currentDealerId={currentUser.dealer?.id}
+                  neighborhoods={neighborhoods}
+                />
+
+               )}
+                 {tab === "interestedStocks" && id && (
+                <StocksUIProvider currentDealerId={customerForEdit.dealerId} currentCustomerId={customerForEdit.id} openDetailStockPage={openDetailStockPage}> 
+                  <Stocks />
+                </StocksUIProvider>
+              )}
+              {tab === "documents" && id && (
+                <DocumentsUIProvider currentStockId={customerForEdit.guid}>
+                  <Documents />
+                </DocumentsUIProvider>
+              )}
+               {tab === "addresses" && id && (
+                <AddressesUIProvider guid={customerForEdit.guid}>
+                  <Addresses />
+                </AddressesUIProvider>
+              )}
+             
+            </div>
+          </>
+        )}
       </CardBody>
     </Card>
   );

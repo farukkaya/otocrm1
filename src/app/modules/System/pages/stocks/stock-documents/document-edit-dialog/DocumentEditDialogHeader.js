@@ -17,9 +17,8 @@ export function DocumentEditDialogHeader({ id }) {
   );
 
   useEffect(() => {
-    let _title = id ? "" : "Yeni Stok";
+    let _title = id ? "" : "Yeni Döküman";
     if (documentForEdit && id) {
-      //TODO:Marka ve model ismini başlık olarak göster
       _title = "Döküman Düzenle -"+documentForEdit.name+"-";
     }
 

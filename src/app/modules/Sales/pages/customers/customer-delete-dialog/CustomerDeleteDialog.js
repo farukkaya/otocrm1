@@ -56,14 +56,14 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
       {/*end::Loading*/}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Customer Delete
+          Müşteri Sil
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {!isLoading && (
-          <span>Are you sure to permanently delete this customer?</span>
+          <span>Bu müşteriyi kalıcı olarak silmek istediğiniz emin misiniz ?</span>
         )}
-        {isLoading && <span>Customer is deleting...</span>}
+        {isLoading && <span>Müşteri Siliniyor...</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -72,7 +72,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
             onClick={onHide}
             className="btn btn-light btn-elevate"
           >
-            Cancel
+            Vazgeç
           </button>
           <> </>
           <button
@@ -80,7 +80,7 @@ export function CustomerDeleteDialog({ id, show, onHide }) {
             onClick={deleteCustomer}
             className="btn btn-primary btn-elevate"
           >
-            Delete
+            Sil
           </button>
         </div>
       </Modal.Footer>

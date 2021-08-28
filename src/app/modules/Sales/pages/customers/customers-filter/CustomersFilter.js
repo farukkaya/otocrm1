@@ -9,15 +9,16 @@ import {
 } from "../CustomersUIHelpers";
 
 export const prepareFilter = (queryParams, values) => {
-  const { customerTypeId, paymentMethodId,customerSourceId, searchText } = values;
+  const { isActive,customerTypeId, paymentMethodId,customerSourceId, searchText } = values;
   const newQueryParams = { ...queryParams };
-  const filter = {};
-  // Filter by customerSourceId
-  filter.customerSourceId = customerSourceId !== "" ? +customerSourceId : undefined;
-  // Filter by customerTypeId
-  filter.customerTypeId = customerTypeId !== "" ? +customerTypeId : undefined;
-   // Filter by paymentMethodId
-   filter.paymentMethodId = paymentMethodId !== "" ? +paymentMethodId : undefined;
+  const filter = {
+    customerTypeId:"",
+    customerSourceId:"",
+    paymentMethodId:""
+  };
+  filter.customerSourceId = customerSourceId ;
+  filter.customerTypeId = customerTypeId;
+   filter.paymentMethodId = paymentMethodId;
   // Filter by all fields
   if (searchText) {
     filter.firstName = searchText;
@@ -25,6 +26,7 @@ export const prepareFilter = (queryParams, values) => {
     filter.identityNo = searchText;
     filter.salesPerson = searchText;
   }
+  filter.isActive=isActive;
   newQueryParams.filter = filter;
   return newQueryParams;
 };
@@ -53,7 +55,9 @@ export function CustomersFilter({ listLoading }) {
     <>
       <Formik
         initialValues={{
+          isActive: customersUIContext.queryParams.filter.isActive, 
           customerTypeId: "",
+          customerSourceId:"",
           paymentMethodId: "", 
           searchText: "",
         }}
@@ -69,8 +73,8 @@ export function CustomersFilter({ listLoading }) {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
-            <div className="form-group row">
-              <div className="col-lg-3">
+            <div className="form-group d-flex justify-content-end">
+              <div className="p-2">
                 <select
                   className="form-control"
                   name="customerTypeId"
@@ -92,7 +96,7 @@ export function CustomersFilter({ listLoading }) {
                  Müşteri Tipine göre <b>filtrele</b>
                 </small>
               </div>
-              <div className="col-lg-3">
+              <div className="p-2">
                 <select
                   className="form-control"
                   placeholder="Ödeme tipine göre filtre"
@@ -113,7 +117,7 @@ export function CustomersFilter({ listLoading }) {
                  Ödeme Tipine Göre <b>Filtrele</b> 
                 </small>
               </div>
-              <div className="col-lg-3">
+              <div className="p-2">
                 <select
                   className="form-control"
                   placeholder="Kaynağa göre filtre"
@@ -134,7 +138,27 @@ export function CustomersFilter({ listLoading }) {
                   Kaynağa Göre <b>Filtrele</b>
                 </small>
               </div>
-              <div className="col-lg-3">
+              <div className="p-2">
+              <select
+                  className="form-control"
+                  name="isActive"
+                  placeholder="Duruma göre filtrele"
+                  onChange={(e) => {
+                    setFieldValue("isActive", e.target.value);
+                    handleSubmit();
+                  }}
+                  onBlur={handleBlur}
+                  value={values.isActive}
+                >
+                  <option value="">Tümü</option>
+                  <option value="true">Aktif</option>
+                  <option value="false">Pasif</option>
+                </select>
+                <small className="form-text text-muted">
+                <b>Durum</b>a göre
+                </small>
+              </div>
+              <div className="p-2">
                 <input
                   type="text"
                   className="form-control"

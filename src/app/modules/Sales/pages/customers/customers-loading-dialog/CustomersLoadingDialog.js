@@ -10,5 +10,5 @@ export function CustomersLoadingDialog() {
   );
   // looking for loading/dispatch
   useEffect(() => {}, [isLoading]);
-  return <LoadingDialog isLoading={isLoading} text="Loading ..." />;
+  return <LoadingDialog isLoading={isLoading} text="Müşteriler Yükleniyor ..." />;
 }

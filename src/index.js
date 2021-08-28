@@ -42,7 +42,7 @@ const { PUBLIC_URL } = process.env;
 
 /**
  * Inject metronic interceptors for axios.
- *
+ *  axios.defaults.baseURL = 'http://api.otocrm.net/';
  * @see https://github.com/axios/axios#interceptors
  */
 _redux.setupAxios(axios, store);

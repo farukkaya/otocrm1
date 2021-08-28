@@ -1,9 +1,9 @@
 import toast from 'react-hot-toast';
 export const ApiErrorCode= {
-  Unknown :"unknown",
-  EntityNotFound : "entityNotFound",
-  InvalidStatusChange :"invalidStatusChange",
-  UnAuthorized :"unAuthorized"
+  Unknown :0,
+  EntityNotFound : 1,
+  InvalidStatusChange :2,
+  UnAuthorized :3
 }
 
 export default function setupAxios(axios, store) {

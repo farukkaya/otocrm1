@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal } from "react-bootstrap";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {
-  CustomerStatusCssClasses,
-  CustomerStatusTitles,
-} from "../CustomersUIHelpers";
 import * as actions from "../../../_redux/customers/customersActions";
 import { useCustomersUIContext } from "../CustomersUIContext";
 
@@ -53,22 +49,12 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
   const [status, setStatus] = useState(0);
 
   const dispatch = useDispatch();
-  const updateStatus = () => {
-    // server request for update customers status by selected ids
-    dispatch(actions.updateCustomersStatus(customersUIProps.ids, status)).then(
-      () => {
-        // refresh list after deletion
-        dispatch(actions.fetchCustomers(customersUIProps.queryParams)).then(
-          () => {
-            // clear selections list
-            customersUIProps.setIds([]);
-            // closing delete modal
-            onHide();
-          }
-        );
-      }
-    );
-  };
+  const updateStatus = () => dispatch(actions.updateCustomersStatus(customersUIProps.ids, status=="1"))// server request for updateing stock by ids
+    .then(() => dispatch(actions.fetchCustomers(customersUIProps.queryParams))
+      .then(() => {
+        customersUIProps.setIds([]);// clear selections list
+        onHide(); // closing delete modal
+      }))
 
   return (
     <Modal
@@ -78,7 +64,7 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Status has been updated for selected customers
+          Toplu Durum Güncelleme
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="overlay overlay-block cursor-default">
@@ -92,9 +78,9 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
         <table className="table table table-head-custom table-vertical-center overflow-hidden">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>STATUS</th>
-              <th>CUSTOMER</th>
+              <th>Id</th>
+              <th>Kimlik/VergiNo</th>
+              <th>Müşteri</th>
             </tr>
           </thead>
           <tbody>
@@ -102,37 +88,24 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
               <tr key={`id${customer.id}`}>
                 <td>{customer.id}</td>
                 <td>
-                  <span
-                    className={`label label-lg label-light-${
-                      CustomerStatusCssClasses[customer.status]
-                    } label-inline`}
-                  >
-                    {" "}
-                    {CustomerStatusTitles[customer.status]}
-                  </span>
+                {customer.identityNo}
                 </td>
                 <td>
-                  <span className="ml-3">
-
-                    {customer.lastname}, {customer.firstname}
-
-                  </span>
+                {customer.lastName} {customer.firstName}  
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
-      </Modal.Body>
+        </table>    </Modal.Body>
       <Modal.Footer className="form">
         <div className="form-group">
-          <select
-            className="form-control"
+        <select
+            className={`form-control ${status=="1" ? "success" : "info"}`}
             value={status}
-            onChange={(e) => setStatus(+e.target.value)}
+            onChange={(e) => setStatus(e.target.value /*=== "0" ? false : true*/)}
           >
-            <option value="0">Suspended</option>
-            <option value="1">Active</option>
-            <option value="2">Pending</option>
+            <option value="1">Aktif</option>
+            <option value="0">Pasif</option>
           </select>
         </div>
         <div className="form-group">
@@ -141,14 +114,14 @@ export function CustomersUpdateStateDialog({ show, onHide }) {
             onClick={onHide}
             className="btn btn-light btn-elevate mr-3"
           >
-            Cancel
+            Vazgeç
           </button>
           <button
             type="button"
             onClick={updateStatus}
             className="btn btn-primary btn-elevate"
           >
-            Update Status
+            Güncelle
           </button>
         </div>
       </Modal.Footer>

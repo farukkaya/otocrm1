@@ -88,8 +88,8 @@ export function StocksFilter({ listLoading }) {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
-            <div className="form-group" style={{display: "flex",flexDirection:"row",alignItems:"center"}}>
-              <div style={{padding:"2px"}}>
+            <div className="form-group d-flex justify-content-end">
+              <div className="p-2">
               <select
                   className="form-control"
                   name="fuelTypeId"
@@ -111,7 +111,7 @@ export function StocksFilter({ listLoading }) {
                <b>Yakıt Tipi</b>ne göre
                 </small>
               </div>
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
               <select
                   className="form-control"
                   name="gearTypeId"
@@ -133,7 +133,7 @@ export function StocksFilter({ listLoading }) {
                <b>Vites Tipi</b>ne göre
                 </small>
               </div>
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
               <select
                   className="form-control"
                   name="caseTypeId"
@@ -155,7 +155,7 @@ export function StocksFilter({ listLoading }) {
                <b>Kasa Tipi</b>ne göre
                 </small>
               </div>
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
               <select
                   className="form-control"
                   name="colorId"
@@ -177,7 +177,7 @@ export function StocksFilter({ listLoading }) {
                <b>Renge</b> göre
                 </small>
               </div>
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
               <select
                   className="form-control"
                   name="fromWhoId"
@@ -199,7 +199,7 @@ export function StocksFilter({ listLoading }) {
                <b>Kimden</b>e göre
                 </small>
               </div>
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
               <select
                   className="form-control"
                   name="purchaseTypeId"
@@ -222,7 +222,7 @@ export function StocksFilter({ listLoading }) {
                 </small>
               </div>
        
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
                 <select
                   className="form-control"
                   name="isActive"
@@ -243,7 +243,7 @@ export function StocksFilter({ listLoading }) {
                 </small>
               </div>
            
-              <div style={{padding:"2px"}}>
+              <div className="p-2">
                 <input
                   type="text"
                   className="form-control"

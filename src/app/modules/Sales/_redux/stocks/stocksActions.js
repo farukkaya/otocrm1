@@ -24,7 +24,24 @@ export const fetchStocksByDealer = (queryParams, dealerId) => dispatch => {
     });
 };
 
+export const fetchInterestedStocks= (queryParams, customerId) => dispatch => {
+  
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  if (!customerId) {
+    return dispatch(actions.stocksFetched({ totalCount: 0, entities: [] }));
+  }
 
+  return requestFromServer
+    .findInterestedStocks(queryParams, customerId)
+    .then(response => {
+      const { totalCount, entities } = response.data;
+      dispatch(actions.stocksFetched({ totalCount, entities }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find remarks";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
 
 export const fetchStocks = queryParams => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.list }));
@@ -118,6 +135,19 @@ export const deleteStocks = ids => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .deleteStocks(ids)
+    .then(() => {
+      dispatch(actions.stocksDeleted({ ids }));
+    })
+    .catch(error => {
+      error.clientMessage = "Can't delete stocks";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
+
+export const deleteInterestedStocks = (customerId,ids) => dispatch => {
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .deleteInterestedStocks(customerId,ids)
     .then(() => {
       dispatch(actions.stocksDeleted({ ids }));
     })

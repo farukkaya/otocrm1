@@ -39,7 +39,7 @@ export function StocksTable() {
     };
   }, [stocksUIContext]);
 
-  // Getting curret state of stocks list from store (Redux)
+  // Getting current state of stocks list from store (Redux)
   const { currentState } = useSelector(
     (state) => ({ currentState: state.stocks }),
     shallowEqual

@@ -67,7 +67,7 @@ const CustomerSchema = {
     .max(150, format(MAX_LENGTH, "150"))
     .email('Geçersiz E-Posta')
     .required(format(REQUIRED, "E-Posta")),
-  personalPhone: Yup.string()
+  phone1: Yup.string()
     .min(2, format(MIN_LENGTH, "2"))
     .max(150, format(MAX_LENGTH, "150"))
     .required(format(REQUIRED, "Kişisel Telefon")),
@@ -108,13 +108,14 @@ export function CustomerEditForm({
   handleReset,
   currentDealerId,
   cities, towns, neighborhoods,
+  openDetailStockPage
 }) {
   const dispatch = useDispatch();
   const [selectedStocks, setSelectedStocks] = useState(customer.selectedStocks)
 
   return (
     customer.id == undefined ? (
-      <StocksUIProvider currentDealerId={currentDealerId}>
+      <StocksUIProvider currentDealerId={currentDealerId} openDetailStockPage={openDetailStockPage}>
        
         <Wizard
           initialValues={customer}
@@ -126,7 +127,7 @@ export function CustomerEditForm({
           btnReset={btnReset}
           onReset={(values) => handleReset(values)}
           onSubmit={(values) => saveCustomer(values)}>
-
+   
 
           <Wizard.Page>
             {props => {
@@ -227,7 +228,7 @@ export function CustomerEditForm({
                   <div className="form-group row">
                     <div className="col-lg-4">
                       <Field
-                        name="personalPhone"
+                        name="phone1"
                         component={Input}
                         placeholder="Kişisel Telefon"
                         label="Kişisel Telefon"
@@ -235,7 +236,7 @@ export function CustomerEditForm({
                     </div>
                     <div className="col-lg-4">
                       <Field
-                        name="workPhone"
+                        name="phone2"
                         component={Input}
                         placeholder="İş Telefonu"
                         label="İş Telefonu"
@@ -368,13 +369,13 @@ export function CustomerEditForm({
                     <div className="col-md-6 margin-bottom-10-mobile">
                       <h6 className="font-weight-bolder mb-3">{arrayProgress.find(q => q.id == 2).title}:</h6>
                       <div className="text-dark-50 line-height-lg">
-                        <div><span><b>Müşteri Tipi:</b></span> {CUSTOMERTYPELIST.find(q => q.id == data.customerTypeId).name}</div>
+                        <div><span><b>Müşteri Tipi: {CUSTOMERTYPELIST.find(q => q.id == data.customerTypeId).name}</b></span> </div>
 
                         <div><span><b>Müşteri Adı:</b></span> {data.firstName} {data.lastName}</div>
 
 
                         <div><span><b>Tc\Vergi No:</b></span> {data.identityNo}</div>
-                        <div><span><b>Peşinat:</b></span> {data.advancePayment}</div>
+                        <div><span><b>Peşinat:</b></span> {`${parseFloat(data.advancePayment)} ₺`}</div>
                         <div><span><b>Email:</b></span> {data.email}</div>
                         <div><span><b>Kişisel Telefon:</b></span> {data.personalPhone}</div>
                         <div><span><b>Ödeme Tipi:</b></span> {PAYMENTMETHODLIST.find(q => q.id == data.paymentMethodId).name}</div>
@@ -455,7 +456,7 @@ export function CustomerEditForm({
               <div className="form-group row">
                 <div className="col-lg-4">
                   <Field
-                    name="personalPhone"
+                    name="phone1"
                     component={Input}
                     placeholder="Kişisel Telefon"
                     label="Kişisel Telefon"
@@ -463,7 +464,7 @@ export function CustomerEditForm({
                 </div>
                 <div className="col-lg-4">
                   <Field
-                    name="workPhone"
+                    name="phone2"
                     component={Input}
                     placeholder="İş Telefonu"
                     label="İş Telefonu"

@@ -30,12 +30,15 @@ export function StocksTable() {
       queryParams: stocksUIContext.queryParams,
       setQueryParams: stocksUIContext.setQueryParams,
       dealerId: stocksUIContext.dealerId,
+      customerId: stocksUIContext.customerId,
+
+      openDetailStockPage: stocksUIContext.openDetailStockPage,
+      openDeleteStockDialog: stocksUIContext.openDeleteStockDialog,
       openEditGalleryDialog: stocksUIContext.openEditGalleryDialog,
       openUpdateStatusGalleryDialog:stocksUIContext.openUpdateStatusGalleryDialog,
       openDeleteGalleryDialog: stocksUIContext.openDeleteGalleryDialog,
     };
   }, [stocksUIContext]);
-
   // Getting curret state of dealers list from store (Redux)
   const { currentState } = useSelector(
     (state) => ({ currentState: state.stocks }),
@@ -45,14 +48,23 @@ export function StocksTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     stocksUIProps.setIds([]);
-    dispatch(actions.fetchStocksByDealer(stocksUIProps.queryParams, stocksUIProps.dealerId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     if(!stocksUIProps.customerId)
+      dispatch(actions.fetchStocksByDealer(stocksUIProps.queryParams, stocksUIProps.dealerId));
+    else
+      dispatch(actions.fetchInterestedStocks(stocksUIProps.queryParams, stocksUIProps.customerId));
+    
   }, [stocksUIProps.queryParams, dispatch, stocksUIProps.galleryId]);
   const columns = [
     {
       dataField: "id",
       sort: true,
       text: "Id",
+      sortCaret: sortCaret,
+    },
+    {
+      dataField: "plateNo",
+      text:"Plaka",
+      sort: true,
       sortCaret: sortCaret,
     },
     {
@@ -85,12 +97,7 @@ export function StocksTable() {
       sort: true,
       sortCaret: sortCaret,
     },
-    {
-      dataField: "plateNo",
-      text:"Plaka",
-      sort: true,
-      sortCaret: sortCaret,
-    },
+  
     {
       dataField: "sellingPrice",
       text:"Satış Fiyatı",
@@ -146,27 +153,21 @@ export function StocksTable() {
         selector:"caseTypeId",
       },
     }, 
+ 
     {
-      dataField: "fromWhoId",
-      text:"Kimden",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter: columnFormatters.ArrayColumnFormatter,
+      dataField: "action",
+      text: "İşlemler",
+      formatter: columnFormatters.ActionsColumnFormatter,
       formatExtraData: {
-        array: uiHelpers.FromWhoTitles,
-        selector:"fromWhoId",
+        openDetailPage: stocksUIProps.openDetailStockPage,
+        openDeleteDialog: stocksUIProps.openDeleteStockDialog,
       },
-    }, 
-    {
-      dataField: "purchaseTypeId",
-      text:"Alım Türü",
-      sort: true,
-      sortCaret: sortCaret,
-      formatter: columnFormatters.ArrayColumnFormatter,
-      formatExtraData: {
-        array: uiHelpers.PurchaseTypes,
-        selector:"purchaseTypeId",
-      }
+      classes: "text-right p-0",
+      headerClasses: "text-right pr-3",
+
+      style: {
+        minWidth: "100px",
+      },
     }
 
   ];
