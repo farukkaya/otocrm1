@@ -104,7 +104,7 @@ export function DocumentEditForm({ saveDocument, setAttachment,document, actions
                         <div className="form-group row">
                           <div className="col-lg-12">
                             <span> Yeni bir dosya seçmeniz halinde bu alanda görüntülemete olduğunuz döküman silinecektir!!!</span>
-                          <iframe src={process.env.REACT_APP_API_DEVELOPMENT_URL+values.path} width="100%" height="400"/>
+                          <iframe src={process.env.REACT_APP_API_URL+values.path} width="100%" height="400"/>
                           </div>
                       </div>
                     )}

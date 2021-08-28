@@ -8,7 +8,7 @@ export const ApiErrorCode= {
 
 export default function setupAxios(axios, store) {
   //axios.defaults.baseURL = 'http://api.otocrm.net/';
-  axios.defaults.baseURL = process.env[`REACT_APP_API_${process.env.NODE_ENV.toUpperCase()}_URL`];
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
   axios.interceptors.request.use(config => {
     config.headers["Content-Type"] = config.headers["Content-Type"] == "" ? "application/json;charset=utf-8" : config.headers["Content-Type"];
     const {

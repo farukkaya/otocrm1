@@ -260,7 +260,7 @@ export default function DocumentsTable({documents}) {
                       <TableCell align="left">{row.validityDate}</TableCell>
                       <TableCell align="left">{row.description}</TableCell>
                       <TableCell align="left">
-                      <a target='_blank' href={process.env.REACT_APP_API_DEVELOPMENT_URL+row.path}>Belgeyi Göster</a>
+                      <a target='_blank' href={process.env.REACT_APP_API_URL+row.path}>Belgeyi Göster</a>
                       </TableCell>
                     </TableRow>
                   );

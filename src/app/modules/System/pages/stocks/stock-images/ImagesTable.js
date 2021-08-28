@@ -39,7 +39,7 @@ export function ImagesTable() {
 
       {stockImages
         .map((image, index) => {
-          const imagePath = process.env.REACT_APP_API_DEVELOPMENT_URL + image.path;
+          const imagePath = process.env.REACT_APP_API_URL + image.path;
           return (
 
             <div class="thumbnail">

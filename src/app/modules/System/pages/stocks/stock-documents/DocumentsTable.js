@@ -87,7 +87,7 @@ export function DocumentsTable() {
     dataField: "path",
     text:"Dosya",
     sort: false,
-    formatter:(cellContent, row,rowIndex )=>  <a target='_blank' href={process.env.REACT_APP_API_DEVELOPMENT_URL+row.path}>Belgeyi Göster</a>
+    formatter:(cellContent, row,rowIndex )=>  <a target='_blank' href={process.env.REACT_APP_API_URL+row.path}>Belgeyi Göster</a>
   },
     {
       dataField: "action",

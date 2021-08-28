@@ -29,7 +29,7 @@ export function DashboardUpload({ images, setImages, transactionId ,stockId}) {
     allowMultipleUploads: true
   })
     .use(XHRUpload, {
-      endpoint: `${process.env.REACT_APP_API_DEVELOPMENT_URL}Documents/UploadImages?stockGuid=${stockId}`,
+      endpoint: `${process.env.REACT_APP_API_URL}Documents/UploadImages?stockGuid=${stockId}`,
       method: 'POST',
       formData:true, 
       headers: {

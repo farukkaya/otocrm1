@@ -64,7 +64,7 @@ export function StockDocumentsCard({ documents, vinNo, plateNo }) {
 
                       </td>
                       <td className="pr-0 text-center">
-                        <a target='_blank' className="font-weight-bolder font-size-sm" href={process.env.REACT_APP_API_DEVELOPMENT_URL + document.path}>Belgeyi Göster</a>
+                        <a target='_blank' className="font-weight-bolder font-size-sm" href={process.env.REACT_APP_API_URL + document.path}>Belgeyi Göster</a>
                       </td>
                     </tr>
                   )
