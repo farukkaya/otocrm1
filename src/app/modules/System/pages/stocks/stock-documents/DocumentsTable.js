@@ -98,7 +98,7 @@ export function DocumentsTable() {
         openEditPage: documentsUIProps.openEditDocumentDialog,
         openDeleteDialog: documentsUIProps.openDeleteDocumentDialog,
       },
-      classes: "text-right pr-0",
+      classes: "text-right p-0",
       headerClasses: "text-right pr-3",
 
       style: {

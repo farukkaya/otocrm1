@@ -99,7 +99,7 @@ export function ClaimsTable() {
         openEditPage: claimsUIProps.openEditClaimDialog,
         openDeleteDialog: claimsUIProps.claimType=="2"?claimsUIProps.openDeleteClaimDialog:undefined
       },
-      classes: "text-right pr-0",
+      classes: "text-right p-0",
       headerClasses:"text-right pr-3",
 
       style: {

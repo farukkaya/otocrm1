@@ -152,7 +152,7 @@ export function UsersTable() {
         openDetailPage: usersUIProps.openDetailUserPage,
         openDeleteDialog: usersUIProps.openDeleteUserDialog,
       },
-      classes: "text-right pr-0",
+      classes: "text-right p-0",
       headerClasses:"text-right pr-3",
 
       style: {

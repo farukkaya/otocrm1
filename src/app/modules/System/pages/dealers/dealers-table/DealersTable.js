@@ -131,7 +131,7 @@ export function DealersTable() {
         openDeleteDialog: dealersUIProps.openDeleteDealerDialog,
       },
 
-      classes: "text-right pr-0",
+      classes: "text-right p-0",
       headerClasses:"text-right pr-3",
 
       style: {

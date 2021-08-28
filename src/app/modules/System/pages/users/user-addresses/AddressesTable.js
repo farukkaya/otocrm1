@@ -123,7 +123,7 @@ export function AddressesTable() {
         openUpdateStatusDialog: addressesUIProps.openUpdateStatusAddressDialog,
         openUpdatePrimaryDialog: addressesUIProps.openUpdatePrimaryAddressDialog,
       },
-      classes: "text-right pr-0",
+      classes: "text-right p-0",
       headerClasses:"text-right pr-3",
 
       style: {

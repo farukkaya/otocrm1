@@ -101,7 +101,7 @@ export function GalleriesTable() {
         openEditPage: galleriesUIProps.openEditGalleryDialog,
         openDeleteDialog: galleriesUIProps.openDeleteGalleryDialog,
       },
-      classes: "text-right pr-0",
+      classes: "text-right p-0",
       headerClasses: "text-right pr-3",
 
       style: {
