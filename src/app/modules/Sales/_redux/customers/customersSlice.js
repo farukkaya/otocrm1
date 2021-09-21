@@ -6,6 +6,7 @@ const initialCustomersState = {
   totalCount: 0,
   entities: [],
   customerForEdit: undefined,
+  customerForDetail: undefined,
   lastError: null
 };
 export const callTypes = {
@@ -37,6 +38,11 @@ export const customersSlice = createSlice({
     customerFetched: (state, action) => {
       state.actionsLoading = false;
       state.customerForEdit = action.payload.customerForEdit;
+      state.error = null;
+    },
+    customerDetailFetched: (state, action) => {
+      state.actionsLoading = false;
+      state.customerForDetail = action.payload.customerForDetail;
       state.error = null;
     },
     // findCustomers

@@ -34,7 +34,25 @@ export const fetchCustomer = id => dispatch => {
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
+export const fetchCustomerDetail = id => dispatch => {
+  if (!id) {
+    return dispatch(actions.customerDetailFetched({ customerForDetail: undefined }));
+  }
 
+  dispatch(actions.startCall({ callType: callTypes.action }));
+  return requestFromServer
+    .getCustomerDetail(id)
+    .then(response => {
+      
+      const customer = response.data;
+      dispatch(actions.customerDetailFetched({ customerForDetail: customer }));
+      return customer;
+    })
+    .catch(error => {
+      error.clientMessage = "Can't find customer";
+      dispatch(actions.catchError({ error, callType: callTypes.action }));
+    });
+};
 export const deleteCustomer = id => dispatch => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer

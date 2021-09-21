@@ -13,7 +13,7 @@ export const createCustomer=customerWizardDto=>axios.post(`${CUSTOMERS_URL}/Inse
 export const getAllCustomers=()=>axios.get(CUSTOMERS_URL+"/GetAll");
 
 export const getCustomerById=(customerId) =>axios.get(`${CUSTOMERS_URL}/GetById?id=${customerId}`);
-
+export const getCustomerDetail=(customerId)=>axios.get(`${CUSTOMERS_URL}/GetDetailById?id=${customerId}`);
 export const findCustomers=queryParams=> axios.post(`${CUSTOMERS_URL}/Find`, queryParams);
 
 export const updateCustomer=customer=>axios.put(`${CUSTOMERS_URL}/Update`, customer);

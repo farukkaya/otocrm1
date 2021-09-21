@@ -16,6 +16,9 @@ export function CustomersPage({ history }) {
     openEditCustomerPage: (id) => {
       history.push(`/sales/customers/${id}/edit`);
     },
+    openDetailCustomerPage: (id) => {
+      history.push(`/sales/customers/${id}/detail`);
+    },
     openDeleteCustomerDialog: (id) => {
       history.push(`/sales/customers/${id}/delete`);
     },

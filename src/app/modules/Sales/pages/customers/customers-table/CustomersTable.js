@@ -31,6 +31,7 @@ export function CustomersTable() {
       queryParams: customersUIContext.queryParams,
       setQueryParams: customersUIContext.setQueryParams,
       openEditCustomerPage: customersUIContext.openEditCustomerPage,
+      openDetailCustomerPage: customersUIContext.openDetailCustomerPage,
       openDeleteCustomerDialog: customersUIContext.openDeleteCustomerDialog,
       openUpdateCustomerStatusDialog:customersUIContext.openUpdateCustomerStatusDialog,
       openUpdateCustomersStatusDialog:customersUIContext.openUpdateCustomersStatusDialog,
@@ -61,6 +62,8 @@ export function CustomersTable() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customersUIProps.queryParams, dispatch]);
   // Table columns
+ 
+
   const columns = [
     {
       dataField: "id",
@@ -154,6 +157,7 @@ export function CustomersTable() {
       formatExtraData: {
         openUpdateStatusDialog: customersUIProps.openUpdateCustomerStatusDialog,
         openEditPage: customersUIProps.openEditCustomerPage,
+        openDetailPage: customersUIProps.openDetailCustomerPage,
         openDeleteDialog: customersUIProps.openDeleteCustomerDialog,
       },
       classes: "text-right p-0",

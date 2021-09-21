@@ -6,7 +6,7 @@ import { StockCard } from "./stock-detail-cards/StockCard";
 import { DamageRecordsCard } from "./stock-detail-cards/DamageRecordsCard";
 import { StockDocumentsCard } from "./stock-detail-cards/StockDocumentsCard";
 import { ExperiseViewCard } from "./stock-detail-cards/ExperiseViewCard";
-import { AdvanceTablesWidget7,AdvanceTablesWidget9, ListsWidget10 } from '../../../../../../_metronic/_partials/widgets';
+import { InterestedCustomersCard } from "./stock-detail-cards/InterestedCustomersCard";
 
 export function StockDetails({
   history,
@@ -46,7 +46,7 @@ export function StockDetails({
           <StockDocumentsCard documents={stockDetail.documents} vinNo={stockDetail.stock?.vinNo} plateNo={stockDetail.stock?.plateNo}/>
           </div>
           <div className="col-lg-12">
-             <AdvanceTablesWidget9 className="card-stretch gutter-b"/>
+           <InterestedCustomersCard customers={stockDetail.customers}/>
          </div>
         </div>
 

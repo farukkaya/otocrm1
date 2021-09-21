@@ -28,7 +28,7 @@ export function CustomersUIProvider({customersUIEvents, children}) {
       return nextQueryParams;
     });
   }, []);
-
+debugger
   const value = {
     queryParams,
     setQueryParamsBase,
@@ -39,6 +39,7 @@ export function CustomersUIProvider({customersUIEvents, children}) {
     setIsFiltering,
     newCustomerButtonClick: customersUIEvents.newCustomerButtonClick,
     openEditCustomerPage: customersUIEvents.openEditCustomerPage,
+    openDetailCustomerPage: customersUIEvents.openDetailCustomerPage,
     openDeleteCustomerDialog: customersUIEvents.openDeleteCustomerDialog,
     openDeleteCustomersDialog: customersUIEvents.openDeleteCustomersDialog,
     openFetchCustomersDialog: customersUIEvents.openFetchCustomersDialog,
