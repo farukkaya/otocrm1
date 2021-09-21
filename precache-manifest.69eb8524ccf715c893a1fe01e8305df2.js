@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a59d6a503daf74c60b327657ee0c9b35",
+    "revision": "db78907fb8af97143115d93af18395b1",
     "url": "/otocrm/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/otocrm/static/css/6.389eeb4b.chunk.css"
   },
   {
-    "revision": "a618731e3ddc0ee6fcfd",
+    "revision": "ea7c3d8ba6616a2d797e",
     "url": "/otocrm/static/css/main.48663d6e.chunk.css"
   },
   {
@@ -68,8 +68,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/otocrm/static/js/9.aa878d5f.chunk.js"
   },
   {
-    "revision": "a618731e3ddc0ee6fcfd",
-    "url": "/otocrm/static/js/main.7c019c65.chunk.js"
+    "revision": "ea7c3d8ba6616a2d797e",
+    "url": "/otocrm/static/js/main.a774285f.chunk.js"
   },
   {
     "revision": "896e892ca07d62d63540",

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/otocrm/precache-manifest.b891af46a6c788f1ee0869d161aa3279.js"
+  "/otocrm/precache-manifest.69eb8524ccf715c893a1fe01e8305df2.js"
 );
 
 self.addEventListener('message', (event) => {
