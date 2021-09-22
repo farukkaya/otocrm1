@@ -9,8 +9,8 @@
     "static/js/3.05e4e9c3.chunk.js": "/otocrm/static/js/3.05e4e9c3.chunk.js",
     "static/js/3.05e4e9c3.chunk.js.map": "/otocrm/static/js/3.05e4e9c3.chunk.js.map",
     "main.css": "/otocrm/static/css/main.48663d6e.chunk.css",
-    "main.js": "/otocrm/static/js/main.5e05b93f.chunk.js",
-    "main.js.map": "/otocrm/static/js/main.5e05b93f.chunk.js.map",
+    "main.js": "/otocrm/static/js/main.e42c7b71.chunk.js",
+    "main.js.map": "/otocrm/static/js/main.e42c7b71.chunk.js.map",
     "runtime-main.js": "/otocrm/static/js/runtime-main.4419bea8.js",
     "runtime-main.js.map": "/otocrm/static/js/runtime-main.4419bea8.js.map",
     "static/css/6.389eeb4b.chunk.css": "/otocrm/static/css/6.389eeb4b.chunk.css",
@@ -35,7 +35,7 @@
     "static/js/15.092df63f.chunk.js": "/otocrm/static/js/15.092df63f.chunk.js",
     "static/js/15.092df63f.chunk.js.map": "/otocrm/static/js/15.092df63f.chunk.js.map",
     "index.html": "/otocrm/index.html",
-    "precache-manifest.7f0e750654602971424d9a35a04d1e23.js": "/otocrm/precache-manifest.7f0e750654602971424d9a35a04d1e23.js",
+    "precache-manifest.6f0c70c5cdfd6a5a080d792894520786.js": "/otocrm/precache-manifest.6f0c70c5cdfd6a5a080d792894520786.js",
     "service-worker.js": "/otocrm/service-worker.js",
     "static/css/6.389eeb4b.chunk.css.map": "/otocrm/static/css/6.389eeb4b.chunk.css.map",
     "static/css/main.48663d6e.chunk.css.map": "/otocrm/static/css/main.48663d6e.chunk.css.map",
@@ -49,6 +49,6 @@
     "static/css/6.389eeb4b.chunk.css",
     "static/js/6.cf17d5df.chunk.js",
     "static/css/main.48663d6e.chunk.css",
-    "static/js/main.5e05b93f.chunk.js"
+    "static/js/main.e42c7b71.chunk.js"
   ]
 }
